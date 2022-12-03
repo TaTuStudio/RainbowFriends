@@ -12,7 +12,6 @@ public class UI_Rotate_Camera_View : MonoBehaviour, IUpdateSelectedHandler, IPoi
 
     public Text valueText;
 
-    public bool getTouch = false;
     public int fingerId = -1;
 
     float modRotSpeedX = 0.1f;
@@ -25,45 +24,52 @@ public class UI_Rotate_Camera_View : MonoBehaviour, IUpdateSelectedHandler, IPoi
 
     private void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
         _Touch();
     }
 
     void _Touch()
     {
-        if(Input.touchCount > 0 && isRotate)
+        if (isRotate == false) return;
+
+        for(int i=0; i<Input.touchCount; i++)
         {
-            Touch touch = Input.GetTouch(0);
+            Touch touch = Input.GetTouch(i);
 
-            if (getTouch == true)
+            switch (touch.phase)
             {
-                getTouch = false;
+                case TouchPhase.Began:
+                    {
+                        if (fingerId == -1)
+                        {
+                            fingerId = touch.fingerId;
+                        }
+                    }
+                    break;
 
-                fingerId = touch.fingerId;
+                case TouchPhase.Moved:
+                    {
+
+                    }
+                    break;
+
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    {
+                        if (touch.fingerId == fingerId)
+                        {
+                            _ResetDelta();
+                        }
+                    }
+                    break;
             }
 
-            //if (touch.phase == TouchPhase.Moved)
-            //{
-
-            //}
-
-            if(touch.phase == TouchPhase.Ended)
+            if (fingerId != -1 && touch.fingerId == fingerId)
             {
-                _ResetDelta();
+                deltaX = touch.deltaPosition.x * modRotSpeedX;
+                deltaY = touch.deltaPosition.y * modRotSpeedY;
+
+                valueText.text = "Current Value: " + new Vector2(deltaX, deltaY);
             }
-
-            deltaX = touch.deltaPosition.x * modRotSpeedX;
-            deltaY = touch.deltaPosition.y * modRotSpeedY;
-
-            valueText.text = "Current Value: " + new Vector2(deltaX, deltaY);
-        }
-        else
-        {
-            _ResetDelta();
         }
     }
 
@@ -87,14 +93,12 @@ public class UI_Rotate_Camera_View : MonoBehaviour, IUpdateSelectedHandler, IPoi
     }
     public void OnPointerUp(PointerEventData data)
     {
-
+        _ResetDelta();
     }
 
     void _OnMouseDown()
     {
         isRotate = true;
-
-        getTouch = true;
 
         fingerId = -1;
     }
@@ -105,7 +109,6 @@ public class UI_Rotate_Camera_View : MonoBehaviour, IUpdateSelectedHandler, IPoi
         deltaY = 0f;
 
         isRotate = false;
-        getTouch = false;
 
         fingerId = -1;
     }

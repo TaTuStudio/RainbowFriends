@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, yEuler, transform.localEulerAngles.z);
 
         camRotX -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
-        camRotX = Mathf.Clamp(camRotX, -90f, 90f);
+        camRotX = Mathf.Clamp(camRotX, -60f, 60f);
 
         fpsVirtualCam.transform.localEulerAngles = new Vector3(camRotX, 0f, 0f);
     }
