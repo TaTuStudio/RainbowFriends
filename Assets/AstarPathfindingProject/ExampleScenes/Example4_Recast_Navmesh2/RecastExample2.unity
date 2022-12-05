@@ -4182,6 +4182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393038521}
+  - component: {fileID: 393038523}
   - component: {fileID: 393038522}
   m_Layer: 0
   m_Name: Link
@@ -4213,7 +4214,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 393038519}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd2cfff5dfa8c4244aa00fea9675adb2, type: 3}
   m_Name: 
@@ -4223,6 +4224,29 @@ MonoBehaviour:
   end: {fileID: 405827228}
   costFactor: 1
   oneWay: 0
+--- !u!114 &393038523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393038519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e8b1fd6fa484fc29f8a26fb5e8662b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  uniqueID: 845884120256954300
+  end: {fileID: 405827228}
+  costFactor: 1
+  oneWay: 0
+  clip: 
+  animSpeed: 1
+  reverseAnim: 0
+  referenceMesh: {fileID: 0}
+  sequence: []
+  boneRoot: bn_COG_Root
 --- !u!1 &405827227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4687,7 +4711,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617778278}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81825518f1bed49bda1223459d4bdf99, type: 3}
   m_Name: 
@@ -6886,7 +6910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 845884120256954300
+  uniqueID: 4842514210339559651
   end: {fileID: 89894559}
   costFactor: 1
   oneWay: 0

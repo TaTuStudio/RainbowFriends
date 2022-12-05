@@ -572,5 +572,10 @@ namespace Pathfinding {
 #pragma warning restore 618
 			return base.OnUpgradeSerializedData(version, unityThread);
 		}
+
+		public void SetMoveToPosition(Vector3 worldPos)
+        {
+			destination = worldPos;
+		}
 	}
 }

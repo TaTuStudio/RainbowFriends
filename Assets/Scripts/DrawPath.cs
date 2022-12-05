@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class RecastDrawPath : MonoBehaviour
+public class DrawPath : MonoBehaviour
 {
+    public Seeker seeker;
+
     public Transform target;
     public Vector3 targetPos;
 
     public List<Vector3> movePath = new List<Vector3>();
+
+    private void Awake()
+    {
+        seeker = GetComponent<Seeker>();
+    }
 
     private void Update()
     {
@@ -25,15 +32,18 @@ public class RecastDrawPath : MonoBehaviour
         }
     }
 
-    public void _GetMoveToTargetPath()
+public void _GetMoveToTargetPath()
     {
         Debug.Log("Get path");
 
-        var p = ABPath.Construct(transform.position, targetPos, OnPathComplete);
+        //var p = ABPath.Construct(transform.position, targetPos, OnPathComplete);
 
-        // Start the path by calling the AstarPath component directly
-        // AstarPath.active is the active AstarPath instance in the scene
-        AstarPath.StartPath(p);
+        //// Start the path by calling the AstarPath component directly
+        //// AstarPath.active is the active AstarPath instance in the scene
+        //AstarPath.StartPath(p);
+
+        //Caculate by seeker
+        seeker.StartPath(transform.position, targetPos, OnPathComplete);
     }
 
     public void OnPathComplete(Path p)
@@ -47,16 +57,21 @@ public class RecastDrawPath : MonoBehaviour
 
             //Debug.Log("Nooo, a valid path couldn't be found");
         }
+        //else
+        //{
+        //    // Yay, now we can get a Vector3 representation of the path
+        //    // from p.vectorPath
+
+        //    //Debug.Log("Yay, now we can get a Vector3 representation of the path");
+
+        //    movePath.AddRange(p.vectorPath);
+
+        //    movePath.Remove(movePath[0]);
+        //}
+        //Caculate by seeker
         else
         {
-            // Yay, now we can get a Vector3 representation of the path
-            // from p.vectorPath
-
-            //Debug.Log("Yay, now we can get a Vector3 representation of the path");
-
-            movePath.AddRange(p.vectorPath);
-
-            movePath.Remove(movePath[0]);
+            movePath.AddRange(seeker.GetCurrentPath().vectorPath);
         }
     }
 

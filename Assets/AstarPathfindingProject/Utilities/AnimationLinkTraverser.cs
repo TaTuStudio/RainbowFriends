@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Pathfinding.Examples {
@@ -13,30 +14,36 @@ namespace Pathfinding.Examples {
 	/// See: <see cref="Pathfinding.AnimationLink"/>
 	/// </summary>
 	[HelpURL("http://arongranberg.com/astar/docs/class_pathfinding_1_1_examples_1_1_animation_link_traverser.php")]
-	public class AnimationLinkTraverser : VersionedMonoBehaviour {
+	public class AnimationLinkTraverser : VersionedMonoBehaviour
+	{
 		public Animation anim;
 
 		RichAI ai;
 
-		void OnEnable () {
+		void OnEnable()
+		{
 			ai = GetComponent<RichAI>();
 			if (ai != null) ai.onTraverseOffMeshLink += TraverseOffMeshLink;
 		}
 
-		void OnDisable () {
+		void OnDisable()
+		{
 			if (ai != null) ai.onTraverseOffMeshLink -= TraverseOffMeshLink;
 		}
 
-		protected virtual IEnumerator TraverseOffMeshLink (RichSpecial rs) {
+		protected virtual IEnumerator TraverseOffMeshLink(RichSpecial rs)
+		{
 			var link = rs.nodeLink as AnimationLink;
 
-			if (link == null) {
+			if (link == null)
+			{
 				Debug.LogError("Unhandled RichSpecial");
 				yield break;
 			}
 
 			// Rotate character to face the correct direction
-			while (true) {
+			while (true)
+			{
 				var origRotation = ai.rotation;
 				var finalRotation = ai.SimulateRotationTowards(rs.first.forward, ai.rotationSpeed * Time.deltaTime);
 				// Rotate until the rotation does not change anymore
@@ -45,30 +52,70 @@ namespace Pathfinding.Examples {
 				yield return null;
 			}
 
-			// Reposition
-			transform.parent.position = transform.position;
+			if (link.clip != "")
+			{
+				// Reposition
+				transform.parent.position = transform.position;
 
-			transform.parent.rotation = transform.rotation;
-			transform.localPosition = Vector3.zero;
-			transform.localRotation = Quaternion.identity;
+				transform.parent.rotation = transform.rotation;
+				transform.localPosition = Vector3.zero;
+				transform.localRotation = Quaternion.identity;
 
-			// Set up animation speeds
-			if (rs.reverse && link.reverseAnim) {
-				anim[link.clip].speed = -link.animSpeed;
-				anim[link.clip].normalizedTime = 1;
-				anim.Play(link.clip);
-				anim.Sample();
-			} else {
-				anim[link.clip].speed = link.animSpeed;
-				anim.Rewind(link.clip);
-				anim.Play(link.clip);
+				Debug.Log("Not loop anim");
+
+				// Set up animation speeds
+				if (rs.reverse && link.reverseAnim)
+				{
+					anim[link.clip].speed = -link.animSpeed;
+					anim[link.clip].normalizedTime = 1;
+					anim.Play(link.clip);
+					anim.Sample();
+				}
+				else
+				{
+					anim[link.clip].speed = link.animSpeed;
+					anim.Rewind(link.clip);
+					anim.Play(link.clip);
+				}
+
+				// Fix required for animations in reverse direction
+				transform.parent.position -= transform.position - transform.parent.position;
+
+				// Wait for the animation to finish
+				yield return new WaitForSeconds(Mathf.Abs(anim[link.clip].length / link.animSpeed));
 			}
+			else
+			{
+				//float dist = Vector3.Distance(link.transform.position, link.end.position);
 
-			// Fix required for animations in reverse direction
-			transform.parent.position -= transform.position-transform.parent.position;
+				//float timeToNextPos = dist / ai.maxSpeed;
 
-			// Wait for the animation to finish
-			yield return new WaitForSeconds(Mathf.Abs(anim[link.clip].length/link.animSpeed));
+				//Debug.Log("dist = " + dist);
+				//Debug.Log("timeToNextPos = " + timeToNextPos);
+
+				if(rs.reverse == false && link.reverseAnim == false)
+                {
+					while (ai.transform.position != link.end.position)
+                    {
+						ai.transform.position = Vector3.MoveTowards(ai.transform.position, link.end.position, ai.maxSpeed * Time.deltaTime);
+
+						yield return null;
+					}
+                }
+                else
+                {
+					while (ai.transform.position != link.transform.position)
+					{
+						ai.transform.position = Vector3.MoveTowards(ai.transform.position, link.transform.position, ai.maxSpeed * Time.deltaTime);
+
+						yield return null;
+					}
+				}
+
+				//yield return new WaitForSeconds(timeToNextPos);
+
+				yield break;
+			}
 		}
 	}
 }

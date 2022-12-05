@@ -472,8 +472,17 @@ namespace Pathfinding {
 			return position;
 		}
 
+        #region Custom
+
+		public void _SetMoveToPosition(Vector3 worldPos)
+        {
+			destination = worldPos;
+        }
+
+        #endregion
+
 #if UNITY_EDITOR
-		[System.NonSerialized]
+        [System.NonSerialized]
 		int gizmoHash = 0;
 
 		[System.NonSerialized]
