@@ -1,0 +1,410 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Pathfinding;
+
+public class MonsterController : MonoBehaviour
+{
+    public Animator animator;
+
+    public AIPath aIPath;
+
+    public float turnTime = 0f;
+
+    public bool setDefault = false;
+
+    [Header("Turn settings")]
+    public int turnType = -1;
+    // turnType = 0 -> stay
+    // turnType = 1 -> move to checkPoints
+    // turnType = 2 -> move to one of player position
+    PlayerController selectedPlayer;
+    PlayerAIController selectedAIPlayer;
+
+    [Header("Run to nearest settings")]
+    //Run to nearest
+    float runToRange = 5f;
+    float runToNearestDelay = 3f;
+    public float curRunToNearestDelay = 0f;
+    public bool runToNearest = false;
+    public Transform nearest = null;
+
+    [Header("Attack settings")]
+    //Attack
+    float attackRange = 3f;
+    float attackDelay = 1f;
+    float curAttackDelay = 0f;
+    float hitDelay = 1.5f;
+    float curHitDelay = 0f;
+    public bool attacking = false;
+
+    private void OnEnable()
+    {
+        setDefault = true;
+    }
+
+    private void Awake()
+    {
+        aIPath = GetComponent<AIPath>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        _Default();
+
+        _SetAnimMove();
+
+        _CheckTurn();
+
+        _CheckFindPlayer();
+
+        _CheckRunToNearest();
+
+        _Attack();
+    }
+
+    public void _Default()
+    {
+        if (setDefault == false) return;
+
+        setDefault = false;
+
+        _TurnDefault();
+
+        curAttackDelay = attackDelay;
+        attacking = false;
+        curHitDelay = hitDelay;
+
+        runToNearest = false;
+        nearest = null;
+    }
+
+    void _TurnDefault()
+    {
+        turnTime = 0f;
+
+        turnType = -1;
+
+        selectedPlayer = null;
+
+        selectedAIPlayer = null;
+    }
+
+    void _CheckTurn()
+    {
+        if (runToNearest || attacking) return;
+
+        if(turnTime > 0f)
+        {
+            turnTime -= Time.deltaTime;
+        }
+
+        if(turnTime <= 0f)
+        {
+            List<int> ranNumList = new List<int>() { 0, 1, 2 };
+
+            turnType = Random.Range(0, ranNumList.Count);
+
+            if(turnType == 0)
+            {
+                turnTime = (float)Random.RandomRange(1, 3);
+
+                aIPath.destination = transform.position;
+
+                Debug.Log("Monster Stay");
+            }
+            else if (turnType == 1)
+            {
+                turnTime = (float)Random.RandomRange(5, 10);
+
+                int checkPointIndex = Random.Range(0, MapManager.instance.spawnedMap.checkPoints.Length);
+
+                Transform checkPoint = MapManager.instance.spawnedMap.checkPoints[checkPointIndex];
+
+                aIPath.destination = checkPoint.position;
+
+                Debug.Log("Monster Move to check point");
+            }
+            else if (turnType == 2)
+            {
+                turnTime = (float)Random.RandomRange(5, 10);
+
+                int ranNum = Random.Range(0, 100);
+
+                if(ranNum < 50)
+                {
+                    //find ai player
+
+                    List<PlayerAIController> canUsePlayerAIList = new List<PlayerAIController>();
+
+                    foreach(PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
+                    {
+                        if(aiController.isDead == false)
+                        {
+                            canUsePlayerAIList.Add(aiController);
+                        }
+                    }
+
+                    if (canUsePlayerAIList.Count > 0)
+                    {
+                        int ranAIIndex = Random.Range(0, canUsePlayerAIList.Count);
+
+                        selectedAIPlayer = canUsePlayerAIList[ranAIIndex];
+                    }
+                    else
+                    {
+                        turnTime = 0f;
+                    }
+
+                    Debug.Log("Find Player");
+                }
+                else
+                {
+                    //find player
+
+                    if(PlayerManager.instance.spawnedPlayer.isDead == false)
+                    {
+                        selectedPlayer = PlayerManager.instance.spawnedPlayer;
+                    }
+                    else
+                    {
+                        turnTime = 0f;
+                    }
+
+                    Debug.Log("Find AI Player");
+                }
+            }
+        }
+    }
+
+    void _CheckFindPlayer()
+    {
+        if (runToNearest || attacking) return;
+
+        if (turnType == 2)
+        {
+            if(selectedAIPlayer != null)
+            {
+                if (selectedAIPlayer.isHiding)
+                {
+                    aIPath.destination = transform.position;
+                }
+                else
+                {
+                    aIPath.destination = selectedAIPlayer.transform.position;
+                }
+            }
+            else if (selectedPlayer != null)
+            {
+                if (selectedPlayer.isHiding)
+                {
+                    aIPath.destination = transform.position;
+                }
+                else
+                {
+                    aIPath.destination = selectedPlayer.transform.position;
+                }
+            }
+        }
+    }
+
+    void _CheckRunToNearest()
+    {
+        if (attacking) return; 
+
+        List<Transform> transforms = new List<Transform>();
+
+        foreach (PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
+        {
+            float dist = Vector3.Distance(transform.position, aiController.transform.position);
+
+            if (aiController.isDead == false && dist < runToRange)
+            {
+                transforms.Add(aiController.transform);
+            }
+        }
+
+        {
+            float dist = Vector3.Distance(transform.position, PlayerManager.instance.spawnedPlayer.transform.position);
+
+            if (PlayerManager.instance.spawnedPlayer.isDead == false && dist < runToRange)
+            {
+                transforms.Add(PlayerManager.instance.spawnedPlayer.transform);
+            }
+        }
+
+        if(transforms.Count > 0)
+        {
+            nearest = transforms[0];
+
+            for(int i = 1; i < transforms.Count; i++)
+            {
+                float curDist = Vector3.Distance(transform.position, transforms[i].position);
+                float nearestDist = Vector3.Distance(transform.position, nearest.position);
+
+                if(curDist < nearestDist)
+                {
+                    nearest = transform;
+                }
+            }
+
+            aIPath.destination = nearest.position;
+        }
+        else
+        {
+            nearest = null;
+        }
+
+        if(nearest != null && curRunToNearestDelay > 0f &&  runToNearest == false)
+        {
+            curRunToNearestDelay -= Time.deltaTime;
+
+            if(curRunToNearestDelay <= 0f)
+            {
+                runToNearest = true;
+            }
+        }
+        else if(nearest == null)
+        {
+            curRunToNearestDelay = runToNearestDelay;
+
+            runToNearest = false;
+        }
+    }
+
+    void _Attack()
+    {
+        if (attacking == false)
+        {
+            if (nearest != null)
+            {
+                if (curAttackDelay > 0)
+                {
+                    curAttackDelay -= Time.deltaTime;
+                }
+
+                if (curAttackDelay <= 0f)
+                {
+                    attacking = true;
+
+                    _SetNearestCatched();
+
+                    _SetAnimAttack(true);
+                }
+            }
+            else
+            {
+                curAttackDelay = attackDelay;
+            }
+        }
+
+        if (attacking == true)
+        {
+            if (curHitDelay > 0)
+            {
+                curHitDelay -= Time.deltaTime;
+            }
+
+            if (curHitDelay <= 0f)
+            {
+                curHitDelay = hitDelay;
+
+                attacking = false;
+
+                _SetNearestHit();
+            }
+        }
+    }
+
+    void _SetNearestCatched()
+    {
+        if(nearest != null)
+        {
+            PlayerController playerController = nearest.GetComponent<PlayerController>();
+            PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
+
+            if (playerController != null && playerController.enabled)
+            {
+                playerController._SetCatched();
+            }
+            else
+            if (playerAIController != null && playerAIController.enabled)
+            {
+                playerAIController._SetCatched();
+            }
+        }
+    }
+
+    void _SetNearestHit()
+    {
+        if (nearest != null)
+        {
+            PlayerController playerController = nearest.GetComponent<PlayerController>();
+            PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
+
+            if (playerController != null && playerController.enabled)
+            {
+                playerController._SetCatched();
+
+                Debug.Log("Monster hit player");
+            }
+            else
+            if (playerAIController != null && playerAIController.enabled)
+            {
+                playerAIController._SetCatched();
+
+                Debug.Log("Monster hit ai player");
+            }
+        }
+
+        nearest = null;
+
+        _SetAnimAttack(false);
+    }
+
+    void _SetAnimMove()
+    {
+        // Calculate the velocity relative to this transform's orientation
+        Vector3 relVelocity = transform.InverseTransformDirection(aIPath.velocity);
+        relVelocity.y = 0;
+
+        if (runToNearest )
+        {
+            animator.SetFloat("NormalizedSpeed", (relVelocity.magnitude / animator.transform.lossyScale.x) * 2f);
+        }
+        else
+        {
+            // Speed relative to the character size
+            animator.SetFloat("NormalizedSpeed", relVelocity.magnitude / animator.transform.lossyScale.x);
+        }
+    }
+
+    void _SetAnimAttack(bool attack)
+    {
+        animator.SetBool("Attack", attack);
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, runToRange);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if (nearest != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, nearest.position);
+        }
+    }
+#endif
+}

@@ -262,5 +262,23 @@ public class PlayerController : MonoBehaviour
     public CinemachineVirtualCamera fpsVirtualCam;
     public float camRotX = 0f;
 
+    public bool isHiding = false;
+
+    public bool catched = false;
+
+    public bool isDead = false;
+
+    public bool setDefault = false;
+
+    public void _SetCatched()
+    {
+        catched = true;
+    }
+
+    public void _SetHit()
+    {
+        isDead = true;
+    }
+
     #endregion
 }
