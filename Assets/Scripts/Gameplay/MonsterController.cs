@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Cinemachine;
 
 public class MonsterController : MonoBehaviour
 {
+    public CinemachineVirtualCamera virtualCam;
+
     public Animator animator;
 
     public AIPath aIPath;
@@ -14,6 +17,7 @@ public class MonsterController : MonoBehaviour
     public bool setDefault = false;
 
     [Header("Turn settings")]
+
     public int turnType = -1;
     // turnType = 0 -> stay
     // turnType = 1 -> move to checkPoints
@@ -34,7 +38,7 @@ public class MonsterController : MonoBehaviour
     float attackRange = 3f;
     float attackDelay = 1f;
     float curAttackDelay = 0f;
-    float hitDelay = 1.5f;
+    float hitDelay = 0f;
     float curHitDelay = 0f;
     public bool attacking = false;
 
@@ -51,7 +55,8 @@ public class MonsterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        CameraManager.instance._RegisterVirtualCamera(virtualCam);
+        CameraManager.instance._DeactiveCamera(virtualCam);
     }
 
     // Update is called once per frame
@@ -84,6 +89,9 @@ public class MonsterController : MonoBehaviour
 
         runToNearest = false;
         nearest = null;
+
+        _SetAnimJumpScare(false);
+        _SetAnimAttack(false);
     }
 
     void _TurnDefault()
@@ -124,7 +132,7 @@ public class MonsterController : MonoBehaviour
             {
                 turnTime = (float)Random.RandomRange(5, 10);
 
-                int checkPointIndex = Random.Range(0, MapManager.instance.spawnedMap.checkPoints.Length);
+                int checkPointIndex = Random.Range(0, MapManager.instance.spawnedMap.checkPoints.Count);
 
                 Transform checkPoint = MapManager.instance.spawnedMap.checkPoints[checkPointIndex];
 
@@ -138,7 +146,7 @@ public class MonsterController : MonoBehaviour
 
                 int ranNum = Random.Range(0, 100);
 
-                if(ranNum < 50)
+                //if(ranNum < 50)
                 {
                     //find ai player
 
@@ -165,21 +173,21 @@ public class MonsterController : MonoBehaviour
 
                     Debug.Log("Find Player");
                 }
-                else
-                {
-                    //find player
+                //else
+                //{
+                //    //find player
 
-                    if(PlayerManager.instance.spawnedPlayer.isDead == false)
-                    {
-                        selectedPlayer = PlayerManager.instance.spawnedPlayer;
-                    }
-                    else
-                    {
-                        turnTime = 0f;
-                    }
+                //    if(PlayerManager.instance.spawnedPlayer.isDead == false)
+                //    {
+                //        selectedPlayer = PlayerManager.instance.spawnedPlayer;
+                //    }
+                //    else
+                //    {
+                //        turnTime = 0f;
+                //    }
 
-                    Debug.Log("Find AI Player");
-                }
+                //    Debug.Log("Find AI Player");
+                //}
             }
         }
     }
@@ -314,8 +322,6 @@ public class MonsterController : MonoBehaviour
 
             if (curHitDelay <= 0f)
             {
-                curHitDelay = hitDelay;
-
                 attacking = false;
 
                 _SetNearestHit();
@@ -332,11 +338,19 @@ public class MonsterController : MonoBehaviour
 
             if (playerController != null && playerController.enabled)
             {
+                curHitDelay = 2.22f;
+
                 playerController._SetCatched();
+
+                _SetAnimJumpScare(true);
+
+                CameraManager.instance._GameplaySwitchCam(virtualCam);
             }
             else
             if (playerAIController != null && playerAIController.enabled)
             {
+                curHitDelay = 1.5f;
+
                 playerAIController._SetCatched();
             }
         }
@@ -351,14 +365,14 @@ public class MonsterController : MonoBehaviour
 
             if (playerController != null && playerController.enabled)
             {
-                playerController._SetCatched();
+                playerController._SetHit();
 
                 Debug.Log("Monster hit player");
             }
             else
             if (playerAIController != null && playerAIController.enabled)
             {
-                playerAIController._SetCatched();
+                playerAIController._SetHit();
 
                 Debug.Log("Monster hit ai player");
             }
@@ -367,8 +381,10 @@ public class MonsterController : MonoBehaviour
         nearest = null;
 
         _SetAnimAttack(false);
+        _SetAnimJumpScare(false);
     }
 
+    #region Animations
     void _SetAnimMove()
     {
         // Calculate the velocity relative to this transform's orientation
@@ -390,6 +406,13 @@ public class MonsterController : MonoBehaviour
     {
         animator.SetBool("Attack", attack);
     }
+
+    void _SetAnimJumpScare(bool active)
+    {
+        animator.SetBool("JumpScare", active);
+    }
+
+    #endregion
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()

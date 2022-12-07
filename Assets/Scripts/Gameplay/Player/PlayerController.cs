@@ -98,14 +98,14 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateRotation()
     {
-        //Other solution
+        if (isDead) return;
+
         float yEuler = transform.localEulerAngles.y + UI_Input_Controller.instance.uI_Rotate_Camera.deltaX;
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, yEuler, transform.localEulerAngles.z);
 
-        camRotX -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
-        camRotX = Mathf.Clamp(camRotX, -60f, 60f);
-
-        fpsVirtualCam.transform.localEulerAngles = new Vector3(camRotX, 0f, 0f);
+        camRotVertical -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
+        camRotVertical = Mathf.Clamp(camRotVertical, -60f, 60f);
+        fpsVirtualCam.transform.localEulerAngles = new Vector3(camRotVertical, 0f, 0f);
     }
 
     /// <summary>
@@ -174,7 +174,12 @@ public class PlayerController : MonoBehaviour
     {
         movementDirection = transform.forward * UI_Input_Controller.instance.moveJoyStick.Vertical + transform.right * UI_Input_Controller.instance.moveJoyStick.Horizontal;
 
-        Vector3 desiredVelocity = movementDirection * maxSpeed;
+        Vector3 desiredVelocity = Vector3.zero;
+
+        if (catched == false && isDead == false)
+        {
+            desiredVelocity = movementDirection * maxSpeed;
+        }
 
         // Update character’s velocity based on its grounding status
 
@@ -224,6 +229,8 @@ public class PlayerController : MonoBehaviour
 
         characterMovement.FoundGround += OnFoundGround;
         characterMovement.Collided += OnCollided;
+
+        setDefault = true;
     }
 
     private void OnDisable()
@@ -260,7 +267,7 @@ public class PlayerController : MonoBehaviour
     [Header("Custom settings")]
 
     public CinemachineVirtualCamera fpsVirtualCam;
-    public float camRotX = 0f;
+    public float camRotVertical = 0f;
 
     public bool isHiding = false;
 
@@ -270,6 +277,33 @@ public class PlayerController : MonoBehaviour
 
     public bool setDefault = false;
 
+    private void Start()
+    {
+        CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
+    }
+
+    private void Update()
+    {
+        _Default();
+
+        _UpdateMovementAnim();
+
+        _UpdateDeadAnim();
+    }
+
+    public void _Default()
+    {
+        if (setDefault == false) return;
+
+        setDefault = false;
+
+        isHiding = false;
+        catched = false;
+        isDead = false;
+
+        CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
+    }
+
     public void _SetCatched()
     {
         catched = true;
@@ -278,7 +312,42 @@ public class PlayerController : MonoBehaviour
     public void _SetHit()
     {
         isDead = true;
+
+        CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
     }
+
+    #region Animations
+
+    public Animator playerAnimator;
+
+    void _UpdateMovementAnim()
+    {
+        float trueSpeed = 0f;
+
+        if (catched == false && isDead == false)
+        {
+            float vertical = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Vertical);
+            float horizontal = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Horizontal);
+
+            if (vertical > horizontal)
+            {
+                trueSpeed = vertical;
+            }
+            else
+            {
+                trueSpeed = horizontal;
+            }
+        }
+
+        playerAnimator.SetFloat("NormalizedSpeed", trueSpeed);
+    }
+
+    void _UpdateDeadAnim()
+    {
+        playerAnimator.SetBool("Dead", isDead);
+    }
+
+    #endregion
 
     #endregion
 }

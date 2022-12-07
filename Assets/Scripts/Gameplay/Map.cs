@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public Transform[] checkPoints;
+    public bool loadMapDone = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Transform> checkPoints;
 
-    // Update is called once per frame
-    void Update()
+    public List<Transform> playerSpawnPoints;
+
+    private void OnEnable()
     {
-        
+        MapManager.instance.spawnedMap = this;
     }
 }
