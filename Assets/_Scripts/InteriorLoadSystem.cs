@@ -5,8 +5,8 @@ using UnityEngine.AddressableAssets;
 
 public class InteriorLoadSystem : MonoBehaviour
 {
-    private LinkedList<GameObject> rooms;
-    private GameObject[] hallWays = new GameObject[2];
+    //private LinkedList<GameObject> rooms;
+    private readonly GameObject[] hallWays = new GameObject[2];
     private int lastPos;
     private GameObject currentRoom;
     
@@ -18,7 +18,7 @@ public class InteriorLoadSystem : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        rooms = new LinkedList<GameObject>();
+        //rooms = new LinkedList<GameObject>();
     }
 
     private void OnEnable()
@@ -36,6 +36,7 @@ public class InteriorLoadSystem : MonoBehaviour
     {
         InitHallWay(currentPosition);
         
+        // Load current room
         if (currentRoom != null)
             room[lastPos].ReleaseInstance(currentRoom);
         
