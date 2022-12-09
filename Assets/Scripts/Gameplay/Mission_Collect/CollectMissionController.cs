@@ -9,11 +9,28 @@ public class CollectMissionController : MonoBehaviour
     public ReuseGO blueMonsterPrefab;
     public Transform blueSpawnPoint;
 
+    public int collectNum = 0;
+    public int curCollectedNum = 0;
+
+    public bool win = false;
+    public bool lose = false;
+
     int aiSpawnNum = 9;
+
+    private void Start()
+    {
+        GameController.instance._SetPlaying(false);
+
+        PlayerManager.instance._Clean();
+
+        GameplayUI.instance._GameplayAlphabetCollectSetup();
+    }
 
     private void Update()
     {
         _GameplaySetup();
+
+        _WinLoseCheck();
     }
 
     public void _GameplaySetup()
@@ -25,6 +42,50 @@ public class CollectMissionController : MonoBehaviour
             _SpawnPlayers();
 
             _SpawnMonster();
+
+            GameController.instance._SetGameTime(60f);
+
+            GameController.instance._SetPlaying(true);
+        }
+    }
+
+    public void _AddCollectItemNum(int num)
+    {
+        curCollectedNum += num;
+
+        GameplayUI.instance.alphabetCollectCountUI._SetCount(curCollectedNum, collectNum);
+    }
+
+    void _WinLoseCheck()
+    {
+        if(win == false && lose == false && gameplaySet == true)
+        {
+            if (curCollectedNum > 0 && curCollectedNum >= collectNum)
+            {
+                win = true;
+
+                GameplayUI.instance._ActiveWinUI(true);
+
+                return;
+            }
+
+            if (PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.isDead)
+            {
+                lose = true;
+
+                GameplayUI.instance._ActiveDeadUI(true);
+
+                return;
+            }
+
+            if (GameController.instance.curGameTime >= GameController.instance.gameTime)
+            {
+                lose = true;
+
+                GameplayUI.instance._ActiveOutTimeUI(true);
+
+                return;
+            }
         }
     }
 

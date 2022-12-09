@@ -6,6 +6,11 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
+    public bool playing = false;
+
+    public float gameTime = 0f;
+    public float curGameTime = 0f;
+
     private void Awake()
     {
         instance = this;
@@ -17,9 +22,39 @@ public class GameController : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        _TimeCount();
+    }
+
+    public void _SetPlaying(bool active)
+    {
+        playing = active;
+
+        GameplayUI.instance.timeCountUI._SetTime(curGameTime);
+    }
+
+    public void _SetGameTime(float time)
+    {
+        gameTime = time;
+
+        curGameTime = 0f;
+    }
+
+    void _TimeCount()
+    {
+        if (gameTime == 0f && curGameTime == 0f || playing == false) return;
+
+        if (curGameTime < gameTime)
+        {
+            curGameTime += Time.deltaTime;
+
+            if (curGameTime >= gameTime)
+            {
+                curGameTime = gameTime;
+            }
+
+            GameplayUI.instance.timeCountUI._SetTime(gameTime - curGameTime);
+        }
     }
 }

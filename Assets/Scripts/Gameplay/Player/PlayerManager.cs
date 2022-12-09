@@ -41,7 +41,11 @@ public class PlayerManager : MonoBehaviour
             UnusedManager.instance._AddToUnusedMonster(go.GetComponent<ReuseGO>());
         }
 
-        UnusedManager.instance._AddToUnusedPlayer(spawnedPlayer);
+        if(spawnedPlayer != null)
+        {
+            UnusedManager.instance._AddToUnusedPlayer(spawnedPlayer);
+        }
+
     }
 
     public void _SpawnMonster(ReuseGO prefab, Vector3 spawnPos)
@@ -118,8 +122,6 @@ public class PlayerManager : MonoBehaviour
     public void _SpawnPlayer(PlayerController prefab, Vector3 spawnPos)
     {
         PlayerController selected = UnusedManager.instance._GetUnusedPlayer(prefab.GetComponent<ReuseGO>().itemID);
-
-        Debug.Log("Selected player null");
 
         if (selected != null)
         {

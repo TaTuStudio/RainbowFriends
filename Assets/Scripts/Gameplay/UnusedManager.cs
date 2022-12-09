@@ -35,6 +35,15 @@ public class UnusedManager : MonoBehaviour
         return selected;
     }
 
+    public void _AddToUnusedGO(ReuseGO go)
+    {
+        go.gameObject.SetActive(false);
+
+        go.transform.parent = this.transform;
+
+        unusedReuseGOs.Add(go);
+    }
+
     public void _AddToUnusedMonster(ReuseGO go)
     {
         go.gameObject.SetActive(false);

@@ -277,6 +277,10 @@ public class PlayerController : MonoBehaviour
 
     public bool setDefault = false;
 
+    public Transform OnHandItemContainer_Right;
+
+    public List<Transform> rightHandCollectedList = new List<Transform>();
+
     private void Start()
     {
         CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
@@ -287,8 +291,6 @@ public class PlayerController : MonoBehaviour
         _Default();
 
         _UpdateMovementAnim();
-
-        _UpdateDeadAnim();
     }
 
     public void _Default()
@@ -302,6 +304,29 @@ public class PlayerController : MonoBehaviour
         isDead = false;
 
         CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
+
+        rightHandCollectedList.Clear();
+
+        _SetHoldItemAnim(false);
+
+        _SetDeadAnim(false);
+    }
+
+    public void _AddRightHandColectItem(Transform item)
+    {
+        rightHandCollectedList.Add(item);
+
+        _SetHoldItemAnim(true);
+    }
+
+    public void _RemoveRightHandColectItem(Transform item)
+    {
+        rightHandCollectedList.Remove(item);
+
+        if(rightHandCollectedList.Count <= 0)
+        {
+            _SetHoldItemAnim(false);
+        }
     }
 
     public void _SetCatched()
@@ -314,6 +339,8 @@ public class PlayerController : MonoBehaviour
         isDead = true;
 
         CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
+
+        _SetDeadAnim(true);
     }
 
     #region Animations
@@ -342,9 +369,14 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("NormalizedSpeed", trueSpeed);
     }
 
-    void _UpdateDeadAnim()
+    void _SetDeadAnim(bool active)
     {
-        playerAnimator.SetBool("Dead", isDead);
+        playerAnimator.SetBool("Dead", active);
+    }
+
+    void _SetHoldItemAnim(bool active)
+    {
+        playerAnimator.SetBool("Hold Item", active);
     }
 
     #endregion
