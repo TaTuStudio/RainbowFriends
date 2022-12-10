@@ -2,36 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectAlphabetSpawner : MonoBehaviour
+public class CollectItemSpawner : MonoBehaviour
 {
     public CollectMissionController collectMissionController;
 
     public bool gameplaySet = false;
 
-    public List<ReuseGO> alphabetPrefabs = new List<ReuseGO>();
+    public List<ReuseGO> collectItemPrefabs = new List<ReuseGO>();
 
     public List<Transform> spawnPoints = new List<Transform>();
 
-    public List<ReuseGO> spawnedAlphabetBoxes = new List<ReuseGO>();
+    public List<ReuseGO> spawnedItems = new List<ReuseGO>();
 
-    private void Start()
-    {
-        collectMissionController.collectNum = alphabetPrefabs.Count;
-
-        collectMissionController._AddCollectItemNum(0);
-    }
+    public List<ReuseGO> collectedItems = new List<ReuseGO>();
 
     private void Update()
     {
         _GameplaySetup();
     }
 
-    private void OnDisable()
-    {
-        if (Application.isEditor) return;
-
-        _Clean();
-    }
+    //private void OnDisable()
+    //{
+    //    _Clean();
+    //}
 
     public void _GameplaySetup()
     {
@@ -54,23 +47,25 @@ public class CollectAlphabetSpawner : MonoBehaviour
 
             selected.gameObject.SetActive(true);
 
-            spawnedAlphabetBoxes.Add(selected);
+            spawnedItems.Add(selected);
         }
         else
         {
             selected = Instantiate(prefab, spawnPos, Quaternion.identity, transform);
 
-            spawnedAlphabetBoxes.Add(selected);
+            spawnedItems.Add(selected);
         }
     }
 
     void _Clean()
     {
-        while(spawnedAlphabetBoxes.Count > 0)
-        {
-            UnusedManager.instance._AddToUnusedGO(spawnedAlphabetBoxes[0]);
+        collectedItems.Clear();
 
-            spawnedAlphabetBoxes.RemoveAt(0);
+        while (spawnedItems.Count > 0)
+        {
+            UnusedManager.instance._AddToUnusedGO(spawnedItems[0]);
+
+            spawnedItems.RemoveAt(0);
         }
     }
 
@@ -81,7 +76,7 @@ public class CollectAlphabetSpawner : MonoBehaviour
         List<Transform> canSpawnPoints = new List<Transform>();
         canSpawnPoints.AddRange(spawnPoints);
 
-        foreach (ReuseGO go in alphabetPrefabs)
+        foreach (ReuseGO go in collectItemPrefabs)
         {
             int ranIndex = Random.Range(0, canSpawnPoints.Count);
 
@@ -89,5 +84,10 @@ public class CollectAlphabetSpawner : MonoBehaviour
 
             canSpawnPoints.Remove(canSpawnPoints[ranIndex]);
         }
+    }
+
+    public void _AddToCollected(ReuseGO reuseGO)
+    {
+        collectedItems.Add(reuseGO);
     }
 }

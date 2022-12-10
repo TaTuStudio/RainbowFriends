@@ -131,9 +131,9 @@ public class MonsterController : MonoBehaviour
             {
                 turnTime = (float)Random.RandomRange(1, 3);
 
-                aIPath.destination = transform.position;
+                aIPath._SetMoveToPosition(transform.position);
 
-                Debug.Log("Monster Stay");
+                //Debug.Log("Monster Stay");
             }
             else if (turnType == 1)
             {
@@ -143,9 +143,9 @@ public class MonsterController : MonoBehaviour
 
                 Transform checkPoint = monsterInfo.checkPoints[checkPointIndex];
 
-                aIPath.destination = checkPoint.position;
+                aIPath._SetMoveToPosition(checkPoint.position);
 
-                Debug.Log("Monster Move to check point");
+                //Debug.Log("Monster Move to check point");
             }
             else if (turnType == 2)
             {
@@ -178,7 +178,7 @@ public class MonsterController : MonoBehaviour
                         turnTime = 0f;
                     }
 
-                    Debug.Log("Find Player");
+                    //Debug.Log("Find Player");
                 }
                 //else
                 //{
@@ -209,22 +209,22 @@ public class MonsterController : MonoBehaviour
             {
                 if (selectedAIPlayer.isHiding)
                 {
-                    aIPath.destination = transform.position;
+                    aIPath._SetMoveToPosition(transform.position);
                 }
                 else
                 {
-                    aIPath.destination = selectedAIPlayer.transform.position;
+                    aIPath._SetMoveToPosition(selectedAIPlayer.transform.position);
                 }
             }
             else if (selectedPlayer != null)
             {
                 if (selectedPlayer.isHiding)
                 {
-                    aIPath.destination = transform.position;
+                    aIPath._SetMoveToPosition(transform.position);
                 }
                 else
                 {
-                    aIPath.destination = selectedPlayer.transform.position;
+                    aIPath._SetMoveToPosition(selectedPlayer.transform.position);
                 }
             }
         }
@@ -270,7 +270,7 @@ public class MonsterController : MonoBehaviour
                 }
             }
 
-            aIPath.destination = nearest.position;
+            aIPath._SetMoveToPosition(nearest.position);
         }
         else
         {
@@ -330,6 +330,8 @@ public class MonsterController : MonoBehaviour
             if (curHitDelay <= 0f)
             {
                 attacking = false;
+
+                curAttackDelay = attackDelay;
 
                 _SetNearestHit();
             }

@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class CollectMissionController : MonoBehaviour
 {
+    public static CollectMissionController instance;
+
+    public PlayerAIBrains_CollectController playerAIBrains_CollectController;
+
+    public CollectItemSpawner collectItemSpawner;
+
+    public Transform collector;
+
     public bool gameplaySet = false;
 
     public ReuseGO blueMonsterPrefab;
     public Transform blueSpawnPoint;
 
-    public int collectNum = 0;
-    public int curCollectedNum = 0;
-
     public bool win = false;
     public bool lose = false;
 
     int aiSpawnNum = 9;
+
+    private void Awake()
+    {
+        _MakeReplaceSingleton();
+    }
 
     private void Start()
     {
@@ -33,6 +43,22 @@ public class CollectMissionController : MonoBehaviour
         _WinLoseCheck();
     }
 
+    void _MakeReplaceSingleton()
+    {
+        if (CollectMissionController.instance != null && CollectMissionController.instance != this)
+        {
+            CollectMissionController old = CollectMissionController.instance;
+
+            CollectMissionController.instance = this;
+
+            Destroy(old);
+        }
+        else
+        {
+            CollectMissionController.instance = this;
+        }
+    }
+
     public void _GameplaySetup()
     {
         if(MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
@@ -43,24 +69,19 @@ public class CollectMissionController : MonoBehaviour
 
             MonsterSpawner.instance._SpawnAllMonsters();
 
+            playerAIBrains_CollectController._SetBrainToAIPlayer();
+
             GameController.instance._SetGameTime(60f);
 
             GameController.instance._SetPlaying(true);
         }
     }
 
-    public void _AddCollectItemNum(int num)
-    {
-        curCollectedNum += num;
-
-        GameplayUI.instance.alphabetCollectCountUI._SetCount(curCollectedNum, collectNum);
-    }
-
     void _WinLoseCheck()
     {
         if(win == false && lose == false && gameplaySet == true && GameController.instance.isPlaying == true && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
         {
-            if (curCollectedNum > 0 && curCollectedNum >= collectNum)
+            if (collectItemSpawner.spawnedItems.Count > 0 && collectItemSpawner.collectedItems.Count >= collectItemSpawner.spawnedItems.Count)
             {
                 win = true;
 

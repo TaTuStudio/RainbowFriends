@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class PlayerAIController : MonoBehaviour
 {
+    public AIPath aIPath;
+
     public bool isHiding = false;
 
     public bool catched = false;
@@ -16,11 +19,21 @@ public class PlayerAIController : MonoBehaviour
 
     public List<Transform> rightHandCollectedList = new List<Transform>();
 
+    private void OnEnable()
+    {
+        setDefault = true;
+    }
+
+    private void Awake()
+    {
+        aIPath = GetComponent<AIPath>();
+    }
+
     private void Update()
     {
         _Default();
 
-        _UpdateMovementAnim();
+        _SetAnimMove();
     }
 
     public void _Default()
@@ -33,11 +46,26 @@ public class PlayerAIController : MonoBehaviour
         catched = false;
         isDead = false;
 
-        rightHandCollectedList.Clear();
+        _CleanItems();
 
         _SetHoldItemAnim(false);
 
         _SetDeadAnim(false);
+    }
+
+    void _CleanItems()
+    {
+        foreach (Transform t in rightHandCollectedList)
+        {
+            ReuseGO reuseGO = t.GetComponent<ReuseGO>();
+
+            if (reuseGO != null)
+            {
+                UnusedManager.instance._AddToUnusedGO(reuseGO);
+            }
+        }
+
+        rightHandCollectedList.Clear();
     }
 
     public void _AddRightHandColectItem(Transform item)
@@ -60,11 +88,17 @@ public class PlayerAIController : MonoBehaviour
     public void _SetCatched()
     {
         catched = true;
+
+        aIPath._SetMoveToPosition(transform.position);
+
+        _SetHoldItemAnim(true);
     }
 
     public void _SetHit()
     {
         isDead = true;
+
+        aIPath._SetMoveToPosition(transform.position);
 
         _SetDeadAnim(true);
     }
@@ -73,26 +107,16 @@ public class PlayerAIController : MonoBehaviour
 
     public Animator playerAnimator;
 
-    void _UpdateMovementAnim()
+    void _SetAnimMove()
     {
-        float trueSpeed = 0f;
+        if (GameController.instance.isPlaying == false || catched || isDead) return;
 
-        if (catched == false && isDead == false)
-        {
-            float vertical = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Vertical);
-            float horizontal = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Horizontal);
+        // Calculate the velocity relative to this transform's orientation
+        Vector3 relVelocity = transform.InverseTransformDirection(aIPath.velocity);
+        relVelocity.y = 0;
 
-            if (vertical > horizontal)
-            {
-                trueSpeed = vertical;
-            }
-            else
-            {
-                trueSpeed = horizontal;
-            }
-        }
-
-        playerAnimator.SetFloat("NormalizedSpeed", trueSpeed);
+        // Speed relative to the character size
+        playerAnimator.SetFloat("NormalizedSpeed", relVelocity.magnitude / playerAnimator.transform.lossyScale.x);
     }
 
     void _SetDeadAnim(bool active)

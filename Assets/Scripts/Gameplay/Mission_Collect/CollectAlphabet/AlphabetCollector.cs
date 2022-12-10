@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AlphabetCollector : MonoBehaviour
 {
-    public CollectMissionController collectMissionController;
-
     public List<Transform> collectPositions = new List<Transform>();
 
     List<Transform> positionLeftList = new List<Transform>();
@@ -17,6 +15,8 @@ public class AlphabetCollector : MonoBehaviour
         positionLeftList.Clear();
 
         positionLeftList.AddRange(collectPositions);
+
+        collectedItems.Clear();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,11 +45,13 @@ public class AlphabetCollector : MonoBehaviour
 
                     collectItem._SetCollected();
 
-                    collectMissionController._AddCollectItemNum(1);
+                    CollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
 
                     positionLeftList.RemoveAt(0);
 
                     playerController._RemoveRightHandColectItem(tempList[0]);
+
+                    collectItem._ResetOnHandPlayer();
                 }
 
                 tempList.RemoveAt(0);
@@ -75,9 +77,13 @@ public class AlphabetCollector : MonoBehaviour
 
                     collectItem._SetCollected();
 
-                    collectMissionController._AddCollectItemNum(1);
+                    CollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
+
+                    positionLeftList.RemoveAt(0);
 
                     playerAIController._RemoveRightHandColectItem(tempList[0]);
+
+                    collectItem._ResetOnHandPlayer();
                 }
 
                 tempList.RemoveAt(0);

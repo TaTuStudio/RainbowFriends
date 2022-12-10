@@ -305,11 +305,26 @@ public class PlayerController : MonoBehaviour
 
         CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
 
-        rightHandCollectedList.Clear();
+        _CleanItems();
 
         _SetHoldItemAnim(false);
 
         _SetDeadAnim(false);
+    }
+
+    void _CleanItems()
+    {
+        foreach(Transform t in rightHandCollectedList)
+        {
+            ReuseGO reuseGO = t.GetComponent<ReuseGO>();
+
+            if(reuseGO != null)
+            {
+                UnusedManager.instance._AddToUnusedGO(reuseGO);
+            }
+        }
+
+        rightHandCollectedList.Clear();
     }
 
     public void _AddRightHandColectItem(Transform item)

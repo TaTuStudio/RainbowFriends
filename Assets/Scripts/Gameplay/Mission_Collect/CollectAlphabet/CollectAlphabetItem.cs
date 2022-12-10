@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CollectAlphabetItem : MonoBehaviour
 {
+    public PlayerController onHandPlayer;
+    public PlayerAIController onHandAIPlayer;
+
     public bool onHand = false;
     public bool collected = false;
 
@@ -11,10 +14,28 @@ public class CollectAlphabetItem : MonoBehaviour
 
     private void OnEnable()
     {
+        _OnGroundSet();
+    }
+
+    private void Update()
+    {
+        _CheckDropItem();
+    }
+
+    void _OnGroundSet()
+    {
         onHand = false;
         collected = false;
 
+        _ResetOnHandPlayer();
+
         _ActiveMesh(true);
+    }
+
+    public void _ResetOnHandPlayer()
+    {
+        onHandPlayer = null;
+        onHandAIPlayer = null;
     }
 
     public void _ActiveMesh(bool active)
@@ -22,6 +43,30 @@ public class CollectAlphabetItem : MonoBehaviour
         meshContainer.gameObject.SetActive(active);
 
         GetComponent<Collider>().enabled = active;
+    }
+
+    void _CheckDropItem()
+    {
+        if (onHand)
+        {
+            if(onHandAIPlayer != null && onHandAIPlayer.isDead)
+            {
+                transform.position = onHandAIPlayer.transform.position;
+
+                transform.parent = CollectMissionController.instance.collectItemSpawner.transform;
+
+                _OnGroundSet();
+            }
+            else
+            if (onHandPlayer != null && onHandPlayer.isDead)
+            {
+                transform.position = onHandPlayer.transform.position;
+
+                transform.parent = CollectMissionController.instance.collectItemSpawner.transform;
+
+                _OnGroundSet();
+            }
+        }
     }
 
     public void _SetCollected()
@@ -38,7 +83,7 @@ public class CollectAlphabetItem : MonoBehaviour
 
             PlayerAIController playerAIController = other.GetComponent<PlayerAIController>();
 
-            if (playerController != null)
+            if (playerController != null && playerController.isDead == false && playerController.catched == false)
             {
                 onHand = true;
 
@@ -58,8 +103,10 @@ public class CollectAlphabetItem : MonoBehaviour
                 }
 
                 playerController._AddRightHandColectItem(transform);
+
+                onHandPlayer = playerController;
             }
-            else if (playerAIController != null)
+            else if (playerAIController != null && playerAIController.isDead == false && playerAIController.catched == false)
             {
                 onHand = true;
 
@@ -79,6 +126,8 @@ public class CollectAlphabetItem : MonoBehaviour
                 }
 
                 playerAIController._AddRightHandColectItem(transform);
+
+                onHandAIPlayer = playerAIController;
             }
         }
     }
