@@ -8,7 +8,7 @@ public class SoundEffectSO : ScriptableObject
     #region config
 
     private static readonly float SEMITONES_TO_PITCH_CONVERSION_UNIT = 1.05946f;
-
+    
     // [Required] 
     public AudioClip[] clips;
 
@@ -84,6 +84,11 @@ public class SoundEffectSO : ScriptableObject
 
     #endregion
 
+    public void PlaySfx()
+    {
+        Play();
+    }
+
     public void SyncPitchAndSemitones()
     {
         if (useSemitones)
@@ -132,6 +137,44 @@ public class SoundEffectSO : ScriptableObject
         }
 
         // set source config:
+        source.spatialBlend = spatialBlend;
+        source.maxDistance = maxDistance;
+        source.clip = GetAudioClip();
+        source.volume = Random.Range(volume.x, volume.y);
+        source.pitch = useSemitones
+            ? Mathf.Pow(SEMITONES_TO_PITCH_CONVERSION_UNIT, Random.Range(semitones.x, semitones.y))
+            : Random.Range(pitch.x, pitch.y);
+
+        source.Play();
+
+#if UNITY_EDITOR
+        if (source != previewer)
+        {
+            Destroy(source.gameObject, source.clip.length / source.pitch);
+        }
+#else
+                Destroy(source.gameObject, source.clip.length / source.pitch);
+#endif
+        return source;
+    }
+    
+    public AudioSource PlayBgm(AudioSource audioSourceParam = null)
+    {
+        if (clips.Length == 0)
+        {
+            Debug.LogError($"Missing sound clips for {name}");
+            return null;
+        }
+
+        var source = audioSourceParam;
+        if (source == null)
+        {
+            var _obj = new GameObject("Sound", typeof(AudioSource));
+            source = _obj.GetComponent<AudioSource>();
+        }
+
+        // set source config:
+        source.loop = true;
         source.spatialBlend = spatialBlend;
         source.maxDistance = maxDistance;
         source.clip = GetAudioClip();

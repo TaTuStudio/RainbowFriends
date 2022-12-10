@@ -7,12 +7,12 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 public class SceneLoaderSO : ScriptableObject
 {
     public AssetReference Scene;
-    private AsyncOperationHandle<SceneInstance> handle;
+    public AsyncOperationHandle<SceneInstance> Handle;
 
     // Start is called before the first frame update
-    public void LoadScene()
+    public void LoadScene(bool activate = false)
     {
-        Addressables.LoadSceneAsync(Scene, UnityEngine.SceneManagement.LoadSceneMode.Additive).Completed +=
+        Addressables.LoadSceneAsync(Scene, UnityEngine.SceneManagement.LoadSceneMode.Additive, activate).Completed +=
             SceneLoadCompleted;
     }
 
@@ -20,12 +20,12 @@ public class SceneLoaderSO : ScriptableObject
     {
         if (obj.Status != AsyncOperationStatus.Succeeded) return;
         Debug.Log("Successfully loaded Scene.");
-        handle = obj;
+        Handle = obj;
     }
 
     public void UnloadScene()
     {
-        Addressables.UnloadSceneAsync(handle).Completed += (_) =>
+        Addressables.UnloadSceneAsync(Handle).Completed += (_) =>
         {
             if (_.Status == AsyncOperationStatus.Succeeded)
                 Debug.Log("Successfully unloaded Scene.");

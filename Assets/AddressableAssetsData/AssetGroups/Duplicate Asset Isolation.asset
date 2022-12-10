@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Duplicate Asset Isolation
+  m_EditorClassIdentifier: 
+  m_GroupName: Duplicate Asset Isolation
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 68fc5915ec8be4deabb3131effcc98ed
+  m_SerializeEntries:
+  - m_GUID: 65b6c8586a6772541ad89be96fd3a629
+    m_Address: Assets/SchoolScene/Materials/Surfaces/Glass/GlassClear.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 66b5632cbcf196342a3659c35535c743
+    m_Address: Assets/SchoolScene/Materials/Surfaces/Metall/MetallRusted03.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3978225c83e484740a2806f497f646ce
+    m_Address: Assets/SchoolScene/PhysicsMaterials/PhyGlass.physicMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7195dc6f20d5fc64496aff5eeff1f732
+    m_Address: Assets/SchoolScene/PhysicsMaterials/PhyMetallSolid.physicMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 36e9f244679ef6049b6d65587531cf65
+    m_Address: Assets/SchoolScene/Textures/Surfaces/Metall/MetallRusted03Spec.tga
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 933532a4fcc9baf4fa0491de14d08ed7
+    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/Lit.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f530b995538a2f44293c3a62cc965bdc
+    m_Address: Assets/SchoolScene/Textures/Surfaces/Metall/MetallRusted03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1d27d9d667a25254ea2188a187097b6b
+    m_Address: Assets/SchoolScene/Textures/Surfaces/Metall/MetallRusted03NM.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fc36939b38bcc8044897f933e7571333
+    m_Address: Assets/SchoolScene/Models/Interior/DoorsWindows/Textures/DoorsWindowsSpec.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e6e9a19c3678ded42a3bc431ebef7dbd
+    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/Utils/FallbackError.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0bdf615183bb1934a8f974d8d74bdcf4
+    m_Address: Assets/SchoolScene/Models/Interior/DoorsWindows/Materials/DoorsWindowsPlasticOld.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eeaff882b8439664aba34120adce5a20
+    m_Address: Assets/SchoolScene/PhysicsMaterials/PhyConcrete.physicMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 789b1cd25a7771b45a5ae5628ac40ff0
+    m_Address: Assets/SchoolScene/Materials/Models/BuildingWindows/WindowsBroken03.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d2c13f2c8ed83e24fb285cdbc20b1501
+    m_Address: Assets/SchoolScene/Models/Interior/DoorsWindows/Door01_2.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: deec8b505e0729f4bbb9ce5265bafda9
+    m_Address: Assets/SchoolScene/Textures/Models/BuildingWindows/WindowsBroken01NM.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1e99bdf936f70d14286f09ad3f9e77eb
+    m_Address: Assets/SchoolScene/Models/Interior/DoorsWindows/Textures/DoorsWindowsPlasticOld.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f98400fb51a79114cb28568541b6010a
+    m_Address: Assets/SchoolScene/Textures/Models/BuildingWindows/WindowsBroken03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 62f317c1a42ba452bb6716b319bd22cd, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c5a2000019c0c45e7991445e20964f76, type: 2}
+    - {fileID: 11400000, guid: 1f9ce97358db349e0abce26ddb11c40b, type: 2}

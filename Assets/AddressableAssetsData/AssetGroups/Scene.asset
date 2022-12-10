@@ -25,6 +25,22 @@ MonoBehaviour:
     m_Address: gameScene
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5a231e976dfdd48679e1d197364cae02
+    m_Address: TestPlayer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: daf8462367c0f47ca8e85bf55637a567
+    m_Address: Assets/ScriptableObjects/Scene/GameSceneSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ea496a5d7476c45a78604f2673d0fe77
+    m_Address: Assets/ScriptableObjects/Scene/MainMenuSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bfd51d7f630534ff1b2bb63fa16da343
+    m_Address: Assets/ScriptableObjects/Scene/TestPlayer.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 62f317c1a42ba452bb6716b319bd22cd, type: 2}
   m_SchemaSet:
