@@ -6,8 +6,6 @@ public class Map : MonoBehaviour
 {
     public bool loadMapDone = false;
 
-    public List<Transform> checkPoints;
-
     public List<Transform> playerSpawnPoints;
 
     private void OnEnable()

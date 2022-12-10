@@ -25,6 +25,8 @@ public class MonsterController : MonoBehaviour
     PlayerController selectedPlayer;
     PlayerAIController selectedAIPlayer;
 
+    public MonsterSpawner.MonsterSpawnInfo monsterInfo;
+
     [Header("Run to nearest settings")]
     //Run to nearest
     float runToRange = 5f;
@@ -116,7 +118,12 @@ public class MonsterController : MonoBehaviour
 
         if(turnTime <= 0f)
         {
-            List<int> ranNumList = new List<int>() { 0, 1, 2 };
+            List<int> ranNumList = new List<int>() { 0, 2 };
+
+            if(monsterInfo != null)
+            {
+                ranNumList.Add(1);
+            }
 
             turnType = Random.Range(0, ranNumList.Count);
 
@@ -132,9 +139,9 @@ public class MonsterController : MonoBehaviour
             {
                 turnTime = (float)Random.RandomRange(5, 10);
 
-                int checkPointIndex = Random.Range(0, MapManager.instance.spawnedMap.checkPoints.Count);
+                int checkPointIndex = Random.Range(0, monsterInfo.checkPoints.Count);
 
-                Transform checkPoint = MapManager.instance.spawnedMap.checkPoints[checkPointIndex];
+                Transform checkPoint = monsterInfo.checkPoints[checkPointIndex];
 
                 aIPath.destination = checkPoint.position;
 

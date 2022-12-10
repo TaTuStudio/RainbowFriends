@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
-    public bool playing = false;
+    public bool isPlaying = false;
 
     public float gameTime = 0f;
     public float curGameTime = 0f;
@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
 
     public void _SetPlaying(bool active)
     {
-        playing = active;
+        isPlaying = active;
 
         GameplayUI.instance.timeCountUI._SetTime(curGameTime);
     }
@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
 
     void _TimeCount()
     {
-        if (gameTime == 0f && curGameTime == 0f || playing == false) return;
+        if (gameTime == 0f && curGameTime == 0f || isPlaying == false) return;
 
         if (curGameTime < gameTime)
         {

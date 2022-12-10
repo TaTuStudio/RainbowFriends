@@ -41,7 +41,7 @@ public class CollectMissionController : MonoBehaviour
 
             _SpawnPlayers();
 
-            _SpawnMonster();
+            MonsterSpawner.instance._SpawnAllMonsters();
 
             GameController.instance._SetGameTime(60f);
 
@@ -58,7 +58,7 @@ public class CollectMissionController : MonoBehaviour
 
     void _WinLoseCheck()
     {
-        if(win == false && lose == false && gameplaySet == true)
+        if(win == false && lose == false && gameplaySet == true && GameController.instance.isPlaying == true && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
         {
             if (curCollectedNum > 0 && curCollectedNum >= collectNum)
             {
@@ -109,10 +109,5 @@ public class CollectMissionController : MonoBehaviour
 
             tempSpawnPoints.Remove(selectedPos);
         }
-    }
-
-    void _SpawnMonster()
-    {
-        PlayerManager.instance._SpawnMonster(blueMonsterPrefab, blueSpawnPoint.position);
     }
 }

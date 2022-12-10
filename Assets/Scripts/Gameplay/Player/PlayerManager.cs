@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    public void _SpawnMonster(ReuseGO prefab, Vector3 spawnPos)
+    public ReuseGO _SpawnMonster(ReuseGO prefab, Vector3 spawnPos)
     {
         ReuseGO selected = UnusedManager.instance._GetReuseGO(prefab.itemID);
 
@@ -67,6 +67,8 @@ public class PlayerManager : MonoBehaviour
 
             spawnedMonsters.Add(selected);
         }
+
+        return selected;
     }
 
     public PlayerAIController _GetRandomPlayerAI()
