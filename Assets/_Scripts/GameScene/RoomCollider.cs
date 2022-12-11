@@ -9,11 +9,8 @@ public class RoomCollider : MonoBehaviour
 
     private void OnEnable()
     {
-        Addressables.LoadAssetAsync<PlayerPosSO>("NewPlayerPos").Completed += (_) =>
-        {
-            playerPos = _.Result;
-        };
-        
+        Addressables.LoadAssetAsync<PlayerPosSO>("NewPlayerPos").Completed += (_) => playerPos = _.Result;
+
         roomNumber = int.Parse(Regex.Match(gameObject.name, @"\d+").Value);
     }
 
@@ -23,3 +20,4 @@ public class RoomCollider : MonoBehaviour
             playerPos.Pos = roomNumber;
     }
 }
+

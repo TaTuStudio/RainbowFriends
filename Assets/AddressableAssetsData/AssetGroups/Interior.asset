@@ -77,10 +77,6 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Interior/15. Toilets.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 95e7f1397141f488aae6838eee70ae85
-    m_Address: Assets/Prefabs/Interior/16. EmptyRoom.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 62f317c1a42ba452bb6716b319bd22cd, type: 2}
   m_SchemaSet:

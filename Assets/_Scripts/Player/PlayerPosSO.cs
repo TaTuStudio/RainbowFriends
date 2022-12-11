@@ -4,7 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerPos", menuName = "Player/New Player Pos")]
 public class PlayerPosSO : ScriptableObject
 {
-    [SerializeField]
     private int pos;
     
     public int Pos

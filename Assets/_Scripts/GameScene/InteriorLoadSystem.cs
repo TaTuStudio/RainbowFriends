@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -9,19 +7,12 @@ public class InteriorLoadSystem : MonoBehaviour
     private readonly GameObject[] hallWays = new GameObject[2];
     private int lastPos;
     private GameObject currentRoom;
-    
     private PlayerPosSO playerPos;
+    
     [SerializeField] private AssetReferenceGameObject[] room;
     [SerializeField] private AssetReferenceGameObject[] hallWay;
     [SerializeField] private SceneLoaderSO loadTestPlayer;
-
     
-    // Start is called before the first frame update
-    private void Start()
-    {
-        //rooms = new LinkedList<GameObject>();
-    }
-
     private void OnEnable()
     {
         Addressables.LoadAssetAsync<PlayerPosSO>("NewPlayerPos").Completed += (_) =>
@@ -30,7 +21,6 @@ public class InteriorLoadSystem : MonoBehaviour
             playerPos = _.Result;
             playerPos.OnPosChange += GetPos;
         };
-
     }
 
     private void OnDisable()
@@ -42,8 +32,6 @@ public class InteriorLoadSystem : MonoBehaviour
 
     private void GetPos(int currentPosition)
     {
-        print(currentPosition);
-        
         InitHallWay(currentPosition);
         
         // Load current room
