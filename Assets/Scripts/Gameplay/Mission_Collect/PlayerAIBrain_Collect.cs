@@ -29,18 +29,14 @@ public class PlayerAIBrain_Collect : MonoBehaviour
         defaultSet = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         _Default();
 
         _CheckTurn();
+
+        _CheckHide();
     }
 
     void _Default()
@@ -233,6 +229,32 @@ public class PlayerAIBrain_Collect : MonoBehaviour
                 //Debug.Log(brain.name + " got same item " + brain.selectedItem.itemID);
 
                 brain.selectedItem = null;
+            }
+        }
+    }
+
+    float hideDelay = 0f;
+    void _CheckHide()
+    {
+        if (GameController.instance.isPlaying == false || playerAIController.catched || playerAIController.isDead)
+            return;
+
+        if (hideDelay >= 0f)
+        {
+            hideDelay -= Time.deltaTime;
+
+            if(hideDelay < 0f)
+            {
+                if (playerAIController.isHiding)
+                {
+                    hideDelay = (float)Random.Range(5, 15);
+                }
+                else
+                {
+                    hideDelay = (float)Random.Range(5, 10);
+                }
+
+                playerAIController._SetHide();
             }
         }
     }

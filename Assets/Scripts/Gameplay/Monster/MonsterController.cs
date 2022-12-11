@@ -153,7 +153,7 @@ public class MonsterController : MonoBehaviour
 
                 int ranNum = Random.Range(0, 100);
 
-                //if(ranNum < 50)
+                if(ranNum < 70)
                 {
                     //find ai player
 
@@ -161,7 +161,7 @@ public class MonsterController : MonoBehaviour
 
                     foreach(PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
                     {
-                        if(aiController.isDead == false)
+                        if(aiController.isDead == false && aiController.isHiding == false)
                         {
                             canUsePlayerAIList.Add(aiController);
                         }
@@ -178,23 +178,23 @@ public class MonsterController : MonoBehaviour
                         turnTime = 0f;
                     }
 
+                    //Debug.Log("Find AI Player");
+                }
+                else
+                {
+                    //find player
+
+                    if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false)
+                    {
+                        selectedPlayer = PlayerManager.instance.spawnedPlayer;
+                    }
+                    else
+                    {
+                        turnTime = 0f;
+                    }
+
                     //Debug.Log("Find Player");
                 }
-                //else
-                //{
-                //    //find player
-
-                //    if(PlayerManager.instance.spawnedPlayer.isDead == false)
-                //    {
-                //        selectedPlayer = PlayerManager.instance.spawnedPlayer;
-                //    }
-                //    else
-                //    {
-                //        turnTime = 0f;
-                //    }
-
-                //    Debug.Log("Find AI Player");
-                //}
             }
         }
     }
@@ -240,7 +240,7 @@ public class MonsterController : MonoBehaviour
         {
             float dist = Vector3.Distance(transform.position, aiController.transform.position);
 
-            if (aiController.isDead == false && dist < runToRange)
+            if (aiController.isDead == false && aiController.isHiding == false && dist < runToRange)
             {
                 transforms.Add(aiController.transform);
             }
@@ -249,7 +249,7 @@ public class MonsterController : MonoBehaviour
         {
             float dist = Vector3.Distance(transform.position, PlayerManager.instance.spawnedPlayer.transform.position);
 
-            if (PlayerManager.instance.spawnedPlayer.isDead == false && dist < runToRange)
+            if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false && dist < runToRange)
             {
                 transforms.Add(PlayerManager.instance.spawnedPlayer.transform);
             }

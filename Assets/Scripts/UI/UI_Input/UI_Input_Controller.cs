@@ -14,4 +14,12 @@ public class UI_Input_Controller : MonoBehaviour
     {
         instance = this;
     }
+
+    public void _HideButton()
+    {
+        if(PlayerManager.instance.spawnedPlayer != null)
+        {
+            PlayerManager.instance.spawnedPlayer._SetHide();
+        }
+    }
 }

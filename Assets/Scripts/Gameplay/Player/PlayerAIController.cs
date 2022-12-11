@@ -50,13 +50,17 @@ public class PlayerAIController : MonoBehaviour
 
         _SetHoldItemAnim(false);
 
-        _SetDeadAnim(false);
+        _SetDeadAnim(isDead);
+
+        _SetHideAnim(isHiding);
     }
 
     void _CleanItems()
     {
         foreach (Transform t in rightHandCollectedList)
         {
+            if (t == null) continue;
+
             ReuseGO reuseGO = t.GetComponent<ReuseGO>();
 
             if (reuseGO != null)
@@ -85,13 +89,31 @@ public class PlayerAIController : MonoBehaviour
         }
     }
 
+    public void _SetHide()
+    {
+        if (catched || isDead) return;
+
+        if (isHiding == false)
+        {
+            isHiding = true;
+
+            _SetHideAnim(isHiding);
+        }
+        else
+        {
+            isHiding = false;
+
+            _SetHideAnim(isHiding);
+        }
+    }
+
     public void _SetCatched()
     {
         catched = true;
 
         aIPath._SetMoveToPosition(transform.position);
 
-        _SetHoldItemAnim(true);
+        _SetHoldItemAnim(catched);
     }
 
     public void _SetHit()
@@ -127,6 +149,11 @@ public class PlayerAIController : MonoBehaviour
     void _SetHoldItemAnim(bool active)
     {
         playerAnimator.SetBool("Hold Item", active);
+    }
+
+    void _SetHideAnim(bool active)
+    {
+        playerAnimator.SetBool("Hiding", active);
     }
 
     #endregion

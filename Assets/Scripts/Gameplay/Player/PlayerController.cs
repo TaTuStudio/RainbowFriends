@@ -103,9 +103,9 @@ public class PlayerController : MonoBehaviour
         float yEuler = transform.localEulerAngles.y + UI_Input_Controller.instance.uI_Rotate_Camera.deltaX;
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, yEuler, transform.localEulerAngles.z);
 
-        camRotVertical -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
-        camRotVertical = Mathf.Clamp(camRotVertical, -60f, 60f);
-        fpsVirtualCam.transform.localEulerAngles = new Vector3(camRotVertical, 0f, 0f);
+        fpsCamRotVertical -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
+        fpsCamRotVertical = Mathf.Clamp(fpsCamRotVertical, -60f, 60f);
+        fpsVirtualCam.transform.localEulerAngles = new Vector3(fpsCamRotVertical, 0f, 0f);
     }
 
     /// <summary>
@@ -267,7 +267,8 @@ public class PlayerController : MonoBehaviour
     [Header("Custom settings")]
 
     public CinemachineVirtualCamera fpsVirtualCam;
-    public float camRotVertical = 0f;
+    public CinemachineVirtualCamera tpsVirtualCam;
+    public float fpsCamRotVertical = 0f;
 
     public bool isHiding = false;
 
@@ -284,6 +285,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
+        CameraManager.instance._RegisterVirtualCamera(tpsVirtualCam);
     }
 
     private void Update()
@@ -291,6 +293,8 @@ public class PlayerController : MonoBehaviour
         _Default();
 
         _UpdateMovementAnim();
+
+        _UnHideDelay();
     }
 
     public void _Default()
@@ -303,19 +307,25 @@ public class PlayerController : MonoBehaviour
         catched = false;
         isDead = false;
 
+        isHiding = false;
+
         CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
 
         _CleanItems();
 
         _SetHoldItemAnim(false);
 
-        _SetDeadAnim(false);
+        _SetDeadAnim(isDead);
+
+        _SetHideAnim(isHiding);
     }
 
     void _CleanItems()
     {
         foreach(Transform t in rightHandCollectedList)
         {
+            if (t == null) continue;
+
             ReuseGO reuseGO = t.GetComponent<ReuseGO>();
 
             if(reuseGO != null)
@@ -344,6 +354,44 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void _SetHide()
+    {
+        if (catched || isDead) return;
+
+        if(isHiding == false)
+        {
+            isHiding = true;
+
+            CameraManager.instance._GameplaySwitchCam(tpsVirtualCam);
+
+            _SetHideAnim(isHiding);
+        }
+        else
+        {
+            isHiding = false;
+
+            unHideDelayTime = 1f;
+
+            _SetHideAnim(isHiding);
+        }
+    }
+
+    float unHideDelayTime = 0f;
+    public void _UnHideDelay()
+    {
+        if (unHideDelayTime > 0f)
+        {
+            unHideDelayTime -= Time.deltaTime;
+
+            if(unHideDelayTime <= 0f)
+            {
+                fpsCamRotVertical = 0f;
+
+                CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
+            }
+        }
+    }
+
     public void _SetCatched()
     {
         catched = true;
@@ -353,9 +401,11 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
 
+        fpsCamRotVertical = 0f;
+
         CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
 
-        _SetDeadAnim(true);
+        _SetDeadAnim(isDead);
     }
 
     #region Animations
@@ -392,6 +442,11 @@ public class PlayerController : MonoBehaviour
     void _SetHoldItemAnim(bool active)
     {
         playerAnimator.SetBool("Hold Item", active);
+    }
+
+    void _SetHideAnim(bool active)
+    {
+        playerAnimator.SetBool("Hiding", active);
     }
 
     #endregion
