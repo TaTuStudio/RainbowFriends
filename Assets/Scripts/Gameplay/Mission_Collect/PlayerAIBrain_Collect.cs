@@ -55,7 +55,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     void _CheckTurn()
     {
-        if (GameController.instance.isPlaying == false || playerAIController.catched || playerAIController.isDead)
+        if (CollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
             return;
 
         _CheckRightHandItemsChange();
@@ -236,7 +236,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
     float hideDelay = 0f;
     void _CheckHide()
     {
-        if (GameController.instance.isPlaying == false || playerAIController.catched || playerAIController.isDead)
+        if (CollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
             return;
 
         if (hideDelay >= 0f)

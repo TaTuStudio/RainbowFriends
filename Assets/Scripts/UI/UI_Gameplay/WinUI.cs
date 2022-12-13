@@ -19,6 +19,6 @@ public class WinUI : MonoBehaviour
     {
         Debug.Log("Home button");
 
-        MapManager.instance._SpawnMap();
+        GameController.instance._GameplayBackToHome();
     }
 }

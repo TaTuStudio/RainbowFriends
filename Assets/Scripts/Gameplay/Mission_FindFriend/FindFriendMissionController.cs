@@ -2,38 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectMissionController : MonoBehaviour
+public class FindFriendMissionController : MonoBehaviour
 {
-    public static CollectMissionController instance;
+    public static FindFriendMissionController instance;
 
-    public PlayerAIBrains_CollectController playerAIBrains_CollectController;
+    public PlayerAIBrain_FindFriend_Controller playerAIBrain_FindFriend_Controller;
 
-    public CollectItemSpawner collectItemSpawner;
-
-    public Transform collector;
+    public FindFriendSafeZone findFriendSafeZone;
 
     public bool gameplaySet = false;
-
-    public ReuseGO blueMonsterPrefab;
-    public Transform blueSpawnPoint;
 
     public bool win = false;
     public bool lose = false;
 
     int aiSpawnNum = 9;
 
+    public PlayerAIController friendPrefab;
+
+    public PlayerAIController spawnedFriend;
+
+    public List<Transform> lostFriendSpawnpoints;
+
     private void Awake()
     {
         _MakeReplaceSingleton();
     }
 
+    // Start is called before the first frame update
     private void Start()
     {
         GameController.instance._GameplayReadySetup();
-        GameplayUI.instance._GameplayAlphabetCollectSetup();
+
+        GameplayUI.instance._GameplayFindFriendSetup();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
         _GameplaySetup();
 
@@ -42,31 +46,33 @@ public class CollectMissionController : MonoBehaviour
 
     void _MakeReplaceSingleton()
     {
-        if (CollectMissionController.instance != null && CollectMissionController.instance != this)
+        if (FindFriendMissionController.instance != null && FindFriendMissionController.instance != this)
         {
-            CollectMissionController old = CollectMissionController.instance;
+            FindFriendMissionController old = FindFriendMissionController.instance;
 
-            CollectMissionController.instance = this;
+            FindFriendMissionController.instance = this;
 
             Destroy(old);
         }
         else
         {
-            CollectMissionController.instance = this;
+            FindFriendMissionController.instance = this;
         }
     }
 
     public void _GameplaySetup()
     {
-        if(MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
+        if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
             gameplaySet = true;
+
+            _SpawnLostFriend();
 
             PlayerManager.instance._SpawnPlayerAndAIPlayers(aiSpawnNum);
 
             MonsterSpawner.instance._SpawnAllMonsters();
 
-            playerAIBrains_CollectController._SetBrainToAIPlayer();
+            playerAIBrain_FindFriend_Controller._SetBrainToAIPlayer();
 
             GameController.instance._SetGameTime(60f);
 
@@ -76,9 +82,9 @@ public class CollectMissionController : MonoBehaviour
 
     void _WinLoseCheck()
     {
-        if(win == false && lose == false && gameplaySet == true && GameController.instance.isPlaying == true && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
+        if (win == false && lose == false && gameplaySet == true && GameController.instance.isPlaying == true && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
         {
-            if (collectItemSpawner.spawnedItems.Count > 0 && collectItemSpawner.collectedItems.Count >= collectItemSpawner.spawnedItems.Count)
+            if (findFriendSafeZone.friendFound != null)
             {
                 win = true;
 
@@ -105,5 +111,12 @@ public class CollectMissionController : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void _SpawnLostFriend()
+    {
+        int ranIndex = Random.Range(0, lostFriendSpawnpoints.Count);
+
+        spawnedFriend = Instantiate(friendPrefab, lostFriendSpawnpoints[ranIndex].position, Quaternion.identity, transform);
     }
 }

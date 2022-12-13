@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+
+        GameplayUI.instance._HomeUISetup();
     }
 
     private void Update()
@@ -56,5 +58,21 @@ public class GameController : MonoBehaviour
 
             GameplayUI.instance.timeCountUI._SetTime(gameTime - curGameTime);
         }
+    }
+
+    public void _GameplayReadySetup()
+    {
+        _SetPlaying(false);
+
+        PlayerManager.instance._Clean();
+    }
+
+    public void _GameplayBackToHome()
+    {
+        _GameplayReadySetup();
+
+        MapManager.instance._UnloadScene();
+
+        GameplayUI.instance._HomeUISetup();
     }
 }

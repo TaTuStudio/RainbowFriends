@@ -13,6 +13,8 @@ public class GameplayUI : MonoBehaviour
     public OutTimeUI outTimeUI;
     public DeadUI deadUI;
 
+    public SelectGameUI selectGameUI;
+
     private void Awake()
     {
         instance = this;
@@ -25,6 +27,27 @@ public class GameplayUI : MonoBehaviour
         _ActiveWinUI(false);
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
+        _ActiveSelectGameUI(false);
+    }
+
+    public void _GameplayFindFriendSetup()
+    {
+        _ActiveTimeCountUI(true);
+        _ActiveAlphabetCollectCountUI(false);
+        _ActiveWinUI(false);
+        _ActiveOutTimeUI(false);
+        _ActiveDeadUI(false);
+        _ActiveSelectGameUI(false);
+    }
+
+    public void _HomeUISetup()
+    {
+        _ActiveTimeCountUI(false);
+        _ActiveAlphabetCollectCountUI(false);
+        _ActiveWinUI(false);
+        _ActiveOutTimeUI(false);
+        _ActiveDeadUI(false);
+        _ActiveSelectGameUI(true);
     }
 
     public void _ActiveTimeCountUI(bool active)
@@ -48,5 +71,10 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveDeadUI(bool active)
     {
         deadUI.gameObject.SetActive(active);
+    }
+
+    public void _ActiveSelectGameUI(bool active)
+    {
+        selectGameUI.gameObject.SetActive(active);
     }
 }

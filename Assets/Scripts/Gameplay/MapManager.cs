@@ -23,14 +23,14 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        _SpawnMap();
+        //_SpawnMap();
 
         //StartCoroutine(_GetAllNodesPositions());
     }
 
     public void _SpawnMap()
     {
-        StartCoroutine(_UnloadMapScene());
+        StartCoroutine(_CheckSceneSpawned());
     }
 
     IEnumerator _LoadMapScene()
@@ -57,7 +57,7 @@ public class MapManager : MonoBehaviour
         yield break;
     }
 
-    IEnumerator _UnloadMapScene()
+    IEnumerator _CheckSceneSpawned()
     {
         if (spawnedMap != null)
         {
@@ -78,6 +78,14 @@ public class MapManager : MonoBehaviour
         }
 
         yield break;
+    }
+
+    public void _UnloadScene()
+    {
+        if (spawnedMap != null)
+        {
+            SceneManager.UnloadSceneAsync(selectedMap);
+        }
     }
 
     public IEnumerator _GetAllNodesPositions()

@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviour
         return aIPlayerPrefabs[ranIndex];
     }
 
-    public void _SpawnPlayerAI(PlayerAIController prefab, Vector3 spawnPos)
+    public PlayerAIController _SpawnPlayerAI(PlayerAIController prefab, Vector3 spawnPos)
     {
         PlayerAIController selected = UnusedManager.instance._GetUnusedPlayerAI(prefab.GetComponent<ReuseGO>().itemID);
 
@@ -97,6 +97,8 @@ public class PlayerManager : MonoBehaviour
 
             spawnedAIPlayers.Add(selected);
         }
+
+        return selected;
     }
 
     public PlayerController _GetCurrentPlayer()
@@ -139,6 +141,28 @@ public class PlayerManager : MonoBehaviour
             selected = Instantiate(prefab, spawnPos, Quaternion.identity, transform);
 
             spawnedPlayer = selected;
+        }
+    }
+
+    public void _SpawnPlayerAndAIPlayers(int SpawnNum)
+    {
+        List<Transform> tempSpawnPoints = new List<Transform>();
+
+        tempSpawnPoints.AddRange(MapManager.instance.spawnedMap.playerSpawnPoints);
+
+        Transform selectedPos = tempSpawnPoints[Random.Range(0, tempSpawnPoints.Count)];
+
+        PlayerManager.instance._SpawnPlayer(PlayerManager.instance._GetCurrentPlayer(), selectedPos.position);
+
+        tempSpawnPoints.Remove(selectedPos);
+
+        for (int i = 0; i < SpawnNum; i++)
+        {
+            selectedPos = tempSpawnPoints[Random.Range(0, tempSpawnPoints.Count)];
+
+            PlayerManager.instance._SpawnPlayerAI(PlayerManager.instance._GetRandomPlayerAI(), selectedPos.position);
+
+            tempSpawnPoints.Remove(selectedPos);
         }
     }
 }
