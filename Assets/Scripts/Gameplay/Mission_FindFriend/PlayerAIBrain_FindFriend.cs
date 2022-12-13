@@ -80,9 +80,20 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
 
     void _GetTurn()
     {
-        List<int> ranNumList = new List<int>() { 0, 1, 2 };
+        int ranNum = Random.Range(0, 100);
 
-        turnType = Random.Range(0, ranNumList.Count);
+        if(ranNum < 40)
+        {
+            turnType = 0;
+        }
+        else if(ranNum >= 40 && ranNum < 80)
+        {
+            turnType = 2;
+        }
+        else
+        {
+            turnType = 1;
+        }
 
         if (turnType == 0)
         {
@@ -94,7 +105,7 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
         }
         else if (turnType == 1)
         {
-            turnTime = (float)Random.RandomRange(3, 5);
+            turnTime = (float)Random.RandomRange(1, 5);
 
             playerAIController.aIPath._SetMoveToPosition(FindFriendMissionController.instance.spawnedFriend.transform.position);
         }
