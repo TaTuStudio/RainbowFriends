@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Interior
+  m_EditorClassIdentifier: 
+  m_GroupName: Interior
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 96016f4e3838a4305a398eac806cd1b0
+  m_SerializeEntries:
+  - m_GUID: 11ac8f8878b6a4f35b24e02a5da3ca2a
+    m_Address: Assets/Prefabs/Interior/1. Corridor1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 43605068c074f4954bbfadd9552a230c
+    m_Address: Assets/Prefabs/Interior/2. Kitchen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5884525cd4a3542c3bed3ec3849574f6
+    m_Address: Assets/Prefabs/Interior/3. ClassComputer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7e492d90a7ec44d309f4cde72865cc91
+    m_Address: Assets/Prefabs/Interior/4. Class1-2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ed9379df6528a4066a4a430b0965cc86
+    m_Address: Assets/Prefabs/Interior/5. Class1-3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bee46b9a77f2f46a2b38df3b2340b280
+    m_Address: Assets/Prefabs/Interior/6. Class1-4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8114ba545dc1a4f859c9fdfa578cc271
+    m_Address: Assets/Prefabs/Interior/7. SportRoom.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a058539cc72e046519886f18e2bda2ee
+    m_Address: Assets/Prefabs/Interior/8. SportClassProps.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9755ba31347442d991b009cd1bc8066
+    m_Address: Assets/Prefabs/Interior/9. Corridor2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1a87bffe0a98f47cbbaf15f286858e6c
+    m_Address: Assets/Prefabs/Interior/10. ActZal.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c8477b000e0734691b6d71eeb16ab9c9
+    m_Address: Assets/Prefabs/Interior/11. Class2-1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1b6bd72394c4a443ab1fc35de2aed1cc
+    m_Address: Assets/Prefabs/Interior/12. ClassDirector.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ee37b2011fcb945b7836d4233ad78e7c
+    m_Address: Assets/Prefabs/Interior/13. ClassTeachers.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 72382ec6b2cd84c6f8de6254cd9a2411
+    m_Address: Assets/Prefabs/Interior/14. Class2-2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e88370fb793ee4eafa33ddcd0a60f09e
+    m_Address: Assets/Prefabs/Interior/15. Toilets.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 62f317c1a42ba452bb6716b319bd22cd, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d47ff2e4cf3c444cdb25100739aea358, type: 2}
+    - {fileID: 11400000, guid: d385ff2ba7fbe4f0bbf28b96bd75fd6e, type: 2}

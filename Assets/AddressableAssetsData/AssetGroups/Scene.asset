@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Scene
+  m_EditorClassIdentifier: 
+  m_GroupName: Scene
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 30ec3b9bc62a6416791c5f5cccbb3a85
+  m_SerializeEntries:
+  - m_GUID: 3ba3ec6d81923481c8161dfe3443d885
+    m_Address: mainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5a231e976dfdd48679e1d197364cae02
+    m_Address: TestPlayer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: daf8462367c0f47ca8e85bf55637a567
+    m_Address: Assets/ScriptableObjects/Scene/GameSceneSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ea496a5d7476c45a78604f2673d0fe77
+    m_Address: Assets/ScriptableObjects/Scene/MainMenuSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bfd51d7f630534ff1b2bb63fa16da343
+    m_Address: Assets/ScriptableObjects/Scene/TestPlayer.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c2d5027cd762d4645afbf87129a59cf1
+    m_Address: SchoolSceen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 62f317c1a42ba452bb6716b319bd22cd, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dc455f52b73ae43a18e678c50a9704e3, type: 2}
+    - {fileID: 11400000, guid: 0b5751ea51739446d9502e908e806875, type: 2}
