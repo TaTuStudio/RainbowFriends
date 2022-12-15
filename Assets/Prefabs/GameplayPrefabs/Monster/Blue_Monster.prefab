@@ -202,8 +202,8 @@ MonoBehaviour:
   orientation: 0
   enableRotation: 1
   autoRepath:
-    mode: 2
-    interval: 0
+    mode: 1
+    interval: 0.5
     sensitivity: 10
     maximumInterval: 1
     visualizeSensitivity: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 1.5
-  pickNextWaypointDist: 2
+  pickNextWaypointDist: 0.5
   endReachedDistance: 1.5
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
@@ -268,6 +268,10 @@ MonoBehaviour:
   turnTime: 0
   setDefault: 0
   turnType: -1
+  monsterInfo:
+    monsterPrefab: {fileID: 0}
+    checkPoints: []
+    spawnPoints: []
   curRunToNearestDelay: 0
   runToNearest: 0
   nearest: {fileID: 0}

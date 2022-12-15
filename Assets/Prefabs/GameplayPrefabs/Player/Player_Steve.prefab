@@ -338,13 +338,14 @@ MonoBehaviour:
   standingHeight: 2
   fpsVirtualCam: {fileID: 8240268023615860392}
   tpsVirtualCam: {fileID: 868801492346190711}
-  camRotVertical: 0
+  fpsCamRotVertical: 0
   isHiding: 0
   catched: 0
   isDead: 0
   setDefault: 0
   OnHandItemContainer_Right: {fileID: 2276930560001290942}
   rightHandCollectedList: []
+  hitSfx: {fileID: 11400000, guid: d85e31a1e759a4185a29d8a90b242f41, type: 2}
   playerAnimator: {fileID: 1261715109122316217}
 --- !u!1 &8240268023615860394
 GameObject:

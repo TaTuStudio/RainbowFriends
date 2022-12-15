@@ -5,6 +5,56 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brokenwindow_mat
+    second: {fileID: 2100000, guid: 6f8cd32897b6ea24fbb177c78fb1d1cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConcreteDirt1b
+    second: {fileID: 2100000, guid: 3fc7dcbb1804b2b499a2e88f390e1cf7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConcreteWall01
+    second: {fileID: 2100000, guid: c586d1ce588c424428aed0feeb2372f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConctereWall1
+    second: {fileID: 2100000, guid: 01c5e431f88b36146b8b252663a7c35a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConctereWall2
+    second: {fileID: 2100000, guid: 5267fcf03008c5b4b8e1bc28f96e34e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetallRusted03
+    second: {fileID: 2100000, guid: 8668d2cea3e41924398a20fdfa1411af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Schoolprop_mat
+    second: {fileID: 2100000, guid: a8598aa0429a9594784ad86b5576e118, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Schoolwall
+    second: {fileID: 2100000, guid: 355741566578a6a488ec23128f003872, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TileFloor05Old
+    second: {fileID: 2100000, guid: b3ce4e2804e6ea846acf28efb4b48c7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood3Old
+    second: {fileID: 2100000, guid: d96eba95532941e478958fcd1cb019b6, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: ConcreteDirt1b
@@ -107,7 +157,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -120,10 +170,10 @@ ModelImporter:
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
-    secondaryUVAreaDistortion: 15.000001
+    secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
     secondaryUVMarginMethod: 1
-    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinLightmapResolution: 20
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1

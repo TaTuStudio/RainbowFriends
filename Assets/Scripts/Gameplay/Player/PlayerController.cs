@@ -282,6 +282,7 @@ public class PlayerController : MonoBehaviour
 
     public List<Transform> rightHandCollectedList = new List<Transform>();
 
+    public SoundEffectSO hitSfx;
     private void Start()
     {
         CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
@@ -406,6 +407,8 @@ public class PlayerController : MonoBehaviour
         CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
 
         _SetDeadAnim(isDead);
+
+        hitSfx.Play(gameObject);
     }
 
     #region Animations
