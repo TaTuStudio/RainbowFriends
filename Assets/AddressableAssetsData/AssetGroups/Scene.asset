@@ -21,10 +21,6 @@ MonoBehaviour:
     m_Address: mainMenu
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: c2d5027cd762d4645afbf87129a59cf1
-    m_Address: gameScene
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 5a231e976dfdd48679e1d197364cae02
     m_Address: TestPlayer
     m_ReadOnly: 0
@@ -39,6 +35,10 @@ MonoBehaviour:
     m_SerializedLabels: []
   - m_GUID: bfd51d7f630534ff1b2bb63fa16da343
     m_Address: Assets/ScriptableObjects/Scene/TestPlayer.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c2d5027cd762d4645afbf87129a59cf1
+    m_Address: SchoolSceen
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

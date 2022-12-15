@@ -19,18 +19,18 @@ public class InteriorLoadSystem : MonoBehaviour
         {
             loadTestPlayer.LoadScene(true);
             playerPos = _.Result;
-            playerPos.OnPosChange += GetPos;
+            playerPos.OnPosChange += GetPosAndLoadRoom;
         };
     }
 
     private void OnDisable()
     {
-        playerPos.OnPosChange -= GetPos;
+        playerPos.OnPosChange -= GetPosAndLoadRoom;
         Resources.UnloadUnusedAssets();
     }
     
 
-    private void GetPos(int currentPosition)
+    private void GetPosAndLoadRoom(int currentPosition)
     {
         InitHallWay(currentPosition);
         
@@ -40,8 +40,6 @@ public class InteriorLoadSystem : MonoBehaviour
         
         room[currentPosition].InstantiateAsync().Completed += (_) => currentRoom = _.Result;
         lastPos = currentPosition;
-        
-        //CheckPos(currentPosition);
     }
 
     private void InitHallWay(int currentPosition)

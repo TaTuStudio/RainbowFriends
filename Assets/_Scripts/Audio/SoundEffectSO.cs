@@ -1,19 +1,21 @@
 // using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 [CreateAssetMenu(fileName = "NewSoundEffect", menuName = "Audio/New Sound Effect")]
 public class SoundEffectSO : ScriptableObject
 {
     #region config
 
-    private static readonly float SEMITONES_TO_PITCH_CONVERSION_UNIT = 1.05946f;
-    
+    private PlayerSettingsSO settings;
+    private const float SemitonesToPitchConversionUnit = 1.05946f;
+
     // [Required] 
     public AudioClip[] clips;
 
     // [MinMaxSlider(0, 1)] [BoxGroup("config")]
-    public Vector2 volume = new Vector2(0.5f, 0.5f);
+    public Vector2 volume = new Vector2(1f, 1f);
 
     //Pitch / Semitones
     // [LabelWidth(100)] [HorizontalGroup("config/pitch")]
@@ -52,6 +54,8 @@ public class SoundEffectSO : ScriptableObject
 
     private void OnEnable()
     {
+        Addressables.LoadAssetAsync<PlayerSettingsSO>("PlayerSettings").Completed += (_) => settings = _.Result;
+        
         previewer = EditorUtility
             .CreateGameObjectWithHideFlags("AudioPreview", HideFlags.HideAndDontSave,
                 typeof(AudioSource))
@@ -69,7 +73,7 @@ public class SoundEffectSO : ScriptableObject
     // [Button(ButtonSizes.Gigantic)]
     private void PlayPreview()
     {
-        Play(previewer);
+        Play(null, previewer);
     }
 
     // [ButtonGroup("previewControls")]
@@ -83,30 +87,26 @@ public class SoundEffectSO : ScriptableObject
 #endif
 
     #endregion
-
-    public void PlaySfx()
-    {
-        Play();
-    }
+    
 
     public void SyncPitchAndSemitones()
     {
         if (useSemitones)
         {
-            pitch.x = Mathf.Pow(SEMITONES_TO_PITCH_CONVERSION_UNIT, semitones.x);
-            pitch.y = Mathf.Pow(SEMITONES_TO_PITCH_CONVERSION_UNIT, semitones.y);
+            pitch.x = Mathf.Pow(SemitonesToPitchConversionUnit, semitones.x);
+            pitch.y = Mathf.Pow(SemitonesToPitchConversionUnit, semitones.y);
         }
         else
         {
-            semitones.x = Mathf.RoundToInt(Mathf.Log10(pitch.x) / Mathf.Log10(SEMITONES_TO_PITCH_CONVERSION_UNIT));
-            semitones.y = Mathf.RoundToInt(Mathf.Log10(pitch.y) / Mathf.Log10(SEMITONES_TO_PITCH_CONVERSION_UNIT));
+            semitones.x = Mathf.RoundToInt(Mathf.Log10(pitch.x) / Mathf.Log10(SemitonesToPitchConversionUnit));
+            semitones.y = Mathf.RoundToInt(Mathf.Log10(pitch.y) / Mathf.Log10(SemitonesToPitchConversionUnit));
         }
     }
 
     private AudioClip GetAudioClip()
     {
         // get current clip
-        var clip = clips[playIndex >= clips.Length ? 0 : playIndex];
+        var _clip = clips[playIndex >= clips.Length ? 0 : playIndex];
 
         // find next clip
         playIndex = playOrder switch
@@ -118,10 +118,10 @@ public class SoundEffectSO : ScriptableObject
         };
 
         // return clip
-        return clip;
+        return _clip;
     }
 
-    public AudioSource Play(AudioSource audioSourceParam = null)
+    public AudioSource Play(GameObject parent = null, bool isBgm = false, AudioSource audioSourceParam = null)
     {
         if (clips.Length == 0)
         {
@@ -129,71 +129,39 @@ public class SoundEffectSO : ScriptableObject
             return null;
         }
 
-        var source = audioSourceParam;
-        if (source == null)
+        var _source = audioSourceParam;
+        if (_source == null)
         {
             var _obj = new GameObject("Sound", typeof(AudioSource));
-            source = _obj.GetComponent<AudioSource>();
+            if (parent != null)
+            {
+                _obj.transform.parent = parent.transform;
+            }
+            _source = _obj.GetComponent<AudioSource>();
         }
 
         // set source config:
-        source.spatialBlend = spatialBlend;
-        source.maxDistance = maxDistance;
-        source.clip = GetAudioClip();
-        source.volume = Random.Range(volume.x, volume.y);
-        source.pitch = useSemitones
-            ? Mathf.Pow(SEMITONES_TO_PITCH_CONVERSION_UNIT, Random.Range(semitones.x, semitones.y))
+        _source.mute = isBgm ? settings.Bgm : settings.Sfx;
+        _source.loop = isBgm;
+        _source.spatialBlend = spatialBlend;
+        _source.maxDistance = maxDistance;
+        _source.clip = GetAudioClip();
+        _source.volume = Random.Range(volume.x, volume.y);
+        _source.pitch = useSemitones
+            ? Mathf.Pow(SemitonesToPitchConversionUnit, Random.Range(semitones.x, semitones.y))
             : Random.Range(pitch.x, pitch.y);
 
-        source.Play();
+        _source.Play();
 
 #if UNITY_EDITOR
-        if (source != previewer)
+        if (_source != previewer)
         {
-            Destroy(source.gameObject, source.clip.length / source.pitch);
+            Destroy(_source.gameObject, _source.clip.length / _source.pitch);
         }
 #else
-                Destroy(source.gameObject, source.clip.length / source.pitch);
+                Destroy(_source.gameObject, _source.clip.length / _source.pitch);
 #endif
-        return source;
-    }
-    
-    public AudioSource PlayBgm(AudioSource audioSourceParam = null)
-    {
-        if (clips.Length == 0)
-        {
-            Debug.LogError($"Missing sound clips for {name}");
-            return null;
-        }
-
-        var source = audioSourceParam;
-        if (source == null)
-        {
-            var _obj = new GameObject("Sound", typeof(AudioSource));
-            source = _obj.GetComponent<AudioSource>();
-        }
-
-        // set source config:
-        source.loop = true;
-        source.spatialBlend = spatialBlend;
-        source.maxDistance = maxDistance;
-        source.clip = GetAudioClip();
-        source.volume = Random.Range(volume.x, volume.y);
-        source.pitch = useSemitones
-            ? Mathf.Pow(SEMITONES_TO_PITCH_CONVERSION_UNIT, Random.Range(semitones.x, semitones.y))
-            : Random.Range(pitch.x, pitch.y);
-
-        source.Play();
-
-#if UNITY_EDITOR
-        if (source != previewer)
-        {
-            Destroy(source.gameObject, source.clip.length / source.pitch);
-        }
-#else
-                Destroy(source.gameObject, source.clip.length / source.pitch);
-#endif
-        return source;
+        return _source;
     }
 
     private enum SoundClipPlayOrder

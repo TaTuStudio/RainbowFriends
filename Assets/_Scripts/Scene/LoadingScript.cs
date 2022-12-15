@@ -1,15 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadingScript : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Slider sliderReal;
+    [SerializeField] private Slider sliderFake;
+    
     [SerializeField] private SceneLoaderSO loadMainMenu;
 
+    private bool load;
+    
     private IEnumerator Start()
     {
         var _a = StartCoroutine(SliderChangeValue());
@@ -23,13 +26,20 @@ public class LoadingScript : MonoBehaviour
     
     private IEnumerator SliderChangeValue()
     {
-        yield return slider.DOValue(1, 2f).SetEase(Ease.InCubic).WaitForCompletion();
+        yield return sliderFake.DOValue(1, 2f).SetEase(Ease.InCubic).WaitForCompletion();
     }
     
     private IEnumerator LoadScene()
     {
         loadMainMenu.LoadScene();
+        load = true;
         yield return loadMainMenu.Handle.WaitForCompletion();
+    }
+
+    private void Update()
+    {
+        if (!load) return;
+        sliderReal.value = loadMainMenu.Handle.PercentComplete;
     }
 
     // private async void Start()

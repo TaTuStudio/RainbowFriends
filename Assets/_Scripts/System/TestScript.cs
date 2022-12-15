@@ -11,7 +11,7 @@ public class TestScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            sfx?.Play();
+            sfx?.Play(gameObject);
         }
     }
 }

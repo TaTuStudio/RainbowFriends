@@ -7,7 +7,8 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 public class SceneLoaderSO : ScriptableObject
 {
     public AssetReference Scene;
-    public AsyncOperationHandle<SceneInstance> Handle;
+
+    public AsyncOperationHandle<SceneInstance> Handle { get; private set; }
 
     // Start is called before the first frame update
     public void LoadScene(bool activate = false)
