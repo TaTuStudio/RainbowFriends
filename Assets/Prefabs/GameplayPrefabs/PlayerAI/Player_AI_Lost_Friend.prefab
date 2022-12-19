@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: -1520994108809393143}
   - component: {fileID: 7984167734686233688}
   - component: {fileID: 8135495336584078598}
+  - component: {fileID: 8311918262747339130}
   m_Layer: 9
   m_Name: Player_AI_Lost_Friend
   m_TagString: Untagged
@@ -319,6 +320,27 @@ MonoBehaviour:
   OnHandItemContainer_Right: {fileID: 82580859014055265}
   rightHandCollectedList: []
   playerAnimator: {fileID: 9195000456271500072}
+--- !u!114 &8311918262747339130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984167734686233680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b8d6485960a8947922efd1a7714cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSkinMat: Steve
+  boxSkinMat: Cardbox_tex
+  playerSkinnedMesh: {fileID: 8771540294281868618, guid: c580206590f384a4d965476a6d323123,
+    type: 3}
+  boxSkinnedMesh: {fileID: 5990899500863183837, guid: c580206590f384a4d965476a6d323123,
+    type: 3}
+  holdBoxSkinnedMesh: {fileID: 124442731772709069, guid: c580206590f384a4d965476a6d323123,
+    type: 3}
+  change: 0
 --- !u!1 &7984167734712630298
 GameObject:
   m_ObjectHideFlags: 0

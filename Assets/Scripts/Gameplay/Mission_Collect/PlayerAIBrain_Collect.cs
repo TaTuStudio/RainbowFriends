@@ -19,7 +19,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     public int lastItemOnhand = 0;
 
-    public float randomRange = 10f;
+    private float randomRange = 10f;
     public ReuseGO selectedItem;
 
     public bool defaultSet = false;

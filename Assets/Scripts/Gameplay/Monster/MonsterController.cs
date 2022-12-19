@@ -43,6 +43,13 @@ public class MonsterController : MonoBehaviour
     float hitDelay = 0f;
     float curHitDelay = 0f;
     public bool attacking = false;
+    [SerializeField]
+    private bool avoidHide = false;
+
+    [Header("Behavior Rate settings")]
+    public float moveToAnyWhereRate = 20f;
+    public float moveToCheckPointRate = 40f;
+    public float moveToPlayerRate = 40f;
 
     private void OnEnable()
     {
@@ -118,16 +125,22 @@ public class MonsterController : MonoBehaviour
 
         if(turnTime <= 0f)
         {
-            List<int> ranNumList = new List<int>() { 0, 2 };
+            int ranIndex = Random.Range(0, 100);
 
-            if(monsterInfo != null)
+            if(ranIndex < moveToAnyWhereRate)
             {
-                ranNumList.Add(1);
+                turnType = 0;
+            }
+            else if(ranIndex < moveToAnyWhereRate + moveToCheckPointRate && monsterInfo != null && monsterInfo.checkPoints.Count > 0)
+            {
+                turnType = 1;
+            }
+            else
+            {
+                turnType = 2;
             }
 
-            turnType = Random.Range(0, ranNumList.Count);
-
-            if(turnType == 0)
+            if (turnType == 0)
             {
                 turnTime = (float)Random.RandomRange(1, 3);
 
@@ -153,7 +166,7 @@ public class MonsterController : MonoBehaviour
 
                 int ranNum = Random.Range(0, 100);
 
-                if(ranNum < 70)
+                if(ranNum < 50)
                 {
                     //find ai player
 
@@ -172,6 +185,10 @@ public class MonsterController : MonoBehaviour
                         int ranAIIndex = Random.Range(0, canUsePlayerAIList.Count);
 
                         selectedAIPlayer = canUsePlayerAIList[ranAIIndex];
+                    }
+                    else if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false)
+                    {
+                        selectedPlayer = PlayerManager.instance.spawnedPlayer;
                     }
                     else
                     {
@@ -240,7 +257,8 @@ public class MonsterController : MonoBehaviour
         {
             float dist = Vector3.Distance(transform.position, aiController.transform.position);
 
-            if (aiController.isDead == false && aiController.isHiding == false && dist < runToRange)
+            if (aiController.isDead == false && aiController.isHiding == false && dist < runToRange
+                || aiController.isDead == false && avoidHide == true && dist < runToRange)
             {
                 transforms.Add(aiController.transform);
             }
@@ -249,7 +267,8 @@ public class MonsterController : MonoBehaviour
         {
             float dist = Vector3.Distance(transform.position, PlayerManager.instance.spawnedPlayer.transform.position);
 
-            if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false && dist < runToRange)
+            if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false && dist < runToRange
+                                || PlayerManager.instance.spawnedPlayer.isDead == false && avoidHide == true && dist < runToRange)
             {
                 transforms.Add(PlayerManager.instance.spawnedPlayer.transform);
             }
@@ -430,7 +449,7 @@ public class MonsterController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, runToRange);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        //Gizmos.DrawWireSphere(transform.position, attackRange);
 
         if (nearest != null)
         {

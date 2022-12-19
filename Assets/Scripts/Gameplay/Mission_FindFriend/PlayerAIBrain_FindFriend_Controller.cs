@@ -20,7 +20,6 @@ public class PlayerAIBrain_FindFriend_Controller : MonoBehaviour
         {
             if (tempList.Count > 0)
             {
-                brain.playerAIBrain_FindFriend_Controller = this;
                 brain.playerAIController = tempList[0];
 
                 tempList.RemoveAt(0);

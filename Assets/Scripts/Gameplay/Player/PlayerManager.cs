@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
 
+    public PlayerSkinScriptObj playerSkinScriptObj;
+
     public string selectedPlayerID = "";
     public List<PlayerController> playerPrefabs = new List<PlayerController>();
     public List<PlayerAIController> aIPlayerPrefabs = new List<PlayerAIController>();

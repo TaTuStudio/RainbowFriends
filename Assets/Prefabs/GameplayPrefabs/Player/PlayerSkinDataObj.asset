@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e34bae293300e74cac7488d6569ce0f, type: 3}
+  m_Name: PlayerSkinDataObj
+  m_EditorClassIdentifier: 
+  playerSkins:
+  - skinID: Steve
+    skinName: Steve
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 0bd28eed8a26afb4aa05fbb4bd102ed0, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
+  - skinID: Bugman
+    skinName: Bug Man
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: c8b09e657273c5148ba732c9c16d3ae4, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 183fb86fb9ecbc8418ca0c0c150dccd2, type: 3}
+  - skinID: Clown
+    skinName: Clown
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 89c96686cad790a49ac569926e3e6b70, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 0d04030073bb7024d97b57395d5c42e4, type: 3}
+  - skinID: Deadpoor
+    skinName: Dead Poor
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 9c1f815e2062cec4fb8fbb677bfb4597, type: 3}
+    skinAvatar: {fileID: 21300000, guid: e85977df30c414e439b2504ee5ef3103, type: 3}
+  - skinID: Greenman
+    skinName: Greenman
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 7f23031403fa1c4458ea19caf324b342, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 9fce6eb6a68e85248902d9d8f5adb510, type: 3}
+  - skinID: Machineman
+    skinName: Machineman
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 4fe6e8521c2fd754ebe1c07c3d6f046d, type: 3}
+    skinAvatar: {fileID: 21300000, guid: a855a2477b39cde4482ae4d4a972cccd, type: 3}
+  - skinID: plumber
+    skinName: Plumber
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 425cb902c9ac27d4490c57ea60f4b441, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 52373921c08b6ea49a508a8e16764c3d, type: 3}
+  - skinID: santa
+    skinName: Red Old
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 3dd5672352454d2458e432195456e41e, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 624bbfae42bb13a4d924ccf0b15049d9, type: 3}
+  - skinID: soldier
+    skinName: Soldier
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: c5988b30b0893834f9c59af87631d914, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 56477616e3481d14780823ff96fad540, type: 3}
+  - skinID: speedboi
+    skinName: Speed Boi
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 45d2209d4c7753b4e89592c6d1951b00, type: 3}
+    skinAvatar: {fileID: 21300000, guid: ec8b1d244362d294b8b6520de362ef8f, type: 3}
+  - skinID: StudentBoy
+    skinName: Student Boy
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 9795a02bf814ddb42bd68d12ca5965ea, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 5789c9ccf817c9449b55c3088231e2e2, type: 3}
+  - skinID: StudenGirl
+    skinName: Studen Girl
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 59b19d25cdd394944906f8602c51a335, type: 3}
+    skinAvatar: {fileID: 21300000, guid: d664c9b364fb7b342aa5720432f9bd24, type: 3}
+  - skinID: SteelMan
+    skinName: Steel Man
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 2920d1f311fb4504bbf2c30fb635e385, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 5300785d2bdb23b4fa2e6cb96ffb7636, type: 3}
+  - skinID: ElecHam
+    skinName: Elec Ham
+    boxTex: {fileID: 2800000, guid: fbc6cd99155fa4c42ab33370aea0dc31, type: 3}
+    playerTex: {fileID: 2800000, guid: 15fac3faab8f00a40821b45e984e96cf, type: 3}
+    skinAvatar: {fileID: 21300000, guid: 8860f5fd39b11014eba8cb869373e30a, type: 3}

@@ -15,6 +15,8 @@ public class GameplayUI : MonoBehaviour
 
     public SelectGameUI selectGameUI;
 
+    public ShopUI shopUI;
+
     private void Awake()
     {
         instance = this;
@@ -28,6 +30,7 @@ public class GameplayUI : MonoBehaviour
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
         _ActiveSelectGameUI(false);
+        _ActiveSelectShopUI(false);
     }
 
     public void _GameplayFindFriendSetup()
@@ -38,6 +41,18 @@ public class GameplayUI : MonoBehaviour
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
         _ActiveSelectGameUI(false);
+        _ActiveSelectShopUI(false);
+    }
+
+    public void _GameplayLastStandSetup()
+    {
+        _ActiveTimeCountUI(true);
+        _ActiveAlphabetCollectCountUI(false);
+        _ActiveWinUI(false);
+        _ActiveOutTimeUI(false);
+        _ActiveDeadUI(false);
+        _ActiveSelectGameUI(false);
+        _ActiveSelectShopUI(false);
     }
 
     public void _HomeUISetup()
@@ -48,6 +63,7 @@ public class GameplayUI : MonoBehaviour
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
         _ActiveSelectGameUI(true);
+        _ActiveSelectShopUI(false);
     }
 
     public void _ActiveTimeCountUI(bool active)
@@ -76,5 +92,10 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveSelectGameUI(bool active)
     {
         selectGameUI.gameObject.SetActive(active);
+    }
+
+    public void _ActiveSelectShopUI(bool active)
+    {
+        shopUI.gameObject.SetActive(active);
     }
 }
