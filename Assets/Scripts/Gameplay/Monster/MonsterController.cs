@@ -51,6 +51,8 @@ public class MonsterController : MonoBehaviour
     public float moveToCheckPointRate = 40f;
     public float moveToPlayerRate = 40f;
 
+    public SoundEffectSO jumpScareSfx;
+
     private void OnEnable()
     {
         setDefault = true;
@@ -125,6 +127,8 @@ public class MonsterController : MonoBehaviour
 
         if(turnTime <= 0f)
         {
+            _TurnDefault();
+
             int ranIndex = Random.Range(0, 100);
 
             if(ranIndex < moveToAnyWhereRate)
@@ -257,20 +261,22 @@ public class MonsterController : MonoBehaviour
         {
             float dist = Vector3.Distance(transform.position, aiController.transform.position);
 
-            if (aiController.isDead == false && aiController.isHiding == false && dist < runToRange
-                || aiController.isDead == false && avoidHide == true && dist < runToRange)
+            if (aiController.isDead == false && aiController.isHiding == false && aiController.catched == false && dist < runToRange
+                || aiController.isDead == false && aiController.catched == false && avoidHide == true && dist < runToRange)
             {
                 transforms.Add(aiController.transform);
             }
         }
 
         {
-            float dist = Vector3.Distance(transform.position, PlayerManager.instance.spawnedPlayer.transform.position);
+            PlayerController player = PlayerManager.instance.spawnedPlayer;
 
-            if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false && dist < runToRange
-                                || PlayerManager.instance.spawnedPlayer.isDead == false && avoidHide == true && dist < runToRange)
+            float dist = Vector3.Distance(transform.position, player.transform.position);
+
+            if (player.isDead == false && player.isHiding == false && player.catched == false && dist < runToRange
+                                || player.isDead == false && player.catched == false && avoidHide == true && dist < runToRange)
             {
-                transforms.Add(PlayerManager.instance.spawnedPlayer.transform);
+                transforms.Add(player.transform);
             }
         }
 
@@ -373,6 +379,8 @@ public class MonsterController : MonoBehaviour
                 _SetAnimJumpScare(true);
 
                 CameraManager.instance._GameplaySwitchCam(virtualCam);
+
+                jumpScareSfx.Play(gameObject);
             }
             else
             if (playerAIController != null && playerAIController.enabled)

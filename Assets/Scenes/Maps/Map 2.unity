@@ -3059,6 +3059,22 @@ MonoBehaviour:
     - {fileID: 1459602354}
     - {fileID: 783309560}
     - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 73c890878b53c5f4591c840c906d1966,
+      type: 3}
+    checkPoints: []
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: d0bc6de402ff73c479752a717aa77bca,
+      type: 3}
+    checkPoints: []
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
 --- !u!1 &879650570
 GameObject:
   m_ObjectHideFlags: 0

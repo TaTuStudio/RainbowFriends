@@ -189,6 +189,20 @@ public class PlayerController : MonoBehaviour
             NotGroundedMovement(desiredVelocity);
 
         characterMovement.Move();
+
+        //Step sound FX
+
+        float vertical = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Vertical);
+        float horizontal = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Horizontal);
+
+        if (vertical > horizontal)
+        {
+            playerSFX._SetSpeedNormalize(vertical);
+        }
+        else
+        {
+            playerSFX._SetSpeedNormalize(horizontal);
+        }
     }
 
     /// <summary>
@@ -283,6 +297,9 @@ public class PlayerController : MonoBehaviour
     public List<Transform> rightHandCollectedList = new List<Transform>();
 
     public SoundEffectSO hitSfx;
+
+    public PlayerSFX playerSFX;
+
     private void Start()
     {
         CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
