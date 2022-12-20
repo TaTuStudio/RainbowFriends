@@ -240,7 +240,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &26431721 stripped
@@ -2085,7 +2084,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &552435877
@@ -2558,7 +2556,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &663099343 stripped
@@ -2827,7 +2824,7 @@ GameObject:
   - component: {fileID: 765576998}
   - component: {fileID: 765576999}
   m_Layer: 0
-  m_Name: CollectMissionController
+  m_Name: AlphabetCollectMissionController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3118,6 +3115,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterSpawnInfos:
   - monsterPrefab: {fileID: 3496561724330584008, guid: 8976a7552c5a0e643aa19e7d17bab080,
+      type: 3}
+    checkPoints:
+    - {fileID: 1840560653}
+    - {fileID: 1758803392}
+    - {fileID: 109780621}
+    - {fileID: 503317833}
+    - {fileID: 1392380857}
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 21e7849e87ae7a141979beed072d865b,
+      type: 3}
+    checkPoints:
+    - {fileID: 1840560653}
+    - {fileID: 1758803392}
+    - {fileID: 109780621}
+    - {fileID: 503317833}
+    - {fileID: 1392380857}
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 747efff612fb6204ea89397e29e57bd3,
       type: 3}
     checkPoints:
     - {fileID: 1840560653}
@@ -3426,7 +3449,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &890637919
@@ -4743,7 +4765,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1081393110}
-  - component: {fileID: 1081393111}
   m_Layer: 0
   m_Name: Statics
   m_TagString: Untagged
@@ -4770,19 +4791,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1081393111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081393109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d43cdd025a6ec5f43ba4b14720ec6311, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  run: 0
 --- !u!1 &1089901693
 GameObject:
   m_ObjectHideFlags: 0
@@ -6616,7 +6624,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &1346355791 stripped
@@ -7483,7 +7490,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1001 &1511923732
@@ -8080,7 +8086,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &1680102067
@@ -8159,7 +8164,7 @@ GameObject:
   - component: {fileID: 1685523133}
   - component: {fileID: 1685523134}
   m_Layer: 0
-  m_Name: CollectItemSpawner
+  m_Name: AlphabetCollectItemSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8218,7 +8223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5794278b4450e084ba80dea367d120e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectMissionController: {fileID: 765576999}
+  alphabetCollectMissionController: {fileID: 765576999}
   gameplaySet: 0
   collectItemPrefabs:
   - {fileID: 4186595074075441213, guid: 98315b66eebd953459f72da4661727bb, type: 3}
@@ -9078,7 +9083,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1 &1849491917
@@ -9687,7 +9691,6 @@ MonoBehaviour:
   turnTime: 0
   turnType: -1
   lastItemOnhand: 0
-  randomRange: 5
   selectedItem: {fileID: 0}
   defaultSet: 0
 --- !u!1001 &1980517363

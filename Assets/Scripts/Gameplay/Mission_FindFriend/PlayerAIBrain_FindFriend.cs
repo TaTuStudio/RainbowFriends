@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerAIBrain_FindFriend : MonoBehaviour
 {
-    public PlayerAIBrain_FindFriend_Controller playerAIBrain_FindFriend_Controller;
-
     public PlayerAIController playerAIController;
 
     [Header("Turn settings")]
@@ -17,7 +15,7 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
     // turnType = 1 -> move to lost friend position
     // turnType = 2 -> move to Random pos in range in a time
 
-    public float randomRange = 10f;
+    private float randomRange = 10f;
     public bool friendFound = false;
 
     public bool defaultSet = false;

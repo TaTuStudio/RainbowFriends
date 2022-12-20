@@ -45,7 +45,7 @@ public class AlphabetCollector : MonoBehaviour
 
                     collectItem._SetCollected();
 
-                    CollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
+                    AlphabetCollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
 
                     positionLeftList.RemoveAt(0);
 
@@ -77,7 +77,7 @@ public class AlphabetCollector : MonoBehaviour
 
                     collectItem._SetCollected();
 
-                    CollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
+                    AlphabetCollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
 
                     positionLeftList.RemoveAt(0);
 

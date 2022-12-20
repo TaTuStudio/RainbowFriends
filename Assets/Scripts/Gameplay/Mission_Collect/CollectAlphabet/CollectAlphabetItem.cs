@@ -53,7 +53,7 @@ public class CollectAlphabetItem : MonoBehaviour
             {
                 transform.position = onHandAIPlayer.transform.position;
 
-                transform.parent = CollectMissionController.instance.collectItemSpawner.transform;
+                transform.parent = AlphabetCollectMissionController.instance.collectItemSpawner.transform;
 
                 _OnGroundSet();
             }
@@ -62,7 +62,7 @@ public class CollectAlphabetItem : MonoBehaviour
             {
                 transform.position = onHandPlayer.transform.position;
 
-                transform.parent = CollectMissionController.instance.collectItemSpawner.transform;
+                transform.parent = AlphabetCollectMissionController.instance.collectItemSpawner.transform;
 
                 _OnGroundSet();
             }

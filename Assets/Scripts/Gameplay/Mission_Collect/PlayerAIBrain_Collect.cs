@@ -19,7 +19,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     public int lastItemOnhand = 0;
 
-    public float randomRange = 10f;
+    private float randomRange = 10f;
     public ReuseGO selectedItem;
 
     public bool defaultSet = false;
@@ -55,7 +55,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     void _CheckTurn()
     {
-        if (CollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
+        if (AlphabetCollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
             return;
 
         _CheckRightHandItemsChange();
@@ -86,7 +86,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
             }
             else
             {
-                if (CollectMissionController.instance.collectItemSpawner.collectedItems.Contains(selectedItem))
+                if (AlphabetCollectMissionController.instance.collectItemSpawner.collectedItems.Contains(selectedItem))
                 {
                     selectedItem = null;
                 }
@@ -99,7 +99,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
         if (playerAIController.rightHandCollectedList.Count > 0)
         {
-            playerAIController.aIPath._SetMoveToPosition(CollectMissionController.instance.collector.position);
+            playerAIController.aIPath._SetMoveToPosition(AlphabetCollectMissionController.instance.collector.position);
         }
     }
 
@@ -107,7 +107,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
     {
         List<int> ranNumList = new List<int>() { 0, 2 };
 
-        if(CollectMissionController.instance.collectItemSpawner.collectedItems.Count < CollectMissionController.instance.collectItemSpawner.spawnedItems.Count)
+        if(AlphabetCollectMissionController.instance.collectItemSpawner.collectedItems.Count < AlphabetCollectMissionController.instance.collectItemSpawner.spawnedItems.Count)
         {
             ranNumList.Add(1);
         }
@@ -128,9 +128,9 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
             List<ReuseGO> tempList = new List<ReuseGO>();
 
-            tempList.AddRange(CollectMissionController.instance.collectItemSpawner.spawnedItems);
+            tempList.AddRange(AlphabetCollectMissionController.instance.collectItemSpawner.spawnedItems);
 
-            foreach (ReuseGO reuseGO in CollectMissionController.instance.collectItemSpawner.collectedItems)
+            foreach (ReuseGO reuseGO in AlphabetCollectMissionController.instance.collectItemSpawner.collectedItems)
             {
                 if (tempList.Contains(reuseGO) || _CheckCanCollectItem(reuseGO) == false)
                 {
@@ -236,7 +236,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
     float hideDelay = 0f;
     void _CheckHide()
     {
-        if (CollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
+        if (AlphabetCollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
             return;
 
         if (hideDelay >= 0f)

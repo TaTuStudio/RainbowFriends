@@ -16,11 +16,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c0f8c2844afa8497980a95b523385d27, type: 3}
   - {fileID: 8300000, guid: dbbc527cac80f46d9a7bfe8cfa63847b, type: 3}
   - {fileID: 8300000, guid: 22c0aa6a009504d059d283b5ebb05034, type: 3}
-  volume: {x: 1, y: 1}
+  volume: {x: 0.15, y: 0.15}
   useSemitones: 0
   semitones: {x: 0, y: 0}
-  pitch: {x: 1, y: 1}
+  pitch: {x: 1.5, y: 1.5}
   playOrder: 0
-  playIndex: 0
-  spatialBlend: 1
+  playIndex: 1
+  spatialBlend: 0
   maxDistance: 500

@@ -1718,11 +1718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &392219345
@@ -2145,11 +2143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &502674850
@@ -3187,11 +3183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &833218193
@@ -3355,6 +3349,40 @@ MonoBehaviour:
     - {fileID: 1459602354}
     - {fileID: 783309560}
     - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 21e7849e87ae7a141979beed072d865b,
+      type: 3}
+    checkPoints:
+    - {fileID: 1840560653}
+    - {fileID: 1758803392}
+    - {fileID: 109780621}
+    - {fileID: 503317833}
+    - {fileID: 1392380857}
+    - {fileID: 178713731}
+    - {fileID: 2136898717}
+    - {fileID: 1078630300}
+    - {fileID: 1164527824}
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 747efff612fb6204ea89397e29e57bd3,
+      type: 3}
+    checkPoints:
+    - {fileID: 1840560653}
+    - {fileID: 1758803392}
+    - {fileID: 109780621}
+    - {fileID: 503317833}
+    - {fileID: 1392380857}
+    - {fileID: 178713731}
+    - {fileID: 2136898717}
+    - {fileID: 1078630300}
+    - {fileID: 1164527824}
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
 --- !u!1 &847705954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3399,11 +3427,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &879650570
@@ -3812,11 +3838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &992392631
@@ -4578,11 +4602,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &1152142805
@@ -4726,11 +4748,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &1164527823
@@ -5517,11 +5537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &1369929600
@@ -6115,11 +6133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f5f5619fc29944fa06ab90505096c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAIBrain_FindFriend_Controller: {fileID: 0}
   playerAIController: {fileID: 0}
   turnTime: 0
   turnType: -1
-  randomRange: 10
   friendFound: 0
   defaultSet: 0
 --- !u!1 &1527781140
