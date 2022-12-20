@@ -21,10 +21,6 @@ MonoBehaviour:
     m_Address: NewPlayerPos
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 4f5dacf6a31ca4fe5bd4b39d6aada119
-    m_Address: PlayerData
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 6ec81f7b98ce8487597fd0f817777d19
     m_Address: PlayerSettings
     m_ReadOnly: 0
