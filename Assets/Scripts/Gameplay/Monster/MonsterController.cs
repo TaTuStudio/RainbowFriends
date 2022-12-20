@@ -40,8 +40,12 @@ public class MonsterController : MonoBehaviour
     float attackRange = 3f;
     float attackDelay = 1f;
     float curAttackDelay = 0f;
+    [SerializeField]
     float hitDelay = 0f;
+    [SerializeField]
+    float hitScareDelay = 0f;
     float curHitDelay = 0f;
+
     public bool attacking = false;
     [SerializeField]
     private bool avoidHide = false;

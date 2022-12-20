@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 5
   radius: 0.5
-  height: 3.5
+  height: 3
   canMove: 1
   maxSpeed: 4
   gravity: {x: NaN, y: NaN, z: NaN}
@@ -229,7 +229,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 3.5
+  m_Height: 3
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.5
@@ -276,6 +276,8 @@ MonoBehaviour:
   curRunToNearestDelay: 0
   runToNearest: 0
   nearest: {fileID: 0}
+  hitDelay: 2
+  hitScareDelay: 2.25
   attacking: 0
   avoidHide: 1
   moveToAnyWhereRate: 20

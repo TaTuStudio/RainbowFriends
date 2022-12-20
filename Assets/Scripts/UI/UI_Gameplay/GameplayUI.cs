@@ -17,6 +17,8 @@ public class GameplayUI : MonoBehaviour
 
     public ShopUI shopUI;
 
+    public Transform flashLightUI;
+
     private void Awake()
     {
         instance = this;
@@ -97,5 +99,10 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveSelectShopUI(bool active)
     {
         shopUI.gameObject.SetActive(active);
+    }
+
+    public void _ActiveFlashLightUI(bool active)
+    {
+        flashLightUI.gameObject.SetActive(active);
     }
 }
