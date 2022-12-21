@@ -19,6 +19,12 @@ public class AlphabetCollector : MonoBehaviour
         collectedItems.Clear();
     }
 
+    private void Update()
+    {
+        if (AlphabetCollectMissionController.instance.gameplaySet == false) return;
+        GameplayUI.instance.alphabetCollectCountUI._SetCount(collectedItems.Count, AlphabetCollectMissionController.instance.collectItemSpawner.spawnedItems.Count);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PlayerController playerController = other.GetComponent<PlayerController>();

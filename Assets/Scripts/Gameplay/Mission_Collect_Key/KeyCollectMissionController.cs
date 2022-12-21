@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeederCollectMissionController : MonoBehaviour
+public class KeyCollectMissionController : MonoBehaviour
 {
-    public static FeederCollectMissionController instance;
+    public static KeyCollectMissionController instance;
 
-    public PlayerAIBrains_Feeder_CollectController playerAIBrains_CollectController;
+    public PlayerAIBrains_Key_Collect_Controller playerAIBrains_CollectController;
 
     public CollectItemSpawner collectItemSpawner;
 
@@ -27,7 +27,7 @@ public class FeederCollectMissionController : MonoBehaviour
     private void Start()
     {
         GameController.instance._GameplayReadySetup();
-        GameplayUI.instance._GameplayFoodCollectSetup();
+        GameplayUI.instance._GameplayKeyCollectSetup();
     }
 
     private void Update()
@@ -39,17 +39,17 @@ public class FeederCollectMissionController : MonoBehaviour
 
     void _MakeReplaceSingleton()
     {
-        if (FeederCollectMissionController.instance != null && FeederCollectMissionController.instance != this)
+        if (KeyCollectMissionController.instance != null && KeyCollectMissionController.instance != this)
         {
-            FeederCollectMissionController old = FeederCollectMissionController.instance;
+            KeyCollectMissionController old = KeyCollectMissionController.instance;
 
-            FeederCollectMissionController.instance = this;
+            KeyCollectMissionController.instance = this;
 
             Destroy(old);
         }
         else
         {
-            FeederCollectMissionController.instance = this;
+            KeyCollectMissionController.instance = this;
         }
     }
 

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/Map_Feeder.unity
     guid: 40c2b4617d7b701459babfa7a1f96cb4
+  - enabled: 1
+    path: Assets/Scenes/Maps/Map_FindKey.unity
+    guid: 7a54e4b76e7c5e84291f79b055cc5ab8
   m_configObjects: {}

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeederCollector : MonoBehaviour
+public class KeyCollector : MonoBehaviour
 {
     public List<Transform> collectPositions = new List<Transform>();
 
     List<Transform> positionLeftList = new List<Transform>();
 
-    public List<CollectFeederItem> collectedItems = new List<CollectFeederItem>();
+    public List<KeyCollectItem> collectedItems = new List<KeyCollectItem>();
 
     private void Start()
     {
@@ -21,8 +21,8 @@ public class FeederCollector : MonoBehaviour
 
     private void Update()
     {
-        if (FeederCollectMissionController.instance.gameplaySet == false) return;
-        GameplayUI.instance.foodCollectCountUI._SetCount(collectedItems.Count, FeederCollectMissionController.instance.collectItemSpawner.spawnedItems.Count);
+        if (KeyCollectMissionController.instance.gameplaySet == false) return;
+        GameplayUI.instance.keyCollectCountUI._SetCount(collectedItems.Count, KeyCollectMissionController.instance.collectItemSpawner.spawnedItems.Count);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +39,7 @@ public class FeederCollector : MonoBehaviour
 
             while (tempList.Count > 0)
             {
-                CollectFeederItem collectItem = tempList[0].GetComponent<CollectFeederItem>();
+                KeyCollectItem collectItem = tempList[0].GetComponent<KeyCollectItem>();
 
                 if (collectItem != null)
                 {
@@ -51,7 +51,7 @@ public class FeederCollector : MonoBehaviour
 
                     collectItem._SetCollected();
 
-                    FeederCollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
+                    KeyCollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
 
                     positionLeftList.RemoveAt(0);
 
@@ -71,7 +71,7 @@ public class FeederCollector : MonoBehaviour
 
             while (tempList.Count > 0)
             {
-                CollectFeederItem collectItem = tempList[0].GetComponent<CollectFeederItem>();
+                KeyCollectItem collectItem = tempList[0].GetComponent<KeyCollectItem>();
 
                 if (collectItem != null)
                 {
@@ -83,7 +83,7 @@ public class FeederCollector : MonoBehaviour
 
                     collectItem._SetCollected();
 
-                    FeederCollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
+                    KeyCollectMissionController.instance.collectItemSpawner._AddToCollected(tempList[0].GetComponent<ReuseGO>());
 
                     positionLeftList.RemoveAt(0);
 

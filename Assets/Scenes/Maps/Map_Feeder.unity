@@ -1353,6 +1353,40 @@ MonoBehaviour:
     - {fileID: 1459602354}
     - {fileID: 783309560}
     - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 747efff612fb6204ea89397e29e57bd3,
+      type: 3}
+    avoidHide: 0
+    moveToAnyWhereRate: 20
+    moveToCheckPointRate: 40
+    moveToPlayerRate: 40
+    checkPoints:
+    - {fileID: 1840560653}
+    - {fileID: 1758803392}
+    - {fileID: 109780621}
+    - {fileID: 503317833}
+    - {fileID: 1392380857}
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
+  - monsterPrefab: {fileID: 3496561724330584008, guid: 0ffd1fcd00ce4454180c560949b8306c,
+      type: 3}
+    avoidHide: 0
+    moveToAnyWhereRate: 20
+    moveToCheckPointRate: 40
+    moveToPlayerRate: 40
+    checkPoints:
+    - {fileID: 1840560653}
+    - {fileID: 1758803392}
+    - {fileID: 109780621}
+    - {fileID: 503317833}
+    - {fileID: 1392380857}
+    spawnPoints:
+    - {fileID: 160396041}
+    - {fileID: 1459602354}
+    - {fileID: 783309560}
+    - {fileID: 2069662477}
 --- !u!1 &860278053
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,7 +3307,7 @@ MonoBehaviour:
   data:
     dataString: UEsDBBQAAAgIAAA4IewD6+UbzAIAAPIFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFtVNty2jAQ/RVGzw1jc4lJ31rIpZ0mYeJ28lDyIOS1rUGWPLoESIZ/70o22CFlGGzOXnT27K7eiaB70HPlpCVfB6MvA1KBLiCtqXyisgAEo+EUYVZSTZkFfQe8KL3zGFEuTQ3MKn2reXavMu9P/DvpG+9gRwslU/4GR59nntnSO9Hg80QtV4jHPsyoCqzm7JssRCCAoJM8V7q6zgqYK2MNwjkVBtCklfXREqH3Adm1Afv2+eafg4OvACTS77wuLqNhhJ/4zDsejpPJ1Ww8nYYwJ5mgVQ2Zp99FJ9M2LEmGjaPE0lqfVjIlBDctM2L3dag8rUvQ4EvPOMVCAyXPoTwKG/djH/PcwBHVdL/gGvVqkpLvqhGxombTUHulwvlj4tEskGqS3n+yXzacc62qU0PjyEtgS842T3TPqLE9lfvw4iNxJ7dUbOhawHMJ8kHdahynDI1WOx/qDIwWvVSn2uYlsE3n13A9A139ua9x19dDqH43F7xan4RHIBUqyD3x/0Fja34g4TAnps2AqCfxx8BvWvQHqjXccG0smlp36dmtldPeldzgi1eeOTtXWkJAW8o1SCrsfolZbL+D0Wdb79Qzyw31m9Oe3dqOC3EWEuDOP4rOTEu17Xpl4Ker6qXi0qZANSt7+UyptvdgykdnBZfQVeQND6jhXEnZTJ/5T1jqdE5ZL8zCzjoNC2ppWAHkhEOS9UNRxhAhnRB+HkMVPvlfrMJ/X5q7B88VASYPSobt+fB88XNQOJ59nHIyW8cZu4roJJ+MJ1dscpGPWX4JCZtGyTpJZiMS1oBL1JyKZSNa2yocINnVInHkfcZf/r6EbOAvOfyhdVjATNPtLX+rVG8MuMxVyjSAfGwynYoGjYfhTZFdZxzLTcFaLsMIkvcVEYptIFudEq2CwNc7q+mqy7IiNX9V1iMrMg9X24p4+LRdSw2vHLb+8GOyAzn8A1BLAwQUAAAICAAAOCHsgTPOp3IAAAB9AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kkWSYUqypUGiSZqJsYllsolumnFymlmqebKpgXmSubmFkVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqeT2JlapF7UWaKO8h8pdhaAFBLAQItABQAAAgIAAA4IewD6+UbzAIAAPIFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAA4IeyBM86ncgAAAH0AAAAJACQAAAAAAAAAAAAAABkDAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAA1gMAAAAA
     upgradeData: 
-    file_cachedStartup: {fileID: 4900000, guid: 48d30c3e299d87c48b29b756a8356137,
+    file_cachedStartup: {fileID: 4900000, guid: 8c8ee13916d05224d9e3cd618227c4bf,
       type: 3}
     data_cachedStartup: 
     cacheStartup: 1

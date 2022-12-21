@@ -30,7 +30,7 @@ public class CollectItemSpawner : MonoBehaviour
         {
             gameplaySet = true;
 
-            _SpawnAlphabetBoxes();
+            _SpawnCollectItems();
         }
     }
 
@@ -67,7 +67,7 @@ public class CollectItemSpawner : MonoBehaviour
         }
     }
 
-    void _SpawnAlphabetBoxes()
+    void _SpawnCollectItems()
     {
         _Clean();
 
