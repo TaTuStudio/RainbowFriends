@@ -47,13 +47,6 @@ public class MonsterController : MonoBehaviour
     float curHitDelay = 0f;
 
     public bool attacking = false;
-    [SerializeField]
-    private bool avoidHide = false;
-
-    [Header("Behavior Rate settings")]
-    public float moveToAnyWhereRate = 20f;
-    public float moveToCheckPointRate = 40f;
-    public float moveToPlayerRate = 40f;
 
     public SoundEffectSO jumpScareSfx;
 
@@ -135,11 +128,11 @@ public class MonsterController : MonoBehaviour
 
             int ranIndex = Random.Range(0, 100);
 
-            if(ranIndex < moveToAnyWhereRate)
+            if(ranIndex < monsterInfo.moveToAnyWhereRate)
             {
                 turnType = 0;
             }
-            else if(ranIndex < moveToAnyWhereRate + moveToCheckPointRate && monsterInfo != null && monsterInfo.checkPoints.Count > 0)
+            else if(ranIndex < monsterInfo.moveToAnyWhereRate + monsterInfo.moveToCheckPointRate && monsterInfo != null && monsterInfo.checkPoints.Count > 0)
             {
                 turnType = 1;
             }
@@ -266,7 +259,7 @@ public class MonsterController : MonoBehaviour
             float dist = Vector3.Distance(transform.position, aiController.transform.position);
 
             if (aiController.isDead == false && aiController.isHiding == false && aiController.catched == false && dist < runToRange
-                || aiController.isDead == false && aiController.catched == false && avoidHide == true && dist < runToRange)
+                || aiController.isDead == false && aiController.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
             {
                 transforms.Add(aiController.transform);
             }
@@ -278,7 +271,7 @@ public class MonsterController : MonoBehaviour
             float dist = Vector3.Distance(transform.position, player.transform.position);
 
             if (player.isDead == false && player.isHiding == false && player.catched == false && dist < runToRange
-                                || player.isDead == false && player.catched == false && avoidHide == true && dist < runToRange)
+                                || player.isDead == false && player.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
             {
                 transforms.Add(player.transform);
             }

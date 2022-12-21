@@ -101,7 +101,7 @@ public class GameplayUI : MonoBehaviour
         shopUI.gameObject.SetActive(active);
     }
 
-    public void _ActiveFlashLightUI(bool active)
+    public void _ActiveFlashLight(bool active)
     {
         flashLightUI.gameObject.SetActive(active);
     }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8623112437459070354}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MonsterSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8595642891248567632}
   - component: {fileID: 600335903606503099}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MonsterDistanceAlert
   m_TagString: Untagged
   m_Icon: {fileID: 0}

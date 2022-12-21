@@ -11,6 +11,13 @@ public class MonsterSpawner : MonoBehaviour
     {
         public ReuseGO monsterPrefab;
 
+        [Header("Behavior Rate settings")]
+        public bool avoidHide = false;
+        public float moveToAnyWhereRate = 20f;
+        public float moveToCheckPointRate = 40f;
+        public float moveToPlayerRate = 40f;
+
+        [Header("Check points Spawn Points settings")]
         public List<Transform> checkPoints = new List<Transform>();
         public List<Transform> spawnPoints = new List<Transform>();
     }
