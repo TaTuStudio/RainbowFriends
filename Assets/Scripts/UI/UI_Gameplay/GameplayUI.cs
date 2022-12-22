@@ -8,6 +8,8 @@ public class GameplayUI : MonoBehaviour
 
     public TimeCountUI timeCountUI;
     public CollectCountUI alphabetCollectCountUI;
+    public CollectCountUI foodCollectCountUI;
+    public CollectCountUI keyCollectCountUI;
 
     public WinUI winUI;
     public OutTimeUI outTimeUI;
@@ -16,6 +18,8 @@ public class GameplayUI : MonoBehaviour
     public SelectGameUI selectGameUI;
 
     public ShopUI shopUI;
+
+    public Transform flashLightUI;
 
     private void Awake()
     {
@@ -26,31 +30,58 @@ public class GameplayUI : MonoBehaviour
     {
         _ActiveTimeCountUI(true);
         _ActiveAlphabetCollectCountUI(true);
-        _ActiveWinUI(false);
-        _ActiveOutTimeUI(false);
-        _ActiveDeadUI(false);
-        _ActiveSelectGameUI(false);
-        _ActiveSelectShopUI(false);
+        _ActiveFoodCollectCountUI(false);
+        _ActiveKeyCollectCountUI(false);
+
+        _GameplayUISetup();
+    }
+
+    public void _GameplayFoodCollectSetup()
+    {
+        _ActiveTimeCountUI(true);
+        _ActiveAlphabetCollectCountUI(false);
+        _ActiveFoodCollectCountUI(true);
+        _ActiveKeyCollectCountUI(false);
+
+        _GameplayUISetup();
+    }
+
+    public void _GameplayKeyCollectSetup()
+    {
+        _ActiveTimeCountUI(true);
+        _ActiveAlphabetCollectCountUI(false);
+        _ActiveFoodCollectCountUI(false);
+        _ActiveKeyCollectCountUI(true);
+
+        _GameplayUISetup();
     }
 
     public void _GameplayFindFriendSetup()
     {
         _ActiveTimeCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
-        _ActiveWinUI(false);
-        _ActiveOutTimeUI(false);
-        _ActiveDeadUI(false);
-        _ActiveSelectGameUI(false);
-        _ActiveSelectShopUI(false);
+        _ActiveFoodCollectCountUI(false);
+        _ActiveKeyCollectCountUI(false);
+
+        _GameplayUISetup();
     }
 
     public void _GameplayLastStandSetup()
     {
         _ActiveTimeCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
+        _ActiveFoodCollectCountUI(false);
+        _ActiveKeyCollectCountUI(false);
+
+        _GameplayUISetup();
+    }
+
+    public void _GameplayUISetup()
+    {
         _ActiveWinUI(false);
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
+
         _ActiveSelectGameUI(false);
         _ActiveSelectShopUI(false);
     }
@@ -59,9 +90,13 @@ public class GameplayUI : MonoBehaviour
     {
         _ActiveTimeCountUI(false);
         _ActiveAlphabetCollectCountUI(false);
+        _ActiveFoodCollectCountUI(false);
+        _ActiveKeyCollectCountUI(false);
+
         _ActiveWinUI(false);
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
+
         _ActiveSelectGameUI(true);
         _ActiveSelectShopUI(false);
     }
@@ -74,6 +109,16 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveAlphabetCollectCountUI(bool active)
     {
         alphabetCollectCountUI.gameObject.SetActive(active);
+    }
+
+    public void _ActiveFoodCollectCountUI(bool active)
+    {
+        foodCollectCountUI.gameObject.SetActive(active);
+    }
+
+    public void _ActiveKeyCollectCountUI(bool active)
+    {
+        keyCollectCountUI.gameObject.SetActive(active);
     }
 
     public void _ActiveWinUI(bool active)
@@ -97,5 +142,10 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveSelectShopUI(bool active)
     {
         shopUI.gameObject.SetActive(active);
+    }
+
+    public void _ActiveFlashLight(bool active)
+    {
+        flashLightUI.gameObject.SetActive(active);
     }
 }

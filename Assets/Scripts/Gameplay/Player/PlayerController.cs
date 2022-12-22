@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Space(15f)]
     [Tooltip("The character's maximum speed.")]
-    public static float maxSpeed = 5f;
+    public static float maxSpeed = 4f;
 
     [Tooltip("Max Acceleration (rate of change of velocity).")]
     public float maxAcceleration = 20.0f;
@@ -176,9 +176,16 @@ public class PlayerController : MonoBehaviour
 
         Vector3 desiredVelocity = Vector3.zero;
 
+        float curSpeed = maxSpeed;
+
+        if (isHiding)
+        {
+            curSpeed = maxSpeed / 2f;
+        }
+
         if (catched == false && isDead == false)
         {
-            desiredVelocity = movementDirection * maxSpeed;
+            desiredVelocity = movementDirection * curSpeed;
         }
 
         // Update character’s velocity based on its grounding status
@@ -336,6 +343,8 @@ public class PlayerController : MonoBehaviour
         _SetDeadAnim(isDead);
 
         _SetHideAnim(isHiding);
+
+        GameplayUI.instance._ActiveFlashLight(true);
     }
 
     void _CleanItems()
@@ -383,6 +392,8 @@ public class PlayerController : MonoBehaviour
             CameraManager.instance._GameplaySwitchCam(tpsVirtualCam);
 
             _SetHideAnim(isHiding);
+
+            GameplayUI.instance._ActiveFlashLight(false);
         }
         else
         {
@@ -391,6 +402,8 @@ public class PlayerController : MonoBehaviour
             unHideDelayTime = 1f;
 
             _SetHideAnim(isHiding);
+
+            GameplayUI.instance._ActiveFlashLight(true);
         }
     }
 

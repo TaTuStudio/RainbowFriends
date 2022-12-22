@@ -7,6 +7,8 @@ public class PlayerAIController : MonoBehaviour
 {
     public AIPath aIPath;
 
+    float speed = 4f;
+
     public bool isHiding = false;
 
     public bool catched = false;
@@ -132,6 +134,15 @@ public class PlayerAIController : MonoBehaviour
     void _SetAnimMove()
     {
         if (GameController.instance.isPlaying == false || catched || isDead) return;
+
+        float curSpeed = speed;
+
+        if (isHiding)
+        {
+            curSpeed = speed / 2f;
+        }
+
+        aIPath.maxSpeed = curSpeed;
 
         // Calculate the velocity relative to this transform's orientation
         Vector3 relVelocity = transform.InverseTransformDirection(aIPath.velocity);
