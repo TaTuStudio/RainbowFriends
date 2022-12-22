@@ -22,6 +22,8 @@ public class PlayerStats : MonoBehaviour
 
     public bool noAd = false;
 
+    public List<string> mapUnlockedList = new List<string>();
+
     public List<string> playerUnlockedSkinList = new List<string>();
 
     private void Awake()
@@ -118,14 +120,37 @@ public class PlayerStats : MonoBehaviour
                 List<string> tempPlayerUnlockedDataList = new List<string>();
                 for (int i = 0; i < json["playerUnlockedSkinList"].count; i++)
                 {
-                    JSONObject playerUnlockedDataJson = json["playerUnlockedSkinList"][i];
+                    JSONObject mapUnlockedDataJson = json["playerUnlockedSkinList"][i];
 
-                    string idStr = playerUnlockedDataJson.ToString().Replace("\"", "");
+                    string idStr = mapUnlockedDataJson.ToString().Replace("\"", "");
 
                     tempPlayerUnlockedDataList.Add(idStr);
                 }
 
                 playerUnlockedSkinList = tempPlayerUnlockedDataList;
+            }
+
+            ////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////
+            ///
+
+            ////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////
+            ///
+            //Convert json map Unlocked Data
+            if (json["playerUnlockedSkinList"] != null)
+            {
+                List<string> tempMapUnlockedDataList = new List<string>();
+                for (int i = 0; i < json["mapUnlockedList"].count; i++)
+                {
+                    JSONObject playerUnlockedDataJson = json["mapUnlockedList"][i];
+
+                    string idStr = playerUnlockedDataJson.ToString().Replace("\"", "");
+
+                    tempMapUnlockedDataList.Add(idStr);
+                }
+
+                mapUnlockedList = tempMapUnlockedDataList;
             }
 
             ////////////////////////////////////////////////////////////////////////
@@ -175,6 +200,19 @@ public class PlayerStats : MonoBehaviour
         }
 
         jsonData.AddField("playerUnlockedSkinList", playerUnlockedSkinDatasArr);
+
+        /////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////
+        ///
+
+        //Add unlocked map data list to json file
+        JSONObject mapUnlockedSkinDatasArr = new JSONObject();
+        foreach (string unlockedID in mapUnlockedList)
+        {
+            mapUnlockedSkinDatasArr.Add(unlockedID);
+        }
+
+        jsonData.AddField("mapUnlockedList", mapUnlockedSkinDatasArr);
 
         /////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////
