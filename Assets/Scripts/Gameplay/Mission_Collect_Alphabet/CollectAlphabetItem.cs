@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EPOOutline;
 
 public class CollectAlphabetItem : MonoBehaviour
 {
+    Outlinable outlinable;
+
     public PlayerController onHandPlayer;
     public PlayerAIController onHandAIPlayer;
 
@@ -30,6 +33,21 @@ public class CollectAlphabetItem : MonoBehaviour
         _ResetOnHandPlayer();
 
         _ActiveMesh(true);
+
+        _ActiveOutLine(true);
+    }
+
+    void _ActiveOutLine(bool active)
+    {
+        if(outlinable == null)
+        {
+            outlinable = GetComponent<Outlinable>();
+        }
+
+        if(outlinable != null)
+        {
+            outlinable.enabled = active;
+        }
     }
 
     public void _ResetOnHandPlayer()
@@ -73,6 +91,8 @@ public class CollectAlphabetItem : MonoBehaviour
     {
         collected = true;
         _ActiveMesh(true);
+
+        _ActiveOutLine(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,6 +125,8 @@ public class CollectAlphabetItem : MonoBehaviour
                 playerController._AddRightHandColectItem(transform);
 
                 onHandPlayer = playerController;
+
+                _ActiveOutLine(false);
             }
             else if (playerAIController != null && playerAIController.isDead == false && playerAIController.catched == false)
             {
@@ -128,6 +150,8 @@ public class CollectAlphabetItem : MonoBehaviour
                 playerAIController._AddRightHandColectItem(transform);
 
                 onHandAIPlayer = playerAIController;
+
+                _ActiveOutLine(false);
             }
         }
     }
