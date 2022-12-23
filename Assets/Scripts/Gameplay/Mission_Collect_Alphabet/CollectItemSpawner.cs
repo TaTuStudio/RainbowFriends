@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class CollectItemSpawner : MonoBehaviour
@@ -74,7 +75,7 @@ public class CollectItemSpawner : MonoBehaviour
         List<Transform> canSpawnPoints = new List<Transform>();
         canSpawnPoints.AddRange(spawnPoints);
 
-        foreach (ReuseGO go in collectItemPrefabs)
+        foreach (ReuseGO go in CollectionMarshal.AsSpan(collectItemPrefabs))
         {
             int ranIndex = Random.Range(0, canSpawnPoints.Count);
 

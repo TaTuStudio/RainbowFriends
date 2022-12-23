@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2491385798084467604}
   - component: {fileID: 2258140687279435312}
   - component: {fileID: 5343831928936796685}
+  - component: {fileID: 3735406915307137883}
   m_Layer: 0
   m_Name: C
   m_TagString: Untagged
@@ -74,9 +75,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d9f92a27c4a394ea96ef71eb784872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHandPlayer: {fileID: 0}
+  onHandAIPlayer: {fileID: 0}
   onHand: 0
   collected: 0
   meshContainer: {fileID: 7152579669900160574}
+--- !u!114 &3735406915307137883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421891212377204188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe91dc294731a9428c0941ea7579110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  complexMaskingMode: 0
+  drawingMode: 1
+  outlineLayer: 0
+  outlineTargets:
+  - IsVisible: 0
+    CutoutMask: 8
+    edgeDilateAmount: 5
+    frontEdgeDilateAmount: 5
+    backEdgeDilateAmount: 5
+    renderer: {fileID: 2212277979585964897}
+    SubmeshIndex: 0
+    BoundsMode: 0
+    Bounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0.5, y: 0.5, z: 0.5}
+    CutoutThreshold: 0.5
+    CullMode: 2
+    cutoutTextureName: 
+    DilateRenderingMode: 0
+    cutoutTextureIndex: 0
+  renderStyle: 2
+  outlineParameters:
+    enabled: 1
+    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    dilateShift: 1
+    blurShift: 1
+    fillPass:
+      shader: {fileID: 0}
+      serializedProperties: []
+  backParameters:
+    enabled: 1
+    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    dilateShift: 1
+    blurShift: 1
+    fillPass:
+      shader: {fileID: 0}
+      serializedProperties: []
+  frontParameters:
+    enabled: 1
+    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    dilateShift: 1
+    blurShift: 1
+    fillPass:
+      shader: {fileID: 0}
+      serializedProperties: []
 --- !u!1 &6473790890413977131
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +148,7 @@ GameObject:
   - component: {fileID: 7152579669900160574}
   - component: {fileID: 250467580036074579}
   - component: {fileID: 2212277979585964897}
+  - component: {fileID: -2090904070319285488}
   m_Layer: 0
   m_Name: Block_C
   m_TagString: Untagged
@@ -160,3 +221,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-2090904070319285488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6473790890413977131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 034bc47afcbf5e141a58d5c20b7808e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

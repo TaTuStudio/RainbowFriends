@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2762858822328154193}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.09, y: 0.18, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,6 +221,7 @@ MonoBehaviour:
   setDefault: 0
   OnHandItemContainer_Right: {fileID: 82580859014055265}
   rightHandCollectedList: []
+  deadSfx: {fileID: 11400000, guid: d85e31a1e759a4185a29d8a90b242f41, type: 2}
   playerAnimator: {fileID: 9195000456271500072}
 --- !u!114 &1141438805278627063
 MonoBehaviour:

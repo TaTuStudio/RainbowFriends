@@ -130,10 +130,10 @@ public class SoundEffectSO : ScriptableObject
         }
 
         var _source = audioSourceParam;
-        if (_source == null)
+        if (ReferenceEquals(_source, null))
         {
             var _obj = new GameObject("Sound", typeof(AudioSource));
-            if (parent != null)
+            if (!ReferenceEquals(parent, null))
             {
                 _obj.transform.parent = parent.transform;
             }
@@ -143,6 +143,7 @@ public class SoundEffectSO : ScriptableObject
         // set source config:
         _source.mute = isBgm ? settings.Bgm : settings.Sfx;
         _source.loop = isBgm;
+        _source.rolloffMode = AudioRolloffMode.Linear;
         _source.spatialBlend = spatialBlend;
         _source.maxDistance = maxDistance;
         _source.clip = GetAudioClip();

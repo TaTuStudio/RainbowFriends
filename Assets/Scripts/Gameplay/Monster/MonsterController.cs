@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using Cinemachine;
+using Lofelt.NiceVibrations;
 
 public class MonsterController : MonoBehaviour
 {
@@ -378,6 +379,8 @@ public class MonsterController : MonoBehaviour
                 CameraManager.instance._GameplaySwitchCam(virtualCam);
 
                 jumpScareSfx.Play(gameObject);
+                
+                HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
             }
             else
             if (playerAIController != null && playerAIController.enabled)
