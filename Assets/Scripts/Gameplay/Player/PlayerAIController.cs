@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using Pathfinding;
 
@@ -21,6 +22,8 @@ public class PlayerAIController : MonoBehaviour
 
     public List<Transform> rightHandCollectedList = new List<Transform>();
 
+    public SoundEffectSO deadSfx;
+    
     private void OnEnable()
     {
         setDefault = true;
@@ -59,7 +62,7 @@ public class PlayerAIController : MonoBehaviour
 
     void _CleanItems()
     {
-        foreach (Transform t in rightHandCollectedList)
+        foreach (Transform t in CollectionMarshal.AsSpan(rightHandCollectedList))
         {
             if (t == null) continue;
 
@@ -121,10 +124,12 @@ public class PlayerAIController : MonoBehaviour
     public void _SetHit()
     {
         isDead = true;
-
+        
         aIPath._SetMoveToPosition(transform.position);
 
         _SetDeadAnim(true);
+        
+        deadSfx.Play(gameObject);
     }
 
     #region Animations

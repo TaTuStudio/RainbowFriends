@@ -221,6 +221,7 @@ MonoBehaviour:
   setDefault: 0
   OnHandItemContainer_Right: {fileID: 82580859014055265}
   rightHandCollectedList: []
+  deadSfx: {fileID: 11400000, guid: d85e31a1e759a4185a29d8a90b242f41, type: 2}
   playerAnimator: {fileID: 9195000456271500072}
 --- !u!114 &1141438805278627063
 MonoBehaviour:
