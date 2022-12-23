@@ -61,6 +61,7 @@ public class LastStandMissionController : MonoBehaviour
             PlayerManager.instance._SpawnPlayerAndAIPlayers(aiSpawnNum);
 
             MonsterSpawner.instance._SpawnAllMonsters();
+            MonsterStaticScareSpawner.instance._SpawnAllMonsters();
 
             playerAIBrain_LastStand_Controller._SetBrainToAIPlayer();
 

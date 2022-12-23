@@ -22,4 +22,4 @@ MonoBehaviour:
   playOrder: 1
   playIndex: 0
   spatialBlend: 1
-  maxDistance: 70
+  maxDistance: 20

@@ -58,6 +58,8 @@ public class PlayerAIController : MonoBehaviour
         _SetDeadAnim(isDead);
 
         _SetHideAnim(isHiding);
+
+        aIPath.isStopped = false;
     }
 
     void _CleanItems()
@@ -112,13 +114,22 @@ public class PlayerAIController : MonoBehaviour
         }
     }
 
-    public void _SetCatched()
+    public void _SetCatched(bool active)
     {
-        catched = true;
+        if (active)
+        {
+            catched = true;
 
-        aIPath._SetMoveToPosition(transform.position);
+            aIPath.isStopped = true;
 
-        _SetHoldItemAnim(catched);
+            //aIPath._SetMoveToPosition(transform.position);
+        }
+        else
+        {
+            catched = false;
+
+            aIPath.isStopped = false;
+        }
     }
 
     public void _SetHit()

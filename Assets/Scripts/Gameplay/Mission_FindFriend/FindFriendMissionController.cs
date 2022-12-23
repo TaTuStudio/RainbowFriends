@@ -71,6 +71,7 @@ public class FindFriendMissionController : MonoBehaviour
             PlayerManager.instance._SpawnPlayerAndAIPlayers(aiSpawnNum);
 
             MonsterSpawner.instance._SpawnAllMonsters();
+            MonsterStaticScareSpawner.instance._SpawnAllMonsters();
 
             playerAIBrain_FindFriend_Controller._SetBrainToAIPlayer();
 

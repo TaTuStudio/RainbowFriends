@@ -345,6 +345,8 @@ public class PlayerController : MonoBehaviour
 
         _SetHideAnim(isHiding);
 
+        _HideMesh(false);
+
         GameplayUI.instance._ActiveFlashLight(true);
     }
 
@@ -426,9 +428,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void _SetCatched()
+    public void _SetCatched(bool active)
     {
-        catched = true;
+        if (active)
+        {
+            catched = true;
+
+            _HideMesh(true);
+        }
+        else
+        {
+            catched = false;
+
+            _HideMesh(false);
+
+            CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
+        }
+
     }
 
     public void _SetHit()
@@ -447,6 +463,19 @@ public class PlayerController : MonoBehaviour
     #region Animations
 
     public Animator playerAnimator;
+    public Vector3 amatureScale = Vector3.zero;
+
+    void _HideMesh(bool active)
+    {
+        if (active)
+        {
+            playerAnimator.transform.localScale = Vector3.zero;
+        }
+        else
+        {
+            playerAnimator.transform.localScale = amatureScale;
+        }
+    }
 
     void _UpdateMovementAnim()
     {

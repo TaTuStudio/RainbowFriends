@@ -25,6 +25,7 @@ public class MonsterController : MonoBehaviour
     // turnType = 2 -> move to one of player position
     PlayerController selectedPlayer;
     PlayerAIController selectedAIPlayer;
+    Transform checkPoint;
 
     public MonsterSpawner.MonsterSpawnInfo monsterInfo;
 
@@ -77,6 +78,8 @@ public class MonsterController : MonoBehaviour
 
         _CheckTurn();
 
+        _CheckOnCheckPoint();
+
         _CheckFindPlayer();
 
         _CheckRunToNearest();
@@ -112,6 +115,8 @@ public class MonsterController : MonoBehaviour
         selectedPlayer = null;
 
         selectedAIPlayer = null;
+
+        checkPoint = null;
     }
 
     void _CheckTurn()
@@ -156,7 +161,7 @@ public class MonsterController : MonoBehaviour
 
                 int checkPointIndex = Random.Range(0, monsterInfo.checkPoints.Count);
 
-                Transform checkPoint = monsterInfo.checkPoints[checkPointIndex];
+                checkPoint = monsterInfo.checkPoints[checkPointIndex];
 
                 aIPath._SetMoveToPosition(checkPoint.position);
 
@@ -214,6 +219,26 @@ public class MonsterController : MonoBehaviour
 
                     //Debug.Log("Find Player");
                 }
+            }
+        }
+    }
+
+    void _CheckOnCheckPoint()
+    {
+        if (runToNearest || attacking) return;
+
+        if (turnType == 1 && checkPoint != null)
+        {
+            float distToCheckPoint = Vector3.Distance(transform.position, checkPoint.position);
+
+            if(distToCheckPoint <= 0.5f)
+            {
+                checkPoint = null;
+                turnTime = 0f;
+            }
+            else
+            {
+                aIPath._SetMoveToPosition(checkPoint.position);
             }
         }
     }
@@ -372,7 +397,7 @@ public class MonsterController : MonoBehaviour
             {
                 curHitDelay = 2.22f;
 
-                playerController._SetCatched();
+                playerController._SetCatched(true);
 
                 _SetAnimJumpScare(true);
 
@@ -387,7 +412,7 @@ public class MonsterController : MonoBehaviour
             {
                 curHitDelay = 1.5f;
 
-                playerAIController._SetCatched();
+                playerAIController._SetCatched(true);
             }
         }
     }

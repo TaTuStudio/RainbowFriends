@@ -405,7 +405,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 20
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.01
     FarClipPlane: 1000
@@ -733,6 +733,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852497534626534515, guid: f5de05503d3c9a04fa8f1febe677eb45,
+        type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7356314801855020176, guid: f5de05503d3c9a04fa8f1febe677eb45,
         type: 3}

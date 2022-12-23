@@ -327,12 +327,14 @@ public class ImpostorMonsterController : MonoBehaviour
         {
             if (nearest != null)
             {
+                float curAttackDist = Vector3.Distance(transform.position, nearest.position);
+
                 if (curAttackDelay > 0)
                 {
                     curAttackDelay -= Time.deltaTime;
                 }
 
-                if (curAttackDelay <= 0f)
+                if (curAttackDelay <= 0f && curAttackDist <= attackRange)
                 {
                     attacking = true;
 
@@ -390,7 +392,7 @@ public class ImpostorMonsterController : MonoBehaviour
             {
                 curHitDelay = 2.22f;
 
-                playerController._SetCatched();
+                playerController._SetCatched(true);
 
                 _SetAnimJumpScare(true);
 
@@ -405,7 +407,7 @@ public class ImpostorMonsterController : MonoBehaviour
             {
                 curHitDelay = 1.5f;
 
-                playerAIController._SetCatched();
+                playerAIController._SetCatched(true);
 
                 _ActiveImpostor(true);
             }
@@ -481,7 +483,7 @@ public class ImpostorMonsterController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, runToRange);
 
         Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
 
         if (nearest != null)
         {

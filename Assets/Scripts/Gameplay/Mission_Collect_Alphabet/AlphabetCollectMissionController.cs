@@ -65,6 +65,7 @@ public class AlphabetCollectMissionController : MonoBehaviour
             PlayerManager.instance._SpawnPlayerAndAIPlayers(aiSpawnNum);
 
             MonsterSpawner.instance._SpawnAllMonsters();
+            MonsterStaticScareSpawner.instance._SpawnAllMonsters();
 
             playerAIBrains_CollectController._SetBrainToAIPlayer();
 

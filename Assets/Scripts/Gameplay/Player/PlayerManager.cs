@@ -73,6 +73,29 @@ public class PlayerManager : MonoBehaviour
         return selected;
     }
 
+    public ReuseGO _SpawnMonster(ReuseGO prefab, Quaternion spawnRot ,Vector3 spawnPos)
+    {
+        ReuseGO selected = UnusedManager.instance._GetReuseGO(prefab.itemID);
+
+        if (selected != null)
+        {
+            selected.transform.parent = transform;
+            selected.transform.position = spawnPos;
+
+            selected.gameObject.SetActive(true);
+
+            spawnedMonsters.Add(selected);
+        }
+        else
+        {
+            selected = Instantiate(prefab, spawnPos, spawnRot, transform);
+
+            spawnedMonsters.Add(selected);
+        }
+
+        return selected;
+    }
+
     public PlayerAIController _GetRandomPlayerAI()
     {
         int ranIndex = Random.Range(0, aIPlayerPrefabs.Count);
