@@ -8,7 +8,7 @@ public class SoundEffectSO : ScriptableObject
 {
     #region config
 
-    private PlayerSettingsSO settings;
+    public PlayerSettingsSO settings;
     private const float SemitonesToPitchConversionUnit = 1.05946f;
 
     // [Required] 
@@ -49,42 +49,42 @@ public class SoundEffectSO : ScriptableObject
 
     #region PreviewCode
 
-#if UNITY_EDITOR
-    private AudioSource previewer;
-
-    private void OnEnable()
-    {
-        Addressables.LoadAssetAsync<PlayerSettingsSO>("PlayerSettings").Completed += (_) => settings = _.Result;
-        
-        previewer = EditorUtility
-            .CreateGameObjectWithHideFlags("AudioPreview", HideFlags.HideAndDontSave,
-                typeof(AudioSource))
-            .GetComponent<AudioSource>();
-    }
-
-    private void OnDisable()
-    {
-        DestroyImmediate(previewer.gameObject);
-    }
-
-
-    // [ButtonGroup("previewControls")]
-    // [GUIColor(.3f, 1f, .3f)]
-    // [Button(ButtonSizes.Gigantic)]
-    private void PlayPreview()
-    {
-        Play(null, previewer);
-    }
-
-    // [ButtonGroup("previewControls")]
-    // [GUIColor(1, .3f, .3f)]
-    // [Button(ButtonSizes.Gigantic)]
-    // [EnableIf("@previewer.isPlaying")]
-    private void StopPreview()
-    {
-        previewer.Stop();
-    }
-#endif
+// #if UNITY_EDITOR
+//     private AudioSource previewer;
+//
+//     private void OnEnable()
+//     {
+//         Addressables.LoadAssetAsync<PlayerSettingsSO>("PlayerSettings").Completed += (_) => settings = _.Result;
+//         
+//         previewer = EditorUtility
+//             .CreateGameObjectWithHideFlags("AudioPreview", HideFlags.HideAndDontSave,
+//                 typeof(AudioSource))
+//             .GetComponent<AudioSource>();
+//     }
+//
+//     private void OnDisable()
+//     {
+//         DestroyImmediate(previewer.gameObject);
+//     }
+//
+//
+//     // [ButtonGroup("previewControls")]
+//     // [GUIColor(.3f, 1f, .3f)]
+//     // [Button(ButtonSizes.Gigantic)]
+//     private void PlayPreview()
+//     {
+//         Play(null, previewer);
+//     }
+//
+//     // [ButtonGroup("previewControls")]
+//     // [GUIColor(1, .3f, .3f)]
+//     // [Button(ButtonSizes.Gigantic)]
+//     // [EnableIf("@previewer.isPlaying")]
+//     private void StopPreview()
+//     {
+//         previewer.Stop();
+//     }
+// #endif
 
     #endregion
     
@@ -135,7 +135,7 @@ public class SoundEffectSO : ScriptableObject
             var _obj = new GameObject("Sound", typeof(AudioSource));
             if (!ReferenceEquals(parent, null))
             {
-                _obj.transform.parent = parent.transform;
+                _obj.transform.position = parent.transform.position;
             }
             _source = _obj.GetComponent<AudioSource>();
         }
@@ -154,14 +154,17 @@ public class SoundEffectSO : ScriptableObject
 
         _source.Play();
 
-#if UNITY_EDITOR
-        if (_source != previewer)
-        {
-            Destroy(_source.gameObject, _source.clip.length / _source.pitch);
-        }
-#else
-                Destroy(_source.gameObject, _source.clip.length / _source.pitch);
-#endif
+// #if UNITY_EDITOR
+//         if (_source != previewer)
+//         {
+//             Destroy(_source.gameObject, _source.clip.length / _source.pitch);
+//         }
+// #else
+//             Destroy(_source.gameObject, _source.clip.length / _source.pitch);
+// #endif
+        
+        Destroy(_source.gameObject, _source.clip.length / _source.pitch);
+
         return _source;
     }
 

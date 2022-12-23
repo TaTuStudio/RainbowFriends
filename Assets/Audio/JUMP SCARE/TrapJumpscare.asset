@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
   m_Name: TrapJumpscare
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 6ec81f7b98ce8487597fd0f817777d19, type: 2}
   clips:
   - {fileID: 8300000, guid: d2a07d71477f84a0798d30dfea790dd5, type: 3}
   - {fileID: 8300000, guid: 0aa3d6c26af6e45a5bd152eef842d30a, type: 3}

@@ -378,7 +378,7 @@ public class MonsterController : MonoBehaviour
 
                 CameraManager.instance._GameplaySwitchCam(virtualCam);
 
-                jumpScareSfx.Play(gameObject);
+                jumpScareSfx.Play();
                 
                 HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
             }

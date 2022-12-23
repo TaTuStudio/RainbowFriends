@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
   m_Name: Step1
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 6ec81f7b98ce8487597fd0f817777d19, type: 2}
   clips:
   - {fileID: 8300000, guid: 7aff6c7cf35e74711a85125197d84307, type: 3}
   - {fileID: 8300000, guid: fb02120038c1e48ac93ebb05f3e51c7b, type: 3}
