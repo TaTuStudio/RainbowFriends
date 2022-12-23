@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EasyCharacterMovement;
 using Cinemachine;
+using Lofelt.NiceVibrations;
 
 public class PlayerController : MonoBehaviour
 {
@@ -188,7 +189,7 @@ public class PlayerController : MonoBehaviour
             desiredVelocity = movementDirection * curSpeed;
         }
 
-        // Update character’s velocity based on its grounding status
+        // Update characterï¿½s velocity based on its grounding status
 
         if (characterMovement.isGrounded)
             GroundedMovement(desiredVelocity);
@@ -366,6 +367,8 @@ public class PlayerController : MonoBehaviour
 
     public void _AddRightHandColectItem(Transform item)
     {
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
+        
         rightHandCollectedList.Add(item);
 
         _SetHoldItemAnim(true);

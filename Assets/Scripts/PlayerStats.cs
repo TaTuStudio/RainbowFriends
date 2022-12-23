@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Runtime.InteropServices;
 using Defective.JSON;
 
 public class PlayerStats : MonoBehaviour
@@ -194,7 +195,7 @@ public class PlayerStats : MonoBehaviour
 
         //Add unlocked player data list to json file
         JSONObject playerUnlockedSkinDatasArr = new JSONObject();
-        foreach (string unlockedID in playerUnlockedSkinList)
+        foreach (string unlockedID in CollectionMarshal.AsSpan(playerUnlockedSkinList))
         {
             playerUnlockedSkinDatasArr.Add(unlockedID);
         }
@@ -207,7 +208,7 @@ public class PlayerStats : MonoBehaviour
 
         //Add unlocked map data list to json file
         JSONObject mapUnlockedSkinDatasArr = new JSONObject();
-        foreach (string unlockedID in mapUnlockedList)
+        foreach (string unlockedID in CollectionMarshal.AsSpan(mapUnlockedList))
         {
             mapUnlockedSkinDatasArr.Add(unlockedID);
         }

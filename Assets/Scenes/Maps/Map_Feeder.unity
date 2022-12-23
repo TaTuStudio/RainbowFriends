@@ -3319,8 +3319,8 @@ MonoBehaviour:
   backParameters:
     enabled: 1
     color: {r: 0.015686274, g: 0.09467489, b: 1, a: 1}
-    dilateShift: 1
-    blurShift: 1
+    dilateShift: 0.1
+    blurShift: 0.1
     fillPass:
       shader: {fileID: 0}
       serializedProperties: []

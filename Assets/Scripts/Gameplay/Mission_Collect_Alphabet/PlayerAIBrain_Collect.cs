@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAIBrain_Collect : MonoBehaviour
@@ -130,7 +131,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
             tempList.AddRange(AlphabetCollectMissionController.instance.collectItemSpawner.spawnedItems);
 
-            foreach (ReuseGO reuseGO in AlphabetCollectMissionController.instance.collectItemSpawner.collectedItems)
+            foreach (ReuseGO reuseGO in CollectionMarshal.AsSpan(AlphabetCollectMissionController.instance.collectItemSpawner.collectedItems))
             {
                 if (tempList.Contains(reuseGO) || _CheckCanCollectItem(reuseGO) == false)
                 {
@@ -168,11 +169,11 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     bool _CheckCanCollectItem(ReuseGO checkGO)
     {
-        foreach (PlayerAIBrain_Collect brain in playerAIBrains_CollectController.playerAIBrain_Collects)
+        foreach (PlayerAIBrain_Collect brain in CollectionMarshal.AsSpan(playerAIBrains_CollectController.playerAIBrain_Collects))
         {
             List<ReuseGO> onHandItems = new List<ReuseGO>();
 
-            foreach (Transform t in playerAIController.rightHandCollectedList)
+            foreach (Transform t in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
             {
                 ReuseGO go = t.GetComponent<ReuseGO>();
 
@@ -212,7 +213,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
         
         List<ReuseGO> onHandItems = new List<ReuseGO>();
 
-        foreach (Transform t in playerAIController.rightHandCollectedList)
+        foreach (Transform t in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
         {
             ReuseGO go = t.GetComponent<ReuseGO>();
 
@@ -222,7 +223,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
             }
         }
 
-        foreach (PlayerAIBrain_Collect brain in playerAIBrains_CollectController.playerAIBrain_Collects)
+        foreach (PlayerAIBrain_Collect brain in CollectionMarshal.AsSpan(playerAIBrains_CollectController.playerAIBrain_Collects))
         {
             if (brain != this && brain.selectedItem != null && onHandItems.Contains(brain.selectedItem))
             {
