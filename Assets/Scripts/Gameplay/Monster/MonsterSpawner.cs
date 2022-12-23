@@ -61,6 +61,13 @@ public class MonsterSpawner : MonoBehaviour
             {
                 monsterController.monsterInfo = m;
             }
+
+            ImpostorMonsterController impostorMonsterController = spawnedMonster.GetComponent<ImpostorMonsterController>();
+
+            if (impostorMonsterController != null)
+            {
+                impostorMonsterController.monsterInfo = m;
+            }
         }
     }
 }

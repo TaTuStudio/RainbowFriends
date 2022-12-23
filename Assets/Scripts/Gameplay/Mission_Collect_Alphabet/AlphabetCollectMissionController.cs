@@ -30,7 +30,7 @@ public class AlphabetCollectMissionController : MonoBehaviour
     private void Start()
     {
         GameController.instance._GameplayReadySetup();
-        GameplayUI.instance._GameplayFoodCollectSetup();
+        GameplayUI.instance._GameplayAlphabetCollectSetup();
     }
 
     private void Update()
