@@ -58,6 +58,25 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void _AddCoin(int addNum)
+    {
+        coin += addNum;
+
+        save = true;
+    }
+
+    public void _SubCoin(int subNum)
+    {
+        coin -= subNum;
+
+        if(subNum < 0)
+        {
+            coin = 0;
+        }
+
+        save = true;
+    }
+
     void _CheckDefaultValues()
     {
         if(currentPlayerSkinID == "")

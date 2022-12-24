@@ -19,6 +19,8 @@ public class GameplayUI : MonoBehaviour
 
     public ShopUI shopUI;
 
+    public GameObject settingsUI;
+
     public Transform flashLightUI;
 
     private void Awake()
@@ -99,7 +101,24 @@ public class GameplayUI : MonoBehaviour
 
         _ActiveSelectGameUI(true);
         _ActiveSelectShopUI(false);
+        _ActiveSettingsUI(false);
     }
+    public void _SettingsUISetup()
+    {
+        _ActiveTimeCountUI(false);
+        _ActiveAlphabetCollectCountUI(false);
+        _ActiveFoodCollectCountUI(false);
+        _ActiveKeyCollectCountUI(false);
+
+        _ActiveWinUI(false);
+        _ActiveOutTimeUI(false);
+        _ActiveDeadUI(false);
+
+        _ActiveSelectGameUI(true);
+        _ActiveSelectShopUI(false);
+        _ActiveSettingsUI(true);
+    }
+
 
     public void _ActiveTimeCountUI(bool active)
     {
@@ -147,5 +166,9 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveFlashLight(bool active)
     {
         flashLightUI.gameObject.SetActive(active);
+    }
+    public void _ActiveSettingsUI(bool active)
+    {
+        settingsUI.gameObject.SetActive(active);
     }
 }
