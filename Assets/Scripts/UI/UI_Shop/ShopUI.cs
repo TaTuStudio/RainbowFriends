@@ -96,9 +96,7 @@ public class ShopUI : MonoBehaviour
             {
                 stats.playerUnlockedSkinList.Add(selectedItem.playerSkinID);
 
-                stats.coin -= skinPrice;
-
-                stats.save = true;
+                stats._SubCoin(skinPrice);
 
                 _CheckButtonsStats();
             }
@@ -114,9 +112,7 @@ public class ShopUI : MonoBehaviour
     {
         PlayerStats stats = PlayerStats.instance;
 
-        stats.coin += rewardCoin;
-
-        stats.save = true;
+        stats._AddCoin(rewardCoin);
     }
 
     public void _UseButton()
