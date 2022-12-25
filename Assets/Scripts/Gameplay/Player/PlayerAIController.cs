@@ -24,6 +24,9 @@ public class PlayerAIController : MonoBehaviour
 
     public SoundEffectSO deadSfx;
     
+    public delegate void AIDiedAction();
+    public static event AIDiedAction OnAIDied;
+    
     private void OnEnable()
     {
         setDefault = true;
@@ -141,6 +144,8 @@ public class PlayerAIController : MonoBehaviour
         _SetDeadAnim(true);
         
         deadSfx.Play(gameObject);
+        
+        OnAIDied?.Invoke();
     }
 
     #region Animations

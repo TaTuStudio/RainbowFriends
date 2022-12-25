@@ -9,8 +9,8 @@ public class LoadingScript : MonoBehaviour
     [SerializeField] private Slider sliderReal;
     [SerializeField] private Slider sliderFake;
     
-    [SerializeField] private SceneLoaderSO loadMainMenu;
-
+    //[SerializeField] private SceneLoaderSO loadMainMenu;
+    private AsyncOperation loadScene;
     private bool load;
     
     private IEnumerator Start()
@@ -21,7 +21,9 @@ public class LoadingScript : MonoBehaviour
         yield return _a;
         yield return _b;
     
-        loadMainMenu.Handle.Result.ActivateAsync().completed += (_) => SceneManager.UnloadSceneAsync(0);
+        //loadMainMenu.Handle.Result.ActivateAsync().completed += _ => SceneManager.UnloadSceneAsync(0);
+        SceneManager.UnloadSceneAsync(0).completed += _ => loadScene.allowSceneActivation = true;
+
     }
     
     private IEnumerator SliderChangeValue()
@@ -31,34 +33,17 @@ public class LoadingScript : MonoBehaviour
     
     private IEnumerator LoadScene()
     {
-        loadMainMenu.LoadScene();
+        //loadMainMenu.LoadScene();
+        loadScene = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
         load = true;
-        yield return loadMainMenu.Handle.WaitForCompletion();
+        //yield return loadMainMenu.Handle.WaitForCompletion();
+        yield return loadScene;
     }
 
     private void Update()
     {
         if (!load) return;
-        sliderReal.value = loadMainMenu.Handle.PercentComplete;
+        sliderReal.value = loadScene.progress;
     }
-
-    // private async void Start()
-    // {
-    //     loadMainMenu.LoadScene();
-    //     //loadTestPlayer.LoadScene();
-    //
-    //     var _tasks = new List<UniTask>
-    //     {
-    //         loadMainMenu.Handle.Task.AsUniTask(),
-    //         slider.DOValue(1, 2f).SetEase(Ease.InCubic).AsyncWaitForCompletion().AsUniTask()
-    //     };
-    //     
-    //     await UniTask.WhenAll(_tasks);
-    //     
-    //     loadMainMenu.Handle.Result.ActivateAsync().completed += (_) =>
-    //     {
-    //         //loadTestPlayer.Handle.Result.ActivateAsync();
-    //         SceneManager.UnloadSceneAsync(0);
-    //     };
-    // }
+    
 }

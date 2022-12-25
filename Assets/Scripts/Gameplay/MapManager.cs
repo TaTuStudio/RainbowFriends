@@ -21,12 +21,12 @@ public class MapManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        //_SpawnMap();
-
-        //StartCoroutine(_GetAllNodesPositions());
-    }
+    // private void Start()
+    // {
+    //     //_SpawnMap();
+    //
+    //     //StartCoroutine(_GetAllNodesPositions());
+    // }
 
     public void _SpawnMap()
     {
@@ -53,8 +53,6 @@ public class MapManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(selectedMap));
 
         spawnedMap.loadMapDone = true;
-
-        yield break;
     }
 
     IEnumerator _CheckSceneSpawned()
@@ -76,8 +74,6 @@ public class MapManager : MonoBehaviour
         {
             StartCoroutine(_LoadMapScene());
         }
-
-        yield break;
     }
 
     public void _UnloadScene()
@@ -88,24 +84,24 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public IEnumerator _GetAllNodesPositions()
-    {
-        allPoints.Clear();
-
-        while(AstarPath.active == null)
-        {
-            yield return null;
-        }
-
-        var gg = AstarPath.active.data.layerGridGraph;
-        List<GraphNode> nodes = new List<GraphNode>();
-        gg.GetNodes((System.Action<GraphNode>)nodes.Add);
-
-        foreach (GraphNode n in nodes)
-        {
-            allPoints.Add((Vector3)n.position);
-        }
-
-        yield break;
-    }
+    // public IEnumerator _GetAllNodesPositions()
+    // {
+    //     allPoints.Clear();
+    //
+    //     while(AstarPath.active == null)
+    //     {
+    //         yield return null;
+    //     }
+    //
+    //     var gg = AstarPath.active.data.layerGridGraph;
+    //     List<GraphNode> nodes = new List<GraphNode>();
+    //     gg.GetNodes((System.Action<GraphNode>)nodes.Add);
+    //
+    //     foreach (GraphNode n in nodes)
+    //     {
+    //         allPoints.Add((Vector3)n.position);
+    //     }
+    //
+    //     yield break;
+    // }
 }

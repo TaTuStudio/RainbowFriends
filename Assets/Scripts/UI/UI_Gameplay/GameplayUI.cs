@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameplayUI : MonoBehaviour
 {
     public static GameplayUI instance;
-
+    
     public TimeCountUI timeCountUI;
     public CollectCountUI alphabetCollectCountUI;
     public CollectCountUI foodCollectCountUI;

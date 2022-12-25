@@ -5,4 +5,5 @@ public class PlayerSettingsSO : ScriptableObject
 {
     public bool Sfx;
     public bool Bgm;
+    public string PlayerName;
 }
