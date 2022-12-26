@@ -15,6 +15,7 @@ public class GameplayUI : MonoBehaviour
     public WinUI winUI;
     public OutTimeUI outTimeUI;
     public DeadUI deadUI;
+    public StartGameDelayUI startGameDelayUI;
 
     public SelectGameUI selectGameUI;
 
@@ -137,6 +138,8 @@ public class GameplayUI : MonoBehaviour
     {
         inGameUI.gameObject.SetActive(active);
 
+        _ActiveStartGameDelayUI(active);
+
         _ActiveWinUI(false);
         _ActiveOutTimeUI(false);
         _ActiveDeadUI(false);
@@ -152,6 +155,10 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveDeadUI(bool active)
     {
         deadUI.gameObject.SetActive(active);
+    }
+    public void _ActiveStartGameDelayUI(bool active)
+    {
+        startGameDelayUI.gameObject.SetActive(active);
     }
 
     public void _ActiveSelectGameUI(bool active)

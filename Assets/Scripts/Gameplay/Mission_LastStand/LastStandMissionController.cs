@@ -58,6 +58,8 @@ public class LastStandMissionController : MonoBehaviour
     {
         if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
+            GameController.instance._SetGameplaySetupDone(true);
+
             gameplaySet = true;
 
             PlayerManager.instance._SpawnPlayerAndAIPlayers(aiSpawnNum);

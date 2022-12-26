@@ -6,12 +6,11 @@ public class Env_HallWayDoor : MonoBehaviour
 {
     public GameObject doors;
 
-    float openDoorDelay = 6f;
     float curOpenDoorDelay = 0f;
 
     private void OnEnable()
     {
-        curOpenDoorDelay = openDoorDelay;
+        curOpenDoorDelay = GameplayUI.instance.startGameDelayUI._GetDelayTime();
 
         doors.SetActive(true);
     }

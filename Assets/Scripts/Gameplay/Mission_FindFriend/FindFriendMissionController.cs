@@ -66,6 +66,8 @@ public class FindFriendMissionController : MonoBehaviour
     {
         if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
+            GameController.instance._SetGameplaySetupDone(true);
+
             gameplaySet = true;
 
             _SpawnLostFriend();

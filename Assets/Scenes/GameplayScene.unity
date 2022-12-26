@@ -7853,10 +7853,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusCoin: 0
   bonusMulti: 1
-  tweenPointer: {fileID: 1226560682}
   rewardCoinText: {fileID: 6143748132458357393}
   bonusCoinText: {fileID: 2095436942}
-  noThanksText: {fileID: 195668709}
   bonusButton: {fileID: 90748571}
 --- !u!1 &813824624
 GameObject:
@@ -10562,6 +10560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlaying: 0
+  gameplaySetupDone: 0
   resetWinLose: 0
   gameTime: 60
   curGameTime: 0
@@ -23004,6 +23003,7 @@ MonoBehaviour:
   winUI: {fileID: 811768094}
   outTimeUI: {fileID: 1654700939}
   deadUI: {fileID: 1182283877}
+  startGameDelayUI: {fileID: 1970720493}
   selectGameUI: {fileID: 882556675}
   shopUI: {fileID: 627109533}
   settingsUI: {fileID: 1787509848}

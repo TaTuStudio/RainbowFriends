@@ -30,7 +30,7 @@ public class StartGameDelayUI : MonoBehaviour
 
     void _Delay()
     {
-        if(GameController.instance.isPlaying == false && curDelayTime > 0f)
+        if(GameController.instance.isPlaying == false && GameController.instance.gameplaySetupDone && curDelayTime > 0f)
         {
             curDelayTime -= Time.deltaTime;
 
