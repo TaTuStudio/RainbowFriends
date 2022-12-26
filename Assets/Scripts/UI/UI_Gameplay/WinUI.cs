@@ -14,13 +14,9 @@ public class WinUI : MonoBehaviour
     [SerializeField]
     int bonusMulti = 0;
 
-    public DOTweenAnimation tweenPointer;
-
     public TextMeshProUGUI rewardCoinText;
 
     public TextMeshProUGUI bonusCoinText;
-
-    public TextMeshProUGUI noThanksText;
 
     public GameObject bonusButton;
 
@@ -33,11 +29,7 @@ public class WinUI : MonoBehaviour
 
         rewardCoinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 
-        noThanksText.GetComponent<Animation>().Play();
-
         bonusButton.SetActive(true);
-
-        tweenPointer.enabled = true;
     }
 
     public void _SetBonusMulti(int num)
@@ -58,8 +50,6 @@ public class WinUI : MonoBehaviour
 
     void _BonusAdButtonDone()
     {
-        tweenPointer.enabled = false;
-
         rewardCoinText.text = "" + (bonusCoin);
         rewardCoinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 
