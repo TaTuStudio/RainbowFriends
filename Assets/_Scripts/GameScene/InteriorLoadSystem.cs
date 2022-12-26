@@ -7,7 +7,7 @@ public class InteriorLoadSystem : MonoBehaviour
     private readonly GameObject[] hallWays = new GameObject[2];
     private int lastPos;
     private GameObject currentRoom;
-    private PlayerPosSO playerPos;
+    // private PlayerPosSO playerPos;
     
     [SerializeField] private AssetReferenceGameObject[] room;
     [SerializeField] private AssetReferenceGameObject[] hallWay;
@@ -15,17 +15,17 @@ public class InteriorLoadSystem : MonoBehaviour
     
     private void OnEnable()
     {
-        Addressables.LoadAssetAsync<PlayerPosSO>("NewPlayerPos").Completed += (_) =>
-        {
-            loadTestPlayer.LoadScene(true);
-            playerPos = _.Result;
-            playerPos.OnPosChange += GetPosAndLoadRoom;
-        };
+        // Addressables.LoadAssetAsync<PlayerPosSO>("NewPlayerPos").Completed += (_) =>
+        // {
+        //     loadTestPlayer.LoadScene(true);
+        //     playerPos = _.Result;
+        //     playerPos.OnPosChange += GetPosAndLoadRoom;
+        // };
     }
 
     private void OnDisable()
     {
-        playerPos.OnPosChange -= GetPosAndLoadRoom;
+        // playerPos.OnPosChange -= GetPosAndLoadRoom;
         Resources.UnloadUnusedAssets();
     }
     

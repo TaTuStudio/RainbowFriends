@@ -6,11 +6,10 @@ using UnityEngine.UI;
 
 public class LoadLevelMenu : MonoBehaviour
 {
-    [SerializeField] PlayerDataSO playerData;
+    [SerializeField] PlayerStats playerData;
     [SerializeField] GameObject Notification;
     [SerializeField] Text textNotification;
     [SerializeField] GameObject iconLock;
-    [SerializeField] UiController uiController;
     private bool isUnlock =false;
     public int _level;
     public int _cost;
@@ -22,7 +21,6 @@ public class LoadLevelMenu : MonoBehaviour
         Notification.SetActive(true);
         level = _level;
         index = level;
-        uiController.selectCurrent = level-1;
         Debug.Log(level);
     }
     public void UnlockMap()
@@ -50,14 +48,6 @@ public class LoadLevelMenu : MonoBehaviour
         //cost = _cost;
         //Debug.Log(playerData.Coin);
         Debug.Log(isUnlock);
-
-        if (playerData.Coin >= cost && isUnlock==false)
-        {
-            playerData.Coin -= cost;
-            iconLock.SetActive(false);
-            isUnlock = true;
-            Notification.SetActive(false);
-        }
     }
     
     
