@@ -28,16 +28,21 @@ public class PlayerSFX : MonoBehaviour
 
     void _Step()
     {
-        if(curFootStepDelay >= 0f)
+        if (GameplayUI.instance.settingsUI.sound == false)
+        {
+            return;
+        }
+
+        if (curFootStepDelay >= 0f)
         {
             curFootStepDelay -= Time.deltaTime;
         }
 
-        if(curFootStepDelay < 0f && speedNormalize > 0.5f)
+        if (curFootStepDelay < 0f && speedNormalize > 0.5f)
         {
-          AudioSource audioSource =  footStepFX.Play(gameObject);
+            AudioSource audioSource = footStepFX.Play(gameObject);
 
-          curFootStepDelay = audioSource.clip.length / audioSource.pitch;
+            curFootStepDelay = audioSource.clip.length / audioSource.pitch;
         }
     }
 }

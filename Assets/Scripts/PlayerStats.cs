@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour
 
     public bool noAd = false;
 
-    public List<string> mapUnlockedList = new List<string>();
+    public List<int> mapUnlockedList = new List<int>();
 
     public List<string> playerUnlockedSkinList = new List<string>();
 
@@ -87,6 +87,11 @@ public class PlayerStats : MonoBehaviour
         if(playerUnlockedSkinList.Contains(currentPlayerSkinID) == false)
         {
             playerUnlockedSkinList.Add(currentPlayerSkinID);
+        }
+
+        if (mapUnlockedList.Count < 1)
+        {
+            mapUnlockedList.Add(0);
         }
     }
 
@@ -158,16 +163,19 @@ public class PlayerStats : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             ///
             //Convert json map Unlocked Data
-            if (json["playerUnlockedSkinList"] != null)
+            if (json["mapUnlockedList"] != null)
             {
-                List<string> tempMapUnlockedDataList = new List<string>();
+                List<int> tempMapUnlockedDataList = new List<int>();
                 for (int i = 0; i < json["mapUnlockedList"].count; i++)
                 {
                     JSONObject playerUnlockedDataJson = json["mapUnlockedList"][i];
 
-                    string idStr = playerUnlockedDataJson.ToString().Replace("\"", "");
+                    int mapIndex = 0;
 
-                    tempMapUnlockedDataList.Add(idStr);
+                    if (json["mapUnlockedList"][i] != null)
+                        int.TryParse(json["mapUnlockedList"][i].ToString().Replace("\"", ""), out mapIndex);
+
+                    tempMapUnlockedDataList.Add(mapIndex);
                 }
 
                 mapUnlockedList = tempMapUnlockedDataList;
@@ -227,7 +235,7 @@ public class PlayerStats : MonoBehaviour
 
         //Add unlocked map data list to json file
         JSONObject mapUnlockedSkinDatasArr = new JSONObject();
-        foreach (string unlockedID in CollectionMarshal.AsSpan(mapUnlockedList))
+        foreach (int unlockedID in CollectionMarshal.AsSpan(mapUnlockedList))
         {
             mapUnlockedSkinDatasArr.Add(unlockedID);
         }

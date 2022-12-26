@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class PointsBonus : MonoBehaviour
 {
-    [SerializeField] private int coinBonus;
-    [SerializeField] private TextMeshProUGUI textCoinBonus;
+    public WinUI winUI;
+
+    [SerializeField] private int bonusNum;
     // Start is called before the first frame update
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        textCoinBonus.text ="+" + coinBonus.ToString();
+        if(other.tag == "Pointer")
+        {
+            winUI._SetBonusMulti(bonusNum);
+        }
+
     }
 }

@@ -296,8 +296,8 @@ public class MonsterController : MonoBehaviour
 
             float dist = Vector3.Distance(transform.position, player.transform.position);
 
-            if (player.isDead == false && player.isHiding == false && player.catched == false && dist < runToRange
-                                || player.isDead == false && player.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
+            if (player.isDead == false && player.noDam == false && player.isHiding == false && player.catched == false && dist < runToRange
+                                || player.isDead == false && player.noDam == false && player.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
             {
                 transforms.Add(player.transform);
             }
@@ -403,7 +403,10 @@ public class MonsterController : MonoBehaviour
 
                 CameraManager.instance._GameplaySwitchCam(virtualCam);
 
-                jumpScareSfx.Play();
+                if (GameplayUI.instance.settingsUI.sound)
+                {
+                    jumpScareSfx.Play();
+                }
                 
                 HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
             }

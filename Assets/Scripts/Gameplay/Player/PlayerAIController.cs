@@ -139,8 +139,12 @@ public class PlayerAIController : MonoBehaviour
         aIPath._SetMoveToPosition(transform.position);
 
         _SetDeadAnim(true);
-        
-        deadSfx.Play(gameObject);
+
+        if (GameplayUI.instance.settingsUI.sound)
+        {
+            deadSfx.Play(gameObject);
+        }
+
     }
 
     #region Animations
@@ -149,7 +153,7 @@ public class PlayerAIController : MonoBehaviour
 
     void _SetAnimMove()
     {
-        if (GameController.instance.isPlaying == false || catched || isDead) return;
+        if (catched || isDead) return;
 
         float curSpeed = speed;
 

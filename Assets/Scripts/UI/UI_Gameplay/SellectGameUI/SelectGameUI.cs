@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class SelectGameUI : MonoBehaviour
 {
-    string selected = "";
-
-    private void OnEnable()
-    {
-        selected = "";
-    }
+    public SellectGameUIButton[] sellectGameUIButtons; 
 
     public void _PlayButton(string sceneName)
     {
@@ -17,4 +12,16 @@ public class SelectGameUI : MonoBehaviour
 
         MapManager.instance._SpawnMap();
     }
+
+#if UNITY_EDITOR
+
+    private void OnValidate()
+    {
+        for(int i=0; i< sellectGameUIButtons.Length; i++)
+        {
+            sellectGameUIButtons[i].indexNum = i;
+        }
+    }
+
+#endif
 }

@@ -11,6 +11,7 @@ public class GameplayUI : MonoBehaviour
     public CollectCountUI foodCollectCountUI;
     public CollectCountUI keyCollectCountUI;
 
+    public InGameUI inGameUI;
     public WinUI winUI;
     public OutTimeUI outTimeUI;
     public DeadUI deadUI;
@@ -19,7 +20,7 @@ public class GameplayUI : MonoBehaviour
 
     public ShopUI shopUI;
 
-    public GameObject settingsUI;
+    public SettingsUI settingsUI;
 
     public Transform flashLightUI;
 
@@ -80,9 +81,7 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayUISetup()
     {
-        _ActiveWinUI(false);
-        _ActiveOutTimeUI(false);
-        _ActiveDeadUI(false);
+        _ActiveInGameUI(true);
 
         _ActiveSelectGameUI(false);
         _ActiveSelectShopUI(false);
@@ -95,13 +94,10 @@ public class GameplayUI : MonoBehaviour
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
 
-        _ActiveWinUI(false);
-        _ActiveOutTimeUI(false);
-        _ActiveDeadUI(false);
+        _ActiveInGameUI(false);
 
         _ActiveSelectGameUI(true);
         _ActiveSelectShopUI(false);
-        _ActiveSettingsUI(false);
     }
     public void _SettingsUISetup()
     {
@@ -110,13 +106,10 @@ public class GameplayUI : MonoBehaviour
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
 
-        _ActiveWinUI(false);
-        _ActiveOutTimeUI(false);
-        _ActiveDeadUI(false);
+        _ActiveInGameUI(false);
 
         _ActiveSelectGameUI(true);
         _ActiveSelectShopUI(false);
-        _ActiveSettingsUI(true);
     }
 
 
@@ -140,6 +133,14 @@ public class GameplayUI : MonoBehaviour
         keyCollectCountUI.gameObject.SetActive(active);
     }
 
+    public void _ActiveInGameUI(bool active)
+    {
+        inGameUI.gameObject.SetActive(active);
+
+        _ActiveWinUI(false);
+        _ActiveOutTimeUI(false);
+        _ActiveDeadUI(false);
+    }
     public void _ActiveWinUI(bool active)
     {
         winUI.gameObject.SetActive(active);
@@ -166,9 +167,5 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveFlashLight(bool active)
     {
         flashLightUI.gameObject.SetActive(active);
-    }
-    public void _ActiveSettingsUI(bool active)
-    {
-        settingsUI.gameObject.SetActive(active);
     }
 }

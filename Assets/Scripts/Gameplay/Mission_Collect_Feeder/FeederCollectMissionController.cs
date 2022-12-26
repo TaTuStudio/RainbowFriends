@@ -34,6 +34,8 @@ public class FeederCollectMissionController : MonoBehaviour
     {
         _GameplaySetup();
 
+        _ResetWinLose();
+
         _WinLoseCheck();
     }
 
@@ -68,7 +70,18 @@ public class FeederCollectMissionController : MonoBehaviour
 
             GameController.instance._SetGameTime(60f);
 
-            GameController.instance._SetPlaying(true);
+            //GameController.instance._SetPlaying(true);
+        }
+    }
+
+    void _ResetWinLose()
+    {
+        if (GameController.instance.resetWinLose)
+        {
+            GameController.instance.resetWinLose = false;
+
+            win = false;
+            lose = false;
         }
     }
 
