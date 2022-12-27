@@ -8,6 +8,5 @@ public class MonsterSFX : MonoBehaviour
 
     private void OnEnable()
     {
-        MonsterDistanceAlert.gameObject.SetActive(GameplayUI.instance.settingsUI.sound);
     }
 }

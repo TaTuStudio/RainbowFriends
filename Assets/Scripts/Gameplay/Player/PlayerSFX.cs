@@ -28,7 +28,7 @@ public class PlayerSFX : MonoBehaviour
 
     void _Step()
     {
-        if (GameplayUI.instance.settingsUI.sound == false)
+        if (PlayerStats.instance.toggleSfx == false)
         {
             return;
         }

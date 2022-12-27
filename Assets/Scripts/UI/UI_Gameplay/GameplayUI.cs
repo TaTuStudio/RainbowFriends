@@ -96,10 +96,14 @@ public class GameplayUI : MonoBehaviour
         _ActiveKeyCollectCountUI(false);
 
         _ActiveInGameUI(false);
+        _ActiveSettings(false);
 
         _ActiveSelectGameUI(true);
         _ActiveSelectShopUI(false);
     }
+
+    
+
     public void _SettingsUISetup()
     {
         _ActiveTimeCountUI(false);
@@ -111,9 +115,15 @@ public class GameplayUI : MonoBehaviour
 
         _ActiveSelectGameUI(true);
         _ActiveSelectShopUI(false);
+        
+        _ActiveSettings(true);
     }
 
-
+    private void _ActiveSettings(bool active)
+    {
+        settingsUI.gameObject.SetActive(active);
+    }
+    
     public void _ActiveTimeCountUI(bool active)
     {
         timeCountUI.gameObject.SetActive(active);

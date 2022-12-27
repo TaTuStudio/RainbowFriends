@@ -486,10 +486,8 @@ public class PlayerController : MonoBehaviour
 
         _SetDeadAnim(isDead);
 
-        if (GameplayUI.instance.settingsUI.sound)
-        {
-            hitSfx.Play(gameObject);
-        }
+        hitSfx.Play(gameObject);
+        
     }
 
     #region Animations

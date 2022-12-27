@@ -403,11 +403,8 @@ public class MonsterController : MonoBehaviour
 
                 CameraManager.instance._GameplaySwitchCam(virtualCam);
 
-                if (GameplayUI.instance.settingsUI.sound)
-                {
-                    jumpScareSfx.Play();
-                }
-                
+                jumpScareSfx.Play();
+
                 HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
             }
             else

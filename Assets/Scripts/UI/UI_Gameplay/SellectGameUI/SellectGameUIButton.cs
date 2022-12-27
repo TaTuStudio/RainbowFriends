@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class SellectGameUIButton : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class SellectGameUIButton : MonoBehaviour
 
     private void OnEnable()
     {
+        gameObject.GetComponent<Button>().onClick.AddListener(_Sellect);
         set = true;
     }
 
