@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     public bool isPlaying = false;
+    public bool gameplaySetupDone = false;
+    public bool resetWinLose = false;
 
     public float gameTime = 0f;
     public float curGameTime = 0f;
@@ -32,8 +34,11 @@ public class GameController : MonoBehaviour
     public void _SetPlaying(bool active)
     {
         isPlaying = active;
+    }
 
-        GameplayUI.instance.timeCountUI._SetTime(curGameTime);
+    public void _SetGameplaySetupDone(bool active)
+    {
+        gameplaySetupDone = active;
     }
 
     public void _SetGameTime(float time)
@@ -41,6 +46,8 @@ public class GameController : MonoBehaviour
         gameTime = time;
 
         curGameTime = 0f;
+
+        GameplayUI.instance.timeCountUI._SetTime(curGameTime);
     }
 
     void _TimeCount()
@@ -63,6 +70,10 @@ public class GameController : MonoBehaviour
     public void _GameplayReadySetup()
     {
         _SetPlaying(false);
+
+        _SetGameplaySetupDone(false);
+
+        resetWinLose = false;
 
         PlayerManager.instance._Clean();
     }

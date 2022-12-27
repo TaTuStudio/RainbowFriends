@@ -300,6 +300,11 @@ public class PlayerController : MonoBehaviour
 
     public bool setDefault = false;
 
+    public bool noDam = false;
+
+    [SerializeField]
+    float noDamDelay = 0f;
+
     public Transform OnHandItemContainer_Right;
 
     public List<Transform> rightHandCollectedList = new List<Transform>();
@@ -318,6 +323,8 @@ public class PlayerController : MonoBehaviour
     {
         _Default();
 
+        _NoDamDelay();
+
         _UpdateMovementAnim();
 
         _UnHideDelay();
@@ -332,6 +339,8 @@ public class PlayerController : MonoBehaviour
         isHiding = false;
         catched = false;
         isDead = false;
+
+        noDamDelay = 0f;
 
         isHiding = false;
 
@@ -383,6 +392,26 @@ public class PlayerController : MonoBehaviour
         if(rightHandCollectedList.Count <= 0)
         {
             _SetHoldItemAnim(false);
+        }
+    }
+
+    public void _SetNoDam(float time)
+    {
+        noDam = true;
+
+        noDamDelay = time;
+    }
+
+    void _NoDamDelay()
+    {
+        if(noDam && noDamDelay > 0f)
+        {
+            noDamDelay -= Time.deltaTime;
+
+            if(noDamDelay <= 0f)
+            {
+                noDam = false;
+            }
         }
     }
 
@@ -457,7 +486,10 @@ public class PlayerController : MonoBehaviour
 
         _SetDeadAnim(isDead);
 
-        hitSfx.Play(gameObject);
+        if (GameplayUI.instance.settingsUI.sound)
+        {
+            hitSfx.Play(gameObject);
+        }
     }
 
     #region Animations

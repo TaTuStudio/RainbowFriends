@@ -23,10 +23,10 @@ public class PlayerAIController : MonoBehaviour
     public List<Transform> rightHandCollectedList = new List<Transform>();
 
     public SoundEffectSO deadSfx;
-    
+
     public delegate void AIDiedAction();
     public static event AIDiedAction OnAIDied;
-    
+
     private void OnEnable()
     {
         setDefault = true;
@@ -46,7 +46,8 @@ public class PlayerAIController : MonoBehaviour
 
     public void _Default()
     {
-        if (setDefault == false) return;
+        if (setDefault == false)
+            return;
 
         setDefault = false;
 
@@ -69,7 +70,8 @@ public class PlayerAIController : MonoBehaviour
     {
         foreach (Transform t in CollectionMarshal.AsSpan(rightHandCollectedList))
         {
-            if (t == null) continue;
+            if (t == null)
+                continue;
 
             ReuseGO reuseGO = t.GetComponent<ReuseGO>();
 
@@ -101,7 +103,8 @@ public class PlayerAIController : MonoBehaviour
 
     public void _SetHide()
     {
-        if (catched || isDead) return;
+        if (catched || isDead)
+            return;
 
         if (isHiding == false)
         {
@@ -138,13 +141,13 @@ public class PlayerAIController : MonoBehaviour
     public void _SetHit()
     {
         isDead = true;
-        
+
         aIPath._SetMoveToPosition(transform.position);
 
         _SetDeadAnim(true);
-        
+
         deadSfx.Play(gameObject);
-        
+
         OnAIDied?.Invoke();
     }
 
@@ -154,7 +157,8 @@ public class PlayerAIController : MonoBehaviour
 
     void _SetAnimMove()
     {
-        if (GameController.instance.isPlaying == false || catched || isDead) return;
+        if (catched || isDead)
+            return;
 
         float curSpeed = speed;
 
@@ -170,7 +174,10 @@ public class PlayerAIController : MonoBehaviour
         relVelocity.y = 0;
 
         // Speed relative to the character size
-        playerAnimator.SetFloat("NormalizedSpeed", relVelocity.magnitude / playerAnimator.transform.lossyScale.x);
+        playerAnimator.SetFloat(
+            "NormalizedSpeed",
+            relVelocity.magnitude / playerAnimator.transform.lossyScale.x
+        );
     }
 
     void _SetDeadAnim(bool active)

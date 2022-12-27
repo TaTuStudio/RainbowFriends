@@ -37,6 +37,8 @@ public class AlphabetCollectMissionController : MonoBehaviour
     {
         _GameplaySetup();
 
+        _ResetWinLose();
+
         _WinLoseCheck();
     }
 
@@ -60,6 +62,8 @@ public class AlphabetCollectMissionController : MonoBehaviour
     {
         if(MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
+            GameController.instance._SetGameplaySetupDone(true);
+
             gameplaySet = true;
 
             PlayerManager.instance._SpawnPlayerAndAIPlayers(aiSpawnNum);
@@ -71,7 +75,18 @@ public class AlphabetCollectMissionController : MonoBehaviour
 
             GameController.instance._SetGameTime(60f);
 
-            GameController.instance._SetPlaying(true);
+            //GameController.instance._SetPlaying(true);
+        }
+    }
+
+    void _ResetWinLose()
+    {
+        if (GameController.instance.resetWinLose)
+        {
+            GameController.instance.resetWinLose = false;
+
+            win = false;
+            lose = false;
         }
     }
 

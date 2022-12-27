@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour
     public int level5win;
     public int level5lose;
 
-    public List<string> mapUnlockedList = new List<string>();
+    public List<int> mapUnlockedList = new List<int>();
 
     public List<string> playerUnlockedSkinList = new List<string>();
 
@@ -53,10 +53,7 @@ public class PlayerStats : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
@@ -88,12 +85,12 @@ public class PlayerStats : MonoBehaviour
     public void _SubCoin(int subNum)
     {
         coin -= subNum;
-        
-        if(subNum < 0)
+
+        if (subNum < 0)
         {
             coin = 0;
         }
-        
+
         OnCoinChange?.Invoke(coin);
 
         save = true;
@@ -101,14 +98,19 @@ public class PlayerStats : MonoBehaviour
 
     void _CheckDefaultValues()
     {
-        if(currentPlayerSkinID == "")
+        if (currentPlayerSkinID == "")
         {
             currentPlayerSkinID = playerSkinScriptObj.playerSkins[0].skinID;
         }
 
-        if(playerUnlockedSkinList.Contains(currentPlayerSkinID) == false)
+        if (playerUnlockedSkinList.Contains(currentPlayerSkinID) == false)
         {
             playerUnlockedSkinList.Add(currentPlayerSkinID);
+        }
+
+        if (mapUnlockedList.Count < 1)
+        {
+            mapUnlockedList.Add(0);
         }
     }
 
@@ -151,13 +153,13 @@ public class PlayerStats : MonoBehaviour
 
             if (json["noAd"] != null)
                 bool.TryParse(json["noAd"].ToString().Replace("\"", ""), out noAd);
-            
+
             if (json["playerName"] != null)
                 playerName = json["playerName"].stringValue;
-            
+
             if (json["toggleSfx"] != null)
                 bool.TryParse(json["toggleSfx"].ToString().Replace("\"", ""), out toggleSfx);
-            
+
             if (json["toggleBgm"] != null)
                 bool.TryParse(json["toggleBgm"].ToString().Replace("\"", ""), out toggleBgm);
 
@@ -184,19 +186,18 @@ public class PlayerStats : MonoBehaviour
 
             if (json["level4lose"] != null)
                 int.TryParse(json["level4lose"].ToString().Replace("\"", ""), out level4lose);
-            
+
             if (json["level5win"] != null)
                 int.TryParse(json["level5win"].ToString().Replace("\"", ""), out level5win);
 
             if (json["level5lose"] != null)
                 int.TryParse(json["level5lose"].ToString().Replace("\"", ""), out level5lose);
 
-
             ////////////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////
             ///
             //Convert json Player Unlocked Data
-            if(json["playerUnlockedSkinList"] != null)
+            if (json["playerUnlockedSkinList"] != null)
             {
                 List<string> tempPlayerUnlockedDataList = new List<string>();
                 for (int i = 0; i < json["playerUnlockedSkinList"].count; i++)
@@ -219,16 +220,22 @@ public class PlayerStats : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             ///
             //Convert json map Unlocked Data
-            if (json["playerUnlockedSkinList"] != null)
+            if (json["mapUnlockedList"] != null)
             {
-                List<string> tempMapUnlockedDataList = new List<string>();
+                List<int> tempMapUnlockedDataList = new List<int>();
                 for (int i = 0; i < json["mapUnlockedList"].count; i++)
                 {
                     JSONObject playerUnlockedDataJson = json["mapUnlockedList"][i];
 
-                    string idStr = playerUnlockedDataJson.ToString().Replace("\"", "");
+                    int mapIndex = 0;
 
-                    tempMapUnlockedDataList.Add(idStr);
+                    if (json["mapUnlockedList"][i] != null)
+                        int.TryParse(
+                            json["mapUnlockedList"][i].ToString().Replace("\"", ""),
+                            out mapIndex
+                        );
+
+                    tempMapUnlockedDataList.Add(mapIndex);
                 }
 
                 mapUnlockedList = tempMapUnlockedDataList;
@@ -287,7 +294,6 @@ public class PlayerStats : MonoBehaviour
         jsonData.AddField("level5win", level5win);
         jsonData.AddField("level5lose", level5lose);
 
-
         //Add unlocked player data list to json file
         JSONObject playerUnlockedSkinDatasArr = new JSONObject();
         foreach (string unlockedID in CollectionMarshal.AsSpan(playerUnlockedSkinList))
@@ -303,7 +309,7 @@ public class PlayerStats : MonoBehaviour
 
         //Add unlocked map data list to json file
         JSONObject mapUnlockedSkinDatasArr = new JSONObject();
-        foreach (string unlockedID in CollectionMarshal.AsSpan(mapUnlockedList))
+        foreach (int unlockedID in CollectionMarshal.AsSpan(mapUnlockedList))
         {
             mapUnlockedSkinDatasArr.Add(unlockedID);
         }

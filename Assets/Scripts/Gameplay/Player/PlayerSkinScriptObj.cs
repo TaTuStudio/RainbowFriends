@@ -35,7 +35,7 @@ public class PlayerSkinScriptObj : ScriptableObject
 
         foreach (Material mat in skinnedMesh.materials)
         {
-            Debug.Log("MatName = " + mat.name);
+            //Debug.Log("MatName = " + mat.name);
 
             if (mat.name.Contains(playerSkinMatName))
             {
