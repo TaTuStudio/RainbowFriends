@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -22,7 +20,7 @@ public class TimeCountUI : MonoBehaviour
         
         if (dateTime.Second == 0) isPlaying = false;
         
-        if (dateTime.Second != 3 || isPlaying) return;
+        if (dateTime.Second != 4 || isPlaying) return;
         isPlaying = true;
         beepSound.Play();
         

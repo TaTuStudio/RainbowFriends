@@ -458,6 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderReal: {fileID: 767827845}
   sliderFake: {fileID: 1196057343}
+  delay: 2.5
 --- !u!1 &1196057341
 GameObject:
   m_ObjectHideFlags: 0

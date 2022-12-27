@@ -8,7 +8,8 @@ public class LoadingScript : MonoBehaviour
 {
     [SerializeField] private Slider sliderReal;
     [SerializeField] private Slider sliderFake;
-    
+
+    [SerializeField] private float delay;
     //[SerializeField] private SceneLoaderSO loadMainMenu;
     private AsyncOperation loadScene;
     private bool load;
@@ -28,7 +29,7 @@ public class LoadingScript : MonoBehaviour
     
     private IEnumerator SliderChangeValue()
     {
-        yield return sliderFake.DOValue(1, 2f).SetEase(Ease.InCubic).WaitForCompletion();
+        yield return sliderFake.DOValue(1, delay).SetEase(Ease.InCubic).WaitForCompletion();
     }
     
     private IEnumerator LoadScene()

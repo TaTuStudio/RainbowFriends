@@ -7,8 +7,7 @@ using UnityEngine.AddressableAssets;
 public class SoundEffectSO : ScriptableObject
 {
     #region config
-
-    public PlayerStats settings;
+    
     private const float SemitonesToPitchConversionUnit = 1.05946f;
 
     // [Required] 
@@ -141,7 +140,7 @@ public class SoundEffectSO : ScriptableObject
         }
 
         // set source config:
-        _source.mute = isBgm ? settings.toggleBgm : settings.toggleSfx;
+        _source.mute = isBgm ? !PlayerStats.instance.toggleBgm : !PlayerStats.instance.toggleSfx;
         _source.loop = isBgm;
         _source.rolloffMode = AudioRolloffMode.Linear;
         _source.spatialBlend = spatialBlend;
