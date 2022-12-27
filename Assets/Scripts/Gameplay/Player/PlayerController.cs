@@ -313,6 +313,8 @@ public class PlayerController : MonoBehaviour
 
     public PlayerSFX playerSFX;
 
+    public Animator arrowAnim;
+
     private void Start()
     {
         CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
@@ -357,6 +359,8 @@ public class PlayerController : MonoBehaviour
         _HideMesh(false);
 
         GameplayUI.instance._ActiveFlashLight(true);
+
+        GameController.instance.curPlayer += 1;
     }
 
     void _CleanItems()
@@ -404,11 +408,11 @@ public class PlayerController : MonoBehaviour
 
     void _NoDamDelay()
     {
-        if(noDam && noDamDelay > 0f)
+        if(noDam && noDamDelay >= 0f)
         {
             noDamDelay -= Time.deltaTime;
 
-            if(noDamDelay <= 0f)
+            if(noDamDelay < 0f)
             {
                 noDam = false;
             }
@@ -417,7 +421,7 @@ public class PlayerController : MonoBehaviour
 
     public void _SetHide()
     {
-        if (catched || isDead) return;
+        if (catched || isDead || unHideDelayTime > 0f) return;
 
         if(isHiding == false)
         {
@@ -490,6 +494,8 @@ public class PlayerController : MonoBehaviour
         {
             hitSfx.Play(gameObject);
         }
+
+        GameController.instance.curPlayer -= 1;
     }
 
     #region Animations
@@ -543,6 +549,8 @@ public class PlayerController : MonoBehaviour
 
     void _SetHideAnim(bool active)
     {
+        arrowAnim.gameObject.SetActive(active);
+
         playerAnimator.SetBool("Hiding", active);
     }
 

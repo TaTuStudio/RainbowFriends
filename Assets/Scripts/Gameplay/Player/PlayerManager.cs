@@ -115,12 +115,16 @@ public class PlayerManager : MonoBehaviour
             selected.gameObject.SetActive(true);
 
             spawnedAIPlayers.Add(selected);
+
+            GameController.instance.totalPlayer += 1;
         }
         else
         {
             selected = Instantiate(prefab, spawnPos, Quaternion.identity, transform);
 
             spawnedAIPlayers.Add(selected);
+
+            GameController.instance.totalPlayer += 1;
         }
 
         return selected;
@@ -160,12 +164,16 @@ public class PlayerManager : MonoBehaviour
             selected.gameObject.SetActive(true);
 
             spawnedPlayer = selected;
+
+            GameController.instance.totalPlayer += 1;
         }
         else
         {
             selected = Instantiate(prefab, spawnPos, Quaternion.identity, transform);
 
             spawnedPlayer = selected;
+
+            GameController.instance.totalPlayer += 1;
         }
     }
 
