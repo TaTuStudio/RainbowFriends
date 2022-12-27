@@ -8,7 +8,7 @@ public class SoundEffectSO : ScriptableObject
 {
     #region config
 
-    public PlayerSettingsSO settings;
+    public PlayerStats settings;
     private const float SemitonesToPitchConversionUnit = 1.05946f;
 
     // [Required] 
@@ -141,7 +141,7 @@ public class SoundEffectSO : ScriptableObject
         }
 
         // set source config:
-        _source.mute = isBgm ? settings.Bgm : settings.Sfx;
+        _source.mute = isBgm ? settings.toggleBgm : settings.toggleSfx;
         _source.loop = isBgm;
         _source.rolloffMode = AudioRolloffMode.Linear;
         _source.spatialBlend = spatialBlend;

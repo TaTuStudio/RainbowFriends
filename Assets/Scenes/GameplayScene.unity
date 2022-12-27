@@ -13168,8 +13168,8 @@ MonoBehaviour:
   coin: 0
   noAd: 0
   playerName: 
-  toggleSfx: 0
-  toggleBgm: 0
+  toggleSfx: 1
+  toggleBgm: 1
   level1win: 0
   level1lose: 0
   level2win: 0
