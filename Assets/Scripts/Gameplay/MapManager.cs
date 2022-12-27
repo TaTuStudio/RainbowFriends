@@ -16,6 +16,8 @@ public class MapManager : MonoBehaviour
 
     public List<Vector3> allPoints = new List<Vector3>();
 
+    private bool loadingMap;
+    
     private void Awake()
     {
         instance = this;
@@ -30,11 +32,14 @@ public class MapManager : MonoBehaviour
 
     public void _SpawnMap()
     {
-        StartCoroutine(_CheckSceneSpawned());
+        if(!loadingMap)
+            StartCoroutine(_CheckSceneSpawned());
     }
 
     IEnumerator _LoadMapScene()
     {
+        loadingMap = true;
+        
         AsyncOperation operation = SceneManager.LoadSceneAsync(selectedMap, LoadSceneMode.Additive);
 
         //operation.allowSceneActivation = false;
@@ -53,6 +58,7 @@ public class MapManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(selectedMap));
 
         spawnedMap.loadMapDone = true;
+        loadingMap = false;
     }
 
     IEnumerator _CheckSceneSpawned()
