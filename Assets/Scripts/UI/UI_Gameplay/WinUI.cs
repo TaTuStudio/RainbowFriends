@@ -22,6 +22,8 @@ public class WinUI : MonoBehaviour
 
     public DOTweenAnimation pointerTween;
 
+    public TextMeshProUGUI noThanksText;
+
     private void OnEnable()
     {
         bonusCoin = 0;
@@ -33,7 +35,13 @@ public class WinUI : MonoBehaviour
 
         bonusButton.SetActive(true);
 
+        bonusButton.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
+
         pointerTween.DOPlay();
+
+        noThanksText.color = new Color32(255, 255, 255, 0);
+
+        noThanksText.DOFade(1, 3f).SetDelay(3f);
     }
 
     private void OnDisable()
@@ -45,7 +53,6 @@ public class WinUI : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            pointerTween.DOPause();
         }
     }
 
@@ -60,6 +67,8 @@ public class WinUI : MonoBehaviour
 
     public void _BonusAdButton()
     {
+        pointerTween.DOPause();
+
         Debug.Log("Win Bonus ad button");
 
         _BonusAdButtonDone();
