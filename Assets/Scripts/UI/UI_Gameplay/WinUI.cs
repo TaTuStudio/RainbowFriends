@@ -36,6 +36,11 @@ public class WinUI : MonoBehaviour
         pointerTween.DOPlay();
     }
 
+    private void OnDisable()
+    {
+        pointerTween.DOKill();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -72,7 +77,7 @@ public class WinUI : MonoBehaviour
     {
         Debug.Log("Home button");
 
-        for(int i=0; i< GameplayUI.instance.selectGameUI.sellectGameUIButtons.Length; i++)
+        for (int i = 0; i < GameplayUI.instance.selectGameUI.sellectGameUIButtons.Length; i++)
         {
             if (PlayerStats.instance.mapUnlockedList.Contains(i) == false)
             {

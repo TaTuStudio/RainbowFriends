@@ -20,12 +20,7 @@ public class OutTimeUI : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        GameController.instance.curGameTime -= 30f;
-
-        if (GameController.instance.curGameTime < 0f)
-        {
-            GameController.instance.curGameTime -= 0f;
-        }
+        GameController.instance.curGameTime += 30f;
 
         GameController.instance.resetWinLose = true;
 

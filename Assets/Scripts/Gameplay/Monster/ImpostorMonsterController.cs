@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using Cinemachine;
+using EPOOutline;
 
 public class ImpostorMonsterController : MonoBehaviour
 {
@@ -52,6 +53,10 @@ public class ImpostorMonsterController : MonoBehaviour
     public bool attacking = false;
 
     public SoundEffectSO jumpScareSfx;
+
+    [Header("Outline settings")]
+    //Outline
+    public Outlinable outlinable;
 
     private void OnEnable()
     {
@@ -105,6 +110,8 @@ public class ImpostorMonsterController : MonoBehaviour
         _SetAnimAttack(false);
 
         _ActiveImpostor(false);
+
+        outlinable.enabled = false;
     }
 
     void _TurnDefault()

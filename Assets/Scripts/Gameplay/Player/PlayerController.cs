@@ -198,11 +198,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 desiredVelocity = Vector3.zero;
 
-        float curSpeed = maxSpeed;
+        float curSpeed = (maxSpeed + boostSpeed);
 
         if (isHiding)
         {
-            curSpeed = maxSpeed / 2f;
+            curSpeed = (maxSpeed + boostSpeed) / 2f;
         }
 
         if (catched == false && isDead == false)
@@ -312,6 +312,8 @@ public class PlayerController : MonoBehaviour
     public CinemachineVirtualCamera tpsVirtualCam;
     public float fpsCamRotVertical = 0f;
 
+    public float boostSpeed = 0f;
+
     public bool isHiding = false;
 
     public bool catched = false;
@@ -358,6 +360,8 @@ public class PlayerController : MonoBehaviour
             return;
 
         setDefault = false;
+
+        boostSpeed = 0f;
 
         isHiding = false;
         catched = false;

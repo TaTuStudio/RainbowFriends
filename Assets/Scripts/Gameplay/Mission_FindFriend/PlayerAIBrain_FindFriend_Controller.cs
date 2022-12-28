@@ -12,6 +12,8 @@ public class PlayerAIBrain_FindFriend_Controller : MonoBehaviour
     {
         lostFriendAIBrain.playerAIController = FindFriendMissionController.instance.spawnedFriend;
 
+        GameController.instance.curPlayer -= 1;
+
         List<PlayerAIController> tempList = new List<PlayerAIController>();
 
         tempList.AddRange(PlayerManager.instance.spawnedAIPlayers);

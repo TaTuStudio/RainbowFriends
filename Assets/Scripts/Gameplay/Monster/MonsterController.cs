@@ -4,6 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using Cinemachine;
 using Lofelt.NiceVibrations;
+using EPOOutline;
 
 public class MonsterController : MonoBehaviour
 {
@@ -51,6 +52,10 @@ public class MonsterController : MonoBehaviour
     public bool attacking = false;
 
     public SoundEffectSO jumpScareSfx;
+
+    [Header("Outline settings")]
+    //Outline
+    public Outlinable outlinable;
 
     private void OnEnable()
     {
@@ -104,6 +109,8 @@ public class MonsterController : MonoBehaviour
 
         _SetAnimJumpScare(false);
         _SetAnimAttack(false);
+
+        outlinable.enabled = false;
     }
 
     void _TurnDefault()

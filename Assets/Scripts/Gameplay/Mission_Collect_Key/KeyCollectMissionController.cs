@@ -108,7 +108,7 @@ public class KeyCollectMissionController : MonoBehaviour
                 return;
             }
 
-            if (GameController.instance.curGameTime >= GameController.instance.gameTime)
+            if (GameController.instance.curGameTime <= 0f)
             {
                 lose = true;
 

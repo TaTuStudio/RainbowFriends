@@ -90,7 +90,7 @@ public class LastStandMissionController : MonoBehaviour
     {
         if (win == false && lose == false && gameplaySet == true && GameController.instance.isPlaying == true && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
         {
-            if (GameController.instance.curGameTime >= GameController.instance.gameTime && PlayerManager.instance.spawnedPlayer.isDead == false)
+            if (GameController.instance.curGameTime <= 0f && PlayerManager.instance.spawnedPlayer.isDead == false)
             {
                 win = true;
 

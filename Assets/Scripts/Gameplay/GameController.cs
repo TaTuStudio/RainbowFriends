@@ -49,25 +49,25 @@ public class GameController : MonoBehaviour
     {
         gameTime = time;
 
-        curGameTime = 0f;
+        curGameTime = gameTime;
 
         GameplayUI.instance.timeCountUI._SetTime(curGameTime);
     }
 
     void _TimeCount()
     {
-        if (gameTime == 0f && curGameTime == 0f || isPlaying == false) return;
+        if (isPlaying == false || gameplaySetupDone == false) return;
 
-        if (curGameTime < gameTime)
+        if (curGameTime > 0f)
         {
-            curGameTime += Time.deltaTime;
+            curGameTime -= Time.deltaTime;
 
-            if (curGameTime >= gameTime)
+            if (curGameTime <= 0f)
             {
-                curGameTime = gameTime;
+                curGameTime = 0f;
             }
 
-            GameplayUI.instance.timeCountUI._SetTime(gameTime - curGameTime);
+            GameplayUI.instance.timeCountUI._SetTime(curGameTime);
         }
     }
 

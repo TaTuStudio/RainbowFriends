@@ -8,10 +8,11 @@ public class CoinUI : MonoBehaviour
 {
     [SerializeField] private PlayerStats coinEvent;
     [SerializeField] private TextMeshProUGUI text;
-    
+
     private void OnEnable()
     {
         text.text = coinEvent.coin.ToString();
+
         coinEvent.OnCoinChange += ChangeCoin;
     }
 

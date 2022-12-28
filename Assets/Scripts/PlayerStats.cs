@@ -10,6 +10,13 @@ public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
 
+    public class MapArchivements
+    {
+        public string mapSceneName = "";
+        public int winCount = 0;
+        public int loseCount = 0;
+    }
+
     public PlayerSkinScriptObj playerSkinScriptObj;
 
     static string playerDataFileName = "player_data.json";
