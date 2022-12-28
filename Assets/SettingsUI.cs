@@ -25,6 +25,9 @@ public class SettingsUI : MonoBehaviour
         toggleSfx.isOn = playerStats.toggleSfx;
         playerName.text = playerStats.playerName;
         
+        sfxOffIcon.SetActive(!playerStats.toggleSfx);
+        bgmOffIcon.SetActive(!playerStats.toggleBgm);
+        
         toggleBgm.onValueChanged.AddListener(ChangeBgm);
         toggleSfx.onValueChanged.AddListener(ChangeSfx);
         changeName.onClick.AddListener(ChangeName);
@@ -46,7 +49,7 @@ public class SettingsUI : MonoBehaviour
 
     private void ChangeName()
     {
-        playerStats.playerName = playerName.text;
+        playerStats.playerName = playerName.text.Substring(0,10);
         playerStats.save = true;
     }
     
