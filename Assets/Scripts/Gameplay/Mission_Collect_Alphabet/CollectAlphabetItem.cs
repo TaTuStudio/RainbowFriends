@@ -73,6 +73,8 @@ public class CollectAlphabetItem : MonoBehaviour
 
                 transform.parent = AlphabetCollectMissionController.instance.collectItemSpawner.transform;
 
+                onHandAIPlayer._RemoveRightHandColectItem(transform);
+
                 _OnGroundSet();
             }
             else
@@ -81,6 +83,8 @@ public class CollectAlphabetItem : MonoBehaviour
                 transform.position = onHandPlayer.transform.position;
 
                 transform.parent = AlphabetCollectMissionController.instance.collectItemSpawner.transform;
+
+                onHandPlayer._RemoveRightHandColectItem(transform);
 
                 _OnGroundSet();
             }

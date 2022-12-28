@@ -520,22 +520,31 @@ public class PlayerController : MonoBehaviour
         hitSfx.Play(gameObject);
 
         GameController.instance.curPlayer -= 1;
+
+        _HideMesh(false);
     }
 
     #region Animations
 
     public Animator playerAnimator;
-    public Vector3 amatureScale = Vector3.zero;
+
+    public GameObject[] playerMeshes;
 
     void _HideMesh(bool active)
     {
         if (active)
         {
-            playerAnimator.transform.localScale = Vector3.zero;
+            foreach(GameObject mesh in playerMeshes)
+            {
+                mesh.SetActive(false);
+            }
         }
         else
         {
-            playerAnimator.transform.localScale = amatureScale;
+            foreach (GameObject mesh in playerMeshes)
+            {
+                mesh.SetActive(true);
+            }
         }
     }
 

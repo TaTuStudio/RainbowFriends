@@ -73,6 +73,8 @@ public class CollectFeederItem : MonoBehaviour
 
                 transform.parent = FeederCollectMissionController.instance.collectItemSpawner.transform;
 
+                onHandAIPlayer._RemoveRightHandColectItem(transform);
+
                 _OnGroundSet();
             }
             else
@@ -81,6 +83,8 @@ public class CollectFeederItem : MonoBehaviour
                 transform.position = onHandPlayer.transform.position;
 
                 transform.parent = FeederCollectMissionController.instance.collectItemSpawner.transform;
+
+                onHandPlayer._RemoveRightHandColectItem(transform);
 
                 _OnGroundSet();
             }
