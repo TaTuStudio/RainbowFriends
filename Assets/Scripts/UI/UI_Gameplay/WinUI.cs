@@ -20,6 +20,8 @@ public class WinUI : MonoBehaviour
 
     public GameObject bonusButton;
 
+    public DOTweenAnimation pointerTween;
+
     private void OnEnable()
     {
         bonusCoin = 0;
@@ -30,6 +32,16 @@ public class WinUI : MonoBehaviour
         rewardCoinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 
         bonusButton.SetActive(true);
+
+        pointerTween.DOPlay();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pointerTween.DOPause();
+        }
     }
 
     public void _SetBonusMulti(int num)

@@ -16,15 +16,19 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Max Acceleration (rate of change of velocity).")]
     public float maxAcceleration = 20.0f;
 
-    [Tooltip("Setting that affects movement control. Higher values allow faster changes in direction.")]
+    [Tooltip(
+        "Setting that affects movement control. Higher values allow faster changes in direction."
+    )]
     public float groundFriction = 8.0f;
 
     [Tooltip("Friction to apply when falling.")]
     public float airFriction = 0.1f;
 
     [Range(0.0f, 1.0f)]
-    [Tooltip("When falling, amount of horizontal movement control available to the character.\n" +
-             "0 = no control, 1 = full control at max acceleration.")]
+    [Tooltip(
+        "When falling, amount of horizontal movement control available to the character.\n"
+            + "0 = no control, 1 = full control at max acceleration."
+    )]
     public float airControl = 0.3f;
 
     [Tooltip("The character's gravity.")]
@@ -99,10 +103,16 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateRotation()
     {
-        if (isDead) return;
+        if (isDead)
+            return;
 
-        float yEuler = transform.localEulerAngles.y + UI_Input_Controller.instance.uI_Rotate_Camera.deltaX;
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, yEuler, transform.localEulerAngles.z);
+        float yEuler =
+            transform.localEulerAngles.y + UI_Input_Controller.instance.uI_Rotate_Camera.deltaX;
+        transform.localEulerAngles = new Vector3(
+            transform.localEulerAngles.x,
+            yEuler,
+            transform.localEulerAngles.z
+        );
 
         fpsCamRotVertical -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
         fpsCamRotVertical = Mathf.Clamp(fpsCamRotVertical, -60f, 60f);
@@ -115,8 +125,11 @@ public class PlayerController : MonoBehaviour
 
     private void GroundedMovement(Vector3 desiredVelocity)
     {
-        characterMovement.velocity = Vector3.Lerp(characterMovement.velocity, desiredVelocity,
-            1f - Mathf.Exp(-groundFriction * Time.deltaTime));
+        characterMovement.velocity = Vector3.Lerp(
+            characterMovement.velocity,
+            desiredVelocity,
+            1f - Mathf.Exp(-groundFriction * Time.deltaTime)
+        );
     }
 
     /// <summary>
@@ -132,7 +145,10 @@ public class PlayerController : MonoBehaviour
         // If moving into non-walkable ground, limit its contribution.
         // Allow movement parallel, but not into it because that may push us up.
 
-        if (characterMovement.isOnGround && Vector3.Dot(desiredVelocity, characterMovement.groundNormal) < 0.0f)
+        if (
+            characterMovement.isOnGround
+            && Vector3.Dot(desiredVelocity, characterMovement.groundNormal) < 0.0f
+        )
         {
             Vector3 groundNormal = characterMovement.groundNormal;
             Vector3 groundNormal2D = groundNormal.onlyXZ().normalized;
@@ -146,8 +162,11 @@ public class PlayerController : MonoBehaviour
         {
             // Accelerate horizontal velocity towards desired velocity
 
-            Vector3 horizontalVelocity = Vector3.MoveTowards(velocity.onlyXZ(), desiredVelocity,
-                maxAcceleration * airControl * Time.deltaTime);
+            Vector3 horizontalVelocity = Vector3.MoveTowards(
+                velocity.onlyXZ(),
+                desiredVelocity,
+                maxAcceleration * airControl * Time.deltaTime
+            );
 
             // Update velocity preserving gravity effects (vertical velocity)
 
@@ -173,7 +192,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        movementDirection = transform.forward * UI_Input_Controller.instance.moveJoyStick.Vertical + transform.right * UI_Input_Controller.instance.moveJoyStick.Horizontal;
+        movementDirection =
+            transform.forward * UI_Input_Controller.instance.moveJoyStick.Vertical
+            + transform.right * UI_Input_Controller.instance.moveJoyStick.Horizontal;
 
         Vector3 desiredVelocity = Vector3.zero;
 
@@ -287,7 +308,6 @@ public class PlayerController : MonoBehaviour
     #region Custom
 
     [Header("Custom settings")]
-
     public CinemachineVirtualCamera fpsVirtualCam;
     public CinemachineVirtualCamera tpsVirtualCam;
     public float fpsCamRotVertical = 0f;
@@ -313,6 +333,8 @@ public class PlayerController : MonoBehaviour
 
     public PlayerSFX playerSFX;
 
+    public Animator arrowAnim;
+
     private void Start()
     {
         CameraManager.instance._RegisterVirtualCamera(fpsVirtualCam);
@@ -332,7 +354,8 @@ public class PlayerController : MonoBehaviour
 
     public void _Default()
     {
-        if (setDefault == false) return;
+        if (setDefault == false)
+            return;
 
         setDefault = false;
 
@@ -357,17 +380,20 @@ public class PlayerController : MonoBehaviour
         _HideMesh(false);
 
         GameplayUI.instance._ActiveFlashLight(true);
+
+        GameController.instance.curPlayer += 1;
     }
 
     void _CleanItems()
     {
-        foreach(Transform t in rightHandCollectedList)
+        foreach (Transform t in rightHandCollectedList)
         {
-            if (t == null) continue;
+            if (t == null)
+                continue;
 
             ReuseGO reuseGO = t.GetComponent<ReuseGO>();
 
-            if(reuseGO != null)
+            if (reuseGO != null)
             {
                 UnusedManager.instance._AddToUnusedGO(reuseGO);
             }
@@ -379,7 +405,7 @@ public class PlayerController : MonoBehaviour
     public void _AddRightHandColectItem(Transform item)
     {
         HapticPatterns.PlayPreset(HapticPatterns.PresetType.SoftImpact);
-        
+
         rightHandCollectedList.Add(item);
 
         _SetHoldItemAnim(true);
@@ -389,7 +415,7 @@ public class PlayerController : MonoBehaviour
     {
         rightHandCollectedList.Remove(item);
 
-        if(rightHandCollectedList.Count <= 0)
+        if (rightHandCollectedList.Count <= 0)
         {
             _SetHoldItemAnim(false);
         }
@@ -404,11 +430,11 @@ public class PlayerController : MonoBehaviour
 
     void _NoDamDelay()
     {
-        if(noDam && noDamDelay > 0f)
+        if (noDam && noDamDelay >= 0f)
         {
             noDamDelay -= Time.deltaTime;
 
-            if(noDamDelay <= 0f)
+            if (noDamDelay < 0f)
             {
                 noDam = false;
             }
@@ -417,9 +443,10 @@ public class PlayerController : MonoBehaviour
 
     public void _SetHide()
     {
-        if (catched || isDead) return;
+        if (catched || isDead || unHideDelayTime > 0f)
+            return;
 
-        if(isHiding == false)
+        if (isHiding == false)
         {
             isHiding = true;
 
@@ -442,13 +469,14 @@ public class PlayerController : MonoBehaviour
     }
 
     float unHideDelayTime = 0f;
+
     public void _UnHideDelay()
     {
         if (unHideDelayTime > 0f)
         {
             unHideDelayTime -= Time.deltaTime;
 
-            if(unHideDelayTime <= 0f)
+            if (unHideDelayTime <= 0f)
             {
                 fpsCamRotVertical = 0f;
 
@@ -473,7 +501,6 @@ public class PlayerController : MonoBehaviour
 
             CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
         }
-
     }
 
     public void _SetHit()
@@ -487,7 +514,8 @@ public class PlayerController : MonoBehaviour
         _SetDeadAnim(isDead);
 
         hitSfx.Play(gameObject);
-        
+
+        GameController.instance.curPlayer -= 1;
     }
 
     #region Animations
@@ -541,6 +569,8 @@ public class PlayerController : MonoBehaviour
 
     void _SetHideAnim(bool active)
     {
+        arrowAnim.gameObject.SetActive(active);
+
         playerAnimator.SetBool("Hiding", active);
     }
 

@@ -64,6 +64,8 @@ public class PlayerAIController : MonoBehaviour
         _SetHideAnim(isHiding);
 
         aIPath.isStopped = false;
+
+        GameController.instance.curPlayer += 1;
     }
 
     void _CleanItems()
@@ -149,6 +151,8 @@ public class PlayerAIController : MonoBehaviour
         deadSfx.Play(gameObject);
 
         OnAIDied?.Invoke();
+
+        GameController.instance.curPlayer -= 1;
     }
 
     #region Animations

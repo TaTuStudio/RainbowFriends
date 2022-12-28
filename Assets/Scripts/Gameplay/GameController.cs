@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public float gameTime = 0f;
     public float curGameTime = 0f;
 
+    public int totalPlayer = 0;
+    public int curPlayer = 0;
+
     private void Awake()
     {
         instance = this;
@@ -29,6 +32,7 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         _TimeCount();
+        _PlayerCount();
     }
 
     public void _SetPlaying(bool active)
@@ -67,11 +71,32 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void _PlayerDeathCount()
+    {
+        curPlayer -= 1;
+
+        if(curPlayer < 0)
+        {
+            curPlayer = 0;
+        }
+    }
+
+    void _PlayerCount()
+    {
+        if (gameplaySetupDone == false) return;
+
+        GameplayUI.instance.playerCountUI._SetCount(curPlayer, totalPlayer);
+    }
+
     public void _GameplayReadySetup()
     {
         _SetPlaying(false);
 
         _SetGameplaySetupDone(false);
+
+        totalPlayer = 0;
+
+        curPlayer = 0;
 
         resetWinLose = false;
 

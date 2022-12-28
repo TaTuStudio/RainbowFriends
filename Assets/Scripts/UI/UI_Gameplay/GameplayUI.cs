@@ -7,6 +7,7 @@ public class GameplayUI : MonoBehaviour
     public static GameplayUI instance;
     
     public TimeCountUI timeCountUI;
+    public PlayerCountUI playerCountUI;
     public CollectCountUI alphabetCollectCountUI;
     public CollectCountUI foodCollectCountUI;
     public CollectCountUI keyCollectCountUI;
@@ -33,6 +34,7 @@ public class GameplayUI : MonoBehaviour
     public void _GameplayAlphabetCollectSetup()
     {
         _ActiveTimeCountUI(true);
+        _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(true);
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
@@ -43,6 +45,7 @@ public class GameplayUI : MonoBehaviour
     public void _GameplayFoodCollectSetup()
     {
         _ActiveTimeCountUI(true);
+        _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
         _ActiveFoodCollectCountUI(true);
         _ActiveKeyCollectCountUI(false);
@@ -53,6 +56,7 @@ public class GameplayUI : MonoBehaviour
     public void _GameplayKeyCollectSetup()
     {
         _ActiveTimeCountUI(true);
+        _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(true);
@@ -63,6 +67,7 @@ public class GameplayUI : MonoBehaviour
     public void _GameplayFindFriendSetup()
     {
         _ActiveTimeCountUI(true);
+        _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
@@ -73,6 +78,7 @@ public class GameplayUI : MonoBehaviour
     public void _GameplayLastStandSetup()
     {
         _ActiveTimeCountUI(true);
+        _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
@@ -91,6 +97,7 @@ public class GameplayUI : MonoBehaviour
     public void _HomeUISetup()
     {
         _ActiveTimeCountUI(false);
+        _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
@@ -107,6 +114,7 @@ public class GameplayUI : MonoBehaviour
     public void _SettingsUISetup()
     {
         _ActiveTimeCountUI(false);
+        _ActivePlayerCountUI(false);
         _ActiveAlphabetCollectCountUI(false);
         _ActiveFoodCollectCountUI(false);
         _ActiveKeyCollectCountUI(false);
@@ -127,6 +135,11 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveTimeCountUI(bool active)
     {
         timeCountUI.gameObject.SetActive(active);
+    }
+
+    public void _ActivePlayerCountUI(bool active)
+    {
+        playerCountUI.gameObject.SetActive(active);
     }
 
     public void _ActiveAlphabetCollectCountUI(bool active)
