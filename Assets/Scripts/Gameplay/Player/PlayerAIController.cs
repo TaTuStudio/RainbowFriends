@@ -24,7 +24,8 @@ public class PlayerAIController : MonoBehaviour
 
     public SoundEffectSO deadSfx;
 
-    public delegate void AIDiedAction();
+    public PlayerNameText NameText;
+    public delegate void AIDiedAction(string name);
     public static event AIDiedAction OnAIDied;
 
     private void OnEnable()
@@ -150,7 +151,9 @@ public class PlayerAIController : MonoBehaviour
 
         deadSfx.Play(gameObject);
 
-        OnAIDied?.Invoke();
+        OnAIDied?.Invoke(NameText.Name);
+        
+        NameText.gameObject.SetActive(false);
 
         GameController.instance.curPlayer -= 1;
     }

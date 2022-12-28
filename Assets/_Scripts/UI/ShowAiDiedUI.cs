@@ -18,11 +18,12 @@ public class ShowAiDiedUI : MonoBehaviour
         PlayerAIController.OnAIDied -= ShowAIDiedText;
     }
 
-    private void ShowAIDiedText()
+    private void ShowAIDiedText(string name)
     {
         for (var i = 0; i < text.Length; i++)
         {
             text[i].gameObject.SetActive(true);
+            text[i].text = i == 0 ? $"{name} has" : "died";
             text[i].color = i==0 ? new Color32(255, 255, 255, 0) : new Color32(200, 0, 0, 0);
             text[i].DOFade(1, 0.5f);
             StartCoroutine(Delay());
