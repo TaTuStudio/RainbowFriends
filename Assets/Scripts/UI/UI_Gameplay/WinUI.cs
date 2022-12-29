@@ -43,6 +43,8 @@ public class WinUI : MonoBehaviour
         noThanksText.color = new Color32(255, 255, 255, 0);
 
         noThanksText.DOFade(1, 3f).SetDelay(3f);
+
+        GameController.instance._AddWinArchivement();
     }
 
     private void OnDisable()
@@ -96,4 +98,5 @@ public class WinUI : MonoBehaviour
 
         GameController.instance._GameplayBackToHome();
     }
+
 }

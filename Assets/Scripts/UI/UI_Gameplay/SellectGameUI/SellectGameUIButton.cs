@@ -18,6 +18,19 @@ public class SellectGameUIButton : MonoBehaviour
 
     public bool set = false;
 
+    public int archivementIndex = -1;
+    public int winCount = 0;
+    public TextMeshProUGUI winCountText;
+    public int loseCount = 0;
+    public TextMeshProUGUI loseCountText;
+
+    private void Start()
+    {
+        archivementIndex = -1;
+        winCount = 0;
+        loseCount = 0;
+    }
+
     private void OnEnable()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(_Sellect);
@@ -41,6 +54,8 @@ public class SellectGameUIButton : MonoBehaviour
             unlocked = true;
 
             lockImg.gameObject.SetActive(false);
+
+            _GetArchivements();
         }
         else
         {
@@ -50,6 +65,34 @@ public class SellectGameUIButton : MonoBehaviour
         }
 
         mapNameText.text = mapName;
+    }
+
+    void _GetArchivements()
+    {
+        if(archivementIndex < 0)
+        {
+            for (int i= 0; i< PlayerStats.instance.mapArchivements.Count; i++ )
+            {
+                if (PlayerStats.instance.mapArchivements[i].mapSceneName == mapSceneName)
+                {
+                    archivementIndex = i;
+
+                    break;
+                }
+            }
+        }
+
+        if(archivementIndex >= 0)
+        {
+            PlayerStats.MapArchivements mapArchivements = PlayerStats.instance.mapArchivements[archivementIndex];
+
+            winCount = mapArchivements.winCount;
+            loseCount = mapArchivements.loseCount;
+        }
+
+        winCountText.text = "Survive: " + winCount;
+
+        loseCountText.text = "Death: " + loseCount;
     }
 
     public void _Sellect()

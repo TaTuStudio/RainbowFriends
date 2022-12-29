@@ -42,6 +42,8 @@ public class OutTimeUI : MonoBehaviour
     {
         Debug.Log("OutTimeUI Play again");
 
+        GameController.instance._AddLoseArchivement();
+
         Time.timeScale = 1f;
 
         MapManager.instance._SpawnMap();
