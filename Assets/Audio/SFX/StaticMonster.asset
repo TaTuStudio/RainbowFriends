@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
-  m_Name: Countdown
+  m_Name: StaticMonster
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: b10a9e9cf14b949519903720d0060931, type: 3}
-  volume: {x: 1, y: 1}
-  useSemitones: 0
-  semitones: {x: 0, y: 0}
+  - {fileID: 8300000, guid: e18cc9b877dec4f409affeddab154f85, type: 3}
+  - {fileID: 8300000, guid: f96efca67cdb54e2b944bb6c4b5fe689, type: 3}
+  - {fileID: 8300000, guid: 1e77356fced76435e9c1b8244d3a90b9, type: 3}
+  volume: {x: 0.7, y: 1}
+  useSemitones: 1
+  semitones: {x: -5, y: 5}
   pitch: {x: 1, y: 1}
   playOrder: 0
   playIndex: 0
-  spatialBlend: 0
-  maxDistance: 1
+  spatialBlend: 1
+  maxDistance: 20

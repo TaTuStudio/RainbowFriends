@@ -42,6 +42,7 @@ public class WinUI : MonoBehaviour
         noThanksText.DOFade(1, 3f).SetDelay(3f);
 
         GameController.instance._AddWinArchivement();
+
     }
 
     private void OnDisable()

@@ -155,7 +155,7 @@ public class ImpostorMonsterController : MonoBehaviour
 
             if (turnType == 0)
             {
-                turnTime = (float)Random.RandomRange(1, 3);
+                turnTime = (float)Random.Range(1, 3);
 
                 aIPath._SetMoveToPosition(transform.position);
 
@@ -163,7 +163,7 @@ public class ImpostorMonsterController : MonoBehaviour
             }
             else if (turnType == 1)
             {
-                turnTime = (float)Random.RandomRange(5, 10);
+                turnTime = (float)Random.Range(5, 10);
 
                 int checkPointIndex = Random.Range(0, monsterInfo.checkPoints.Count);
 
@@ -175,7 +175,7 @@ public class ImpostorMonsterController : MonoBehaviour
             }
             else if (turnType == 2)
             {
-                turnTime = (float)Random.RandomRange(5, 10);
+                turnTime = (float)Random.Range(5, 10);
 
                 int ranNum = Random.Range(0, 100);
 

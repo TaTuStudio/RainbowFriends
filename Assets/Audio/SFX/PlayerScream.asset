@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
   m_Name: PlayerScream
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 6ec81f7b98ce8487597fd0f817777d19, type: 2}
   clips:
   - {fileID: 8300000, guid: a4cfa0cca62044ef6bb135b607638592, type: 3}
-  volume: {x: 1, y: 1}
-  useSemitones: 0
-  semitones: {x: 0, y: 0}
+  volume: {x: 0.8, y: 1}
+  useSemitones: 1
+  semitones: {x: -2, y: 2}
   pitch: {x: 1, y: 1}
   playOrder: 1
   playIndex: 0

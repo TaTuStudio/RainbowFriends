@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSFX : MonoBehaviour
 {
-    public AudioSource MonsterDistanceAlert;
+    public SoundEffectSO sound;
 
+    public AudioSource source;
+    
     private void OnEnable()
     {
+        sound.Play(gameObject, true, source);
     }
 }
