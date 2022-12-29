@@ -111,4 +111,46 @@ public class GameController : MonoBehaviour
 
         GameplayUI.instance._HomeUISetup();
     }
+
+    public void _AddWinArchivement()
+    {
+        PlayerStats.MapArchivements archivement = PlayerStats.instance.mapArchivements.Find(item => item.mapSceneName == MapManager.instance.selectedMap);
+
+        if (archivement != null) // check item isn't null
+        {
+            archivement.winCount += 1;
+        }
+        else
+        {
+            PlayerStats.MapArchivements newArchivement = new PlayerStats.MapArchivements();
+
+            newArchivement.mapSceneName = MapManager.instance.selectedMap;
+            newArchivement.winCount = 1;
+
+            PlayerStats.instance.mapArchivements.Add(newArchivement);
+        }
+
+        PlayerStats.instance.save = true;
+    }
+
+    public void _AddLoseArchivement()
+    {
+        PlayerStats.MapArchivements archivement = PlayerStats.instance.mapArchivements.Find(item => item.mapSceneName == MapManager.instance.selectedMap);
+
+        if (archivement != null) // check item isn't null
+        {
+            archivement.loseCount += 1;
+        }
+        else
+        {
+            PlayerStats.MapArchivements newArchivement = new PlayerStats.MapArchivements();
+
+            newArchivement.mapSceneName = MapManager.instance.selectedMap;
+            newArchivement.loseCount = 1;
+
+            PlayerStats.instance.mapArchivements.Add(newArchivement);
+        }
+
+        PlayerStats.instance.save = true;
+    }
 }

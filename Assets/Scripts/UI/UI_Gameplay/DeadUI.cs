@@ -5,6 +5,8 @@ using Pathfinding;
 
 public class DeadUI : MonoBehaviour
 {
+
+
     public void _MoreLifeAd()
     {
         Debug.Log("More life ad");
@@ -32,6 +34,8 @@ public class DeadUI : MonoBehaviour
     public void _PlayAgain()
     {
         Debug.Log("DeadUI Play again");
+
+        GameController.instance._AddLoseArchivement();
 
         MapManager.instance._SpawnMap();
     }

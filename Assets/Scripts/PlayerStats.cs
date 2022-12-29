@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
 
+    [System.Serializable]
     public class MapArchivements
     {
         public string mapSceneName = "";
@@ -29,28 +30,17 @@ public class PlayerStats : MonoBehaviour
 
     public int coin = 0;
 
-    public event Action<int> OnCoinChange;
-
     public bool noAd = false;
 
     public string playerName;
     public bool toggleSfx;
     public bool toggleBgm;
 
-    public int level1win;
-    public int level1lose;
-    public int level2win;
-    public int level2lose;
-    public int level3win;
-    public int level3lose;
-    public int level4win;
-    public int level4lose;
-    public int level5win;
-    public int level5lose;
-
     public List<int> mapUnlockedList = new List<int>();
 
     public List<string> playerUnlockedSkinList = new List<string>();
+
+    public List<MapArchivements> mapArchivements = new List<MapArchivements>();
 
     private void Awake()
     {
@@ -84,8 +74,6 @@ public class PlayerStats : MonoBehaviour
     {
         coin += addNum;
 
-        OnCoinChange?.Invoke(coin);
-
         save = true;
     }
 
@@ -97,8 +85,6 @@ public class PlayerStats : MonoBehaviour
         {
             coin = 0;
         }
-
-        OnCoinChange?.Invoke(coin);
 
         save = true;
     }
@@ -170,35 +156,6 @@ public class PlayerStats : MonoBehaviour
             if (json["toggleBgm"] != null)
                 bool.TryParse(json["toggleBgm"].ToString().Replace("\"", ""), out toggleBgm);
 
-            if (json["level1win"] != null)
-                int.TryParse(json["level1win"].ToString().Replace("\"", ""), out level1win);
-
-            if (json["level1lose"] != null)
-                int.TryParse(json["level1lose"].ToString().Replace("\"", ""), out level1lose);
-
-            if (json["level2win"] != null)
-                int.TryParse(json["level2win"].ToString().Replace("\"", ""), out level2win);
-
-            if (json["level2lose"] != null)
-                int.TryParse(json["level2lose"].ToString().Replace("\"", ""), out level2lose);
-
-            if (json["level3win"] != null)
-                int.TryParse(json["level3win"].ToString().Replace("\"", ""), out level3win);
-
-            if (json["level3lose"] != null)
-                int.TryParse(json["level3lose"].ToString().Replace("\"", ""), out level3lose);
-
-            if (json["level4win"] != null)
-                int.TryParse(json["level4win"].ToString().Replace("\"", ""), out level4win);
-
-            if (json["level4lose"] != null)
-                int.TryParse(json["level4lose"].ToString().Replace("\"", ""), out level4lose);
-
-            if (json["level5win"] != null)
-                int.TryParse(json["level5win"].ToString().Replace("\"", ""), out level5win);
-
-            if (json["level5lose"] != null)
-                int.TryParse(json["level5lose"].ToString().Replace("\"", ""), out level5lose);
 
             ////////////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////
@@ -232,8 +189,6 @@ public class PlayerStats : MonoBehaviour
                 List<int> tempMapUnlockedDataList = new List<int>();
                 for (int i = 0; i < json["mapUnlockedList"].count; i++)
                 {
-                    JSONObject playerUnlockedDataJson = json["mapUnlockedList"][i];
-
                     int mapIndex = 0;
 
                     if (json["mapUnlockedList"][i] != null)
@@ -246,6 +201,41 @@ public class PlayerStats : MonoBehaviour
                 }
 
                 mapUnlockedList = tempMapUnlockedDataList;
+            }
+
+            ////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////
+            ///
+
+            ////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////
+            ///
+            //Convert json map archivements Data
+            if (json["mapArchivements"] != null)
+            {
+                List<MapArchivements> tempMapArchivementsDataList = new List<MapArchivements>();
+                for (int i = 0; i < json["mapArchivements"].count; i++)
+                {
+                    JSONObject dataJson = json["mapArchivements"][i];
+
+                    MapArchivements mapArchivements = new MapArchivements();
+
+                    if (dataJson != null)
+                    {
+                        if(dataJson["mapSceneName"] != null)
+                            mapArchivements.mapSceneName = dataJson["mapSceneName"].ToString().Replace("\"", "");
+
+                        if (dataJson["winCount"] != null)
+                            int.TryParse(dataJson["winCount"].ToString().Replace("\"", ""), out mapArchivements.winCount);
+
+                        if (dataJson["loseCount"] != null)
+                            int.TryParse(dataJson["loseCount"].ToString().Replace("\"", ""), out mapArchivements.loseCount);
+                    }
+
+                    tempMapArchivementsDataList.Add(mapArchivements);
+                }
+
+                mapArchivements = tempMapArchivementsDataList;
             }
 
             ////////////////////////////////////////////////////////////////////////
@@ -290,17 +280,6 @@ public class PlayerStats : MonoBehaviour
         jsonData.AddField("toggleSfx", toggleSfx);
         jsonData.AddField("toggleBgm", toggleBgm);
 
-        jsonData.AddField("level1win", level1win);
-        jsonData.AddField("level1lose", level1lose);
-        jsonData.AddField("level2win", level2win);
-        jsonData.AddField("level2lose", level2lose);
-        jsonData.AddField("level3win", level3win);
-        jsonData.AddField("level3lose", level3lose);
-        jsonData.AddField("level4win", level4win);
-        jsonData.AddField("level4lose", level4lose);
-        jsonData.AddField("level5win", level5win);
-        jsonData.AddField("level5lose", level5lose);
-
         //Add unlocked player data list to json file
         JSONObject playerUnlockedSkinDatasArr = new JSONObject();
         foreach (string unlockedID in CollectionMarshal.AsSpan(playerUnlockedSkinList))
@@ -322,6 +301,25 @@ public class PlayerStats : MonoBehaviour
         }
 
         jsonData.AddField("mapUnlockedList", mapUnlockedSkinDatasArr);
+
+        /////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////
+        ///
+
+        //Add map archivements data list to json file
+        JSONObject mapArchivementsDatasArr = new JSONObject();
+        foreach (MapArchivements mapArchivement in CollectionMarshal.AsSpan(mapArchivements))
+        {
+            JSONObject archiveData = new JSONObject();
+
+            archiveData.AddField("mapSceneName", mapArchivement.mapSceneName);
+            archiveData.AddField("winCount", mapArchivement.winCount);
+            archiveData.AddField("loseCount", mapArchivement.loseCount);
+
+            mapArchivementsDatasArr.Add(archiveData);
+        }
+
+        jsonData.AddField("mapArchivements", mapArchivementsDatasArr);
 
         /////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////

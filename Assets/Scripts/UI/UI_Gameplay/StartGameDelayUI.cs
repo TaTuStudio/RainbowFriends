@@ -10,7 +10,7 @@ public class StartGameDelayUI : MonoBehaviour
     [SerializeField]
     float curDelayTime = 0f;
 
-    public TextMeshProUGUI delayText;
+    //public TextMeshProUGUI delayText;
 
     private void OnEnable()
     {
@@ -34,7 +34,9 @@ public class StartGameDelayUI : MonoBehaviour
         {
             curDelayTime -= Time.deltaTime;
 
-            delayText.text = "" + (int)curDelayTime;
+            //delayText.text = "" + (int)curDelayTime;
+
+            GameplayUI.instance.timeCountUI._SetTime(curDelayTime);
 
             if (curDelayTime <= 0f)
             {

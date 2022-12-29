@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6143748133120586108}
-  - component: {fileID: 6781182440799402065}
+  - component: {fileID: 3868937668179479334}
   m_Layer: 5
   m_Name: CoinBar
   m_TagString: Untagged
@@ -252,7 +252,7 @@ RectTransform:
   m_AnchoredPosition: {x: -433, y: -258}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6781182440799402065
+--- !u!114 &3868937668179479334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,11 +261,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6143748133120586109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06df909d209d84afb90099f98cb0140b, type: 3}
+  m_Script: {fileID: 11500000, guid: 98848b42eeb77964eb71b9e3cb8eb23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinEvent: {fileID: 0}
-  text: {fileID: 6143748132182703275}
+  coinText: {fileID: 6143748132182703275}
 --- !u!1 &6143748133150613353
 GameObject:
   m_ObjectHideFlags: 0
