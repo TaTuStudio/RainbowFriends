@@ -24,7 +24,6 @@ public class WinUI : MonoBehaviour
 
     public TextMeshProUGUI noThanksText;
 
-    private Tweener bonusTween;
     private void OnEnable()
     {
         bonusCoin = 0;
@@ -35,9 +34,7 @@ public class WinUI : MonoBehaviour
         rewardCoinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 
         bonusButton.SetActive(true);
-
-        bonusTween = bonusButton.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
-
+        
         pointerTween.DOPlay();
 
         noThanksText.color = new Color32(255, 255, 255, 0);
@@ -50,7 +47,6 @@ public class WinUI : MonoBehaviour
     private void OnDisable()
     {
         pointerTween.DOPause();
-        bonusTween.Pause();
     }
     
 

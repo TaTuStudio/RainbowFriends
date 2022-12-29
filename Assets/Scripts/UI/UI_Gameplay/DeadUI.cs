@@ -6,20 +6,12 @@ using Pathfinding;
 
 public class DeadUI : MonoBehaviour
 {
-    public GameObject bonusButton;
 
-    private Tweener bonusTween;
-    
     private void OnEnable()
     {
         Time.timeScale = 0f;
-        bonusTween = bonusButton.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
     }
 
-    private void OnDisable()
-    {
-        bonusTween.Pause();
-    }
 
     public void _MoreLifeAd()
     {

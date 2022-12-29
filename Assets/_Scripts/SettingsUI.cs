@@ -49,7 +49,7 @@ public class SettingsUI : MonoBehaviour
 
     private void ChangeName()
     {
-        playerStats.playerName = playerName.text.Substring(0,10);
+        playerStats.playerName = playerName.text.Length > 10 ? playerName.text.Substring(0,10) : playerName.text;
         playerStats.save = true;
     }
     

@@ -3987,6 +3987,7 @@ GameObject:
   - component: {fileID: 256562576}
   - component: {fileID: 256562575}
   - component: {fileID: 256562574}
+  - component: {fileID: 256562577}
   m_Layer: 5
   m_Name: BonusButtonAd
   m_TagString: Untagged
@@ -4110,6 +4111,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256562572}
   m_CullTransparentMesh: 1
+--- !u!114 &256562577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256562572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68a82595e284892adc443a3e40d1b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &257440421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4388,7 +4401,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 94.97006, y: 0, z: 0, w: 0}
+  m_margin: {x: 119.05429, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5719,7 +5732,10 @@ MonoBehaviour:
   mapNameText: {fileID: 178413091}
   lockImg: {fileID: 178413092}
   set: 0
+  archivementIndex: -1
+  winCount: 0
   winCountText: {fileID: 1853703297}
+  loseCount: 0
   loseCountText: {fileID: 182743219}
 --- !u!114 &392616659
 MonoBehaviour:
@@ -10141,6 +10157,7 @@ GameObject:
   - component: {fileID: 853273597}
   - component: {fileID: 853273596}
   - component: {fileID: 853273595}
+  - component: {fileID: 853273598}
   m_Layer: 5
   m_Name: MoreLifeButtonAd
   m_TagString: Untagged
@@ -10264,6 +10281,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853273593}
   m_CullTransparentMesh: 1
+--- !u!114 &853273598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853273593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68a82595e284892adc443a3e40d1b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &854315525
 GameObject:
   m_ObjectHideFlags: 0
@@ -10846,7 +10875,10 @@ MonoBehaviour:
   mapNameText: {fileID: 1340598318}
   lockImg: {fileID: 1340598317}
   set: 0
+  archivementIndex: -1
+  winCount: 0
   winCountText: {fileID: 1820765732}
+  loseCount: 0
   loseCountText: {fileID: 1844729912}
 --- !u!114 &873390022
 MonoBehaviour:
@@ -14180,7 +14212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b3f861beb32b24aa39648452b6fe6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusButton: {fileID: 853273593}
 --- !u!1001 &1193561142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14732,7 +14763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34, y: -33}
+  m_AnchoredPosition: {x: -322, y: -102}
   m_SizeDelta: {x: 123.6, y: 109.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214425679
@@ -18578,7 +18609,10 @@ MonoBehaviour:
   mapNameText: {fileID: 7578742731284590516}
   lockImg: {fileID: 7578742731284590515}
   set: 0
+  archivementIndex: -1
+  winCount: 0
   winCountText: {fileID: 968147622}
+  loseCount: 0
   loseCountText: {fileID: 860465827}
 --- !u!114 &1505701187
 MonoBehaviour:
@@ -19436,7 +19470,10 @@ MonoBehaviour:
   mapNameText: {fileID: 147692985}
   lockImg: {fileID: 147692984}
   set: 0
+  archivementIndex: -1
+  winCount: 0
   winCountText: {fileID: 1898351431}
+  loseCount: 0
   loseCountText: {fileID: 938464063}
 --- !u!114 &1598603697
 MonoBehaviour:
@@ -20221,7 +20258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a796a817e1df19d4d9285e50d6e6fe07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusButton: {fileID: 1885808750}
 --- !u!1 &1658262509
 GameObject:
   m_ObjectHideFlags: 0
@@ -21283,7 +21319,10 @@ MonoBehaviour:
   mapNameText: {fileID: 194830993}
   lockImg: {fileID: 194830992}
   set: 0
+  archivementIndex: -1
+  winCount: 0
   winCountText: {fileID: 282885685}
+  loseCount: 0
   loseCountText: {fileID: 282438868}
 --- !u!114 &1730466254
 MonoBehaviour:
@@ -23260,6 +23299,7 @@ GameObject:
   - component: {fileID: 1885808754}
   - component: {fileID: 1885808753}
   - component: {fileID: 1885808752}
+  - component: {fileID: 1885808755}
   m_Layer: 5
   m_Name: MoreTimeButtonAd
   m_TagString: Untagged
@@ -23383,6 +23423,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885808750}
   m_CullTransparentMesh: 1
+--- !u!114 &1885808755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885808750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68a82595e284892adc443a3e40d1b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1891182404
 GameObject:
   m_ObjectHideFlags: 0
