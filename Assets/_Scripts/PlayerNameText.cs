@@ -8,7 +8,7 @@ public class PlayerNameText : MonoBehaviour
     [SerializeField] private bool isPlayer;
     private GameObject cam;
 
-    [SerializeField] private List<string> namePlayer;
+    [SerializeField] private new List<string> name;
     public string Name;
 
     Vector3 lookOffset = new(0f, 180f, 0f);
@@ -18,7 +18,7 @@ public class PlayerNameText : MonoBehaviour
     {
         if (Camera.main != null) cam = Camera.main.gameObject;
 
-        Name = playerName.text = isPlayer ? PlayerStats.instance.playerName : namePlayer[Random.Range(0, namePlayer.Count)];
+        Name = playerName.text = isPlayer ? PlayerStats.instance.playerName : name[Random.Range(0, name.Count)];
     }
 
     // Update is called once per frame

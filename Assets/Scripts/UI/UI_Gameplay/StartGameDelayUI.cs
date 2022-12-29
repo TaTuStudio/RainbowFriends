@@ -5,7 +5,7 @@ using TMPro;
 
 public class StartGameDelayUI : MonoBehaviour
 {
-    float delayTime = 9f;
+    float delayTime = 11f;
 
     [SerializeField]
     float curDelayTime = 0f;
