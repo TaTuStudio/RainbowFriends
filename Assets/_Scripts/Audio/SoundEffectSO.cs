@@ -161,8 +161,8 @@ public class SoundEffectSO : ScriptableObject
 // #else
 //             Destroy(_source.gameObject, _source.clip.length / _source.pitch);
 // #endif
-        
-        Destroy(_source.gameObject, _source.clip.length / _source.pitch);
+        if (!isBgm)
+            Destroy(_source.gameObject, _source.clip.length / _source.pitch);
 
         return _source;
     }

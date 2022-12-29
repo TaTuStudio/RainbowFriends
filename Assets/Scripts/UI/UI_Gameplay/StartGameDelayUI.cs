@@ -30,20 +30,17 @@ public class StartGameDelayUI : MonoBehaviour
 
     void _Delay()
     {
-        if(GameController.instance.isPlaying == false && GameController.instance.gameplaySetupDone && curDelayTime > 0f)
-        {
-            curDelayTime -= Time.deltaTime;
+        if (GameController.instance.isPlaying != false || !GameController.instance.gameplaySetupDone ||
+            !(curDelayTime > 0f)) return;
+        curDelayTime -= Time.deltaTime;
 
-            delayText.text = "" + (int)curDelayTime;
+        delayText.text = "" + (int)curDelayTime;
 
-            if (curDelayTime <= 0f)
-            {
-                GameController.instance._SetPlaying(true);
+        if (!(curDelayTime <= 0f)) return;
+        GameController.instance._SetPlaying(true);
 
-                GameplayUI.instance._ActiveBoosterUI(false);
+        GameplayUI.instance._ActiveBoosterUI(false);
 
-                gameObject.SetActive(false);
-            }
-        }
+        gameObject.SetActive(false);
     }
 }

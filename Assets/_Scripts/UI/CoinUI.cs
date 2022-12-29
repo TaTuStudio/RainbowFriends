@@ -1,24 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class CoinUI : MonoBehaviour
 {
-    [SerializeField] private PlayerStats coinEvent;
     [SerializeField] private TextMeshProUGUI text;
 
     private void OnEnable()
     {
-        text.text = coinEvent.coin.ToString();
+        text.text = PlayerStats.instance.coin.ToString();
 
-        coinEvent.OnCoinChange += ChangeCoin;
+        PlayerStats.instance.OnCoinChange += ChangeCoin;
     }
 
     private void OnDisable()
     {
-        coinEvent.OnCoinChange -= ChangeCoin;
+        PlayerStats.instance.OnCoinChange -= ChangeCoin;
     }
 
     private void ChangeCoin(int coin)

@@ -24,6 +24,7 @@ public class WinUI : MonoBehaviour
 
     public TextMeshProUGUI noThanksText;
 
+    private Tweener bonusTween;
     private void OnEnable()
     {
         bonusCoin = 0;
@@ -35,7 +36,7 @@ public class WinUI : MonoBehaviour
 
         bonusButton.SetActive(true);
 
-        bonusButton.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
+        bonusTween = bonusButton.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
 
         pointerTween.DOPlay();
 
@@ -46,15 +47,10 @@ public class WinUI : MonoBehaviour
 
     private void OnDisable()
     {
-        pointerTween.DOKill();
+        pointerTween.DOPause();
+        bonusTween.Pause();
     }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-        }
-    }
+    
 
     public void _SetBonusMulti(int num)
     {

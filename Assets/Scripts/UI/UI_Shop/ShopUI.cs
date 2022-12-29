@@ -26,6 +26,10 @@ public class ShopUI : MonoBehaviour
     public SkinnedMeshRenderer boxSkinnedMesh;
     public SkinnedMeshRenderer holdBoxSkinnedMesh;
 
+    public delegate void BuySkin(string skinName);
+
+    public static BuySkin OnBuySkin;
+
     public void _SetItemInfos(List<UI_PlayerSkinShopItem> itemList, List<PlayerSkinScriptObj.Skin2DInfo> skinInfoList)
     {
         for (int i = 0; i < itemList.Count; i++)
@@ -88,19 +92,18 @@ public class ShopUI : MonoBehaviour
 
     public void _BuyButton()
     {
-        if (PlayerStats.instance.coin >= skinPrice)
-        {
-            PlayerStats stats = PlayerStats.instance;
+        if (PlayerStats.instance.coin < skinPrice) return;
+        
+        var stats = PlayerStats.instance;
 
-            if (stats.playerUnlockedSkinList.Contains(selectedItem.playerSkinID) == false)
-            {
-                stats.playerUnlockedSkinList.Add(selectedItem.playerSkinID);
+        if (stats.playerUnlockedSkinList.Contains(selectedItem.playerSkinID) != false) return;
+        stats.playerUnlockedSkinList.Add(selectedItem.playerSkinID);
 
-                stats._SubCoin(skinPrice);
+        stats._SubCoin(skinPrice);
 
-                _CheckButtonsStats();
-            }
-        }
+        OnBuySkin?.Invoke(selectedItem.playerSkinID);
+        
+        _CheckButtonsStats();
     }
 
     public void _WatchAdButton()
