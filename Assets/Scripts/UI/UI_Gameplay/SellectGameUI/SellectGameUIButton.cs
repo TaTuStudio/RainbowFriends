@@ -85,6 +85,9 @@ public class SellectGameUIButton : MonoBehaviour
         if(archivementIndex >= 0)
         {
             PlayerStats.MapArchivements mapArchivements = PlayerStats.instance.mapArchivements[archivementIndex];
+
+            winCount = mapArchivements.winCount;
+            loseCount = mapArchivements.loseCount;
         }
 
         winCountText.text = "Survive: " + winCount;
