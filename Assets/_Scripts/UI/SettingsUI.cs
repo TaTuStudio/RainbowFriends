@@ -18,6 +18,8 @@ public class SettingsUI : MonoBehaviour
 
     [SerializeField] private GameObject bgmOffIcon;
     [SerializeField] private GameObject sfxOffIcon;
+
+    [SerializeField] private AudioSource bgmAudioSource;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -43,6 +45,7 @@ public class SettingsUI : MonoBehaviour
     private void ChangeBgm(bool arg0)
     {
         bgmOffIcon.SetActive(!arg0);
+        bgmAudioSource.mute = !arg0;
         playerStats.toggleBgm = arg0;
         playerStats.save = true;
     }
