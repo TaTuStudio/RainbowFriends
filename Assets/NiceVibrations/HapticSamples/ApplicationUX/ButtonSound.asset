@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
   m_Name: ButtonSound
   m_EditorClassIdentifier: 
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 64ff396d839704d88a172f40f442e3b3, type: 3}
   volume: {x: 1, y: 1}
   useSemitones: 0
   semitones: {x: 0, y: 0}
