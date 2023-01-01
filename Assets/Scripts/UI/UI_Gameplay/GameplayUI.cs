@@ -28,9 +28,11 @@ public class GameplayUI : MonoBehaviour
 
     public Transform flashLightUI;
 
+    private int screenSize;
     private void Awake()
     {
         instance = this;
+        screenSize = Camera.main.aspect > 2.5f ? 3000 : 2500;
     }
 
     public void _GameplayAlphabetCollectSetup()
@@ -141,7 +143,7 @@ public class GameplayUI : MonoBehaviour
         else
         {
             settingsUI.dimBg.DOFade(0, .5f);
-            settingsUI.gameObject.GetComponent<RectTransform>().DOAnchorPosX(-3000, 1f).SetDelay(.2f);
+            settingsUI.gameObject.GetComponent<RectTransform>().DOAnchorPosX(-screenSize, 1f).SetDelay(.2f);
         }
     }
     
@@ -212,7 +214,7 @@ public class GameplayUI : MonoBehaviour
     {
         //shopUI.gameObject.SetActive(active);
         shopUI.gameObject.GetComponent<RectTransform>()
-            .DOAnchorPos(active ? new Vector2(0, 0) : new Vector2(3000, 0), 1f);
+            .DOAnchorPos(active ? new Vector2(0, 0) : new Vector2(screenSize, 0), 1f);
     }
 
     public void _ActiveFlashLight(bool active)
