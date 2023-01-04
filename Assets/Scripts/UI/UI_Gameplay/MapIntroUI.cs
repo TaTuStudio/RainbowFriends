@@ -100,15 +100,17 @@ public class MapIntroUI : MonoBehaviour
 
         string text = "";
 
-        Tween customTween = DOTween.To(() => text, x => text = x, showText, showText.Length / speed).OnUpdate(()=> 
-        {
-            
-            contentText.text = text;
+        //Tween customTween = DOTween.To(() => text, x => text = x, showText, showText.Length / speed).OnUpdate(()=> 
+        //{
 
-        }).OnComplete(()=> 
-        {
-            PlayTweenText();
-        }) ;
+        //    contentText.text = text;
+
+        //}).OnComplete(()=> 
+        //{
+        //    PlayTweenText();
+        //}) ;
+
+        contentText.DOText(showText, 5f, true, ScrambleMode.None);
     }
 
     public void _CloseButton()
