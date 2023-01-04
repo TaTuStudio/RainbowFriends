@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class OutTimeUI : MonoBehaviour
@@ -7,6 +9,7 @@ public class OutTimeUI : MonoBehaviour
     private void OnEnable()
     {
         Time.timeScale = 0f;
+        
     }
 
     public void _MoreTimeAd()

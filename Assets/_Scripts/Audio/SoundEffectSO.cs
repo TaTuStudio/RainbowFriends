@@ -42,7 +42,7 @@ public class SoundEffectSO : ScriptableObject
     
     [Range(0.0f, 1.0f)]
     [SerializeField] private float spatialBlend = 0;
-    [Range(1.0f, 1000.0f)]
+    [Range(1.0f, 100.0f)]
     [SerializeField] private float maxDistance = 1;
     #endregion
 
@@ -161,12 +161,12 @@ public class SoundEffectSO : ScriptableObject
 // #else
 //             Destroy(_source.gameObject, _source.clip.length / _source.pitch);
 // #endif
-        
-        Destroy(_source.gameObject, _source.clip.length / _source.pitch);
+        if (!isBgm)
+            Destroy(_source.gameObject, _source.clip.length / _source.pitch);
 
         return _source;
     }
-
+    
     private enum SoundClipPlayOrder
     {
         Random = 0,

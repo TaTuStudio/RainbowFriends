@@ -14,7 +14,11 @@ public class MapManager : MonoBehaviour
 
     public Map spawnedMap;
 
-    public List<Vector3> allPoints = new List<Vector3>();
+    public List<Vector3> allPoints = new();
+
+    public AudioSource BGMAudioSource;
+
+    public SoundEffectSO bgm;
 
     private bool loadingMap;
     
@@ -23,17 +27,20 @@ public class MapManager : MonoBehaviour
         instance = this;
     }
 
-    // private void Start()
-    // {
-    //     //_SpawnMap();
-    //
-    //     //StartCoroutine(_GetAllNodesPositions());
-    // }
+    private void Start()
+    {
+        //_SpawnMap();
+    
+        //StartCoroutine(_GetAllNodesPositions());
+
+        bgm.Play(null, true, BGMAudioSource);
+    }
 
     public void _SpawnMap()
     {
-        if(!loadingMap)
-            StartCoroutine(_CheckSceneSpawned());
+        if(loadingMap) return;
+        StartCoroutine(_CheckSceneSpawned());
+        BGMAudioSource.Pause();
     }
 
     IEnumerator _LoadMapScene()
@@ -84,10 +91,11 @@ public class MapManager : MonoBehaviour
 
     public void _UnloadScene()
     {
-        if (spawnedMap != null)
-        {
-            SceneManager.UnloadSceneAsync(selectedMap);
-        }
+        if (spawnedMap == null) return;
+        
+        SceneManager.UnloadSceneAsync(selectedMap);
+            
+        BGMAudioSource.Play();
     }
 
     // public IEnumerator _GetAllNodesPositions()

@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Pathfinding;
 
 public class DeadUI : MonoBehaviour
 {
+
+    private void OnEnable()
+    {
+        Time.timeScale = 0f;
+    }
 
 
     public void _MoreLifeAd()

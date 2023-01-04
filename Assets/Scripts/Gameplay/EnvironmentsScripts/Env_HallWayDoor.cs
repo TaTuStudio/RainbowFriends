@@ -28,21 +28,17 @@ public class Env_HallWayDoor : MonoBehaviour
 
     void _OpenDoorDelay()
     {
-        if (curOpenDoorDelay >= 0f)
-        {
-            curOpenDoorDelay -= Time.deltaTime;
+        if (!(curOpenDoorDelay >= 0f)) return;
+        curOpenDoorDelay -= Time.deltaTime;
 
-            if (curOpenDoorDelay < 0f)
-            {
-                foreach (var door in doors1)
-                {
-                    door.DOLocalRotate(new Vector3(0, 0, -90), 1f).OnComplete(() => _UpdateAStarGridLayer(door));
-                }
-                foreach (var door in doors2)
-                {
-                    door.DOLocalRotate(new Vector3(0, 0, 90), 1f).OnComplete(() => _UpdateAStarGridLayer(door));
-                }
-            }
+        if (!(curOpenDoorDelay < 0f)) return;
+        foreach (var door in doors1)
+        {
+            door.DOLocalRotate(new Vector3(0, 0, -90), 1f).OnComplete(() => _UpdateAStarGridLayer(door));
+        }
+        foreach (var door in doors2)
+        {
+            door.DOLocalRotate(new Vector3(0, 0, 90), 1f).OnComplete(() => _UpdateAStarGridLayer(door));
         }
     }
 

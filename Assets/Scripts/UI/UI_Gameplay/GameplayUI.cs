@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class GameplayUI : MonoBehaviour
@@ -130,7 +131,18 @@ public class GameplayUI : MonoBehaviour
 
     private void _ActiveSettings(bool active)
     {
-        settingsUI.gameObject.SetActive(active);
+        //settingsUI.gameObject.SetActive(active);
+        if (active)
+        {
+            settingsUI.dimBg.color = new Color(0, 0, 0, 0);
+            settingsUI.gameObject.GetComponent<RectTransform>().DOAnchorPosX(0, 1f)
+                .OnComplete(() => settingsUI.dimBg.DOFade(.8f,.5f));
+        }
+        else
+        {
+            settingsUI.dimBg.DOFade(0, .5f);
+            settingsUI.gameObject.GetComponent<RectTransform>().DOAnchorPosX(-3000, 1f).SetDelay(.2f);
+        }
     }
     
     public void _ActiveTimeCountUI(bool active)
@@ -198,7 +210,9 @@ public class GameplayUI : MonoBehaviour
 
     public void _ActiveSelectShopUI(bool active)
     {
-        shopUI.gameObject.SetActive(active);
+        //shopUI.gameObject.SetActive(active);
+        shopUI.gameObject.GetComponent<RectTransform>()
+            .DOAnchorPos(active ? new Vector2(0, 0) : new Vector2(3000, 0), 1f);
     }
 
     public void _ActiveFlashLight(bool active)

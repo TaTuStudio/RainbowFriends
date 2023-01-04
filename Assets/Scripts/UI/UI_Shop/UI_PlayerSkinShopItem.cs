@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,22 @@ public class UI_PlayerSkinShopItem : MonoBehaviour
 
     public bool unlocked = false;
 
+    private void OnEnable()
+    {
+        ShopUI.OnBuySkin += BuySkinAction;
+    }
+
+    private void OnDisable()
+    {
+        ShopUI.OnBuySkin -= BuySkinAction;
+    }
+
+    private void BuySkinAction(string skinName)
+    {
+        if(skinName!= playerSkinID) return;
+        lockGO.SetActive(false);
+    }
+    
     public void _SetInfo(ShopUI shop, string skinID, Sprite skinSprite)
     {
         shopUI = shop;

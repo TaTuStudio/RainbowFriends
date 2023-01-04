@@ -34,9 +34,7 @@ public class WinUI : MonoBehaviour
         rewardCoinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 
         bonusButton.SetActive(true);
-
-        bonusButton.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutSine);
-
+        
         pointerTween.DOPlay();
 
         noThanksText.color = new Color32(255, 255, 255, 0);
@@ -44,12 +42,14 @@ public class WinUI : MonoBehaviour
         noThanksText.DOFade(1, 3f).SetDelay(3f);
 
         GameController.instance._AddWinArchivement();
+
     }
 
     private void OnDisable()
     {
-        pointerTween.DOKill();
+        pointerTween.DOPause();
     }
+    
 
     public void _SetBonusMulti(int num)
     {

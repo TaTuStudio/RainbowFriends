@@ -18,6 +18,10 @@ public class SettingsUI : MonoBehaviour
 
     [SerializeField] private GameObject bgmOffIcon;
     [SerializeField] private GameObject sfxOffIcon;
+
+    [SerializeField] private AudioSource bgmAudioSource;
+
+    public Image dimBg;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -43,13 +47,14 @@ public class SettingsUI : MonoBehaviour
     private void ChangeBgm(bool arg0)
     {
         bgmOffIcon.SetActive(!arg0);
+        bgmAudioSource.mute = !arg0;
         playerStats.toggleBgm = arg0;
         playerStats.save = true;
     }
 
     private void ChangeName()
     {
-        playerStats.playerName = playerName.text.Substring(0,10);
+        playerStats.playerName = playerName.text.Length > 10 ? playerName.text.Substring(0,10) : playerName.text;
         playerStats.save = true;
     }
     

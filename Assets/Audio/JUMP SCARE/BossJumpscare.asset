@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
   m_Name: BossJumpscare
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 6ec81f7b98ce8487597fd0f817777d19, type: 2}
   clips:
   - {fileID: 8300000, guid: 4840ed5830b5d4573a7f0c3c5e35b417, type: 3}
   - {fileID: 8300000, guid: 9bccab65022024d14b7ddfb7a1a85b5b, type: 3}
+  - {fileID: 8300000, guid: d7d9c2715d9514db29e537c6d8fc1daf, type: 3}
   volume: {x: 1, y: 1}
   useSemitones: 0
   semitones: {x: 0, y: 0}

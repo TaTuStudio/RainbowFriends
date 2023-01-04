@@ -90,7 +90,7 @@ public class SellectGameUIButton : MonoBehaviour
             loseCount = mapArchivements.loseCount;
         }
 
-        winCountText.text = "Survive: " + winCount;
+        winCountText.text = "Survived: " + winCount;
 
         loseCountText.text = "Death: " + loseCount;
     }

@@ -95,7 +95,7 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
 
         if (turnType == 0)
         {
-            turnTime = (float)Random.RandomRange(1, 3);
+            turnTime = Random.Range(1, 3);
 
             playerAIController.aIPath._SetMoveToPosition(playerAIController.transform.position);
 
@@ -103,15 +103,15 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
         }
         else if (turnType == 1)
         {
-            turnTime = (float)Random.RandomRange(1, 5);
+            turnTime = Random.Range(1, 5);
 
             playerAIController.aIPath._SetMoveToPosition(FindFriendMissionController.instance.spawnedFriend.transform.position);
         }
         else if (turnType == 2)
         {
-            turnTime = (float)Random.RandomRange(3, 5);
+            turnTime = Random.Range(3, 5);
 
-            Vector3 ranPos = new Vector3((float)Random.RandomRange(-randomRange, randomRange), playerAIController.transform.position.y, (float)Random.RandomRange(-randomRange, randomRange));
+            Vector3 ranPos = new Vector3(Random.Range(-randomRange, randomRange), playerAIController.transform.position.y, Random.Range(-randomRange, randomRange));
 
             ranPos = transform.position + ranPos;
 
@@ -141,11 +141,11 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
             {
                 if (playerAIController.isHiding)
                 {
-                    hideDelay = (float)Random.Range(5, 15);
+                    hideDelay = Random.Range(5, 15);
                 }
                 else
                 {
-                    hideDelay = (float)Random.Range(5, 10);
+                    hideDelay = Random.Range(5, 10);
                 }
 
                 playerAIController._SetHide();
