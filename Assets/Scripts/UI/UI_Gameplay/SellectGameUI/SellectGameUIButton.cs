@@ -62,6 +62,13 @@ public class SellectGameUIButton : MonoBehaviour
             unlocked = false;
 
             lockImg.gameObject.SetActive(true);
+
+            if (GameplayUI.instance.selectGameUI._CheckCanBeUnlocked(indexNum))
+            {
+                GameplayUI.instance.selectGameUI._UnlockMap(indexNum);
+
+                _SetActive();
+            }
         }
 
         mapNameText.text = mapName;
@@ -97,7 +104,14 @@ public class SellectGameUIButton : MonoBehaviour
 
     public void _Sellect()
     {
-        GameplayUI.instance.selectGameUI._PlayButton(mapSceneName);
+        if (unlocked)
+        {
+            GameplayUI.instance.selectGameUI._PlayButton(mapSceneName);
+        }
+        else
+        {
+            GameplayUI.instance.unlockMapInfoUI._Setup(GameplayUI.instance.selectGameUI._GetUnlockText(indexNum));
+        }
     }
 
 #if UNITY_EDITOR

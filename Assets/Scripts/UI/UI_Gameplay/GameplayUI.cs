@@ -21,6 +21,7 @@ public class GameplayUI : MonoBehaviour
     public BoosterUI boosterUI;
 
     public SelectGameUI selectGameUI;
+    public UnlockMapInfoUI unlockMapInfoUI;
 
     public ShopUI shopUI;
 
@@ -206,6 +207,8 @@ public class GameplayUI : MonoBehaviour
     public void _ActiveSelectGameUI(bool active)
     {
         selectGameUI.gameObject.SetActive(active);
+
+        unlockMapInfoUI._Close();
     }
 
     public void _ActiveSelectShopUI(bool active)

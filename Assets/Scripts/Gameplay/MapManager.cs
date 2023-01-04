@@ -10,6 +10,7 @@ public class MapManager : MonoBehaviour
 
     //public Map selectedMap;
 
+    //public int selectedMapIndex = 0;
     public string selectedMap = "";
 
     public Map spawnedMap;

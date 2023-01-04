@@ -81,16 +81,6 @@ public class WinUI : MonoBehaviour
     {
         Debug.Log("Home button");
 
-        for (int i = 0; i < GameplayUI.instance.selectGameUI.sellectGameUIButtons.Length; i++)
-        {
-            if (PlayerStats.instance.mapUnlockedList.Contains(i) == false)
-            {
-                PlayerStats.instance.mapUnlockedList.Add(i);
-
-                break;
-            }
-        }
-
         PlayerStats.instance._AddCoin(bonusCoin);
 
         GameController.instance._GameplayBackToHome();
