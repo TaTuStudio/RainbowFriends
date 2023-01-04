@@ -42,7 +42,7 @@ public class SoundEffectSO : ScriptableObject
     
     [Range(0.0f, 1.0f)]
     [SerializeField] private float spatialBlend = 0;
-    [Range(1.0f, 100.0f)]
+    [Range(1.0f, 200.0f)]
     [SerializeField] private float maxDistance = 1;
     #endregion
 
@@ -120,7 +120,7 @@ public class SoundEffectSO : ScriptableObject
         return _clip;
     }
 
-    public AudioSource Play(GameObject parent = null, bool isBgm = false, AudioSource audioSourceParam = null)
+    public AudioSource Play(GameObject parent = null, bool isBgm = false, bool isStaticMonster = false, AudioSource audioSourceParam = null)
     {
         if (clips.Length == 0)
         {
@@ -142,7 +142,7 @@ public class SoundEffectSO : ScriptableObject
         // set source config:
         _source.mute = isBgm ? !PlayerStats.instance.toggleBgm : !PlayerStats.instance.toggleSfx;
         _source.loop = isBgm;
-        _source.rolloffMode = AudioRolloffMode.Linear;
+        _source.rolloffMode = isStaticMonster ? AudioRolloffMode.Logarithmic : AudioRolloffMode.Linear;
         _source.spatialBlend = spatialBlend;
         _source.maxDistance = maxDistance;
         _source.clip = GetAudioClip();

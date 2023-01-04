@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214d012310ef475a9b35e53866f0c9b, type: 3}
   m_Name: Footstep4
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 6ec81f7b98ce8487597fd0f817777d19, type: 2}
   clips:
   - {fileID: 8300000, guid: c0f8c2844afa8497980a95b523385d27, type: 3}
   - {fileID: 8300000, guid: dbbc527cac80f46d9a7bfe8cfa63847b, type: 3}
   - {fileID: 8300000, guid: 22c0aa6a009504d059d283b5ebb05034, type: 3}
-  volume: {x: 0.15, y: 0.15}
+  volume: {x: 0.4, y: 0.5}
   useSemitones: 0
   semitones: {x: 0, y: 0}
-  pitch: {x: 1.5, y: 1.5}
+  pitch: {x: 1.2, y: 1.5}
   playOrder: 0
-  playIndex: 2
+  playIndex: 1
   spatialBlend: 1
-  maxDistance: 100
+  maxDistance: 20

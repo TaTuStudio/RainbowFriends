@@ -443,6 +443,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b3a9383ba1f79472f84d2221cc71a6ae,
         type: 2}
+    - target: {fileID: 3218223320822126726, guid: f802b4c201c96b646aadee2e1c074700,
+        type: 3}
+      propertyPath: isStaticMonster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7765299832296161714, guid: f802b4c201c96b646aadee2e1c074700,
         type: 3}
       propertyPath: m_Layer

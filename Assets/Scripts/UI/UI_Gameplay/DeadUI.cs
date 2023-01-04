@@ -11,7 +11,10 @@ public class DeadUI : MonoBehaviour
     {
         Time.timeScale = 0f;
     }
-
+    private void OnDisable()
+    {
+        Time.timeScale = 1f;
+    }
 
     public void _MoreLifeAd()
     {

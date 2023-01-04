@@ -1,17 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
 {
     public SoundEffectSO sfx;
 
-    // Update is called once per frame
-    void Update()
+    public TextMeshProUGUI txt;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sfx?.Play(gameObject);
-        }
+        txt.DOText("Find the blocks!", 5, true,ScrambleMode.Lowercase);
     }
 }

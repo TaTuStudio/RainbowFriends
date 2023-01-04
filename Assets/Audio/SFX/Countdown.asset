@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: b10a9e9cf14b949519903720d0060931, type: 3}
-  volume: {x: 1, y: 1}
+  volume: {x: 0.5, y: 0.5}
   useSemitones: 0
   semitones: {x: 0, y: 0}
   pitch: {x: 1, y: 1}

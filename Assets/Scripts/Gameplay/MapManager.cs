@@ -33,7 +33,7 @@ public class MapManager : MonoBehaviour
     
         //StartCoroutine(_GetAllNodesPositions());
 
-        bgm.Play(null, true, BGMAudioSource);
+        bgm.Play(null, true, false, BGMAudioSource);
     }
 
     public void _SpawnMap()

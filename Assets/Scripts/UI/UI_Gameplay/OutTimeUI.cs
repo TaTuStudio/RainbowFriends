@@ -9,7 +9,11 @@ public class OutTimeUI : MonoBehaviour
     private void OnEnable()
     {
         Time.timeScale = 0f;
-        
+    }
+
+    private void OnDisable()
+    {
+        Time.timeScale = 1f;
     }
 
     public void _MoreTimeAd()
@@ -21,8 +25,6 @@ public class OutTimeUI : MonoBehaviour
 
     public void _MoreTimeAdDone()
     {
-        Time.timeScale = 1f;
-
         GameController.instance.curGameTime += 30f;
 
         GameController.instance.resetWinLose = true;
@@ -35,9 +37,7 @@ public class OutTimeUI : MonoBehaviour
         Debug.Log("OutTimeUI Play again");
 
         GameController.instance._AddLoseArchivement();
-
-        Time.timeScale = 1f;
-
+        
         MapManager.instance._SpawnMap();
     }
 }

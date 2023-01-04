@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 4153805856404897736}
   - component: {fileID: 7443946899409516962}
   - component: {fileID: 2487584898907516940}
+  - component: {fileID: 532960371916727581}
   m_Layer: 5
   m_Name: SkinItem
   m_TagString: Untagged
@@ -309,6 +310,20 @@ MonoBehaviour:
   usingGO: {fileID: 4153805857352234364}
   skinImage: {fileID: 4153805856267446729}
   unlocked: 0
+--- !u!114 &532960371916727581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153805856404897734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
+  btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &4153805856555351920
 GameObject:
   m_ObjectHideFlags: 0
