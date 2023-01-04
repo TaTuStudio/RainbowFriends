@@ -2134,7 +2134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1001 &141622270
 PrefabInstance:
@@ -2955,7 +2954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1001 &178413089
 PrefabInstance:
@@ -4243,7 +4241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1001 &257440421
 PrefabInstance:
@@ -5623,7 +5620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &372201619
 GameObject:
@@ -5931,7 +5927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1001 &395069893
 PrefabInstance:
@@ -6549,7 +6544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &448172724
 GameObject:
@@ -7484,7 +7478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &559274328
 GameObject:
@@ -8561,7 +8554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &654805727
 GameObject:
@@ -10503,7 +10495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &854315525
 GameObject:
@@ -11149,7 +11140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &882556673
 GameObject:
@@ -11443,7 +11433,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &901374533
 GameObject:
@@ -12364,7 +12353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!114 &968147622 stripped
 MonoBehaviour:
@@ -13420,7 +13408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1074028923
 GameObject:
@@ -14484,6 +14471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b3f861beb32b24aa39648452b6fe6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  failSound: {fileID: 11400000, guid: fda91de0b50094a54957f3d5f296a217, type: 2}
 --- !u!1001 &1193561142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15145,7 +15133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1255787460
 GameObject:
@@ -17809,7 +17796,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1405784478
 GameObject:
@@ -18973,7 +18959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1514684684
 GameObject:
@@ -19199,7 +19184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1540674470
 GameObject:
@@ -19864,7 +19848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1603010397
 GameObject:
@@ -20642,6 +20625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a796a817e1df19d4d9285e50d6e6fe07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  failSound: {fileID: 11400000, guid: fda91de0b50094a54957f3d5f296a217, type: 2}
 --- !u!1 &1658262509
 GameObject:
   m_ObjectHideFlags: 0
@@ -21765,7 +21749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1731504278
 GameObject:
@@ -22105,7 +22088,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1787509844
 GameObject:
@@ -22880,7 +22862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1817711908
 GameObject:
@@ -23595,7 +23576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1877266806
 GameObject:
@@ -23894,7 +23874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &1891182404
 GameObject:
@@ -24197,7 +24176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!114 &1898351431 stripped
 MonoBehaviour:
@@ -25120,7 +25098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &2038644214
 GameObject:
@@ -25257,7 +25234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &2047718773
 GameObject:
@@ -25481,7 +25457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2a34cdcd14344a2930ec88915a3b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: -8404250095460277587, guid: f1a6f15296c3d4ad88a96aecf465a3e8, type: 3}
   btnSound: {fileID: 11400000, guid: 6205f327de6a1478c9981fe59b093eae, type: 2}
 --- !u!1 &2088227096
 GameObject:

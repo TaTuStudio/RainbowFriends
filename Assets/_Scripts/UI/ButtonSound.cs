@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class ButtonSound : MonoBehaviour
 {
-    [SerializeField] private HapticClip btn;
-
     [SerializeField] private SoundEffectSO btnSound;
     
     // Start is called before the first frame update
@@ -17,10 +15,10 @@ public class ButtonSound : MonoBehaviour
     }
 
     // Update is called once per frame
-    void ClickBtn()
+    private void ClickBtn()
     {
         if (!PlayerStats.instance.toggleSfx) return;
-        HapticController.Play(btn);
+        //HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
         btnSound.Play();
     }
 }

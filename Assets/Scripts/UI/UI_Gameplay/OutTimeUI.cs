@@ -6,9 +6,12 @@ using UnityEngine;
 
 public class OutTimeUI : MonoBehaviour
 {
+    public SoundEffectSO failSound;
+
     private void OnEnable()
     {
-        Time.timeScale = 0f;
+        Time.timeScale = 0f;        
+        failSound.Play();
     }
 
     private void OnDisable()

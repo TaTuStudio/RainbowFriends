@@ -6,10 +6,12 @@ using Pathfinding;
 
 public class DeadUI : MonoBehaviour
 {
-
+    public SoundEffectSO failSound;
+    
     private void OnEnable()
     {
         Time.timeScale = 0f;
+        failSound.Play();
     }
     private void OnDisable()
     {
