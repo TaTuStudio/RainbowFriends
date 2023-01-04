@@ -110,4 +110,9 @@ public class MapIntroUI : MonoBehaviour
             PlayTweenText();
         }) ;
     }
+
+    public void _CloseButton()
+    {
+        gameObject.SetActive(false);
+    }
 }
