@@ -42,7 +42,7 @@ public class LostFriendAIBrain : MonoBehaviour
 
     void _CheckIsFound()
     {
-        if(FindFriendMissionController.instance.gameplaySet == false || followPlayerController != null || followPlayerAIController != null || playerAIController == null)
+        if(FindFriendMissionController.instance.gameplaySet == false || PlayerManager.instance.spawnedPlayer == null || followPlayerController != null || followPlayerAIController != null || playerAIController == null)
         {
             return;
         }

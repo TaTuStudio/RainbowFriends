@@ -10,11 +10,13 @@ public class StartGameDelayUI : MonoBehaviour
     [SerializeField]
     float curDelayTime = 0f;
 
-    //public TextMeshProUGUI delayText;
+    public MapIntroUI mapIntroUI;
 
     private void OnEnable()
     {
         curDelayTime = delayTime;
+
+        mapIntroUI.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
