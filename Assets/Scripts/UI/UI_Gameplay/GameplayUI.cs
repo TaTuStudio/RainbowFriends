@@ -203,7 +203,15 @@ public class GameplayUI : MonoBehaviour
     }
     public void _ActiveBoosterUI(bool active)
     {
-        boosterUI.gameObject.SetActive(active);
+        if (active)
+        {
+            boosterUI._OpenButton();
+        }
+        else
+        {
+            boosterUI._CloseButton();
+        }
+
     }
 
     public void _ActiveSelectGameUI(bool active)

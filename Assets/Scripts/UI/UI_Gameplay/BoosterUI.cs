@@ -6,7 +6,14 @@ public class BoosterUI : MonoBehaviour
 {
     public void _OpenButton()
     {
-        gameObject.SetActive(true);
+        if(PlayerStats.instance.currentTut >= TutManager.instance.tutControllers.Length)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            _CloseButton();
+        }
     }
 
     public void _CloseButton()

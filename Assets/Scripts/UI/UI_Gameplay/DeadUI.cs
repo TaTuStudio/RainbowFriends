@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using Pathfinding;
+using UnityEngine.UI;
+using TMPro;
 
 public class DeadUI : MonoBehaviour
 {
+    int rewardCoin = 100;
+
+    public TextMeshProUGUI coinText;
+
     public SoundEffectSO failSound;
     
     private void OnEnable()
     {
         Time.timeScale = 0f;
         failSound.Play();
+
+        coinText.text = "" + rewardCoin;
+        coinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
     }
+
     private void OnDisable()
     {
         Time.timeScale = 1f;
@@ -47,6 +56,8 @@ public class DeadUI : MonoBehaviour
         Debug.Log("DeadUI Play again");
 
         GameController.instance._AddLoseArchivement();
+
+        PlayerStats.instance._AddCoin(rewardCoin);
 
         MapManager.instance._SpawnMap();
     }

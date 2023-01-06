@@ -16,7 +16,10 @@ public class StartGameDelayUI : MonoBehaviour
     {
         curDelayTime = delayTime;
 
-        mapIntroUI.gameObject.SetActive(true);
+        if (PlayerStats.instance.currentTut >= TutManager.instance.tutControllers.Length)
+        {
+            mapIntroUI.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame

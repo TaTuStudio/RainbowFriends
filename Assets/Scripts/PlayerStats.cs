@@ -24,6 +24,8 @@ public class PlayerStats : MonoBehaviour
     public bool load = false;
     public bool save = false;
 
+    public int currentTut = 0;
+
     public string currentPlayerSkinID = "";
 
     public int passedLvl = 0;
@@ -134,6 +136,9 @@ public class PlayerStats : MonoBehaviour
             string dataText = File.ReadAllText(filePath);
 
             JSONObject json = new JSONObject(dataText);
+
+            if (json["currentTut"] != null)
+                int.TryParse(json["currentTut"].ToString().Replace("\"", ""), out currentTut);
 
             if (json["currentPlayerSkinID"] != null)
                 currentPlayerSkinID = json["currentPlayerSkinID"].ToString().Replace("\"", "");
@@ -267,6 +272,8 @@ public class PlayerStats : MonoBehaviour
         string jsonString = "";
 
         JSONObject jsonData = new JSONObject();
+
+        jsonData.AddField("currentTut", currentTut);
 
         jsonData.AddField("currentPlayerSkinID", currentPlayerSkinID);
 
