@@ -8,6 +8,8 @@ public class SelectGameUI : MonoBehaviour
     [SerializeField]
     private PlayerStats stats;
 
+    public int unlockCoin = 10000;
+
     public SellectGameUIButton[] sellectGameUIButtons;
 
     public void _PlayButton(string sceneName)
@@ -36,7 +38,7 @@ public class SelectGameUI : MonoBehaviour
         //    return true;
         //}
 
-        if(PlayerStats.instance.coin >= 10000 && PlayerStats.instance.mapUnlockedList.Contains(mapIndex) == false)
+        if(PlayerStats.instance.coin >= unlockCoin && PlayerStats.instance.mapUnlockedList.Contains(mapIndex) == false)
         {
             return true;
         }
@@ -71,7 +73,7 @@ public class SelectGameUI : MonoBehaviour
         //    return "Survive \"" + sellectGameUIButtons[2].mapName + "\" 10 times." + "\n" + "Death to \"" + sellectGameUIButtons[3].mapName + "\" 5 times.";
         //}
 
-        return "You need 1000 Coin to unlock this map. \n Do you want to unlock it?";
+        return "You need " + unlockCoin + " Coin to unlock this map. \n Do you want to unlock it?";
     }
 
 #if UNITY_EDITOR

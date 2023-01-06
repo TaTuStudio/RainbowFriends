@@ -70,13 +70,13 @@ public class UnlockMapInfoUI : MonoBehaviour
 
     public void _ConfirmToUnlock()
     {
-        if (GameplayUI.instance.selectGameUI._CheckCanBeUnlocked(selectMapIndex) && PlayerStats.instance.coin >= 10000)
+        if (GameplayUI.instance.selectGameUI._CheckCanBeUnlocked(selectMapIndex) && PlayerStats.instance.coin >= GameplayUI.instance.selectGameUI.unlockCoin)
         {
             GameplayUI.instance.selectGameUI._UnlockMap(selectMapIndex);
 
             GameplayUI.instance.selectGameUI.sellectGameUIButtons[selectMapIndex]._SetActive();
 
-            PlayerStats.instance._SubCoin(10000);
+            PlayerStats.instance._SubCoin(GameplayUI.instance.selectGameUI.unlockCoin);
         }
 
         _Close();
