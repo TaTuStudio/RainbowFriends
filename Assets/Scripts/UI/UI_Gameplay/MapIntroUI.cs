@@ -110,7 +110,7 @@ public class MapIntroUI : MonoBehaviour
         //    PlayTweenText();
         //}) ;
 
-        contentText.DOText(showText, 5f, true, ScrambleMode.None);
+        contentText.DOText(showText, 5f, true, ScrambleMode.Lowercase);
     }
 
     public void _CloseButton()

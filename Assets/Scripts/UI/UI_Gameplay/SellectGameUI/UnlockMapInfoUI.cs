@@ -19,14 +19,12 @@ public class UnlockMapInfoUI : MonoBehaviour
 
     void _AutoDeactive()
     {
-        if(curDeactiveDelay > 0f)
-        {
-            curDeactiveDelay -= Time.deltaTime;
+        if (!(curDeactiveDelay > 0f)) return;
+        curDeactiveDelay -= Time.deltaTime;
 
-            if(curDeactiveDelay <= 0f)
-            {
-                _Close();
-            }
+        if(curDeactiveDelay <= 0f)
+        {
+            _Close();
         }
     }
 
@@ -50,7 +48,7 @@ public class UnlockMapInfoUI : MonoBehaviour
 
         string text = "";
 
-        Tween customTween = DOTween.To(() => text, x => text = x, contentStr, contentStr.Length / speed).OnUpdate(() =>
+        DOTween.To(() => text, x => text = x, contentStr, contentStr.Length / speed).OnUpdate(() =>
         {
 
             contentText.text = text;
