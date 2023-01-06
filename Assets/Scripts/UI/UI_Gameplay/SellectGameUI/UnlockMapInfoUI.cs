@@ -12,9 +12,11 @@ public class UnlockMapInfoUI : MonoBehaviour
 
     float curDeactiveDelay = 0f;
 
+    int selectMapIndex = -1;
+
     private void Update()
     {
-        _AutoDeactive();
+        //_AutoDeactive();
     }
 
     void _AutoDeactive()
@@ -28,13 +30,15 @@ public class UnlockMapInfoUI : MonoBehaviour
         }
     }
 
-    public void _Setup(string contentStr)
+    public void _Setup(int mapIndex)
     {
         gameObject.SetActive(true);
 
+        selectMapIndex = mapIndex;
+
         contentText.text = "";
 
-        PlayTweenText(contentStr);
+        PlayTweenText(GameplayUI.instance.selectGameUI._GetUnlockText(selectMapIndex));
     }
 
     private void PlayTweenText(string contentStr)
@@ -62,5 +66,19 @@ public class UnlockMapInfoUI : MonoBehaviour
     public void _Close()
     {
         gameObject.SetActive(false);
+    }
+
+    public void _ConfirmToUnlock()
+    {
+        if (GameplayUI.instance.selectGameUI._CheckCanBeUnlocked(selectMapIndex) && PlayerStats.instance.coin >= 10000)
+        {
+            GameplayUI.instance.selectGameUI._UnlockMap(selectMapIndex);
+
+            GameplayUI.instance.selectGameUI.sellectGameUIButtons[selectMapIndex]._SetActive();
+
+            PlayerStats.instance._SubCoin(10000);
+        }
+
+        _Close();
     }
 }

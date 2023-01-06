@@ -22,6 +22,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private AudioSource bgmAudioSource;
 
     public Image dimBg;
+
     // Start is called before the first frame update
     private void OnEnable()
     {

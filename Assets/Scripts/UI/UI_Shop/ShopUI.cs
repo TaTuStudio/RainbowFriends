@@ -12,7 +12,7 @@ public class ShopUI : MonoBehaviour
 
     public int skinPrice, rewardCoin;
     public TextMeshProUGUI priceText, rewardText;
-    public GameObject buyBttn, watchAdBttn, useBttn;
+    public GameObject buyBttn, watchAdBttn, useBttn, usingBttn;
 
     public bool getItems = false;
 
@@ -29,6 +29,8 @@ public class ShopUI : MonoBehaviour
     public delegate void BuySkin(string skinName);
 
     public static BuySkin OnBuySkin;
+
+    public Image lockBG;
 
     public void _SetItemInfos(List<UI_PlayerSkinShopItem> itemList, List<PlayerSkinScriptObj.Skin2DInfo> skinInfoList)
     {
@@ -58,6 +60,7 @@ public class ShopUI : MonoBehaviour
             buyBttn.SetActive(false);
             watchAdBttn.SetActive(false);
             useBttn.SetActive(false);
+            usingBttn.SetActive(true);
         }
 
         if (selectedItem != usingItem)
@@ -67,12 +70,24 @@ public class ShopUI : MonoBehaviour
                 buyBttn.SetActive(false);
                 watchAdBttn.SetActive(false);
                 useBttn.SetActive(true);
+                usingBttn.SetActive(false);
             }
             else
             {
-                buyBttn.SetActive(true);
-                watchAdBttn.SetActive(true);
-                useBttn.SetActive(false);
+                if(PlayerStats.instance.coin >= skinPrice)
+                {
+                    buyBttn.SetActive(true);
+                    watchAdBttn.SetActive(false);
+                    useBttn.SetActive(false);
+                    usingBttn.SetActive(false);
+                }
+                else
+                {
+                    buyBttn.SetActive(true);
+                    watchAdBttn.SetActive(true);
+                    useBttn.SetActive(false);
+                    usingBttn.SetActive(false);
+                }
             }
         }
 
@@ -116,6 +131,8 @@ public class ShopUI : MonoBehaviour
         PlayerStats stats = PlayerStats.instance;
 
         stats._AddCoin(rewardCoin);
+
+        _CheckButtonsStats();
     }
 
     public void _UseButton()

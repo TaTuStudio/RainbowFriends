@@ -62,13 +62,6 @@ public class SellectGameUIButton : MonoBehaviour
             unlocked = false;
 
             lockImg.gameObject.SetActive(true);
-
-            if (GameplayUI.instance.selectGameUI._CheckCanBeUnlocked(indexNum))
-            {
-                GameplayUI.instance.selectGameUI._UnlockMap(indexNum);
-
-                _SetActive();
-            }
         }
 
         mapNameText.text = mapName;
@@ -110,7 +103,7 @@ public class SellectGameUIButton : MonoBehaviour
         }
         else
         {
-            GameplayUI.instance.unlockMapInfoUI._Setup(GameplayUI.instance.selectGameUI._GetUnlockText(indexNum));
+            GameplayUI.instance.unlockMapInfoUI._Setup(indexNum);
         }
     }
 
