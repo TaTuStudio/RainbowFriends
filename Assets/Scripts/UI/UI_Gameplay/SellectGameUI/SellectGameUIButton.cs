@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SellectGameUIButton : MonoBehaviour
@@ -49,7 +47,7 @@ public class SellectGameUIButton : MonoBehaviour
 
     public void _SetActive()
     {
-        if(PlayerStats.instance.mapUnlockedList.Contains(indexNum))
+        if (PlayerStats.instance.mapUnlockedList.Contains(indexNum))
         {
             unlocked = true;
 
@@ -69,9 +67,9 @@ public class SellectGameUIButton : MonoBehaviour
 
     void _GetArchivements()
     {
-        if(archivementIndex < 0)
+        if (archivementIndex < 0)
         {
-            for (int i= 0; i< PlayerStats.instance.mapArchivements.Count; i++ )
+            for (int i = 0; i < PlayerStats.instance.mapArchivements.Count; i++)
             {
                 if (PlayerStats.instance.mapArchivements[i].mapSceneName == mapSceneName)
                 {
@@ -82,7 +80,7 @@ public class SellectGameUIButton : MonoBehaviour
             }
         }
 
-        if(archivementIndex >= 0)
+        if (archivementIndex >= 0)
         {
             PlayerStats.MapArchivements mapArchivements = PlayerStats.instance.mapArchivements[archivementIndex];
 

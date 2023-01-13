@@ -45,9 +45,10 @@ public class KeyCollector : MonoBehaviour
                 {
                     collectedItems.Add(collectItem);
 
-                    collectItem.transform.position = positionLeftList[0].position;
-                    collectItem.transform.rotation = positionLeftList[0].rotation;
-                    collectItem.transform.parent = transform;
+                    var _transform = collectItem.transform;
+
+                    _transform.SetPositionAndRotation(positionLeftList[0].position, positionLeftList[0].rotation);
+                    _transform.parent = transform;
 
                     collectItem._SetCollected();
 
@@ -77,9 +78,10 @@ public class KeyCollector : MonoBehaviour
                 {
                     collectedItems.Add(collectItem);
 
-                    collectItem.transform.position = positionLeftList[0].position;
-                    collectItem.transform.rotation = positionLeftList[0].rotation;
-                    collectItem.transform.parent = transform;
+                    var _transform = collectItem.transform;
+
+                    _transform.SetPositionAndRotation(positionLeftList[0].position, positionLeftList[0].rotation);
+                    _transform.parent = transform;
 
                     collectItem._SetCollected();
 

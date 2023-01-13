@@ -122,10 +122,11 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            PlayerStats.MapArchivements newArchivement = new PlayerStats.MapArchivements();
-
-            newArchivement.mapSceneName = MapManager.instance.selectedMap;
-            newArchivement.winCount = 1;
+            PlayerStats.MapArchivements newArchivement = new()
+            {
+                mapSceneName = MapManager.instance.selectedMap,
+                winCount = 1
+            };
 
             PlayerStats.instance.mapArchivements.Add(newArchivement);
         }

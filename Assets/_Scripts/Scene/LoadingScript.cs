@@ -13,7 +13,15 @@ public class LoadingScript : MonoBehaviour
     //[SerializeField] private SceneLoaderSO loadMainMenu;
     private AsyncOperation loadScene;
     private bool load;
-    
+    private void Awake()
+    {
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+        Debug.unityLogger.logEnabled = false;
+#endif
+
+    }
     private IEnumerator Start()
     {
         var _a = StartCoroutine(SliderChangeValue());
