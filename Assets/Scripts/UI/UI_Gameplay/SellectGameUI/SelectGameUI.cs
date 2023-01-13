@@ -73,7 +73,7 @@ public class SelectGameUI : MonoBehaviour
         //    return "Survive \"" + sellectGameUIButtons[2].mapName + "\" 10 times." + "\n" + "Death to \"" + sellectGameUIButtons[3].mapName + "\" 5 times.";
         //}
 
-        return "You need " + unlockCoin + " Coin to unlock this map. \n Do you want to unlock it?";
+        return "You need " + unlockCoin + " coin to unlock this map. \nDo you want to unlock it?";
     }
 
 #if UNITY_EDITOR
