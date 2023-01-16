@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class UnusedManager : MonoBehaviour
@@ -17,17 +17,15 @@ public class UnusedManager : MonoBehaviour
     {
         ReuseGO selected = null;
 
-        for (int i = 0; i < unusedReuseGOs.Count; i++)
+        foreach (var _t in CollectionMarshal.AsSpan(unusedReuseGOs))
         {
-            if (id == unusedReuseGOs[i].itemID)
-            {
-                selected = unusedReuseGOs[i];
+            if (id != _t.itemID) continue;
+            selected = _t;
 
-                break;
-            }
+            break;
         }
 
-        if (selected != null)
+        if (!ReferenceEquals(selected,null))
         {
             unusedReuseGOs.Remove(selected);
         }
@@ -39,7 +37,7 @@ public class UnusedManager : MonoBehaviour
     {
         go.gameObject.SetActive(false);
 
-        go.transform.parent = this.transform;
+        go.transform.parent = transform;
 
         unusedReuseGOs.Add(go);
     }
@@ -48,7 +46,7 @@ public class UnusedManager : MonoBehaviour
     {
         go.gameObject.SetActive(false);
 
-        go.transform.parent = this.transform;
+        go.transform.parent = transform;
 
         PlayerManager.instance.spawnedMonsters.Remove(go);
 
@@ -59,17 +57,14 @@ public class UnusedManager : MonoBehaviour
     {
         PlayerAIController selected = null;
 
-        for (int i = 0; i < unusedReuseGOs.Count; i++)
+        foreach (var _t in CollectionMarshal.AsSpan(unusedReuseGOs))
         {
-            if (id == unusedReuseGOs[i].itemID)
-            {
-                selected = unusedReuseGOs[i].GetComponent<PlayerAIController>();
-
-                break;
-            }
+            if (id != _t.itemID) continue;
+            selected = _t.GetComponent<PlayerAIController>();
+            break;
         }
 
-        if (selected != null)
+        if (!ReferenceEquals(selected,null))
         {
             unusedReuseGOs.Remove(selected.GetComponent<ReuseGO>());
         }
@@ -81,7 +76,7 @@ public class UnusedManager : MonoBehaviour
     {
         go.gameObject.SetActive(false);
 
-        go.transform.parent = this.transform;
+        go.transform.parent = transform;
 
         PlayerManager.instance.spawnedAIPlayers.Remove(go);
 
@@ -92,17 +87,15 @@ public class UnusedManager : MonoBehaviour
     {
         PlayerController selected = null;
 
-        for (int i = 0; i < unusedReuseGOs.Count; i++)
+        foreach (var _t in CollectionMarshal.AsSpan(unusedReuseGOs))
         {
-            if (id == unusedReuseGOs[i].itemID)
-            {
-                selected = unusedReuseGOs[i].GetComponent<PlayerController>();
+            if (id != _t.itemID) continue;
+            selected = _t.GetComponent<PlayerController>();
 
-                break;
-            }
+            break;
         }
 
-        if (selected != null)
+        if (!ReferenceEquals(selected,null))
         {
             unusedReuseGOs.Remove(selected.GetComponent<ReuseGO>());
         }
@@ -116,7 +109,7 @@ public class UnusedManager : MonoBehaviour
     {
         go.gameObject.SetActive(false);
 
-        go.transform.parent = this.transform;
+        go.transform.parent = transform;
 
         PlayerManager.instance.spawnedPlayer = null;
 

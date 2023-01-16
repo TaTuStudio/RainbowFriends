@@ -1,38 +1,37 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Runtime.InteropServices;
 using Defective.JSON;
+using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
 
-    [System.Serializable]
+    [Serializable]
     public class MapArchivements
     {
         public string mapSceneName = "";
-        public int winCount = 0;
-        public int loseCount = 0;
+        public int winCount;
+        public int loseCount;
     }
 
     public PlayerSkinScriptObj playerSkinScriptObj;
 
     static string playerDataFileName = "player_data.json";
-    public bool load = false;
-    public bool save = false;
+    public bool load;
+    public bool save;
 
-    public int currentTut = 0;
+    public int currentTut;
 
     public string currentPlayerSkinID = "";
 
-    public int passedLvl = 0;
+    public int passedLvl;
 
-    public int coin = 0;
+    public int coin;
 
-    public bool noAd = false;
+    public bool noAd;
 
     public string playerName;
     public bool toggleSfx;

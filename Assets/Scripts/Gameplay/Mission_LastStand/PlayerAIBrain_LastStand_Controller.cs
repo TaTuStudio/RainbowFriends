@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAIBrain_LastStand_Controller : MonoBehaviour
@@ -12,7 +12,7 @@ public class PlayerAIBrain_LastStand_Controller : MonoBehaviour
 
         tempList.AddRange(PlayerManager.instance.spawnedAIPlayers);
 
-        foreach (PlayerAIBrain_LastStand brain in playerAIBrains_LastStands)
+        foreach (PlayerAIBrain_LastStand brain in CollectionMarshal.AsSpan(playerAIBrains_LastStands))
         {
             if (tempList.Count > 0)
             {

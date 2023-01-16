@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Runtime.InteropServices;
 using EPOOutline;
+using UnityEngine;
 
 public class CollectAlphabetItem : MonoBehaviour
 {
@@ -10,8 +9,8 @@ public class CollectAlphabetItem : MonoBehaviour
     public PlayerController onHandPlayer;
     public PlayerAIController onHandAIPlayer;
 
-    public bool onHand = false;
-    public bool collected = false;
+    public bool onHand;
+    public bool collected;
 
     public Transform meshContainer;
 
@@ -39,12 +38,9 @@ public class CollectAlphabetItem : MonoBehaviour
 
     void _ActiveOutLine(bool active)
     {
-        if(outlinable == null)
-        {
-            outlinable = GetComponent<Outlinable>();
-        }
+        outlinable ??= GetComponent<Outlinable>();
 
-        if(outlinable != null)
+        if(!ReferenceEquals(outlinable , null))
         {
             outlinable.enabled = active;
         }
@@ -67,7 +63,7 @@ public class CollectAlphabetItem : MonoBehaviour
     {
         if (onHand)
         {
-            if(onHandAIPlayer != null && onHandAIPlayer.isDead)
+            if((!ReferenceEquals(onHandAIPlayer,null)) && onHandAIPlayer.isDead)
             {
                 transform.position = onHandAIPlayer.transform.position;
 
@@ -78,13 +74,13 @@ public class CollectAlphabetItem : MonoBehaviour
                 _OnGroundSet();
             }
             else
-            if (onHandPlayer != null && onHandPlayer.isDead)
+            if ((!ReferenceEquals(onHandPlayer,null)) && onHandPlayer.isDead)
             {
                 transform.position = onHandPlayer.transform.position;
 
                 transform.parent = AlphabetCollectMissionController.instance.collectItemSpawner.transform;
 
-                onHandPlayer._RemoveRightHandColectItem(transform);
+                onHandPlayer._RemoveRightHandCollectItem(transform);
 
                 _OnGroundSet();
             }
@@ -116,7 +112,7 @@ public class CollectAlphabetItem : MonoBehaviour
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
 
-                foreach (Transform go in playerController.rightHandCollectedList)
+                foreach (Transform go in CollectionMarshal.AsSpan(playerController.rightHandCollectedList))
                 {
                     CollectAlphabetItem otherBox = go.GetComponent<CollectAlphabetItem>();
 
@@ -141,7 +137,7 @@ public class CollectAlphabetItem : MonoBehaviour
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
 
-                foreach (Transform go in playerAIController.rightHandCollectedList)
+                foreach (Transform go in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
                 {
                     CollectAlphabetItem otherBox = go.GetComponent<CollectAlphabetItem>();
 

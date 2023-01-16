@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ShopUI : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class ShopUI : MonoBehaviour
     public TextMeshProUGUI priceText, rewardText;
     public GameObject buyBttn, watchAdBttn, useBttn, usingBttn;
 
-    public bool getItems = false;
+    public bool getItems;
 
     public ScrollRect itemScrollView;
     public List<UI_PlayerSkinShopItem> skinItems = new List<UI_PlayerSkinShopItem>();
@@ -111,7 +110,7 @@ public class ShopUI : MonoBehaviour
         
         var stats = PlayerStats.instance;
 
-        if (stats.playerUnlockedSkinList.Contains(selectedItem.playerSkinID) != false) return;
+        if (stats.playerUnlockedSkinList.Contains(selectedItem.playerSkinID)) return;
         stats.playerUnlockedSkinList.Add(selectedItem.playerSkinID);
 
         stats._SubCoin(skinPrice);

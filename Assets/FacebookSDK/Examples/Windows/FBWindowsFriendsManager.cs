@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Facebook.Unity;
-using System;
 
 public class FBWindowsFriendsManager : MonoBehaviour {
 
@@ -71,7 +68,7 @@ public class FBWindowsFriendsManager : MonoBehaviour {
                 {
                     foreach (FriendFinderInviation item in receivedInvitations.Invitations)
                     {
-                        GameObject obj = (GameObject)Instantiate(ShowReceivedInvitation);
+                        GameObject obj = Instantiate(ShowReceivedInvitation);
                         obj.transform.SetParent(ReceivedInvitationsPanelTransform, false);
                         obj.transform.localScale = new Vector3(1, 1, 1);
 

@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-
 
 public class SimpleTouchController : MonoBehaviour {
 
@@ -15,7 +12,7 @@ public class SimpleTouchController : MonoBehaviour {
 	// PRIVATE
 	[SerializeField]
 	private RectTransform joystickArea;
-	private bool touchPresent = false;
+	private bool touchPresent;
 	private Vector2 movementVector;
 
 

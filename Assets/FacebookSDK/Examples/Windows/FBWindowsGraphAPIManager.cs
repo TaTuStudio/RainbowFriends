@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Facebook.Unity;
 
 public class FBWindowsGraphAPIManager : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class FBWindowsGraphAPIManager : MonoBehaviour
     public void GraphAPI()
     {
         HttpMethod typeQuery = (HttpMethod)Enum.Parse(typeof(HttpMethod), QueryType.options[QueryType.value].text);
-        FB.API(QueryText.text, typeQuery, (result) =>
+        FB.API(QueryText.text, typeQuery, result =>
         {
             Logger.DebugLog(result.RawResult);
         }, formData);

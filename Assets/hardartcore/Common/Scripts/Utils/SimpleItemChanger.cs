@@ -6,7 +6,7 @@ namespace hardartcore.Scripts.Utils {
 
         public GameObject[] items;
 
-        private int _selectedItemIndex = 0;
+        private int _selectedItemIndex;
 
         private void Start () {
             items[_selectedItemIndex].SetActive (true);

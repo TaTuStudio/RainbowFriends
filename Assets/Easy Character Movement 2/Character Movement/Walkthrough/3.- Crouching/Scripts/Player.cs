@@ -1,5 +1,4 @@
-﻿using EasyCharacterMovement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EasyCharacterMovement.CharacterMovementWalkthrough.Crouching
 {
@@ -88,8 +87,8 @@ namespace EasyCharacterMovement.CharacterMovementWalkthrough.Crouching
         {
             // Read Input values
 
-            float horizontal = Input.GetAxisRaw($"Horizontal");
-            float vertical = Input.GetAxisRaw($"Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
             // Create a Movement direction vector (in world space)
 
@@ -104,7 +103,7 @@ namespace EasyCharacterMovement.CharacterMovementWalkthrough.Crouching
 
             // Jump input
 
-            jump = Input.GetButton($"Jump");
+            jump = Input.GetButton("Jump");
 
             // Crouch input
 

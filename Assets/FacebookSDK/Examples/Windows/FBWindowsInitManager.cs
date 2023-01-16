@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Facebook.Unity;
 using UnityEngine;
-using Facebook.Unity;
 
 public class FBWindowsInitManager : MonoBehaviour
 {

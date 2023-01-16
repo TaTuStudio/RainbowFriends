@@ -21,7 +21,15 @@ public class AlphabetCollectMissionController : MonoBehaviour
     public bool lose = false;
 
     int aiSpawnNum = 9;
+    private void OnEnable()
+    {
+        MapManager.OnMapLoaded += _GameplaySetup;
+    }
 
+    private void OnDisable()
+    {
+        MapManager.OnMapLoaded -= _GameplaySetup;
+    }
     private void Awake()
     {
         _MakeReplaceSingleton();
@@ -35,7 +43,7 @@ public class AlphabetCollectMissionController : MonoBehaviour
 
     private void Update()
     {
-        _GameplaySetup();
+        // _GameplaySetup();
 
         _ResetWinLose();
 
@@ -60,7 +68,7 @@ public class AlphabetCollectMissionController : MonoBehaviour
 
     public void _GameplaySetup()
     {
-        if(MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
+        // if(MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
             GameController.instance._SetGameplaySetupDone(true);
 

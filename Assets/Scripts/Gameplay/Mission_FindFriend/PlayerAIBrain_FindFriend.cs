@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAIBrain_FindFriend : MonoBehaviour
@@ -8,7 +6,7 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
 
     [Header("Turn settings")]
 
-    public float turnTime = 0f;
+    public float turnTime;
 
     public int turnType = -1;
     // turnType = 0 -> stay
@@ -16,9 +14,9 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
     // turnType = 2 -> move to Random pos in range in a time
 
     private float randomRange = 10f;
-    public bool friendFound = false;
+    public bool friendFound;
 
-    public bool defaultSet = false;
+    public bool defaultSet;
 
     private void OnEnable()
     {
@@ -70,7 +68,7 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
             }
         }
 
-        if (turnType == 1 && friendFound == true)
+        if (turnType == 1 && friendFound)
         {
             playerAIController.aIPath._SetMoveToPosition(FindFriendMissionController.instance.findFriendSafeZone.transform.position);
         }
@@ -127,7 +125,7 @@ public class PlayerAIBrain_FindFriend : MonoBehaviour
         }
     }
 
-    float hideDelay = 0f;
+    float hideDelay;
     void _CheckHide()
     {
         if (FindFriendMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)

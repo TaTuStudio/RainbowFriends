@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Runtime.InteropServices;
 using EPOOutline;
+using UnityEngine;
 
 public class KeyCollectItem : MonoBehaviour
 {
@@ -10,8 +9,8 @@ public class KeyCollectItem : MonoBehaviour
     public PlayerController onHandPlayer;
     public PlayerAIController onHandAIPlayer;
 
-    public bool onHand = false;
-    public bool collected = false;
+    public bool onHand;
+    public bool collected;
 
     public Transform meshContainer;
 
@@ -67,7 +66,7 @@ public class KeyCollectItem : MonoBehaviour
     {
         if (onHand)
         {
-            if (onHandAIPlayer != null && onHandAIPlayer.isDead)
+            if ((!ReferenceEquals(onHandAIPlayer,null)) && onHandAIPlayer.isDead)
             {
                 transform.position = onHandAIPlayer.transform.position;
 
@@ -78,13 +77,13 @@ public class KeyCollectItem : MonoBehaviour
                 _OnGroundSet();
             }
             else
-            if (onHandPlayer != null && onHandPlayer.isDead)
+            if ((!ReferenceEquals(onHandPlayer,null)) && onHandPlayer.isDead)
             {
                 transform.position = onHandPlayer.transform.position;
 
                 transform.parent = KeyCollectMissionController.instance.collectItemSpawner.transform;
 
-                onHandPlayer._RemoveRightHandColectItem(transform);
+                onHandPlayer._RemoveRightHandCollectItem(transform);
 
                 _OnGroundSet();
             }
@@ -116,7 +115,7 @@ public class KeyCollectItem : MonoBehaviour
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
 
-                foreach (Transform go in playerController.rightHandCollectedList)
+                foreach (Transform go in CollectionMarshal.AsSpan(playerController.rightHandCollectedList))
                 {
                     KeyCollectItem otherItem = go.GetComponent<KeyCollectItem>();
 
@@ -141,7 +140,7 @@ public class KeyCollectItem : MonoBehaviour
                 transform.localPosition = Vector3.zero;
                 transform.localRotation = Quaternion.identity;
 
-                foreach (Transform go in playerAIController.rightHandCollectedList)
+                foreach (Transform go in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
                 {
                     KeyCollectItem otherItem = go.GetComponent<KeyCollectItem>();
 

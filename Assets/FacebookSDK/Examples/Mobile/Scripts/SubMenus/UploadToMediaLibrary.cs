@@ -18,13 +18,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+using System.IO;
+using UnityEngine;
+using UnityEngine.Networking;
+
 namespace Facebook.Unity.Example
 {
-    using System;
-    using System.IO;
-    using UnityEngine;
-    using UnityEngine.Networking;
-
     internal class UploadToMediaLibrary : MenuBase
     {
         private bool imageShouldLaunchMediaDialog = true;
@@ -42,8 +42,8 @@ namespace Facebook.Unity.Example
 
             GUILayout.Space(24);
 
-            this.LabelAndTextField("Image caption:", ref this.imageCaption);
-            if (this.Button("Image Dialog: " + imageShouldLaunchMediaDialog.ToString()))
+            LabelAndTextField("Image caption:", ref imageCaption);
+            if (Button("Image Dialog: " + imageShouldLaunchMediaDialog))
             {
                 imageShouldLaunchMediaDialog = !imageShouldLaunchMediaDialog;
             }
@@ -52,10 +52,10 @@ namespace Facebook.Unity.Example
             string imagePath = GetPath(imageFile);
             if (File.Exists(imagePath))
             {
-                if (this.Button("Upload Image to media library"))
+                if (Button("Upload Image to media library"))
                 {
 
-                    FBGamingServices.UploadImageToMediaLibrary(imageCaption, new Uri(imagePath), imageShouldLaunchMediaDialog, this.HandleResult);
+                    FBGamingServices.UploadImageToMediaLibrary(imageCaption, new Uri(imagePath), imageShouldLaunchMediaDialog, HandleResult);
                 }
             }
             else
@@ -64,8 +64,8 @@ namespace Facebook.Unity.Example
             }
             GUILayout.Space(24);
 
-            this.LabelAndTextField("Video caption:", ref this.videoCaption);
-            if (this.Button("Video Dialog: " + videoShouldLaunchMediaDialog.ToString()))
+            LabelAndTextField("Video caption:", ref videoCaption);
+            if (Button("Video Dialog: " + videoShouldLaunchMediaDialog))
             {
                 videoShouldLaunchMediaDialog = !videoShouldLaunchMediaDialog;
             }
@@ -74,9 +74,9 @@ namespace Facebook.Unity.Example
             string videoPath = GetPath(videoFile);
             if (File.Exists(videoPath))
             {
-                if (this.Button("Upload Video to media library"))
+                if (Button("Upload Video to media library"))
                 {
-                    FBGamingServices.UploadVideoToMediaLibrary(videoCaption, new Uri(videoPath), videoShouldLaunchMediaDialog, this.HandleResult);
+                    FBGamingServices.UploadVideoToMediaLibrary(videoCaption, new Uri(videoPath), videoShouldLaunchMediaDialog, HandleResult);
                 }
             }
             else
@@ -104,7 +104,7 @@ namespace Facebook.Unity.Example
 
             // Write the data so it can be uploaded
             path = Path.Combine(Application.persistentDataPath, filename);
-            System.IO.File.WriteAllBytes(path, data);
+            File.WriteAllBytes(path, data);
             #endif
 
             return path;

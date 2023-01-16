@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using EasyCharacterMovement;
+using System.Runtime.InteropServices;
 using Cinemachine;
+using EasyCharacterMovement;
 using Lofelt.NiceVibrations;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -106,13 +107,16 @@ public class PlayerController : MonoBehaviour
         if (isDead)
             return;
 
-        float yEuler =
-            transform.localEulerAngles.y + UI_Input_Controller.instance.uI_Rotate_Camera.deltaX;
-        transform.localEulerAngles = new Vector3(
-            transform.localEulerAngles.x,
-            yEuler,
-            transform.localEulerAngles.z
+        var _transform = transform;
+        var _localEulerAngles = _transform.localEulerAngles;
+        var _yEuler =
+            _localEulerAngles.y + UI_Input_Controller.instance.uI_Rotate_Camera.deltaX;
+        _localEulerAngles = new Vector3(
+            _localEulerAngles.x,
+            _yEuler,
+            _localEulerAngles.z
         );
+        _transform.localEulerAngles = _localEulerAngles;
 
         fpsCamRotVertical -= UI_Input_Controller.instance.uI_Rotate_Camera.deltaY;
         fpsCamRotVertical = Mathf.Clamp(fpsCamRotVertical, -60f, 60f);
@@ -179,7 +183,7 @@ public class PlayerController : MonoBehaviour
 
         // Apply Air friction (Drag)
 
-        velocity -= velocity * airFriction * Time.deltaTime;
+        velocity -= velocity * (airFriction * Time.deltaTime);
 
         // Update character's velocity
 
@@ -192,9 +196,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        var _transform = transform;
         movementDirection =
-            transform.forward * UI_Input_Controller.instance.moveJoyStick.Vertical
-            + transform.right * UI_Input_Controller.instance.moveJoyStick.Horizontal;
+            _transform.forward * UI_Input_Controller.instance.moveJoyStick.Vertical
+            + _transform.right * UI_Input_Controller.instance.moveJoyStick.Horizontal;
 
         Vector3 desiredVelocity = Vector3.zero;
 
@@ -224,14 +229,7 @@ public class PlayerController : MonoBehaviour
         float vertical = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Vertical);
         float horizontal = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Horizontal);
 
-        if (vertical > horizontal)
-        {
-            playerSFX._SetSpeedNormalize(vertical);
-        }
-        else
-        {
-            playerSFX._SetSpeedNormalize(horizontal);
-        }
+        playerSFX._SetSpeedNormalize(vertical > horizontal ? vertical : horizontal);
     }
 
     /// <summary>
@@ -308,22 +306,22 @@ public class PlayerController : MonoBehaviour
     [Header("Custom settings")]
     public CinemachineVirtualCamera fpsVirtualCam;
     public CinemachineVirtualCamera tpsVirtualCam;
-    public float fpsCamRotVertical = 0f;
+    public float fpsCamRotVertical;
 
-    public float boostSpeed = 0f;
+    public float boostSpeed;
 
-    public bool isHiding = false;
+    public bool isHiding;
 
-    public bool catched = false;
+    public bool catched;
 
-    public bool isDead = false;
+    public bool isDead;
 
-    public bool setDefault = false;
+    public bool setDefault;
 
-    public bool noDam = false;
+    public bool noDam;
 
     [SerializeField]
-    float noDamDelay = 0f;
+    float noDamDelay;
 
     public Transform OnHandItemContainer_Right;
 
@@ -388,14 +386,11 @@ public class PlayerController : MonoBehaviour
 
     void _CleanItems()
     {
-        foreach (Transform t in rightHandCollectedList)
+        foreach (Transform t in CollectionMarshal.AsSpan(rightHandCollectedList))
         {
-            if (t == null)
-                continue;
+            ReuseGO reuseGO = !ReferenceEquals(t, null) ? t.GetComponent<ReuseGO>() : null;
 
-            ReuseGO reuseGO = t.GetComponent<ReuseGO>();
-
-            if (reuseGO != null)
+            if (!ReferenceEquals(reuseGO, null))
             {
                 UnusedManager.instance._AddToUnusedGO(reuseGO);
             }
@@ -413,7 +408,7 @@ public class PlayerController : MonoBehaviour
         _SetHoldItemAnim(true);
     }
 
-    public void _RemoveRightHandColectItem(Transform item)
+    public void _RemoveRightHandCollectItem(Transform item)
     {
         rightHandCollectedList.Remove(item);
 
@@ -432,14 +427,12 @@ public class PlayerController : MonoBehaviour
 
     void _NoDamDelay()
     {
-        if (noDam && noDamDelay >= 0f)
-        {
-            noDamDelay -= Time.deltaTime;
+        if (!noDam || !(noDamDelay >= 0f)) return;
+        noDamDelay -= Time.deltaTime;
 
-            if (noDamDelay < 0f)
-            {
-                noDam = false;
-            }
+        if (noDamDelay < 0f)
+        {
+            noDam = false;
         }
     }
 
@@ -470,21 +463,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    float unHideDelayTime = 0f;
+    float unHideDelayTime;
 
     public void _UnHideDelay()
     {
-        if (unHideDelayTime > 0f)
-        {
-            unHideDelayTime -= Time.deltaTime;
+        if (!(unHideDelayTime > 0f)) return;
+        unHideDelayTime -= Time.deltaTime;
 
-            if (unHideDelayTime <= 0f)
-            {
-                fpsCamRotVertical = 0f;
+        if (!(unHideDelayTime <= 0f)) return;
+        fpsCamRotVertical = 0f;
 
-                CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
-            }
-        }
+        CameraManager.instance._GameplaySwitchCam(fpsVirtualCam);
     }
 
     public void _SetCatched(bool active)
@@ -527,6 +516,11 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnimator;
 
     public GameObject[] playerMeshes;
+    
+    private static readonly int NormalizedSpeed = Animator.StringToHash("NormalizedSpeed");
+    private static readonly int Dead = Animator.StringToHash("Dead");
+    private static readonly int Hold = Animator.StringToHash("Hold Item");
+    private static readonly int Hiding = Animator.StringToHash("Hiding");
 
     void _HideMesh(bool active)
     {
@@ -555,34 +549,27 @@ public class PlayerController : MonoBehaviour
             float vertical = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Vertical);
             float horizontal = Mathf.Abs(UI_Input_Controller.instance.moveJoyStick.Horizontal);
 
-            if (vertical > horizontal)
-            {
-                trueSpeed = vertical;
-            }
-            else
-            {
-                trueSpeed = horizontal;
-            }
+            trueSpeed = vertical > horizontal ? vertical : horizontal;
         }
 
-        playerAnimator.SetFloat("NormalizedSpeed", trueSpeed);
+        playerAnimator.SetFloat(NormalizedSpeed, trueSpeed);
     }
 
     void _SetDeadAnim(bool active)
     {
-        playerAnimator.SetBool("Dead", active);
+        playerAnimator.SetBool(Dead, active);
     }
 
     void _SetHoldItemAnim(bool active)
     {
-        playerAnimator.SetBool("Hold Item", active);
+        playerAnimator.SetBool(Hold, active);
     }
 
     void _SetHideAnim(bool active)
     {
         arrowAnim.gameObject.SetActive(active);
 
-        playerAnimator.SetBool("Hiding", active);
+        playerAnimator.SetBool(Hiding, active);
     }
 
     #endregion

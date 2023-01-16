@@ -16,7 +16,15 @@ public class FindFriendMissionController : MonoBehaviour
     public bool lose = false;
 
     int aiSpawnNum = 9;
+    private void OnEnable()
+    {
+        MapManager.OnMapLoaded += _GameplaySetup;
+    }
 
+    private void OnDisable()
+    {
+        MapManager.OnMapLoaded -= _GameplaySetup;
+    }
     public PlayerAIController friendPrefab;
 
     public PlayerAIController spawnedFriend;
@@ -39,7 +47,7 @@ public class FindFriendMissionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _GameplaySetup();
+        // _GameplaySetup();
 
         _ResetWinLose();
 
@@ -64,7 +72,7 @@ public class FindFriendMissionController : MonoBehaviour
 
     public void _GameplaySetup()
     {
-        if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
+        // if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
             GameController.instance._SetGameplaySetupDone(true);
 

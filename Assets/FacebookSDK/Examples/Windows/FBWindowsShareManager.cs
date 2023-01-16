@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.IO;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Facebook.Unity;
-using Facebook.MiniJSON;
-using System;
-using System.IO;
 
 public class FBWindowsShareManager : MonoBehaviour
 {

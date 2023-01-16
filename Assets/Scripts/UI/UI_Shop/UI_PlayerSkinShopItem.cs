@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +12,7 @@ public class UI_PlayerSkinShopItem : MonoBehaviour
 
     public Image skinImage;
 
-    public bool unlocked = false;
+    public bool unlocked;
 
     private void OnEnable()
     {

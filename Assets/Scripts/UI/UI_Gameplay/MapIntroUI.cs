@@ -1,12 +1,12 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
 
 public class MapIntroUI : MonoBehaviour
 {
-    [System.Serializable]
+    [Serializable]
     public class MapIntroInfo
     {
         public string mapSceneName = "";
@@ -24,9 +24,9 @@ public class MapIntroUI : MonoBehaviour
 
     public List<string> selectedContents = new List<string>();
 
-    float curDeactiveTime = 0f;
+    float curDeactiveTime;
 
-    bool setup = false;
+    bool setup;
 
     private void OnEnable()
     {

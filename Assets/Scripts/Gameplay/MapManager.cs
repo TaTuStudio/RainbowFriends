@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Pathfinding;
 
 public class MapManager : MonoBehaviour
 {
@@ -23,6 +23,9 @@ public class MapManager : MonoBehaviour
 
     private bool loadingMap;
     
+    public delegate void MapLoaded();
+    public static event MapLoaded OnMapLoaded;
+
     private void Awake()
     {
         instance = this;
@@ -65,13 +68,16 @@ public class MapManager : MonoBehaviour
 
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(selectedMap));
 
-        spawnedMap.loadMapDone = true;
+        //spawnedMap.loadMapDone = true;
+        
+        OnMapLoaded?.Invoke();
+        
         loadingMap = false;
     }
 
     IEnumerator _CheckSceneSpawned()
     {
-        if (spawnedMap != null)
+        if (!ReferenceEquals(spawnedMap,null))
         {
             AsyncOperation operation = SceneManager.UnloadSceneAsync(selectedMap);
 
@@ -92,10 +98,12 @@ public class MapManager : MonoBehaviour
 
     public void _UnloadScene()
     {
-        if (spawnedMap == null) return;
-        
+        if (ReferenceEquals(spawnedMap,null)) return;
+
         SceneManager.UnloadSceneAsync(selectedMap);
-            
+        
+        spawnedMap = null;
+
         BGMAudioSource.Play();
     }
 

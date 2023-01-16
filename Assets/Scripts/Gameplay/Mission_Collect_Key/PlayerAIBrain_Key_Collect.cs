@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAIBrain_Key_Collect : MonoBehaviour
@@ -10,19 +10,19 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
 
     [Header("Turn settings")]
 
-    public float turnTime = 0f;
+    public float turnTime;
 
     public int turnType = -1;
     // turnType = 0 -> stay
     // turnType = 1 -> move to one of Collect item position
     // turnType = 2 -> move to Random pos in range in a time
 
-    public int lastItemOnhand = 0;
+    public int lastItemOnhand;
 
     private float randomRange = 10f;
     public ReuseGO selectedItem;
 
-    public bool defaultSet = false;
+    public bool defaultSet;
 
     private void OnEnable()
     {
@@ -105,7 +105,7 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
 
     void _GetTurn()
     {
-        List<int> ranNumList = new List<int>() { 0, 2 };
+        List<int> ranNumList = new List<int> { 0, 2 };
 
         if (KeyCollectMissionController.instance.collectItemSpawner.collectedItems.Count < KeyCollectMissionController.instance.collectItemSpawner.spawnedItems.Count)
         {
@@ -130,7 +130,7 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
 
             tempList.AddRange(KeyCollectMissionController.instance.collectItemSpawner.spawnedItems);
 
-            foreach (ReuseGO reuseGO in KeyCollectMissionController.instance.collectItemSpawner.collectedItems)
+            foreach (ReuseGO reuseGO in CollectionMarshal.AsSpan(KeyCollectMissionController.instance.collectItemSpawner.collectedItems))
             {
                 if (tempList.Contains(reuseGO) || _CheckCanCollectItem(reuseGO) == false)
                 {
@@ -168,11 +168,11 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
 
     bool _CheckCanCollectItem(ReuseGO checkGO)
     {
-        foreach (PlayerAIBrain_Key_Collect brain in playerAIBrains_key_Collect_Controller.playerAIBrain_Collects)
+        foreach (PlayerAIBrain_Key_Collect brain in CollectionMarshal.AsSpan(playerAIBrains_key_Collect_Controller.playerAIBrain_Collects))
         {
             List<ReuseGO> onHandItems = new List<ReuseGO>();
 
-            foreach (Transform t in playerAIController.rightHandCollectedList)
+            foreach (Transform t in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
             {
                 ReuseGO go = t.GetComponent<ReuseGO>();
 
@@ -212,7 +212,7 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
 
         List<ReuseGO> onHandItems = new List<ReuseGO>();
 
-        foreach (Transform t in playerAIController.rightHandCollectedList)
+        foreach (Transform t in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
         {
             ReuseGO go = t.GetComponent<ReuseGO>();
 
@@ -222,9 +222,9 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
             }
         }
 
-        foreach (PlayerAIBrain_Key_Collect brain in playerAIBrains_key_Collect_Controller.playerAIBrain_Collects)
+        foreach (PlayerAIBrain_Key_Collect brain in CollectionMarshal.AsSpan(playerAIBrains_key_Collect_Controller.playerAIBrain_Collects))
         {
-            if (brain != this && brain.selectedItem != null && onHandItems.Contains(brain.selectedItem))
+            if (brain != this && !ReferenceEquals(brain.selectedItem, null) && onHandItems.Contains(brain.selectedItem))
             {
                 //Debug.Log(brain.name + " got same item " + brain.selectedItem.itemID);
 
@@ -233,7 +233,7 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
         }
     }
 
-    float hideDelay = 0f;
+    float hideDelay;
     void _CheckHide()
     {
         if (KeyCollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
@@ -247,11 +247,11 @@ public class PlayerAIBrain_Key_Collect : MonoBehaviour
             {
                 if (playerAIController.isHiding)
                 {
-                    hideDelay = (float)Random.Range(5, 15);
+                    hideDelay = Random.Range(5, 15);
                 }
                 else
                 {
-                    hideDelay = (float)Random.Range(5, 10);
+                    hideDelay = Random.Range(5, 10);
                 }
 
                 playerAIController._SetHide();

@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAIBrain_FindFriend_Controller : MonoBehaviour
@@ -18,7 +18,7 @@ public class PlayerAIBrain_FindFriend_Controller : MonoBehaviour
 
         tempList.AddRange(PlayerManager.instance.spawnedAIPlayers);
 
-        foreach (PlayerAIBrain_FindFriend brain in playerAIBrains_FindFriend)
+        foreach (PlayerAIBrain_FindFriend brain in CollectionMarshal.AsSpan(playerAIBrains_FindFriend))
         {
             if (tempList.Count > 0)
             {

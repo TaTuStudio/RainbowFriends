@@ -18,8 +18,8 @@ namespace EasyCharacterMovement.Examples.OldInput.ThirdPersonExample
 
             Vector2 movementInput = new Vector2
             {
-                x = Input.GetAxisRaw($"Horizontal"),
-                y = Input.GetAxisRaw($"Vertical"),
+                x = Input.GetAxisRaw("Horizontal"),
+                y = Input.GetAxisRaw("Vertical"),
             };
 
             // Add input movement relative to camera look direction
@@ -35,9 +35,9 @@ namespace EasyCharacterMovement.Examples.OldInput.ThirdPersonExample
 
             // Jump
 
-            if (Input.GetButtonDown($"Jump"))
+            if (Input.GetButtonDown("Jump"))
                 Jump();
-            else if (Input.GetButtonUp($"Jump"))
+            else if (Input.GetButtonUp("Jump"))
                 StopJumping();
 
             // Crouch
@@ -70,8 +70,8 @@ namespace EasyCharacterMovement.Examples.OldInput.ThirdPersonExample
             
             Vector2 mouseLookInput = new Vector2
             {
-                x = Input.GetAxisRaw($"Mouse X"),
-                y = Input.GetAxisRaw($"Mouse Y"),
+                x = Input.GetAxisRaw("Mouse X"),
+                y = Input.GetAxisRaw("Mouse Y"),
             };
 
             if (mouseLookInput.x != 0.0f)

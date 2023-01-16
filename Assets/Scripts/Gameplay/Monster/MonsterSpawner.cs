@@ -1,28 +1,30 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MonsterSpawner : MonoBehaviour
 {
     public static MonsterSpawner instance;
 
-    [System.Serializable]
+    [Serializable]
     public class MonsterSpawnInfo
     {
         public ReuseGO monsterPrefab;
 
         [Header("Behavior Rate settings")]
-        public bool avoidHide = false;
+        public bool avoidHide;
         public float moveToAnyWhereRate = 20f;
         public float moveToCheckPointRate = 40f;
         public float moveToPlayerRate = 40f;
 
         [Header("Check points Spawn Points settings")]
-        public List<Transform> checkPoints = new List<Transform>();
-        public List<Transform> spawnPoints = new List<Transform>();
+        public List<Transform> checkPoints = new();
+        public List<Transform> spawnPoints = new();
     }
 
-    public List<MonsterSpawnInfo> monsterSpawnInfos = new List<MonsterSpawnInfo>();
+    public List<MonsterSpawnInfo> monsterSpawnInfos = new();
 
     private void Awake()
     {
@@ -31,23 +33,23 @@ public class MonsterSpawner : MonoBehaviour
 
     void _MakeReplaceSingleton()
     {
-        if (MonsterSpawner.instance != null && MonsterSpawner.instance != this)
+        if (instance != null && instance != this)
         {
-            MonsterSpawner old = MonsterSpawner.instance;
+            MonsterSpawner old = instance;
 
-            MonsterSpawner.instance = this;
+            instance = this;
 
             Destroy(old);
         }
         else
         {
-            MonsterSpawner.instance = this;
+            instance = this;
         }
     }
 
     public void _SpawnAllMonsters()
     {
-        foreach (MonsterSpawnInfo m in monsterSpawnInfos)
+        foreach (MonsterSpawnInfo m in CollectionMarshal.AsSpan(monsterSpawnInfos))
         {
             int spawnPosIndex = Random.Range(0, m.spawnPoints.Count);
 
@@ -57,14 +59,14 @@ public class MonsterSpawner : MonoBehaviour
 
             MonsterController monsterController = spawnedMonster.GetComponent<MonsterController>();
 
-            if(monsterController != null)
+            if(!ReferenceEquals(monsterController,null))
             {
                 monsterController.monsterInfo = m;
             }
 
             ImpostorMonsterController impostorMonsterController = spawnedMonster.GetComponent<ImpostorMonsterController>();
 
-            if (impostorMonsterController != null)
+            if (!ReferenceEquals(impostorMonsterController,null))
             {
                 impostorMonsterController.monsterInfo = m;
             }

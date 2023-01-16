@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutLv1Step4 : MonoBehaviour
 {
     public TutController tutController;
 
-    public bool active = false;
+    public bool active;
 
-    public bool stepDone = false;
+    public bool stepDone;
 
     // Update is called once per frame
     void Update()
@@ -30,11 +28,11 @@ public class TutLv1Step4 : MonoBehaviour
 
     void _CheckMove()
     {
-        if (stepDone == false && GameController.instance.gameplaySetupDone && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.isHiding == false)
-        {
-            stepDone = true;
+        if (stepDone || !GameController.instance.gameplaySetupDone ||
+            (ReferenceEquals(PlayerManager.instance.spawnedPlayer, null)) ||
+            PlayerManager.instance.spawnedPlayer.isHiding) return;
+        stepDone = true;
 
-            tutController._NextStep();
-        }
+        tutController._NextStep();
     }
 }

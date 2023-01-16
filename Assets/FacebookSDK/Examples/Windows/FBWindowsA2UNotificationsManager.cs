@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Facebook.Unity;
 
 public class FBWindowsA2UNotificationsManager : MonoBehaviour {
 
@@ -15,7 +14,7 @@ public class FBWindowsA2UNotificationsManager : MonoBehaviour {
 
 	public void ScheduleButton () {
 		Logger.DebugLog("Scheduling notification ...");
-		FB.ScheduleAppToUserNotification(TitleText.text, BodyText.text, new System.Uri(MediaText.text), int.Parse(TimeIntervalText.text), PayloadText.text, A2UNotificationCallback);
+		FB.ScheduleAppToUserNotification(TitleText.text, BodyText.text, new Uri(MediaText.text), int.Parse(TimeIntervalText.text), PayloadText.text, A2UNotificationCallback);
 	}
 
 	private void A2UNotificationCallback(IScheduleAppToUserNotificationResult result)

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,7 +55,7 @@ public class FeederCollector : MonoBehaviour
 
                     positionLeftList.RemoveAt(0);
 
-                    playerController._RemoveRightHandColectItem(tempList[0]);
+                    playerController._RemoveRightHandCollectItem(tempList[0]);
 
                     collectItem._ResetOnHandPlayer();
                 }

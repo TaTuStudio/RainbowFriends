@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Input_Controller : MonoBehaviour
@@ -17,7 +15,7 @@ public class UI_Input_Controller : MonoBehaviour
 
     public void _HideButton()
     {
-        if(PlayerManager.instance.spawnedPlayer != null)
+        if((!ReferenceEquals(PlayerManager.instance.spawnedPlayer,null)))
         {
             PlayerManager.instance.spawnedPlayer._SetHide();
         }

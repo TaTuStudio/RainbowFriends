@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
@@ -10,19 +10,19 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
 
     [Header("Turn settings")]
 
-    public float turnTime = 0f;
+    public float turnTime;
 
     public int turnType = -1;
     // turnType = 0 -> stay
     // turnType = 1 -> move to one of Collect item position
     // turnType = 2 -> move to Random pos in range in a time
 
-    public int lastItemOnhand = 0;
+    public int lastItemOnhand;
 
     private float randomRange = 10f;
     public ReuseGO selectedItem;
 
-    public bool defaultSet = false;
+    public bool defaultSet;
 
     private void OnEnable()
     {
@@ -65,7 +65,7 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
             _GetTurn();
         }
 
-        if (turnType == 0 || turnType == 2)
+        if (turnType is 0 or 2)
         {
             if (turnTime >= 0f)
             {
@@ -80,7 +80,7 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
 
         if (turnType == 1)
         {
-            if (selectedItem == null)
+            if (ReferenceEquals(selectedItem, null))
             {
                 _GetTurn();
             }
@@ -105,7 +105,7 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
 
     void _GetTurn()
     {
-        List<int> ranNumList = new List<int>() { 0, 2 };
+        var ranNumList = new List<int> { 0, 2 };
 
         if (FeederCollectMissionController.instance.collectItemSpawner.collectedItems.Count < FeederCollectMissionController.instance.collectItemSpawner.spawnedItems.Count)
         {
@@ -114,69 +114,76 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
 
         turnType = Random.Range(0, ranNumList.Count);
 
-        if (turnType == 0)
+        switch (turnType)
         {
-            turnTime = (float)Random.Range(1, 3);
+            case 0:
+                turnTime = Random.Range(1, 3);
 
-            playerAIController.aIPath._SetMoveToPosition(playerAIController.transform.position);
+                playerAIController.aIPath._SetMoveToPosition(playerAIController.transform.position);
 
-            //Debug.Log("Player AI Stay");
-        }
-        else if (turnType == 1)
-        {
-            selectedItem = null;
-
-            List<ReuseGO> tempList = new List<ReuseGO>();
-
-            tempList.AddRange(FeederCollectMissionController.instance.collectItemSpawner.spawnedItems);
-
-            foreach (ReuseGO reuseGO in FeederCollectMissionController.instance.collectItemSpawner.collectedItems)
+                //Debug.Log("Player AI Stay");
+                break;
+            case 1:
             {
-                if (tempList.Contains(reuseGO) || _CheckCanCollectItem(reuseGO) == false)
+                selectedItem = null;
+
+                List<ReuseGO> tempList = new List<ReuseGO>();
+
+                tempList.AddRange(FeederCollectMissionController.instance.collectItemSpawner.spawnedItems);
+
+                foreach (ReuseGO reuseGO in CollectionMarshal.AsSpan(FeederCollectMissionController.instance.collectItemSpawner.collectedItems))
                 {
-                    tempList.Remove(reuseGO);
+                    if (tempList.Contains(reuseGO) || _CheckCanCollectItem(reuseGO) == false)
+                    {
+                        tempList.Remove(reuseGO);
+                    }
                 }
-            }
 
-            if (tempList.Count > 0)
+                if (tempList.Count > 0)
+                {
+                    int ranItemIndex = Random.Range(0, tempList.Count);
+
+                    selectedItem = tempList[ranItemIndex];
+                }
+
+                break;
+            }
+            case 2:
             {
-                int ranItemIndex = Random.Range(0, tempList.Count);
+                turnTime = Random.Range(3, 5);
 
-                selectedItem = tempList[ranItemIndex];
+                Vector3 ranPos = new Vector3(
+                    Random.Range(-randomRange, randomRange), 
+                    playerAIController.transform.position.y, 
+                    Random.Range(-randomRange, randomRange));
+
+                ranPos = transform.position + ranPos;
+
+                //var info = AstarPath.active.GetNearest(ranPos);
+                //var node = info.node;
+                //Vector3 closestPoint = info.position;
+
+                //Debug.Log("ranPos = " + ranPos);
+
+                playerAIController.aIPath._SetMoveToPosition(ranPos);
+
+                //Debug.Log("Player AI move to random position");
+                break;
             }
-
-        }
-        else if (turnType == 2)
-        {
-            turnTime = Random.Range(3, 5);
-
-            Vector3 ranPos = new Vector3(Random.Range(-randomRange, randomRange), playerAIController.transform.position.y, Random.Range(-randomRange, randomRange));
-
-            ranPos = transform.position + ranPos;
-
-            //var info = AstarPath.active.GetNearest(ranPos);
-            //var node = info.node;
-            //Vector3 closestPoint = info.position;
-
-            //Debug.Log("ranPos = " + ranPos);
-
-            playerAIController.aIPath._SetMoveToPosition(ranPos);
-
-            //Debug.Log("Player AI move to random position");
         }
     }
 
     bool _CheckCanCollectItem(ReuseGO checkGO)
     {
-        foreach (PlayerAIBrain_Feeder_Collect brain in playerAIBrains_Feeder_CollectController.playerAIBrain_Collects)
+        foreach (var brain in CollectionMarshal.AsSpan(playerAIBrains_Feeder_CollectController.playerAIBrain_Collects))
         {
-            List<ReuseGO> onHandItems = new List<ReuseGO>();
+            var onHandItems = new List<ReuseGO>();
 
-            foreach (Transform t in playerAIController.rightHandCollectedList)
+            foreach (Transform t in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
             {
-                ReuseGO go = t.GetComponent<ReuseGO>();
+                ReuseGO go = t?.GetComponent<ReuseGO>();
 
-                if (go != null)
+                if (!ReferenceEquals(go, null))
                 {
                     onHandItems.Add(go);
                 }
@@ -198,33 +205,31 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
 
     void _CheckRightHandItemsChange()
     {
-        if (lastItemOnhand != playerAIController.rightHandCollectedList.Count)
-        {
-            lastItemOnhand = playerAIController.rightHandCollectedList.Count;
+        if (lastItemOnhand == playerAIController.rightHandCollectedList.Count) return;
+        lastItemOnhand = playerAIController.rightHandCollectedList.Count;
 
-            _SetOtherBrainAvoidOnHandItem();
-        }
+        _SetOtherBrainAvoidOnHandItem();
     }
 
     void _SetOtherBrainAvoidOnHandItem()
     {
-        if (selectedItem == null || playerAIController.rightHandCollectedList.Count == 0) return;
+        if (ReferenceEquals(selectedItem, null) || playerAIController.rightHandCollectedList.Count == 0) return;
 
         List<ReuseGO> onHandItems = new List<ReuseGO>();
 
-        foreach (Transform t in playerAIController.rightHandCollectedList)
+        foreach (Transform t in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
         {
-            ReuseGO go = t.GetComponent<ReuseGO>();
+            ReuseGO go = t?.GetComponent<ReuseGO>();
 
-            if (go != null)
+            if (!ReferenceEquals(go, null))
             {
                 onHandItems.Add(go);
             }
         }
 
-        foreach (PlayerAIBrain_Feeder_Collect brain in playerAIBrains_Feeder_CollectController.playerAIBrain_Collects)
+        foreach (PlayerAIBrain_Feeder_Collect brain in CollectionMarshal.AsSpan(playerAIBrains_Feeder_CollectController.playerAIBrain_Collects))
         {
-            if (brain != this && brain.selectedItem != null && onHandItems.Contains(brain.selectedItem))
+            if (brain != this && !ReferenceEquals(brain.selectedItem, null) && onHandItems.Contains(brain.selectedItem))
             {
                 //Debug.Log(brain.name + " got same item " + brain.selectedItem.itemID);
 
@@ -233,29 +238,18 @@ public class PlayerAIBrain_Feeder_Collect : MonoBehaviour
         }
     }
 
-    float hideDelay = 0f;
+    float hideDelay;
     void _CheckHide()
     {
         if (FeederCollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
             return;
 
-        if (hideDelay >= 0f)
-        {
-            hideDelay -= Time.deltaTime;
+        if (!(hideDelay >= 0f)) return;
+        hideDelay -= Time.deltaTime;
 
-            if (hideDelay < 0f)
-            {
-                if (playerAIController.isHiding)
-                {
-                    hideDelay = (float)Random.Range(5, 15);
-                }
-                else
-                {
-                    hideDelay = (float)Random.Range(5, 10);
-                }
+        if (!(hideDelay < 0f)) return;
+        hideDelay = Random.Range(5, playerAIController.isHiding ? 15 : 10);
 
-                playerAIController._SetHide();
-            }
-        }
+        playerAIController._SetHide();
     }
 }

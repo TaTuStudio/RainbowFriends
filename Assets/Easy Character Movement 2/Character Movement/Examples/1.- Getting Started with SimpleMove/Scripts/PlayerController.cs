@@ -1,5 +1,4 @@
-﻿using EasyCharacterMovement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EasyCharacterMovement.CharacterMovementExamples
 {
@@ -35,8 +34,8 @@ namespace EasyCharacterMovement.CharacterMovementExamples
         {
             // Read Input values
             
-            float horizontal = Input.GetAxisRaw($"Horizontal");
-            float vertical = Input.GetAxisRaw($"Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
             
             // Create a movement direction vector (in world space)
             
@@ -50,7 +49,7 @@ namespace EasyCharacterMovement.CharacterMovementExamples
 
             // Jump
             
-            if (_characterMovement.isGrounded && Input.GetButton($"Jump"))
+            if (_characterMovement.isGrounded && Input.GetButton("Jump"))
             {
                 _characterMovement.PauseGroundConstraint();
                 _characterMovement.LaunchCharacter(Vector3.up * jumpImpulse, true);

@@ -9,17 +9,17 @@ public class SellectGameUIButton : MonoBehaviour
     public string mapSceneName = "";
     public string mapName = "";
 
-    public bool unlocked = false;
+    public bool unlocked;
 
     public TextMeshProUGUI mapNameText;
     public Transform lockImg;
 
-    public bool set = false;
+    public bool set;
 
     public int archivementIndex = -1;
-    public int winCount = 0;
+    public int winCount;
     public TextMeshProUGUI winCountText;
-    public int loseCount = 0;
+    public int loseCount;
     public TextMeshProUGUI loseCountText;
 
     private void Start()

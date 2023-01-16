@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Facebook.MiniJSON;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Facebook.Unity;
-using Facebook.MiniJSON;
 
 public class FBWindowsTournamentsManager : MonoBehaviour {
 

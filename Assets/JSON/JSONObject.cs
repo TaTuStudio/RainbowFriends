@@ -33,12 +33,11 @@ THE SOFTWARE.
 #endif
 
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Globalization;
-
+using System.Text;
 #if USING_UNITY
 using UnityEngine;
 using Debug = UnityEngine.Debug;

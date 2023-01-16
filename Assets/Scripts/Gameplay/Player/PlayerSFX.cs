@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSFX : MonoBehaviour
 {
-    float speedNormalize = 0f;
+    float speedNormalize;
 
     public SoundEffectSO footStepFX;
-    float curFootStepDelay = 0f;
+    float curFootStepDelay;
 
     private void OnEnable()
     {

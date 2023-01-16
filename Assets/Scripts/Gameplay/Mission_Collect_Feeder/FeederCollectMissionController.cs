@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class FeederCollectMissionController : MonoBehaviour
@@ -12,12 +11,22 @@ public class FeederCollectMissionController : MonoBehaviour
 
     public Transform collector;
 
-    public bool gameplaySet = false;
+    public bool gameplaySet;
 
-    public bool win = false;
-    public bool lose = false;
+    public bool win;
+    public bool lose;
 
     int aiSpawnNum = 9;
+
+    private void OnEnable()
+    {
+        MapManager.OnMapLoaded += _GameplaySetup;
+    }
+
+    private void OnDisable()
+    {
+        MapManager.OnMapLoaded -= _GameplaySetup;
+    }
 
     private void Awake()
     {
@@ -32,7 +41,7 @@ public class FeederCollectMissionController : MonoBehaviour
 
     private void Update()
     {
-        _GameplaySetup();
+        //_GameplaySetup();
 
         _ResetWinLose();
 
@@ -41,23 +50,23 @@ public class FeederCollectMissionController : MonoBehaviour
 
     void _MakeReplaceSingleton()
     {
-        if (FeederCollectMissionController.instance != null && FeederCollectMissionController.instance != this)
+        if (instance != null && instance != this)
         {
-            FeederCollectMissionController old = FeederCollectMissionController.instance;
+            FeederCollectMissionController old = instance;
 
-            FeederCollectMissionController.instance = this;
+            instance = this;
 
             Destroy(old);
         }
         else
         {
-            FeederCollectMissionController.instance = this;
+            instance = this;
         }
     }
 
     public void _GameplaySetup()
     {
-        if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
+        //if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
             GameController.instance._SetGameplaySetupDone(true);
 
@@ -89,7 +98,7 @@ public class FeederCollectMissionController : MonoBehaviour
 
     void _WinLoseCheck()
     {
-        if (win == false && lose == false && gameplaySet == true && GameController.instance.isPlaying == true && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
+        if (win == false && lose == false && gameplaySet && GameController.instance.isPlaying && PlayerManager.instance.spawnedPlayer != null && PlayerManager.instance.spawnedPlayer.setDefault == false)
         {
             if (collectItemSpawner.spawnedItems.Count > 0 && collectItemSpawner.collectedItems.Count >= collectItemSpawner.spawnedItems.Count)
             {
@@ -114,8 +123,6 @@ public class FeederCollectMissionController : MonoBehaviour
                 lose = true;
 
                 GameplayUI.instance._ActiveOutTimeUI(true);
-
-                return;
             }
         }
     }

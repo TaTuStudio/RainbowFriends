@@ -1,5 +1,4 @@
-﻿using EasyCharacterMovement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EasyCharacterMovement.CharacterMovementWalkthrough.Crouching
 {

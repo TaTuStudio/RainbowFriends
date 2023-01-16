@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -11,19 +10,19 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     [Header("Turn settings")]
 
-    public float turnTime = 0f;
+    public float turnTime;
 
     public int turnType = -1;
     // turnType = 0 -> stay
     // turnType = 1 -> move to one of Collect item position
     // turnType = 2 -> move to Random pos in range in a time
 
-    public int lastItemOnhand = 0;
+    public int lastItemOnhand;
 
     private float randomRange = 10f;
     public ReuseGO selectedItem;
 
-    public bool defaultSet = false;
+    public bool defaultSet;
 
     private void OnEnable()
     {
@@ -81,7 +80,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
         if (turnType == 1)
         {
-            if(selectedItem == null)
+            if (ReferenceEquals(selectedItem, null))
             {
                 _GetTurn();
             }
@@ -106,7 +105,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     void _GetTurn()
     {
-        List<int> ranNumList = new List<int>() { 0, 2 };
+        List<int> ranNumList = new List<int> { 0, 2 };
 
         if(AlphabetCollectMissionController.instance.collectItemSpawner.collectedItems.Count < AlphabetCollectMissionController.instance.collectItemSpawner.spawnedItems.Count)
         {
@@ -209,7 +208,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
 
     void _SetOtherBrainAvoidOnHandItem()
     {
-        if (selectedItem == null || playerAIController.rightHandCollectedList.Count == 0) return;
+        if (ReferenceEquals(selectedItem, null) || playerAIController.rightHandCollectedList.Count == 0) return;
         
         List<ReuseGO> onHandItems = new List<ReuseGO>();
 
@@ -234,7 +233,7 @@ public class PlayerAIBrain_Collect : MonoBehaviour
         }
     }
 
-    float hideDelay = 0f;
+    float hideDelay;
     void _CheckHide()
     {
         if (AlphabetCollectMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)
@@ -248,11 +247,11 @@ public class PlayerAIBrain_Collect : MonoBehaviour
             {
                 if (playerAIController.isHiding)
                 {
-                    hideDelay = (float)Random.Range(5, 15);
+                    hideDelay = Random.Range(5, 15);
                 }
                 else
                 {
-                    hideDelay = (float)Random.Range(5, 10);
+                    hideDelay = Random.Range(5, 10);
                 }
 
                 playerAIController._SetHide();

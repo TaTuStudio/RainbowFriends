@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Cinemachine;
+using UnityEngine;
 
 public class MonsterStaticScareController : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class MonsterStaticScareController : MonoBehaviour
 
     public Animator animator;
 
-    public bool setDefault = false;
+    public bool setDefault;
 
     public PlayerController selectedPlayer;
     public PlayerAIController selectedAIPlayer;
@@ -17,10 +15,10 @@ public class MonsterStaticScareController : MonoBehaviour
     [Header("Attack settings")]
     //Attack
     [SerializeField]
-    float hitScareDelay = 0f;
-    float curHitDelay = 0f;
+    float hitScareDelay;
+    float curHitDelay;
 
-    public bool attacking = false;
+    public bool attacking;
 
     public SoundEffectSO jumpScareSfx;
 
@@ -99,8 +97,6 @@ public class MonsterStaticScareController : MonoBehaviour
                 curHitDelay = hitScareDelay;
 
                 _SetAnimJumpScare(false);
-
-                return;
             }
         }
     }
@@ -122,7 +118,7 @@ public class MonsterStaticScareController : MonoBehaviour
                         selectedPlayer._SetCatched(false);
                     }
 
-                    if (selectedAIPlayer != null)
+                    if (!ReferenceEquals(selectedAIPlayer,null))
                     {
                         selectedAIPlayer._SetCatched(false);
                     }

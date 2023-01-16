@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Runtime.InteropServices;
 using Cinemachine;
+using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
 
     void _CheckNull()
     {
-        registeredVirtualCameras.RemoveAll(item => item == null);
+        registeredVirtualCameras.RemoveAll(item => ReferenceEquals(item,null));
     }
 
     public void _GameplaySwitchCam(CinemachineVirtualCamera activeCam)
@@ -25,7 +25,7 @@ public class CameraManager : MonoBehaviour
 
         //camera active = 1, camera inActive = 0
 
-        foreach(CinemachineVirtualCamera c in registeredVirtualCameras)
+        foreach(CinemachineVirtualCamera c in CollectionMarshal.AsSpan(registeredVirtualCameras))
         {
             if(c == activeCam)
             {

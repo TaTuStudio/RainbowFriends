@@ -11,11 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 /// Author: Pim de Witte (pimdewitte.com) and contributors, https://github.com/PimDeWitte/UnityMainThreadDispatcher
 /// <summary>
@@ -87,7 +87,7 @@ public class UnityMainThreadDispatcher : MonoBehaviour {
 	}
 
 
-	private static UnityMainThreadDispatcher _instance = null;
+	private static UnityMainThreadDispatcher _instance;
 
 	public static bool Exists() {
 		return _instance != null;
@@ -104,7 +104,7 @@ public class UnityMainThreadDispatcher : MonoBehaviour {
 	void Awake() {
 		if (_instance == null) {
 			_instance = this;
-			DontDestroyOnLoad(this.gameObject);
+			DontDestroyOnLoad(gameObject);
 		}
 	}
 

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Runtime.InteropServices;
 using EPOOutline;
+using UnityEngine;
 
 public class CollectFeederItem : MonoBehaviour
 {
@@ -10,8 +9,8 @@ public class CollectFeederItem : MonoBehaviour
     public PlayerController onHandPlayer;
     public PlayerAIController onHandAIPlayer;
 
-    public bool onHand = false;
-    public bool collected = false;
+    public bool onHand;
+    public bool collected;
 
     public Transform meshContainer;
 
@@ -39,12 +38,9 @@ public class CollectFeederItem : MonoBehaviour
 
     void _ActiveOutLine(bool active)
     {
-        if (outlinable == null)
-        {
-            outlinable = GetComponent<Outlinable>();
-        }
+        outlinable ??= GetComponent<Outlinable>();
 
-        if (outlinable != null)
+        if (!ReferenceEquals(outlinable , null))
         {
             outlinable.enabled = active;
         }
@@ -65,29 +61,31 @@ public class CollectFeederItem : MonoBehaviour
 
     void _CheckDropItem()
     {
-        if (onHand)
+        if (!onHand) return;
+        if (onHandAIPlayer is { isDead: true })
         {
-            if (onHandAIPlayer != null && onHandAIPlayer.isDead)
-            {
-                transform.position = onHandAIPlayer.transform.position;
+            var _transform = transform;
+                
+            _transform.position = onHandAIPlayer.transform.position;
 
-                transform.parent = FeederCollectMissionController.instance.collectItemSpawner.transform;
+            _transform.parent = FeederCollectMissionController.instance.collectItemSpawner.transform;
 
-                onHandAIPlayer._RemoveRightHandColectItem(transform);
+            onHandAIPlayer._RemoveRightHandColectItem(_transform);
 
-                _OnGroundSet();
-            }
-            else
-            if (onHandPlayer != null && onHandPlayer.isDead)
-            {
-                transform.position = onHandPlayer.transform.position;
+            _OnGroundSet();
+        }
+        else
+        if (onHandPlayer is { isDead: true })
+        {
+            var _transform = transform;
+                
+            _transform.position = onHandPlayer.transform.position;
 
-                transform.parent = FeederCollectMissionController.instance.collectItemSpawner.transform;
+            _transform.parent = FeederCollectMissionController.instance.collectItemSpawner.transform;
 
-                onHandPlayer._RemoveRightHandColectItem(transform);
+            onHandPlayer._RemoveRightHandCollectItem(_transform);
 
-                _OnGroundSet();
-            }
+            _OnGroundSet();
         }
     }
 
@@ -101,62 +99,62 @@ public class CollectFeederItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (onHand == false)
+        if (onHand) return;
+        PlayerController playerController = other.GetComponent<PlayerController>();
+
+        PlayerAIController playerAIController = other.GetComponent<PlayerAIController>();
+
+        if (playerController != null && playerController.isDead == false && playerController.catched == false)
         {
-            PlayerController playerController = other.GetComponent<PlayerController>();
+            onHand = true;
 
-            PlayerAIController playerAIController = other.GetComponent<PlayerAIController>();
+            var _transform = transform;
+            _transform.parent = playerController.OnHandItemContainer_Right.transform;
 
-            if (playerController != null && playerController.isDead == false && playerController.catched == false)
+            _transform.localPosition = Vector3.zero;
+            _transform.localRotation = Quaternion.identity;
+
+            foreach (Transform go in CollectionMarshal.AsSpan(playerController.rightHandCollectedList))
             {
-                onHand = true;
+                CollectFeederItem otherItem = go.GetComponent<CollectFeederItem>();
 
-                transform.parent = playerController.OnHandItemContainer_Right.transform;
-
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-
-                foreach (Transform go in playerController.rightHandCollectedList)
+                if (otherItem != null)
                 {
-                    CollectFeederItem otherItem = go.GetComponent<CollectFeederItem>();
-
-                    if (otherItem != null)
-                    {
-                        otherItem._ActiveMesh(false);
-                    }
+                    otherItem._ActiveMesh(false);
                 }
-
-                playerController._AddRightHandColectItem(transform);
-
-                onHandPlayer = playerController;
-
-                _ActiveOutLine(false);
             }
-            else if (playerAIController != null && playerAIController.isDead == false && playerAIController.catched == false)
+
+            playerController._AddRightHandColectItem(transform);
+
+            onHandPlayer = playerController;
+
+            _ActiveOutLine(false);
+        }
+        else if (playerAIController != null && playerAIController.isDead == false && playerAIController.catched == false)
+        {
+            onHand = true;
+
+            var _transform = transform;
+            _transform.parent = playerAIController.OnHandItemContainer_Right.transform;
+
+            _transform.localPosition = Vector3.zero;
+            _transform.localRotation = Quaternion.identity;
+
+            foreach (Transform go in CollectionMarshal.AsSpan(playerAIController.rightHandCollectedList))
             {
-                onHand = true;
+                CollectFeederItem otherItem = go.GetComponent<CollectFeederItem>();
 
-                transform.parent = playerAIController.OnHandItemContainer_Right.transform;
-
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-
-                foreach (Transform go in playerAIController.rightHandCollectedList)
+                if (otherItem != null)
                 {
-                    CollectFeederItem otherItem = go.GetComponent<CollectFeederItem>();
-
-                    if (otherItem != null)
-                    {
-                        otherItem._ActiveMesh(false);
-                    }
+                    otherItem._ActiveMesh(false);
                 }
-
-                playerAIController._AddRightHandColectItem(transform);
-
-                onHandAIPlayer = playerAIController;
-
-                _ActiveOutLine(false);
             }
+
+            playerAIController._AddRightHandColectItem(transform);
+
+            onHandAIPlayer = playerAIController;
+
+            _ActiveOutLine(false);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using EasyCharacterMovement;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EasyCharacterMovement.CharacterMovementWalkthrough.MovingOurPlayer
 {
@@ -59,8 +58,8 @@ namespace EasyCharacterMovement.CharacterMovementWalkthrough.MovingOurPlayer
         {
             // Read Input values
 
-            float horizontal = Input.GetAxisRaw($"Horizontal");
-            float vertical = Input.GetAxisRaw($"Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
             // Create a Movement direction vector (in world space)
 

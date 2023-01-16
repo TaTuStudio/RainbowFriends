@@ -1,9 +1,11 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine;
+using System;
 using System.Collections;
-using UnityEditor;
-using System.Text;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using UnityEditor;
+using UnityEngine;
 
 /*=============================================================================
  |	    Project:  Unity3D Scene OBJ Exporter
@@ -20,15 +22,15 @@ using System.Collections.Generic;
 
 public class OBJExporter : ScriptableWizard
 {
-    public bool onlySelectedObjects = false;
+    public bool onlySelectedObjects;
     public bool applyPosition = true;
     public bool applyRotation = true;
     public bool applyScale = true;
     public bool generateMaterials = true;
     public bool exportTextures = true;
     public bool splitObjects = true;
-    public bool autoMarkTexReadable = false;
-    public bool objNameAddIdNum = false;
+    public bool autoMarkTexReadable;
+    public bool objNameAddIdNum;
 
     //public bool materialsUseTextureName = false;
 
@@ -102,7 +104,7 @@ public class OBJExporter : ScriptableWizard
         string expFile = EditorUtility.SaveFilePanel("Export OBJ", lastPath, lastFileName, "obj");
         if (expFile.Length > 0)
         {
-            var fi = new System.IO.FileInfo(expFile);
+            var fi = new FileInfo(expFile);
             EditorPrefs.SetString("a4_OBJExport_lastFile", fi.Name);
             EditorPrefs.SetString("a4_OBJExport_lastPath", fi.Directory.FullName);
             Export(expFile);
@@ -114,9 +116,9 @@ public class OBJExporter : ScriptableWizard
     {
         //init stuff
         Dictionary<string, bool> materialCache = new Dictionary<string, bool>();
-        var exportFileInfo = new System.IO.FileInfo(exportPath);
+        var exportFileInfo = new FileInfo(exportPath);
         lastExportFolder = exportFileInfo.Directory.FullName;
-        string baseFileName = System.IO.Path.GetFileNameWithoutExtension(exportPath);
+        string baseFileName = Path.GetFileNameWithoutExtension(exportPath);
         EditorUtility.DisplayProgressBar("Exporting OBJ", "Please wait.. Starting export.", 0);
 
         //get list of required export things
@@ -168,12 +170,12 @@ public class OBJExporter : ScriptableWizard
         {
             sb.AppendLine("mtllib " + baseFileName + ".mtl");
         }
-        float maxExportProgress = (float)(sceneMeshes.Length + 1);
+        float maxExportProgress = sceneMeshes.Length + 1;
         int lastIndex = 0;
         for(int i = 0; i < sceneMeshes.Length; i++)
         {
             string meshName = sceneMeshes[i].gameObject.name;
-            float progress = (float)(i + 1) / maxExportProgress;
+            float progress = (i + 1) / maxExportProgress;
             EditorUtility.DisplayProgressBar("Exporting objects... (" + Mathf.Round(progress * 100) + "%)", "Exporting object " + meshName, progress);
             MeshFilter mf = sceneMeshes[i];
             MeshRenderer mr = sceneMeshes[i].gameObject.GetComponent<MeshRenderer>();
@@ -283,10 +285,10 @@ public class OBJExporter : ScriptableWizard
         }
 
         //write to disk
-        System.IO.File.WriteAllText(exportPath, sb.ToString());
+        File.WriteAllText(exportPath, sb.ToString());
         if (generateMaterials)
         {
-            System.IO.File.WriteAllText(exportFileInfo.Directory.FullName + "\\" + baseFileName + ".mtl", sbMaterials.ToString());
+            File.WriteAllText(exportFileInfo.Directory.FullName + "\\" + baseFileName + ".mtl", sbMaterials.ToString());
         }
 
         //export complete, close progress dialog
@@ -329,10 +331,10 @@ public class OBJExporter : ScriptableWizard
             string exportName = lastExportFolder + "\\" + t.name + ".png";
             Texture2D exTexture = new Texture2D(t.width, t.height, TextureFormat.ARGB32, false);
             exTexture.SetPixels(t.GetPixels());
-            System.IO.File.WriteAllBytes(exportName, exTexture.EncodeToPNG());
+            File.WriteAllBytes(exportName, exTexture.EncodeToPNG());
             return exportName;
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.Log("Could not export texture : " + t.name + ". is it readable?");
             return "null";
@@ -355,18 +357,18 @@ public class OBJExporter : ScriptableWizard
         //add properties
         if (m.HasProperty("_Color"))
         {
-            sb.AppendLine("Kd " + m.color.r.ToString() + " " + m.color.g.ToString() + " " + m.color.b.ToString());
+            sb.AppendLine("Kd " + m.color.r + " " + m.color.g + " " + m.color.b);
             if (m.color.a < 1.0f)
             {
                 //use both implementations of OBJ transparency
-                sb.AppendLine("Tr " + (1f - m.color.a).ToString());
-                sb.AppendLine("d " + m.color.a.ToString());
+                sb.AppendLine("Tr " + (1f - m.color.a));
+                sb.AppendLine("d " + m.color.a);
             }
         }
         if (m.HasProperty("_SpecColor"))
         {
             Color sc = m.GetColor("_SpecColor");
-            sb.AppendLine("Ks " + sc.r.ToString() + " " + sc.g.ToString() + " " + sc.b.ToString());
+            sb.AppendLine("Ks " + sc.r + " " + sc.g + " " + sc.b);
         }
         if (exportTextures) {
             //diffuse
@@ -395,7 +397,7 @@ public class OBJExporter : ScriptableWizard
     [MenuItem("File/Export/Wavefront OBJ")]
     static void CreateWizard()
     {
-        ScriptableWizard.DisplayWizard("Export OBJ", typeof(OBJExporter), "Export");
+        DisplayWizard("Export OBJ", typeof(OBJExporter), "Export");
     }
 }
 #endif

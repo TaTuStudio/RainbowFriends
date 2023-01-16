@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
 
 public class UnlockMapInfoUI : MonoBehaviour
 {
@@ -10,7 +8,7 @@ public class UnlockMapInfoUI : MonoBehaviour
 
     float speed = 60f;
 
-    float curDeactiveDelay = 0f;
+    float curDeactiveDelay;
 
     int selectMapIndex = -1;
 

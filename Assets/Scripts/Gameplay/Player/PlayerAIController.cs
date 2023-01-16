@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using UnityEngine;
 using Pathfinding;
+using UnityEngine;
 
 public class PlayerAIController : MonoBehaviour
 {
@@ -10,13 +9,13 @@ public class PlayerAIController : MonoBehaviour
 
     float speed = 4f;
 
-    public bool isHiding = false;
+    public bool isHiding;
 
-    public bool catched = false;
+    public bool catched;
 
-    public bool isDead = false;
+    public bool isDead;
 
-    public bool setDefault = false;
+    public bool setDefault;
 
     public Transform OnHandItemContainer_Right;
 
@@ -31,6 +30,7 @@ public class PlayerAIController : MonoBehaviour
     private void OnEnable()
     {
         setDefault = true;
+        _Default();
     }
 
     private void Awake()
@@ -40,7 +40,7 @@ public class PlayerAIController : MonoBehaviour
 
     private void Update()
     {
-        _Default();
+        //_Default();
 
         _SetAnimMove();
     }
@@ -73,12 +73,9 @@ public class PlayerAIController : MonoBehaviour
     {
         foreach (Transform t in CollectionMarshal.AsSpan(rightHandCollectedList))
         {
-            if (t == null)
-                continue;
+            ReuseGO reuseGO = !ReferenceEquals(t, null) ? t.GetComponent<ReuseGO>() : null;
 
-            ReuseGO reuseGO = t.GetComponent<ReuseGO>();
-
-            if (reuseGO != null)
+            if (!ReferenceEquals(reuseGO, null))
             {
                 UnusedManager.instance._AddToUnusedGO(reuseGO);
             }
@@ -161,6 +158,10 @@ public class PlayerAIController : MonoBehaviour
     #region Animations
 
     public Animator playerAnimator;
+    private static readonly int NormalizedSpeed = Animator.StringToHash("NormalizedSpeed");
+    private static readonly int Dead = Animator.StringToHash("Dead");
+    private static readonly int Hold = Animator.StringToHash("Hold Item");
+    private static readonly int Hiding = Animator.StringToHash("Hiding");
 
     void _SetAnimMove()
     {
@@ -182,24 +183,24 @@ public class PlayerAIController : MonoBehaviour
 
         // Speed relative to the character size
         playerAnimator.SetFloat(
-            "NormalizedSpeed",
+            NormalizedSpeed,
             relVelocity.magnitude / playerAnimator.transform.lossyScale.x
         );
     }
 
     void _SetDeadAnim(bool active)
     {
-        playerAnimator.SetBool("Dead", active);
+        playerAnimator.SetBool(Dead, active);
     }
 
     void _SetHoldItemAnim(bool active)
     {
-        playerAnimator.SetBool("Hold Item", active);
+        playerAnimator.SetBool(Hold, active);
     }
 
     void _SetHideAnim(bool active)
     {
-        playerAnimator.SetBool("Hiding", active);
+        playerAnimator.SetBool(Hiding, active);
     }
 
     #endregion

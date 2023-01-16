@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class RoomCollider : MonoBehaviour
 {

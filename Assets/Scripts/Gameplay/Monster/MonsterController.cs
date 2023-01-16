@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Pathfinding;
+using System.Runtime.InteropServices;
 using Cinemachine;
-using Lofelt.NiceVibrations;
 using EPOOutline;
+using Lofelt.NiceVibrations;
+using Pathfinding;
+using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
@@ -14,9 +14,9 @@ public class MonsterController : MonoBehaviour
 
     public AIPath aIPath;
 
-    public float turnTime = 0f;
+    public float turnTime;
 
-    public bool setDefault = false;
+    public bool setDefault;
 
     [Header("Turn settings")]
 
@@ -34,28 +34,32 @@ public class MonsterController : MonoBehaviour
     //Run to nearest
     float runToRange = 5f;
     float runToNearestDelay = 3f;
-    public float curRunToNearestDelay = 0f;
-    public bool runToNearest = false;
-    public Transform nearest = null;
+    public float curRunToNearestDelay;
+    public bool runToNearest;
+    public Transform nearest;
 
     [Header("Attack settings")]
     //Attack
     float attackRange = 3f;
     float attackDelay = 1f;
-    float curAttackDelay = 0f;
+    float curAttackDelay;
     [SerializeField]
-    float hitDelay = 0f;
+    float hitDelay;
     [SerializeField]
-    float hitScareDelay = 0f;
-    float curHitDelay = 0f;
+    float hitScareDelay;
+    float curHitDelay;
 
-    public bool attacking = false;
+    public bool attacking;
 
     public SoundEffectSO jumpScareSfx;
 
     [Header("Outline settings")]
     //Outline
     public Outlinable outlinable;
+
+    private static readonly int NormalizedSpeed = Animator.StringToHash("NormalizedSpeed");
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int JumpScare = Animator.StringToHash("JumpScare");
 
     private void OnEnable()
     {
@@ -156,7 +160,7 @@ public class MonsterController : MonoBehaviour
 
             if (turnType == 0)
             {
-                turnTime = (float)Random.Range(1, 3);
+                turnTime = Random.Range(1, 3);
 
                 aIPath._SetMoveToPosition(transform.position);
 
@@ -164,7 +168,7 @@ public class MonsterController : MonoBehaviour
             }
             else if (turnType == 1)
             {
-                turnTime = (float)Random.Range(5, 10);
+                turnTime = Random.Range(5, 10);
 
                 int checkPointIndex = Random.Range(0, monsterInfo.checkPoints.Count);
 
@@ -176,7 +180,7 @@ public class MonsterController : MonoBehaviour
             }
             else if (turnType == 2)
             {
-                turnTime = (float)Random.Range(5, 10);
+                turnTime = Random.Range(5, 10);
 
                 int ranNum = Random.Range(0, 100);
 
@@ -186,7 +190,7 @@ public class MonsterController : MonoBehaviour
 
                     List<PlayerAIController> canUsePlayerAIList = new List<PlayerAIController>();
 
-                    foreach(PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
+                    foreach(PlayerAIController aiController in CollectionMarshal.AsSpan(PlayerManager.instance.spawnedAIPlayers))
                     {
                         if(aiController.isDead == false && aiController.isHiding == false)
                         {
@@ -256,7 +260,7 @@ public class MonsterController : MonoBehaviour
 
         if (turnType == 2)
         {
-            if(selectedAIPlayer != null)
+            if(!ReferenceEquals(selectedAIPlayer,null))
             {
                 if (selectedAIPlayer.isHiding)
                 {
@@ -287,12 +291,12 @@ public class MonsterController : MonoBehaviour
 
         List<Transform> transforms = new List<Transform>();
 
-        foreach (PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
+        foreach (PlayerAIController aiController in CollectionMarshal.AsSpan(PlayerManager.instance.spawnedAIPlayers))
         {
             float dist = Vector3.Distance(transform.position, aiController.transform.position);
 
             if (aiController.isDead == false && aiController.isHiding == false && aiController.catched == false && dist < runToRange
-                || aiController.isDead == false && aiController.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
+                || aiController.isDead == false && aiController.catched == false && monsterInfo.avoidHide && dist < runToRange)
             {
                 transforms.Add(aiController.transform);
             }
@@ -304,7 +308,7 @@ public class MonsterController : MonoBehaviour
             float dist = Vector3.Distance(transform.position, player.transform.position);
 
             if (player.isDead == false && player.noDam == false && player.isHiding == false && player.catched == false && dist < runToRange
-                                || player.isDead == false && player.noDam == false && player.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
+                                || player.isDead == false && player.noDam == false && player.catched == false && monsterInfo.avoidHide && dist < runToRange)
             {
                 transforms.Add(player.transform);
             }
@@ -332,7 +336,7 @@ public class MonsterController : MonoBehaviour
             nearest = null;
         }
 
-        if(nearest != null && curRunToNearestDelay > 0f &&  runToNearest == false)
+        if(!ReferenceEquals(nearest , null) && curRunToNearestDelay > 0f &&  runToNearest == false)
         {
             curRunToNearestDelay -= Time.deltaTime;
 
@@ -341,7 +345,7 @@ public class MonsterController : MonoBehaviour
                 runToNearest = true;
             }
         }
-        else if(nearest == null)
+        else if (ReferenceEquals(nearest , null))
         {
             curRunToNearestDelay = runToNearestDelay;
 
@@ -353,7 +357,7 @@ public class MonsterController : MonoBehaviour
     {
         if (attacking == false)
         {
-            if (nearest != null)
+            if (!ReferenceEquals(nearest,null))
             {
                 if (curAttackDelay > 0)
                 {
@@ -375,7 +379,7 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-        if (attacking == true)
+        if (attacking)
         {
             if (curHitDelay > 0)
             {
@@ -395,50 +399,49 @@ public class MonsterController : MonoBehaviour
 
     void _SetNearestCatched()
     {
-        if(nearest != null)
+        if (ReferenceEquals(nearest, null)) return;
+        
+        PlayerController playerController = nearest.GetComponent<PlayerController>();
+        PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
+
+        if (playerController is { enabled: true })
         {
-            PlayerController playerController = nearest.GetComponent<PlayerController>();
-            PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
+            curHitDelay = 2.22f;
 
-            if (playerController != null && playerController.enabled)
-            {
-                curHitDelay = 2.22f;
+            playerController._SetCatched(true);
 
-                playerController._SetCatched(true);
+            _SetAnimJumpScare(true);
 
-                _SetAnimJumpScare(true);
+            CameraManager.instance._GameplaySwitchCam(virtualCam);
 
-                CameraManager.instance._GameplaySwitchCam(virtualCam);
+            jumpScareSfx.Play();
 
-                jumpScareSfx.Play();
+            HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
+        }
+        else
+        if (playerAIController is { enabled: true })
+        {
+            curHitDelay = 1.5f;
 
-                HapticPatterns.PlayPreset(HapticPatterns.PresetType.Failure);
-            }
-            else
-            if (playerAIController != null && playerAIController.enabled)
-            {
-                curHitDelay = 1.5f;
-
-                playerAIController._SetCatched(true);
-            }
+            playerAIController._SetCatched(true);
         }
     }
 
     void _SetNearestHit()
     {
-        if (nearest != null)
+        if (!ReferenceEquals(nearest, null))
         {
             PlayerController playerController = nearest.GetComponent<PlayerController>();
             PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
 
-            if (playerController != null && playerController.enabled)
+            if (playerController is { enabled: true })
             {
                 playerController._SetHit();
 
                 Debug.Log("Monster hit player");
             }
             else
-            if (playerAIController != null && playerAIController.enabled)
+            if (playerAIController is { enabled: true })
             {
                 playerAIController._SetHit();
 
@@ -461,23 +464,23 @@ public class MonsterController : MonoBehaviour
 
         if (runToNearest )
         {
-            animator.SetFloat("NormalizedSpeed", (relVelocity.magnitude / animator.transform.lossyScale.x) * 2f);
+            animator.SetFloat(NormalizedSpeed, (relVelocity.magnitude / animator.transform.lossyScale.x) * 2f);
         }
         else
         {
             // Speed relative to the character size
-            animator.SetFloat("NormalizedSpeed", relVelocity.magnitude / animator.transform.lossyScale.x);
+            animator.SetFloat(NormalizedSpeed, relVelocity.magnitude / animator.transform.lossyScale.x);
         }
     }
 
     void _SetAnimAttack(bool attack)
     {
-        animator.SetBool("Attack", attack);
+        animator.SetBool(Attack, attack);
     }
 
     void _SetAnimJumpScare(bool active)
     {
-        animator.SetBool("JumpScare", active);
+        animator.SetBool(JumpScare, active);
     }
 
     #endregion
@@ -491,7 +494,7 @@ public class MonsterController : MonoBehaviour
         Gizmos.color = Color.blue;
         //Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        if (nearest != null)
+        if (!ReferenceEquals(nearest,null))
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, nearest.position);

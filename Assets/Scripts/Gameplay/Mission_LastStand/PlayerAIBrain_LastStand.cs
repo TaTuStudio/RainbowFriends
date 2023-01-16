@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAIBrain_LastStand : MonoBehaviour
@@ -8,7 +6,7 @@ public class PlayerAIBrain_LastStand : MonoBehaviour
 
     [Header("Turn settings")]
 
-    public float turnTime = 0f;
+    public float turnTime;
 
     public int turnType = -1;
     // turnType = 0 -> stay
@@ -16,7 +14,7 @@ public class PlayerAIBrain_LastStand : MonoBehaviour
 
     private float randomRange = 10f;
 
-    public bool defaultSet = false;
+    public bool defaultSet;
 
     private void OnEnable()
     {
@@ -108,7 +106,7 @@ public class PlayerAIBrain_LastStand : MonoBehaviour
         }
     }
 
-    float hideDelay = 0f;
+    float hideDelay;
     void _CheckHide()
     {
         if (LastStandMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead)

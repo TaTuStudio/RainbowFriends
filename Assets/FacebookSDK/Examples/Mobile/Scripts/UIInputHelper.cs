@@ -1,12 +1,13 @@
 ﻿using System;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Facebook.Unity;
+using UnityEngine.UI;
 
 public class UIInputHelper : MonoBehaviour
 {
     private FBSDKEventBindingManager eventBindingManager { get; set; }
-    private Boolean isOldEventSystem { get; set; } = false;
+    private Boolean isOldEventSystem { get; set; }
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class UIInputHelper : MonoBehaviour
                         {
                             string name = EventSystem.current.currentSelectedGameObject.name;
                             GameObject go = EventSystem.current.currentSelectedGameObject;
-                            if (null != go.GetComponent<UnityEngine.UI.Button>() &&
+                            if (null != go.GetComponent<Button>() &&
                                 null != eventBindingManager)
                             {
 
@@ -63,7 +64,6 @@ public class UIInputHelper : MonoBehaviour
                 }
                 catch (Exception)
                 {
-                    return;
                 }
             }
         }

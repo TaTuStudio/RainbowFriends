@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Pathfinding;
+using System.Runtime.InteropServices;
 using Cinemachine;
 using EPOOutline;
+using Pathfinding;
+using UnityEngine;
 
 public class ImpostorMonsterController : MonoBehaviour
 {
@@ -16,9 +16,9 @@ public class ImpostorMonsterController : MonoBehaviour
 
     public AIPath aIPath;
 
-    public float turnTime = 0f;
+    public float turnTime;
 
-    public bool setDefault = false;
+    public bool setDefault;
 
     [Header("Turn settings")]
 
@@ -35,28 +35,32 @@ public class ImpostorMonsterController : MonoBehaviour
     //Run to nearest
     float runToRange = 5f;
     float runToNearestDelay = 3f;
-    public float curRunToNearestDelay = 0f;
-    public bool runToNearest = false;
-    public Transform nearest = null;
+    public float curRunToNearestDelay;
+    public bool runToNearest;
+    public Transform nearest;
 
     [Header("Attack settings")]
     //Attack
     float attackRange = 3f;
     float attackDelay = 1f;
-    float curAttackDelay = 0f;
+    float curAttackDelay;
     [SerializeField]
-    float hitDelay = 0f;
+    float hitDelay;
     [SerializeField]
-    float hitScareDelay = 0f;
-    float curHitDelay = 0f;
+    float hitScareDelay;
+    float curHitDelay;
 
-    public bool attacking = false;
+    public bool attacking;
 
     public SoundEffectSO jumpScareSfx;
 
     [Header("Outline settings")]
     //Outline
     public Outlinable outlinable;
+
+    private static readonly int NormalizedSpeed = Animator.StringToHash("NormalizedSpeed");
+    private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int JumpScare = Animator.StringToHash("JumpScare");
 
     private void OnEnable()
     {
@@ -153,77 +157,82 @@ public class ImpostorMonsterController : MonoBehaviour
                 turnType = 2;
             }
 
-            if (turnType == 0)
+            switch (turnType)
             {
-                turnTime = (float)Random.Range(1, 3);
+                case 0:
+                    turnTime = Random.Range(1, 3);
 
-                aIPath._SetMoveToPosition(transform.position);
+                    aIPath._SetMoveToPosition(transform.position);
 
-                //Debug.Log("Monster Stay");
-            }
-            else if (turnType == 1)
-            {
-                turnTime = (float)Random.Range(5, 10);
-
-                int checkPointIndex = Random.Range(0, monsterInfo.checkPoints.Count);
-
-                Transform checkPoint = monsterInfo.checkPoints[checkPointIndex];
-
-                aIPath._SetMoveToPosition(checkPoint.position);
-
-                //Debug.Log("Monster Move to check point");
-            }
-            else if (turnType == 2)
-            {
-                turnTime = (float)Random.Range(5, 10);
-
-                int ranNum = Random.Range(0, 100);
-
-                if (ranNum < 50)
+                    //Debug.Log("Monster Stay");
+                    break;
+                case 1:
                 {
-                    //find ai player
+                    turnTime = Random.Range(5, 10);
 
-                    List<PlayerAIController> canUsePlayerAIList = new List<PlayerAIController>();
+                    int checkPointIndex = Random.Range(0, monsterInfo.checkPoints.Count);
 
-                    foreach (PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
-                    {
-                        if (aiController.isDead == false && aiController.isHiding == false)
-                        {
-                            canUsePlayerAIList.Add(aiController);
-                        }
-                    }
+                    Transform checkPoint = monsterInfo.checkPoints[checkPointIndex];
 
-                    if (canUsePlayerAIList.Count > 0)
-                    {
-                        int ranAIIndex = Random.Range(0, canUsePlayerAIList.Count);
+                    aIPath._SetMoveToPosition(checkPoint.position);
 
-                        selectedAIPlayer = canUsePlayerAIList[ranAIIndex];
-                    }
-                    else if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false)
-                    {
-                        selectedPlayer = PlayerManager.instance.spawnedPlayer;
-                    }
-                    else
-                    {
-                        turnTime = 0f;
-                    }
-
-                    //Debug.Log("Find AI Player");
+                    //Debug.Log("Monster Move to check point");
+                    break;
                 }
-                else
+                case 2:
                 {
-                    //find player
+                    turnTime = Random.Range(5, 10);
 
-                    if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false)
+                    int ranNum = Random.Range(0, 100);
+
+                    if (ranNum < 50)
                     {
-                        selectedPlayer = PlayerManager.instance.spawnedPlayer;
+                        //find ai player
+
+                        List<PlayerAIController> canUsePlayerAIList = new List<PlayerAIController>();
+
+                        foreach (PlayerAIController aiController in CollectionMarshal.AsSpan(PlayerManager.instance.spawnedAIPlayers))
+                        {
+                            if (aiController.isDead == false && aiController.isHiding == false)
+                            {
+                                canUsePlayerAIList.Add(aiController);
+                            }
+                        }
+
+                        if (canUsePlayerAIList.Count > 0)
+                        {
+                            int ranAIIndex = Random.Range(0, canUsePlayerAIList.Count);
+
+                            selectedAIPlayer = canUsePlayerAIList[ranAIIndex];
+                        }
+                        else if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false)
+                        {
+                            selectedPlayer = PlayerManager.instance.spawnedPlayer;
+                        }
+                        else
+                        {
+                            turnTime = 0f;
+                        }
+
+                        //Debug.Log("Find AI Player");
                     }
                     else
                     {
-                        turnTime = 0f;
+                        //find player
+
+                        if (PlayerManager.instance.spawnedPlayer.isDead == false && PlayerManager.instance.spawnedPlayer.isHiding == false)
+                        {
+                            selectedPlayer = PlayerManager.instance.spawnedPlayer;
+                        }
+                        else
+                        {
+                            turnTime = 0f;
+                        }
+
+                        //Debug.Log("Find Player");
                     }
 
-                    //Debug.Log("Find Player");
+                    break;
                 }
             }
         }
@@ -235,7 +244,7 @@ public class ImpostorMonsterController : MonoBehaviour
 
         if (turnType == 2)
         {
-            if (selectedAIPlayer != null)
+            if (!ReferenceEquals(selectedAIPlayer,null))
             {
                 if (selectedAIPlayer.isHiding)
                 {
@@ -266,12 +275,12 @@ public class ImpostorMonsterController : MonoBehaviour
 
         List<Transform> transforms = new List<Transform>();
 
-        foreach (PlayerAIController aiController in PlayerManager.instance.spawnedAIPlayers)
+        foreach (PlayerAIController aiController in CollectionMarshal.AsSpan(PlayerManager.instance.spawnedAIPlayers))
         {
             float dist = Vector3.Distance(transform.position, aiController.transform.position);
 
             if (aiController.isDead == false && aiController.isHiding == false && aiController.catched == false && dist < runToRange
-                || aiController.isDead == false && aiController.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
+                || aiController.isDead == false && aiController.catched == false && monsterInfo.avoidHide && dist < runToRange)
             {
                 transforms.Add(aiController.transform);
             }
@@ -283,7 +292,7 @@ public class ImpostorMonsterController : MonoBehaviour
             float dist = Vector3.Distance(transform.position, player.transform.position);
 
             if (player.isDead == false && player.isHiding == false && player.catched == false && dist < runToRange
-                                || player.isDead == false && player.catched == false && monsterInfo.avoidHide == true && dist < runToRange)
+                                || player.isDead == false && player.catched == false && monsterInfo.avoidHide && dist < runToRange)
             {
                 transforms.Add(player.transform);
             }
@@ -311,7 +320,7 @@ public class ImpostorMonsterController : MonoBehaviour
             nearest = null;
         }
 
-        if (nearest != null && curRunToNearestDelay > 0f && runToNearest == false)
+        if (!ReferenceEquals(nearest , null) && curRunToNearestDelay > 0f && runToNearest == false)
         {
             curRunToNearestDelay -= Time.deltaTime;
 
@@ -320,7 +329,7 @@ public class ImpostorMonsterController : MonoBehaviour
                 runToNearest = true;
             }
         }
-        else if (nearest == null)
+        else if (ReferenceEquals(nearest , null))
         {
             curRunToNearestDelay = runToNearestDelay;
 
@@ -332,7 +341,7 @@ public class ImpostorMonsterController : MonoBehaviour
     {
         if (attacking == false)
         {
-            if (nearest != null)
+            if (!ReferenceEquals(nearest,null))
             {
                 float curAttackDist = Vector3.Distance(transform.position, nearest.position);
 
@@ -356,7 +365,7 @@ public class ImpostorMonsterController : MonoBehaviour
             }
         }
 
-        if (attacking == true)
+        if (attacking)
         {
             if (curHitDelay > 0)
             {
@@ -390,12 +399,12 @@ public class ImpostorMonsterController : MonoBehaviour
 
     void _SetNearestCatched()
     {
-        if (nearest != null)
+        if (!ReferenceEquals(nearest,null))
         {
             PlayerController playerController = nearest.GetComponent<PlayerController>();
             PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
 
-            if (playerController != null && playerController.enabled)
+            if (playerController is { enabled: true })
             {
                 curHitDelay = 2.22f;
 
@@ -410,7 +419,7 @@ public class ImpostorMonsterController : MonoBehaviour
                 _ActiveImpostor(true);
             }
             else
-            if (playerAIController != null && playerAIController.enabled)
+            if (playerAIController is { enabled: true })
             {
                 curHitDelay = 1.5f;
 
@@ -423,12 +432,12 @@ public class ImpostorMonsterController : MonoBehaviour
 
     void _SetNearestHit()
     {
-        if (nearest != null)
+        if (!ReferenceEquals(nearest,null))
         {
             PlayerController playerController = nearest.GetComponent<PlayerController>();
             PlayerAIController playerAIController = nearest.GetComponent<PlayerAIController>();
 
-            if (playerController != null && playerController.enabled)
+            if (playerController is { enabled: true })
             {
                 playerController._SetHit();
 
@@ -437,7 +446,7 @@ public class ImpostorMonsterController : MonoBehaviour
                 _ActiveImpostor(false);
             }
             else
-            if (playerAIController != null && playerAIController.enabled)
+            if (playerAIController is { enabled: true })
             {
                 playerAIController._SetHit();
 
@@ -462,23 +471,23 @@ public class ImpostorMonsterController : MonoBehaviour
 
         if (runToNearest)
         {
-            humanAnimator.SetFloat("NormalizedSpeed", (relVelocity.magnitude / impostorAnimator.transform.lossyScale.x) * 2f);
+            humanAnimator.SetFloat(NormalizedSpeed, (relVelocity.magnitude / impostorAnimator.transform.lossyScale.x) * 2f);
         }
         else
         {
             // Speed relative to the character size
-            humanAnimator.SetFloat("NormalizedSpeed", relVelocity.magnitude / impostorAnimator.transform.lossyScale.x);
+            humanAnimator.SetFloat(NormalizedSpeed, relVelocity.magnitude / impostorAnimator.transform.lossyScale.x);
         }
     }
 
     void _SetAnimAttack(bool attack)
     {
-        impostorAnimator.SetBool("Attack", attack);
+        impostorAnimator.SetBool(Attack, attack);
     }
 
     void _SetAnimJumpScare(bool active)
     {
-        impostorAnimator.SetBool("JumpScare", active);
+        impostorAnimator.SetBool(JumpScare, active);
     }
 
     #endregion
@@ -492,7 +501,7 @@ public class ImpostorMonsterController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        if (nearest != null)
+        if (!ReferenceEquals(nearest,null))
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, nearest.position);

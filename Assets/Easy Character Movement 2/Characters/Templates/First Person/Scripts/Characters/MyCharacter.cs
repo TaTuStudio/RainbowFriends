@@ -1,6 +1,4 @@
-﻿using EasyCharacterMovement;
-
-namespace EasyCharacterMovement.Templates.FistPersonTemplate
+﻿namespace EasyCharacterMovement.Templates.FistPersonTemplate
 {
     public class MyCharacter : FirstPersonCharacter
     {

@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class StartGameDelayUI : MonoBehaviour
 {
     float delayTime = 11f;
 
     [SerializeField]
-    float curDelayTime = 0f;
+    float curDelayTime;
 
     public MapIntroUI mapIntroUI;
 
@@ -35,7 +32,7 @@ public class StartGameDelayUI : MonoBehaviour
 
     void _Delay()
     {
-        if (GameController.instance.isPlaying != false || !GameController.instance.gameplaySetupDone ||
+        if (GameController.instance.isPlaying || !GameController.instance.gameplaySetupDone ||
             !(curDelayTime > 0f)) return;
         curDelayTime -= Time.deltaTime;
 

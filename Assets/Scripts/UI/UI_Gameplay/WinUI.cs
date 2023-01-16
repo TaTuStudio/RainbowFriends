@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using DG.Tweening;
 
 public class WinUI : MonoBehaviour
 {
     int rewardCoin = 500;
 
     [SerializeField]
-    int bonusCoin = 0;
+    int bonusCoin;
     [SerializeField]
-    int bonusMulti = 0;
+    int bonusMulti;
 
     public TextMeshProUGUI rewardCoinText;
 

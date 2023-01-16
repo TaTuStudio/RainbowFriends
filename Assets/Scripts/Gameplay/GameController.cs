@@ -1,20 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
-    public bool isPlaying = false;
-    public bool gameplaySetupDone = false;
-    public bool resetWinLose = false;
+    public bool isPlaying;
+    public bool gameplaySetupDone;
+    public bool resetWinLose;
 
-    public float gameTime = 0f;
-    public float curGameTime = 0f;
+    public float gameTime;
+    public float curGameTime;
 
-    public int totalPlayer = 0;
-    public int curPlayer = 0;
+    public int totalPlayer;
+    public int curPlayer;
 
     private void Awake()
     {

@@ -1,9 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.UI;
-using Facebook.Unity;
-using System;
 
 public class FBWindowsLoginManager : MonoBehaviour
 {
@@ -61,7 +59,7 @@ public class FBWindowsLoginManager : MonoBehaviour
             if (FB.IsLoggedIn)
             {
                 // AccessToken class will have session details
-                var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
+                var aToken = AccessToken.CurrentAccessToken;
                 // Print current access token's User ID
                 Logger.DebugLog("aToken.UserId: " + aToken.UserId);
                 // Print current access token's granted permissions
@@ -83,7 +81,7 @@ public class FBWindowsLoginManager : MonoBehaviour
     {
         Logger.DebugLog("Getting current user profile ...");
 
-        FB.CurrentProfile((IProfileResult result) =>
+        FB.CurrentProfile(result =>
         {
             if (result.Error != null)
             {
@@ -109,7 +107,7 @@ public class FBWindowsLoginManager : MonoBehaviour
 
     public void GetUserLocale()
     {
-        FB.GetUserLocale((ILocaleResult result) =>
+        FB.GetUserLocale(result =>
         {
             if (result.Error != null)
             {

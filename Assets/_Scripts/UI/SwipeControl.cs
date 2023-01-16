@@ -1,6 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +6,7 @@ public class SwipeControl : MonoBehaviour
 {
 
     public GameObject scrollbar;
-    float scroll_Pos = 0;
+    float scroll_Pos;
     float[] pos;
     // Start is called before the first frame update
     void Start()

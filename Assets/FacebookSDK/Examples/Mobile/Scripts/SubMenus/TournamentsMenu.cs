@@ -19,12 +19,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System;
+using UnityEngine;
+
 namespace Facebook.Unity.Example
 {
-    using System;
-    using System.Collections;
-    using UnityEngine;
-
     internal class TournamentsMenu : MenuBase
     {
         private string score = string.Empty;
@@ -35,25 +34,25 @@ namespace Facebook.Unity.Example
             bool enabled = GUI.enabled;
             GUI.enabled = enabled && FB.IsLoggedIn;
 
-            if (this.Button("Get Tournaments"))
+            if (Button("Get Tournaments"))
             {
-                FB.Mobile.GetTournaments(this.HandleResult);
+                FB.Mobile.GetTournaments(HandleResult);
             }
 
             GUILayout.Space(24);
-            this.LabelAndTextField("Score:", ref this.score);
-            this.LabelAndTextField("TournamentID:", ref this.tournamentID);
-            if (this.Button("Post Score to Tournament"))
+            LabelAndTextField("Score:", ref score);
+            LabelAndTextField("TournamentID:", ref tournamentID);
+            if (Button("Post Score to Tournament"))
             {
-                FB.Mobile.UpdateTournament(tournamentID, int.Parse(score), this.HandleResult);
+                FB.Mobile.UpdateTournament(tournamentID, int.Parse(score), HandleResult);
             }
 
-            if (this.Button("Update Tournament and Share"))
+            if (Button("Update Tournament and Share"))
             {
-                FB.Mobile.UpdateAndShareTournament(tournamentID, int.Parse(score), this.HandleResult);
+                FB.Mobile.UpdateAndShareTournament(tournamentID, int.Parse(score), HandleResult);
             }
 
-            if (this.Button("Create Tournament and Share"))
+            if (Button("Create Tournament and Share"))
             {
                 FB.Mobile.CreateAndShareTournament(
                     int.Parse(score),
@@ -62,7 +61,7 @@ namespace Facebook.Unity.Example
                     TournamentScoreFormat.Numeric,
                     DateTime.UtcNow.AddHours(2),
                     "Unity SDK Tournament",
-                    this.HandleResult
+                    HandleResult
                 );
 
             }

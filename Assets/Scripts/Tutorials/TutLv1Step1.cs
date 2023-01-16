@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutLv1Step1 : MonoBehaviour
 {
     public TutController tutController;
 
-    public bool active = false;
+    public bool active;
 
-    public bool stepDone = false;
+    public bool stepDone;
 
     // Update is called once per frame
     void Update()
@@ -30,7 +28,7 @@ public class TutLv1Step1 : MonoBehaviour
 
     void _CheckMove()
     {
-        if(stepDone == false && GameController.instance.gameplaySetupDone && PlayerManager.instance.spawnedPlayer != null)
+        if(stepDone == false && GameController.instance.gameplaySetupDone && (!ReferenceEquals(PlayerManager.instance.spawnedPlayer,null)))
         {
             if (UI_Input_Controller.instance.moveJoyStick.Vertical > 0f || UI_Input_Controller.instance.moveJoyStick.Horizontal > 0f)
             {

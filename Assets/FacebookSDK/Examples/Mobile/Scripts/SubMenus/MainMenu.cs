@@ -18,14 +18,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace Facebook.Unity.Example
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using UnityEngine;
-
-
-
     internal sealed class MainMenu : MenuBase
     {
 
@@ -38,7 +35,7 @@ namespace Facebook.Unity.Example
             UserLocation    = 6,
             UserHometown    = 7,
             UserGender      = 8,
-        };
+        }
 
         protected override bool ShowBackButton()
         {
@@ -51,76 +48,76 @@ namespace Facebook.Unity.Example
 
 
             bool enabled = GUI.enabled;
-            if (this.Button("FB.Init"))
+            if (Button("FB.Init"))
             {
-                FB.Init(this.OnInitComplete, this.OnHideUnity);
-                this.Status = "FB.Init() called with " + FB.AppId;
+                FB.Init(OnInitComplete, OnHideUnity);
+                Status = "FB.Init() called with " + FB.AppId;
             }
 
             GUILayout.BeginHorizontal();
 
             GUI.enabled = enabled && FB.IsInitialized;
-            if (this.Button("Classic login"))
+            if (Button("Classic login"))
             {
-                this.CallFBLogin(LoginTracking.ENABLED, new HashSet<Scope> { Scope.PublicProfile });
-                this.Status = "Classic login called";
+                CallFBLogin(LoginTracking.ENABLED, new HashSet<Scope> { Scope.PublicProfile });
+                Status = "Classic login called";
             }
-            if (this.Button("Get publish_actions"))
+            if (Button("Get publish_actions"))
             {
-                this.CallFBLoginForPublish();
-                this.Status = "Login (for publish_actions) called";
-            }
-
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-
-            if (this.Button("Limited login"))
-            {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile });
-                this.Status = "Limited login called";
-
-            }
-            if (this.Button("Limited login +friends"))
-            {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserFriends });
-                this.Status = "Limited login +friends called";
-
+                CallFBLoginForPublish();
+                Status = "Login (for publish_actions) called";
             }
 
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
 
-            if (this.Button("Limited Login+bday"))
+            if (Button("Limited login"))
             {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserBirthday });
-                this.Status = "Limited login +bday called";
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile });
+                Status = "Limited login called";
+
             }
-
-            if (this.Button("Limited Login+agerange"))
+            if (Button("Limited login +friends"))
             {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserAgeRange });
-                this.Status = "Limited login +agerange called";
-            }
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserFriends });
+                Status = "Limited login +friends called";
 
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-
-            if (this.Button("Limited Login + location"))
-            {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserLocation });
-            }
-
-            if (this.Button("Limited Login + Hometown"))
-            {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserHometown });
             }
 
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
 
-            if (this.Button("Limited Login + Gender"))
+            if (Button("Limited Login+bday"))
             {
-                this.CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserGender });
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserBirthday });
+                Status = "Limited login +bday called";
+            }
+
+            if (Button("Limited Login+agerange"))
+            {
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserAgeRange });
+                Status = "Limited login +agerange called";
+            }
+
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+
+            if (Button("Limited Login + location"))
+            {
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserLocation });
+            }
+
+            if (Button("Limited Login + Hometown"))
+            {
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserHometown });
+            }
+
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+
+            if (Button("Limited Login + Gender"))
+            {
+                CallFBLogin(LoginTracking.LIMITED, new HashSet<Scope> { Scope.PublicProfile, Scope.UserGender });
             }
 
 
@@ -128,68 +125,68 @@ namespace Facebook.Unity.Example
 
 
             // Fix GUILayout margin issues
-            GUILayout.Label(GUIContent.none, GUILayout.MinWidth(ConsoleBase.MarginFix));
+            GUILayout.Label(GUIContent.none, GUILayout.MinWidth(MarginFix));
             GUILayout.EndHorizontal();
 
 
             GUILayout.BeginHorizontal();
 
             // Fix GUILayout margin issues
-            GUILayout.Label(GUIContent.none, GUILayout.MinWidth(ConsoleBase.MarginFix));
+            GUILayout.Label(GUIContent.none, GUILayout.MinWidth(MarginFix));
             GUILayout.EndHorizontal();
 
             #if !UNITY_WEBGL
-            if (this.Button("Logout"))
+            if (Button("Logout"))
             {
                 CallFBLogout();
-                this.Status = "Logout called";
+                Status = "Logout called";
             }
             #endif
 
             GUI.enabled = enabled && FB.IsInitialized;
-            if (this.Button("Share Dialog"))
+            if (Button("Share Dialog"))
             {
-                this.SwitchMenu(typeof(DialogShare));
+                SwitchMenu(typeof(DialogShare));
             }
 
-            if (this.Button("App Requests"))
+            if (Button("App Requests"))
             {
-                this.SwitchMenu(typeof(AppRequests));
+                SwitchMenu(typeof(AppRequests));
             }
 
-            if (this.Button("Graph Request"))
+            if (Button("Graph Request"))
             {
-                this.SwitchMenu(typeof(GraphRequest));
+                SwitchMenu(typeof(GraphRequest));
             }
 
-            if (Constants.IsWeb && this.Button("Pay"))
+            if (Constants.IsWeb && Button("Pay"))
             {
-                this.SwitchMenu(typeof(Pay));
+                SwitchMenu(typeof(Pay));
             }
 
-            if (this.Button("App Events"))
+            if (Button("App Events"))
             {
-                this.SwitchMenu(typeof(AppEvents));
+                SwitchMenu(typeof(AppEvents));
             }
 
-            if (this.Button("App Links"))
+            if (Button("App Links"))
             {
-                this.SwitchMenu(typeof(AppLinks));
+                SwitchMenu(typeof(AppLinks));
             }
 
-            if (this.Button("Tournaments"))
+            if (Button("Tournaments"))
             {
-                this.SwitchMenu(typeof(TournamentsMenu));
+                SwitchMenu(typeof(TournamentsMenu));
             }
 
-            if (Constants.IsMobile && this.Button("Access Token"))
+            if (Constants.IsMobile && Button("Access Token"))
             {
-                this.SwitchMenu(typeof(AccessTokenMenu));
+                SwitchMenu(typeof(AccessTokenMenu));
             }
 
-            if (this.Button("UploadToMediaLibrary"))
+            if (Button("UploadToMediaLibrary"))
             {
-                this.SwitchMenu(typeof(UploadToMediaLibrary));
+                SwitchMenu(typeof(UploadToMediaLibrary));
             }
             
             GUILayout.EndVertical();
@@ -236,14 +233,14 @@ namespace Facebook.Unity.Example
             if (mode == LoginTracking.ENABLED)
             {
                 if (Constants.CurrentPlatform == FacebookUnityPlatform.IOS) {
-                    FB.Mobile.LoginWithTrackingPreference(LoginTracking.ENABLED, scopes, "classic_nonce123", this.HandleResult);
+                    FB.Mobile.LoginWithTrackingPreference(LoginTracking.ENABLED, scopes, "classic_nonce123", HandleResult);
                 } else {
-                    FB.LogInWithReadPermissions(scopes, this.HandleResult);
+                    FB.LogInWithReadPermissions(scopes, HandleResult);
                 }
             }
             else // mode == loginTracking.LIMITED
             {
-                FB.Mobile.LoginWithTrackingPreference(LoginTracking.LIMITED, scopes, "limited_nonce123", this.HandleLimitedLoginResult);
+                FB.Mobile.LoginWithTrackingPreference(LoginTracking.LIMITED, scopes, "limited_nonce123", HandleLimitedLoginResult);
             }
 
         }
@@ -255,7 +252,7 @@ namespace Facebook.Unity.Example
             //
             // In your own game, consider postponing this call until the moment
             // you actually need it.
-            FB.LogInWithPublishPermissions(new List<string>() { "publish_actions" }, this.HandleResult);
+            FB.LogInWithPublishPermissions(new List<string> { "publish_actions" }, HandleResult);
         }
 
         private void CallFBLogout()
@@ -265,8 +262,8 @@ namespace Facebook.Unity.Example
 
         private void OnInitComplete()
         {
-            this.Status = "Success - Check log for details";
-            this.LastResponse = "Success Response: OnInitComplete Called\n";
+            Status = "Success - Check log for details";
+            LastResponse = "Success Response: OnInitComplete Called\n";
             string logMessage = string.Format(
                 "OnInitCompleteCalled IsLoggedIn='{0}' IsInitialized='{1}'",
                 FB.IsLoggedIn,
@@ -280,8 +277,8 @@ namespace Facebook.Unity.Example
 
         private void OnHideUnity(bool isGameShown)
         {
-            this.Status = "Success - Check log for details";
-            this.LastResponse = string.Format("Success Response: OnHideUnity Called {0}\n", isGameShown);
+            Status = "Success - Check log for details";
+            LastResponse = string.Format("Success Response: OnHideUnity Called {0}\n", isGameShown);
             LogView.AddLog("Is game shown: " + isGameShown);
         }
     }

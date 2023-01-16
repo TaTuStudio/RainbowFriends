@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
 using Pathfinding;
+using UnityEngine;
 
 public class Env_HallWayDoor : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class Env_HallWayDoor : MonoBehaviour
     [Tooltip("Rotate 90 degree")]
     public Transform[] doors2;
 
-    float curOpenDoorDelay = 0f;
+    float curOpenDoorDelay;
 
     private void OnEnable()
     {

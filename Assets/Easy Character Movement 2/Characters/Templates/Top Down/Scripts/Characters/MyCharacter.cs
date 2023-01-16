@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using EasyCharacterMovement;
-
-namespace EasyCharacterMovement.Templates.TopDownTemplate
+﻿namespace EasyCharacterMovement.Templates.TopDownTemplate
 {
     public class MyCharacter : AgentCharacter
     {

@@ -38,7 +38,7 @@ public class InteriorLoadSystem : MonoBehaviour
         if (currentRoom != null)
             room[lastPos].ReleaseInstance(currentRoom);
         
-        room[currentPosition].InstantiateAsync().Completed += (_) => currentRoom = _.Result;
+        room[currentPosition].InstantiateAsync().Completed += _ => currentRoom = _.Result;
         lastPos = currentPosition;
     }
 
@@ -49,7 +49,7 @@ public class InteriorLoadSystem : MonoBehaviour
             case < 7:
             {
                 if (hallWays[0] == null)
-                    hallWay[0].InstantiateAsync().Completed += (_) => hallWays[0] = _.Result;
+                    hallWay[0].InstantiateAsync().Completed += _ => hallWays[0] = _.Result;
                 if (hallWays[1] != null)
                     hallWay[1].ReleaseInstance(hallWays[1]);
                 break;
@@ -57,7 +57,7 @@ public class InteriorLoadSystem : MonoBehaviour
             case >= 7:
             {
                 if (hallWays[1] == null)
-                    hallWay[1].InstantiateAsync().Completed += (_) => hallWays[1] = _.Result;
+                    hallWay[1].InstantiateAsync().Completed += _ => hallWays[1] = _.Result;
                 if (hallWays[0] != null)
                     hallWay[0].ReleaseInstance(hallWays[0]);
                 break;

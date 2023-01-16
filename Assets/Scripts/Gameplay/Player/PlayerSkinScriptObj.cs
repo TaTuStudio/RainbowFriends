@@ -1,11 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Delivery/PlayerSkinDataObj", order = 1)]
 public class PlayerSkinScriptObj : ScriptableObject
 {
-    [System.Serializable]
+    [Serializable]
     public class Skin2DInfo
     {
         public string skinID = "";
@@ -30,7 +30,7 @@ public class PlayerSkinScriptObj : ScriptableObject
         return null;
     }
 
-    public void _Change(ref SkinnedMeshRenderer skinnedMesh, string playerSkinMatName, string boxSkinMatName, PlayerSkinScriptObj.Skin2DInfo info)
+    public void _Change(ref SkinnedMeshRenderer skinnedMesh, string playerSkinMatName, string boxSkinMatName, Skin2DInfo info)
     {
 
         foreach (Material mat in skinnedMesh.materials)

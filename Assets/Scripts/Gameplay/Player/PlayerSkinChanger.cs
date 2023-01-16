@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSkinChanger : MonoBehaviour
@@ -13,7 +11,7 @@ public class PlayerSkinChanger : MonoBehaviour
     public SkinnedMeshRenderer boxSkinnedMesh;
     public SkinnedMeshRenderer holdBoxSkinnedMesh;
 
-    public bool change = false;
+    public bool change;
 
     private void OnEnable()
     {

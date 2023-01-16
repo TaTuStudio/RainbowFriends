@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ReuseGO : MonoBehaviour
 {
-    public bool genID = false;
+    public bool genID;
     public string itemID = "";
 
 #if UNITY_EDITOR

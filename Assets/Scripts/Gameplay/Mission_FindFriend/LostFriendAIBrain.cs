@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class LostFriendAIBrain : MonoBehaviour
@@ -12,7 +11,7 @@ public class LostFriendAIBrain : MonoBehaviour
 
     public PlayerAIController followPlayerAIController;
 
-    public bool defaultSet = false;
+    public bool defaultSet;
 
     private void OnEnable()
     {
@@ -42,7 +41,7 @@ public class LostFriendAIBrain : MonoBehaviour
 
     void _CheckIsFound()
     {
-        if(FindFriendMissionController.instance.gameplaySet == false || PlayerManager.instance.spawnedPlayer == null || followPlayerController != null || followPlayerAIController != null || playerAIController == null)
+        if(FindFriendMissionController.instance.gameplaySet == false || ReferenceEquals(PlayerManager.instance.spawnedPlayer , null) || !ReferenceEquals(followPlayerController , null) || !ReferenceEquals(followPlayerAIController , null) || ReferenceEquals(playerAIController , null))
         {
             return;
         }
@@ -56,7 +55,8 @@ public class LostFriendAIBrain : MonoBehaviour
             return;
         }
 
-        foreach(PlayerAIBrain_FindFriend brain in FindFriendMissionController.instance.playerAIBrain_FindFriend_Controller.playerAIBrains_FindFriend)
+        foreach(PlayerAIBrain_FindFriend brain in CollectionMarshal.AsSpan(FindFriendMissionController.instance
+                    .playerAIBrain_FindFriend_Controller.playerAIBrains_FindFriend))
         {
             dist = Vector3.Distance(brain.playerAIController.transform.position, playerAIController.transform.position);
 
@@ -74,7 +74,7 @@ public class LostFriendAIBrain : MonoBehaviour
 
     void _Follow()
     {
-        if (FindFriendMissionController.instance.gameplaySet == false || playerAIController == null)
+        if (FindFriendMissionController.instance.gameplaySet == false || ReferenceEquals(playerAIController , null))
         {
             return;
         }
@@ -99,10 +99,11 @@ public class LostFriendAIBrain : MonoBehaviour
         }
     }
 
-    float hideDelay = 0f;
+    float hideDelay;
     void _CheckHide()
     {
-        if (FindFriendMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead || followPlayerController == null && followPlayerAIController == null)
+        if (FindFriendMissionController.instance.gameplaySet == false || playerAIController.catched || playerAIController.isDead ||
+            ReferenceEquals(followPlayerController , null) && ReferenceEquals(followPlayerAIController , null))
             return;
 
         if (hideDelay >= 0f)
@@ -113,11 +114,11 @@ public class LostFriendAIBrain : MonoBehaviour
             {
                 if (playerAIController.isHiding)
                 {
-                    hideDelay = (float)Random.Range(5, 15);
+                    hideDelay = Random.Range(5, 15);
                 }
                 else
                 {
-                    hideDelay = (float)Random.Range(5, 10);
+                    hideDelay = Random.Range(5, 10);
                 }
 
                 playerAIController._SetHide();

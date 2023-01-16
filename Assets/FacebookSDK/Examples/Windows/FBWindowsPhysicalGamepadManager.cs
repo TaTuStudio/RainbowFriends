@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
 #if (UNITY_STANDALONE_WIN || UNTIY_EDITOR_WIN) && !UNITY_WEBGL
     using XInputDotNetPure;
 #endif

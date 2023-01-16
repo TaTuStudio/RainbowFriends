@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutManager : MonoBehaviour
 {
-    bool checkActive = false;
+    bool checkActive;
 
     public static TutManager instance;
 

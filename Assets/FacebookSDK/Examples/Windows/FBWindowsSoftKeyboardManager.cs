@@ -1,7 +1,5 @@
 ﻿using Facebook.Unity;
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FBWindowsSoftKeyboardManager : MonoBehaviour
 {

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutController : MonoBehaviour
 {
-    public int activeNum = 0;
+    public int activeNum;
 
-    int currentStep = 0;
+    int currentStep;
 
     public GameObject[] steps;
 

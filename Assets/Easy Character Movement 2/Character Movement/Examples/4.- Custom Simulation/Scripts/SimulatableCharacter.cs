@@ -140,14 +140,14 @@ namespace EasyCharacterMovement.CharacterMovementExamples
 
             _movementDirection = Vector3.zero;
 
-            _movementDirection += Vector3.forward * Input.GetAxisRaw($"Vertical");
-            _movementDirection += Vector3.right * Input.GetAxisRaw($"Horizontal");
+            _movementDirection += Vector3.forward * Input.GetAxisRaw("Vertical");
+            _movementDirection += Vector3.right * Input.GetAxisRaw("Horizontal");
 
             _movementDirection = Vector3.ClampMagnitude(_movementDirection, 1.0f);
 
             // Jump input
 
-            _jumpButtonPressed = Input.GetButton($"Jump");
+            _jumpButtonPressed = Input.GetButton("Jump");
         }
 
         #endregion

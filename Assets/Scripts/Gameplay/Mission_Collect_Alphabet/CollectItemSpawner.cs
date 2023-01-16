@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CollectItemSpawner : MonoBehaviour
 {
@@ -15,9 +17,19 @@ public class CollectItemSpawner : MonoBehaviour
 
     public List<ReuseGO> collectedItems = new List<ReuseGO>();
 
+    private void OnEnable()
+    {
+        MapManager.OnMapLoaded += _GameplaySetup;
+    }
+
+    private void OnDisable()
+    {
+        MapManager.OnMapLoaded -= _GameplaySetup;
+    }
+
     private void Update()
     {
-        _GameplaySetup();
+        //_GameplaySetup();
     }
 
     //private void OnDisable()
@@ -27,7 +39,7 @@ public class CollectItemSpawner : MonoBehaviour
 
     public void _GameplaySetup()
     {
-        if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
+        //if (MapManager.instance.spawnedMap.loadMapDone == true && gameplaySet == false)
         {
             gameplaySet = true;
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,7 +53,7 @@ public class PlayerManager : MonoBehaviour
     {
         ReuseGO selected = UnusedManager.instance._GetReuseGO(prefab.itemID);
 
-        if(selected != null)
+        if(!ReferenceEquals(selected,null))
         {
             selected.transform.parent = transform;
             selected.transform.position = spawnPos;
@@ -77,7 +76,7 @@ public class PlayerManager : MonoBehaviour
     {
         ReuseGO selected = UnusedManager.instance._GetReuseGO(prefab.itemID);
 
-        if (selected != null)
+        if (!ReferenceEquals(selected,null))
         {
             selected.transform.parent = transform;
             selected.transform.position = spawnPos;
@@ -107,7 +106,7 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerAIController selected = UnusedManager.instance._GetUnusedPlayerAI(prefab.GetComponent<ReuseGO>().itemID);
 
-        if (selected != null)
+        if (!ReferenceEquals(selected,null))
         {
             selected.transform.parent = transform;
             selected.transform.position = spawnPos;
@@ -144,7 +143,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        if(selected == null)
+        if(ReferenceEquals(selected , null))
         {
             Debug.Log("Player prefab null");
         }
@@ -156,7 +155,7 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerController selected = UnusedManager.instance._GetUnusedPlayer(prefab.GetComponent<ReuseGO>().itemID);
 
-        if (selected != null)
+        if (!ReferenceEquals(selected,null))
         {
             selected.transform.parent = transform;
             selected.transform.position = spawnPos;
@@ -185,7 +184,7 @@ public class PlayerManager : MonoBehaviour
 
         Transform selectedPos = tempSpawnPoints[Random.Range(0, tempSpawnPoints.Count)];
 
-        PlayerManager.instance._SpawnPlayer(PlayerManager.instance._GetCurrentPlayer(), selectedPos.position);
+        instance._SpawnPlayer(instance._GetCurrentPlayer(), selectedPos.position);
 
         tempSpawnPoints.Remove(selectedPos);
 
@@ -193,7 +192,7 @@ public class PlayerManager : MonoBehaviour
         {
             selectedPos = tempSpawnPoints[Random.Range(0, tempSpawnPoints.Count)];
 
-            PlayerManager.instance._SpawnPlayerAI(PlayerManager.instance._GetRandomPlayerAI(), selectedPos.position);
+            instance._SpawnPlayerAI(instance._GetRandomPlayerAI(), selectedPos.position);
 
             tempSpawnPoints.Remove(selectedPos);
         }

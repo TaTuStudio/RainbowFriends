@@ -1,7 +1,6 @@
 // using Sirenix.OdinInspector;
-using UnityEditor;
+
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 [CreateAssetMenu(fileName = "NewSoundEffect", menuName = "Audio/New Sound Effect")]
 public class SoundEffectSO : ScriptableObject
@@ -38,10 +37,10 @@ public class SoundEffectSO : ScriptableObject
     [SerializeField] private SoundClipPlayOrder playOrder;
 
     // [DisplayAsString] [BoxGroup("config")] 
-    [SerializeField] private int playIndex = 0;
+    [SerializeField] private int playIndex;
     
     [Range(0.0f, 1.0f)]
-    [SerializeField] private float spatialBlend = 0;
+    [SerializeField] private float spatialBlend;
     [Range(1.0f, 200.0f)]
     [SerializeField] private float maxDistance = 1;
     #endregion

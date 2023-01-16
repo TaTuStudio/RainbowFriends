@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "SceneLoader", menuName = "SceneLoader")]
 public class SceneLoaderSO : ScriptableObject
@@ -13,7 +14,7 @@ public class SceneLoaderSO : ScriptableObject
     // Start is called before the first frame update
     public void LoadScene(bool activate = false)
     {
-        Addressables.LoadSceneAsync(Scene, UnityEngine.SceneManagement.LoadSceneMode.Additive, activate).Completed +=
+        Addressables.LoadSceneAsync(Scene, LoadSceneMode.Additive, activate).Completed +=
             SceneLoadCompleted;
     }
 
@@ -26,7 +27,7 @@ public class SceneLoaderSO : ScriptableObject
 
     public void UnloadScene()
     {
-        Addressables.UnloadSceneAsync(Handle).Completed += (_) =>
+        Addressables.UnloadSceneAsync(Handle).Completed += _ =>
         {
             if (_.Status == AsyncOperationStatus.Succeeded)
                 Debug.Log("Successfully unloaded Scene.");

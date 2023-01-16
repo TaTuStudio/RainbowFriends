@@ -662,8 +662,8 @@ namespace EasyCharacterMovement.CharacterMovementExamples
 
             Vector3 movementDirection = Vector3.zero;
 
-            movementDirection += Vector3.right * Input.GetAxisRaw($"Horizontal");
-            movementDirection += Vector3.forward * Input.GetAxisRaw($"Vertical");
+            movementDirection += Vector3.right * Input.GetAxisRaw("Horizontal");
+            movementDirection += Vector3.forward * Input.GetAxisRaw("Vertical");
 
             movementDirection = Vector3.ClampMagnitude(movementDirection, 1.0f);
 
@@ -671,9 +671,9 @@ namespace EasyCharacterMovement.CharacterMovementExamples
 
             // Jump input
             
-            if (Input.GetButtonDown($"Jump"))
+            if (Input.GetButtonDown("Jump"))
                 Jump();
-            else if (Input.GetButtonUp($"Jump"))
+            else if (Input.GetButtonUp("Jump"))
                 StopJumping();
 
             // Crouch input

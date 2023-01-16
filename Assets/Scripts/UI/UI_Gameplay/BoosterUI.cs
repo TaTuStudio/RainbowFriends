@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class BoosterUI : MonoBehaviour
@@ -58,18 +57,18 @@ public class BoosterUI : MonoBehaviour
 
     public void _SeeBossButtonDone()
     {
-        foreach(ReuseGO m in PlayerManager.instance.spawnedMonsters)
+        foreach(ReuseGO m in CollectionMarshal.AsSpan(PlayerManager.instance.spawnedMonsters))
         {
             MonsterController monsterController = m.GetComponent<MonsterController>();
 
-            if(monsterController != null)
+            if(!ReferenceEquals(monsterController,null))
             {
                 monsterController.outlinable.enabled = true;
             }
 
             ImpostorMonsterController impostorMonsterController = m.GetComponent<ImpostorMonsterController>();
 
-            if (impostorMonsterController != null)
+            if (!ReferenceEquals(impostorMonsterController,null))
             {
                 impostorMonsterController.outlinable.enabled = true;
             }
