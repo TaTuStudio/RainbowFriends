@@ -42,6 +42,7 @@ public class AdsManager : MonoBehaviour
         // Banners are automatically sized to 320×50 on phones and 728×90 on tablets
         // You may call the utility method MaxSdkUtils.isTablet() to help with view sizing adjustments
         MaxSdk.CreateBanner(BannerAdUnitId, MaxSdkBase.BannerPosition.BottomCenter);
+        MaxSdk.SetBannerExtraParameter(BannerAdUnitId, "adaptive_banner", "false");
         // Set background or background color for banners to be fully functional
         MaxSdk.SetBannerBackgroundColor(BannerAdUnitId, Color.clear);
     
