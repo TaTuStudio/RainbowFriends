@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class ShopUI : MonoBehaviour
     public bool getItems;
 
     public ScrollRect itemScrollView;
-    public List<UI_PlayerSkinShopItem> skinItems = new List<UI_PlayerSkinShopItem>();
+    public List<UI_PlayerSkinShopItem> skinItems = new();
 
     public string playerSkinMat = "";
     public string boxSkinMat = "";
@@ -30,6 +31,16 @@ public class ShopUI : MonoBehaviour
     public static BuySkin OnBuySkin;
 
     public Image lockBG;
+
+    private void OnEnable()
+    {
+        AdsManager.Instance.OnRewarded += _WatchAdButtonDone;
+    }
+
+    private void OnDisable()
+    {
+        AdsManager.Instance.OnRewarded -= _WatchAdButtonDone;
+    }
 
     public void _SetItemInfos(List<UI_PlayerSkinShopItem> itemList, List<PlayerSkinScriptObj.Skin2DInfo> skinInfoList)
     {
@@ -122,14 +133,15 @@ public class ShopUI : MonoBehaviour
 
     public void _WatchAdButton()
     {
-        _WatchAdButtonDone();
+        AdsManager.Instance.ShowRewardedAd(0);
     }
 
-    public void _WatchAdButtonDone()
+    private void _WatchAdButtonDone()
     {
-        PlayerStats stats = PlayerStats.instance;
-
-        stats._AddCoin(rewardCoin);
+        if(AdsManager.Instance.rewardPos != 0)
+            return;
+        
+        PlayerStats.instance._AddCoin(rewardCoin);
 
         _CheckButtonsStats();
     }

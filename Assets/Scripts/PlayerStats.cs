@@ -128,7 +128,7 @@ public class PlayerStats : MonoBehaviour
     {
         string filePath = Path.Combine(Application.persistentDataPath, playerDataFileName);
 
-        Debug.Log("Load path = " + filePath);
+        // Debug.Log("Load path = " + filePath);
 
         if (File.Exists(filePath))
         {
@@ -250,11 +250,11 @@ public class PlayerStats : MonoBehaviour
             ////////////////////////////////////////////////////////////
             /////////////////////////
 
-            Debug.Log("PlayerStats load success");
+            // Debug.Log("PlayerStats load success");
         }
         else
         {
-            Debug.Log("Load path does not exist");
+            // Debug.Log("Load path does not exist");
 
             _Save();
         }
@@ -266,7 +266,7 @@ public class PlayerStats : MonoBehaviour
 
         string filePath = Path.Combine(Application.persistentDataPath, playerDataFileName);
 
-        Debug.Log("Save path = " + filePath);
+        // Debug.Log("Save path = " + filePath);
 
         string jsonString = "";
 
@@ -333,7 +333,7 @@ public class PlayerStats : MonoBehaviour
 
         jsonString = jsonData.ToString();
 
-        Debug.Log("save jsonString = " + jsonString);
+        // Debug.Log("save jsonString = " + jsonString);
 
         try
         {

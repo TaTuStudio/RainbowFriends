@@ -56,17 +56,16 @@ public class GameController : MonoBehaviour
     {
         if (isPlaying == false || gameplaySetupDone == false) return;
 
-        if (curGameTime > 0f)
+        if (!(curGameTime > 0f)) return;
+        
+        curGameTime -= Time.deltaTime;
+
+        if (curGameTime <= 0f)
         {
-            curGameTime -= Time.deltaTime;
-
-            if (curGameTime <= 0f)
-            {
-                curGameTime = 0f;
-            }
-
-            GameplayUI.instance.timeCountUI._SetTime(curGameTime);
+            curGameTime = 0f;
         }
+
+        GameplayUI.instance.timeCountUI._SetTime(curGameTime);
     }
 
     public void _PlayerDeathCount()

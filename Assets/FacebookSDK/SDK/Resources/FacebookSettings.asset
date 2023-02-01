@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedAppIndex: 0
   clientTokens:
-  - 
+  - 79d0b3bbc59479fb641984a3bfbc8f97
   appIds:
-  - 0
+  - 547064397381921
   appLabels:
-  - App Name
+  - 'Minecraft Survivors: Rainbow Room'
   cookie: 1
   logging: 1
   status: 1

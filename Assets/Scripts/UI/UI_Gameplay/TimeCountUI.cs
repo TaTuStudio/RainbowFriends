@@ -10,22 +10,39 @@ public class TimeCountUI : MonoBehaviour
 
     private bool isPlaying;
 
+    private int mm, ss;
+
+    private string o;
+
     public void _SetTime(float seconds)
     {
-        TimeSpan time = TimeSpan.FromSeconds(seconds);
+        ss = (int)seconds;
 
-        DateTime dateTime = DateTime.Today.Add(time);
-    
-        timeText.text = dateTime.ToString("mm:ss");
+        if (ss >= 60)
+        {
+            mm = 1;
+            ss = 0;
+        }
+        else
+        {
+            mm = 0;
+        }
 
-        timeText.color = dateTime.Second > 4 ? Color.white : Color.red;
+        o = ss > 9 ? "" : "0";
         
-        if (dateTime.Second == 0) isPlaying = false;
+        // TimeSpan time = TimeSpan.FromSeconds(seconds);
+        //
+        // DateTime dateTime = DateTime.Today.Add(time);
         
-        if (dateTime.Second != 4 || isPlaying) return;
+        timeText.text = $"0{mm}:{o}{ss}";
+        
+        timeText.color = seconds > 4 ? Color.white : Color.red;
+        
+        if (seconds == 0) isPlaying = false;
+        
+        if (seconds > 4 || isPlaying) return;
+        
         isPlaying = true;
         beepSound.Play();
-
     }
-    
 }

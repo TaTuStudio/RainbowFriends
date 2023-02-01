@@ -17,22 +17,30 @@ public class DeadUI : MonoBehaviour
 
         coinText.text = "" + rewardCoin;
         coinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
+
+        SdkManager.Instance.SendFALoseLevel();
+        
+        AdsManager.Instance.OnRewarded += _MoreLifeAdDone;
+
     }
 
     private void OnDisable()
     {
         Time.timeScale = 1f;
+        AdsManager.Instance.OnRewarded -= _MoreLifeAdDone;
     }
 
     public void _MoreLifeAd()
     {
-        Debug.Log("More life ad");
-
-        _MoreLifeAdDone();
+        // Debug.Log("More life ad");
+        AdsManager.Instance.ShowRewardedAd(2);
     }
 
-    public void _MoreLifeAdDone()
+    private void _MoreLifeAdDone()
     {
+        if (AdsManager.Instance.rewardPos != 2)
+            return;
+        
         Time.timeScale = 1f;
 
         PlayerController spawnedPlayer = PlayerManager.instance.spawnedPlayer;
@@ -50,6 +58,8 @@ public class DeadUI : MonoBehaviour
 
     public void _PlayAgain()
     {
+        AdsManager.Instance.ShowInterstitialAd();
+
         Debug.Log("DeadUI Play again");
 
         GameController.instance._AddLoseArchivement();

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "945027392864",
+    "project_id": "rainbow-craft-monster-school",
+    "storage_bucket": "rainbow-craft-monster-school.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945027392864:android:18766b863b451df59d6a05",
+        "android_client_info": {
+          "package_name": "com.monster.rainbow.craft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945027392864-vmi4h8gl4f7a9j9u59dqh401fhhbod3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZpj52tdtTey4xV_ddSFRtqOl1xsj-tcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945027392864-vmi4h8gl4f7a9j9u59dqh401fhhbod3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -36,6 +36,7 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayAlphabetCollectSetup()
     {
+        SdkManager.Instance.SendFAStartLevel("alphabetblock");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(true);
@@ -47,6 +48,7 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayFoodCollectSetup()
     {
+        SdkManager.Instance.SendFAStartLevel("feed");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -58,6 +60,7 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayKeyCollectSetup()
     {
+        SdkManager.Instance.SendFAStartLevel("key");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -69,6 +72,7 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayFindFriendSetup()
     {
+        SdkManager.Instance.SendFAStartLevel("friend");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -80,6 +84,7 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayLastStandSetup()
     {
+        SdkManager.Instance.SendFAStartLevel("final");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
