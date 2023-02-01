@@ -18,6 +18,8 @@ public class InGameUI : MonoBehaviour
 
     public void _YesButton()
     {
+        AdsManager.Instance.ShowInterstitialAd();
+
         Time.timeScale = 1f;
 
         homePopup.gameObject.SetActive(false);
