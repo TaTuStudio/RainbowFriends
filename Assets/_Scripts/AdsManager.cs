@@ -42,7 +42,6 @@ public class AdsManager : MonoBehaviour
         // Banners are automatically sized to 320×50 on phones and 728×90 on tablets
         // You may call the utility method MaxSdkUtils.isTablet() to help with view sizing adjustments
         MaxSdk.CreateBanner(BannerAdUnitId, MaxSdkBase.BannerPosition.BottomCenter);
-        MaxSdk.SetBannerExtraParameter(BannerAdUnitId, "adaptive_banner", "false");
         // Set background or background color for banners to be fully functional
         MaxSdk.SetBannerBackgroundColor(BannerAdUnitId, Color.clear);
     
@@ -105,7 +104,7 @@ public class AdsManager : MonoBehaviour
     {
         // Interstitial ad failed to load 
         // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds)
-        SdkManager.Instance.SendFAInterAttempt(interstitialRetryAttempt);
+        SdkManager.Instance.SendFARewardError();
 
         interstitialRetryAttempt++;
         double retryDelay = Math.Pow(2, Math.Min(6, interstitialRetryAttempt));
@@ -115,7 +114,8 @@ public class AdsManager : MonoBehaviour
     
     private void OnInterstitialDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) 
     {
-        SdkManager.Instance.SendOpenInterAppsflyerEvent();    
+        SdkManager.Instance.SendOpenInterAppsflyerEvent();   
+        SdkManager.Instance.SendFAInterAttempt();
     }
     
     private void OnInterstitialAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
@@ -138,6 +138,9 @@ public class AdsManager : MonoBehaviour
     public void ShowRewardedAd(int pos)
     {
         rewardPos = pos;
+
+        SdkManager.Instance.SendFARewardAttempt();
+
         if (MaxSdk.IsRewardedAdReady(RewardedAdUnitId))
         {
             MaxSdk.ShowRewardedAd(RewardedAdUnitId);
@@ -151,7 +154,6 @@ public class AdsManager : MonoBehaviour
         MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdLoadFailedEvent;
         MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent += OnRewardedAdDisplayedEvent;
         MaxSdkCallbacks.Rewarded.OnAdClickedEvent += OnRewardedAdClickedEvent;
-        MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent += OnRewardedAdRevenuePaidEvent;
         MaxSdkCallbacks.Rewarded.OnAdHiddenEvent += OnRewardedAdHiddenEvent;
         MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent += OnRewardedAdFailedToDisplayEvent;
         MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
@@ -179,7 +181,6 @@ public class AdsManager : MonoBehaviour
     {
         // Rewarded ad failed to load 
         // AppLovin recommends that you retry with exponentially higher delays, up to a maximum delay (in this case 64 seconds).
-        SdkManager.Instance.SendFARewardAttempt(rewardRetryAttempt);
 
         rewardRetryAttempt++;
         double retryDelay = Math.Pow(2, Math.Min(6, rewardRetryAttempt));
@@ -196,6 +197,7 @@ public class AdsManager : MonoBehaviour
     {
         // Rewarded ad failed to display. AppLovin recommends that you load the next ad.
         LoadRewardedAd();
+        SdkManager.Instance.SendFARewardFail();
     }
     
     private void OnRewardedAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
@@ -210,6 +212,7 @@ public class AdsManager : MonoBehaviour
     {
         // The rewarded ad displayed and the user should receive the reward.
         OnRewarded?.Invoke();
+        SdkManager.Instance.SendFARewardSuccess();
     }
     
     private void OnRewardedAdRevenuePaidEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)

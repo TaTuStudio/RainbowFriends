@@ -77,7 +77,7 @@ public class WinUI : MonoBehaviour
     {
         if (AdsManager.Instance.rewardPos != 1)
             return;
-        
+        SdkManager.Instance.SendFAReward("rw_bonus");
         rewardCoinText.text = "" + (bonusCoin);
         rewardCoinText.GetComponent<ContentSizeFitter>().SetLayoutHorizontal();
 
