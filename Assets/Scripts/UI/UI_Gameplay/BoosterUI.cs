@@ -1,8 +1,35 @@
+using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class BoosterUI : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        AdsManager.Instance.OnRewarded += CheckBoosterReward;
+    }
+    private void OnDisable()
+    {
+        AdsManager.Instance.OnRewarded -= CheckBoosterReward;
+    }
+
+    private void CheckBoosterReward()
+    {
+        switch (AdsManager.Instance.rewardPos)
+        {
+            case 3:
+                _SpeedUpButtonDone();
+                break;
+            case 4:
+                _More20SecondButtonDone();
+                break;
+            case 5:
+                _SeeBossButtonDone();
+                break;
+        }
+    }
+
+
     public void _OpenButton()
     {
         if(PlayerStats.instance.currentTut >= TutManager.instance.tutControllers.Length)
@@ -23,13 +50,14 @@ public class BoosterUI : MonoBehaviour
     public void _SpeedUpButton()
     {
         Debug.Log("Speed up");
-
-        _SpeedUpButtonDone();
+        AdsManager.Instance.ShowRewardedAd(3);
     }
 
-    public void _SpeedUpButtonDone()
+    private void _SpeedUpButtonDone()
     {
         PlayerManager.instance.spawnedPlayer.boostSpeed = 0.2f * PlayerController.maxSpeed;
+        
+        SdkManager.Instance.SendFAReward("rw_start1");
 
         _CloseButton();
     }
@@ -37,13 +65,14 @@ public class BoosterUI : MonoBehaviour
     public void _More20SecondButton()
     {
         Debug.Log("+20 seconds");
-
-        _More20SecondButtonDone();
+        AdsManager.Instance.ShowRewardedAd(4);
     }
 
-    public void _More20SecondButtonDone()
+    private void _More20SecondButtonDone()
     {
         GameController.instance._SetGameTime(GameController.instance.curGameTime + 20f);
+
+        SdkManager.Instance.SendFAReward("rw_start2");
 
         _CloseButton();
     }
@@ -51,11 +80,10 @@ public class BoosterUI : MonoBehaviour
     public void _SeeBossButton()
     {
         Debug.Log("See boss");
-
-        _SeeBossButtonDone();
+        AdsManager.Instance.ShowRewardedAd(5);
     }
 
-    public void _SeeBossButtonDone()
+    private void _SeeBossButtonDone()
     {
         foreach(ReuseGO m in CollectionMarshal.AsSpan(PlayerManager.instance.spawnedMonsters))
         {
@@ -73,6 +101,8 @@ public class BoosterUI : MonoBehaviour
                 impostorMonsterController.outlinable.enabled = true;
             }
         }
+
+        SdkManager.Instance.SendFAReward("rw_start3");
 
         _CloseButton();
     }

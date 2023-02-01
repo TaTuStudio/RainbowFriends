@@ -37,22 +37,22 @@ public class SdkManager : MonoBehaviour
     //Log events
     public void SendFAStartLevel(string minigame_type)
     {
-        FirebaseAnalytics.LogEvent("start_level", "minigame_type", minigame_type);
+        FirebaseAnalytics.LogEvent("play_mode", "mode", minigame_type);
         currentGame = minigame_type;
     }
 
-    public void SendFALoseLevel() => FirebaseAnalytics.LogEvent("lose_level", "minigame_type", currentGame);
-    public void SendFAWinLevel() => FirebaseAnalytics.LogEvent("win_level", "minigame_type", currentGame);
+    public void SendFALoseLevel() => FirebaseAnalytics.LogEvent("lose_mode", "minigame_type", currentGame);
+    public void SendFAWinLevel() => FirebaseAnalytics.LogEvent("win_mode", "minigame_type", currentGame);
     public void SendFAOpenApp() => FirebaseAnalytics.LogEvent("open_app", "", "");
-    public void SendFAAOA() => FirebaseAnalytics.LogEvent("af_AOA", "", "");
-    public void SendFAInter() => FirebaseAnalytics.LogEvent("af_inters", "", "");
-    public void SendFAInterAttempt(int attempt) => FirebaseAnalytics.LogEvent("inter_attempt", "attempt_number", attempt);
-    public void SendFARewardAttempt(int attempt) => FirebaseAnalytics.LogEvent("reward_attempt", "attempt_number", attempt);
-    public void SendFAReward(string level, string reward_type)
+    public void SendFAInterAttempt() => FirebaseAnalytics.LogEvent("inter_attempt", "", "");
+    public void SendFARewardSuccess() => FirebaseAnalytics.LogEvent("reward_success", "", "");
+    public void SendFARewardFail() => FirebaseAnalytics.LogEvent("reward_fail", "", "");
+    public void SendFARewardError() => FirebaseAnalytics.LogEvent("reward_not_available", "", "");
+    public void SendFARewardAttempt() => FirebaseAnalytics.LogEvent("reward_attempt", "", "");
+    public void SendFAReward(string reward_type)
     {
         FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventSelectContent,
           new Parameter("af_reward", ""),
-          new Parameter("level", level),
           new Parameter("reward_type", reward_type));
     }
     
@@ -72,12 +72,11 @@ public class SdkManager : MonoBehaviour
         SendAdRevenueAppsflyerEvent(impressionData);
     }
     
-    //Set user properties
-    public void SetFAPropertiesRetentType (int retent_type) => FirebaseAnalytics.SetUserProperty("retent_type", retent_type.ToString());
-    public void SetFAPropertiesDaysPlayed(int days_played) => FirebaseAnalytics.SetUserProperty("days_played", days_played.ToString());
-    public void SetFAPropertiesPayingType (int paying_type) => FirebaseAnalytics.SetUserProperty("paying_type", paying_type.ToString());
-    public void SetFAPropertiesLevel (int level) => FirebaseAnalytics.SetUserProperty("level", level.ToString());
-    
+    // //Set user properties
+    // public void SetFAPropertiesRetentType (int retent_type) => FirebaseAnalytics.SetUserProperty("retent_type", retent_type.ToString());
+    // public void SetFAPropertiesDaysPlayed(int days_played) => FirebaseAnalytics.SetUserProperty("days_played", days_played.ToString());
+    // public void SetFAPropertiesPayingType (int paying_type) => FirebaseAnalytics.SetUserProperty("paying_type", paying_type.ToString());
+    // public void SetFAPropertiesLevel (int level) => FirebaseAnalytics.SetUserProperty("level", level.ToString());
     #endregion
     
     #region Appsflyer

@@ -140,6 +140,7 @@ public class ShopUI : MonoBehaviour
     {
         if(AdsManager.Instance.rewardPos != 0)
             return;
+        SdkManager.Instance.SendFAReward("rw_shop");
         
         PlayerStats.instance._AddCoin(rewardCoin);
 

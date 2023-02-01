@@ -40,7 +40,8 @@ public class DeadUI : MonoBehaviour
     {
         if (AdsManager.Instance.rewardPos != 2)
             return;
-        
+        SdkManager.Instance.SendFAReward("rw_revive");
+
         Time.timeScale = 1f;
 
         PlayerController spawnedPlayer = PlayerManager.instance.spawnedPlayer;
