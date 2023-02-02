@@ -2,18 +2,12 @@
     "m_SelectedDeviceId": "1A101FDF6005VG",
     "m_SelectedPackage": {
         "deviceId": "1A101FDF6005VG",
-        "name": "com.TatuStudio.RainbowMonsterSchool",
-        "processId": 1054,
+        "name": "com.monster.rainbow.craft",
+        "processId": 6364,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "1A101FDF6005VG",
-            "name": "com.google.android.apps.nexuslauncher",
-            "processId": 20622,
-            "exited": false
-        },
         {
             "deviceId": "1A101FDF6005VG",
             "name": "com.TatuStudio.RainbowMonsterSchool",
@@ -36,6 +30,18 @@
             "deviceId": "1A101FDF6005VG",
             "name": "com.TatuStudio.RainbowMonsterSchool",
             "processId": 1054,
+            "exited": true
+        },
+        {
+            "deviceId": "1A101FDF6005VG",
+            "name": "com.monster.rainbow.craft",
+            "processId": 30217,
+            "exited": false
+        },
+        {
+            "deviceId": "1A101FDF6005VG",
+            "name": "com.monster.rainbow.craft",
+            "processId": 6364,
             "exited": false
         }
     ],

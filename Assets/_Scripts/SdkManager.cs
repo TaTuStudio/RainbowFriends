@@ -24,13 +24,14 @@ public class SdkManager : MonoBehaviour
                 // where app is a Firebase.FirebaseApp property of your application class.
                 // app = Firebase.FirebaseApp.DefaultInstance;
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
-            } else {
+                SendFAOpenApp();
+            }
+            else {
                 Debug.LogError(System.String.Format(
                     "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                 // Firebase Unity SDK is not safe to use here.
             }
         });
-        SendFAOpenApp();
     }
     
     #region Firebase Analytics
@@ -40,7 +41,7 @@ public class SdkManager : MonoBehaviour
         FirebaseAnalytics.LogEvent("play_mode", "mode", minigame_type);
         currentGame = minigame_type;
     }
-
+    public void SendFAPlayerBuySkin(string skinName) => FirebaseAnalytics.LogEvent("skin_purchase", "skin_name", skinName);
     public void SendFALoseLevel() => FirebaseAnalytics.LogEvent("lose_mode", "minigame_type", currentGame);
     public void SendFAWinLevel() => FirebaseAnalytics.LogEvent("win_mode", "minigame_type", currentGame);
     public void SendFAOpenApp() => FirebaseAnalytics.LogEvent("open_app", "", "");
@@ -96,13 +97,15 @@ public class SdkManager : MonoBehaviour
     
     public void SendAdRevenueAppsflyerEvent(AdInfo impressionData)
     {
-        Dictionary<string, string> eventValues = new Dictionary<string, string>();
-        eventValues.Add("ad_platform", "AppLovin");
-        eventValues.Add("ad_source", impressionData.NetworkName);
-        eventValues.Add("ad_unit_name", impressionData.AdUnitIdentifier);
-        eventValues.Add("ad_format", impressionData.AdFormat);
-        eventValues.Add("value", impressionData.Revenue.ToString());
-        eventValues.Add("currency", "USD");
+        Dictionary<string, string> eventValues = new()
+        {
+            { "ad_platform", "AppLovin" },
+            { "ad_source", impressionData.NetworkName },
+            { "ad_unit_name", impressionData.AdUnitIdentifier },
+            { "ad_format", impressionData.AdFormat },
+            { "value", impressionData.Revenue.ToString() },
+            { "currency", "USD" }
+        };
         AppsFlyer.sendEvent("af_ad_revenue ", eventValues);
     }
     #endregion

@@ -36,7 +36,6 @@ public class GameplayUI : MonoBehaviour
 
     public void _GameplayAlphabetCollectSetup()
     {
-        SdkManager.Instance.SendFAStartLevel("mode_1");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(true);
@@ -44,11 +43,11 @@ public class GameplayUI : MonoBehaviour
         _ActiveKeyCollectCountUI(false);
 
         _GameplayUISetup();
+        SdkManager.Instance.SendFAStartLevel("mode_1");
     }
 
     public void _GameplayFoodCollectSetup()
     {
-        SdkManager.Instance.SendFAStartLevel("mode_3");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -56,11 +55,11 @@ public class GameplayUI : MonoBehaviour
         _ActiveKeyCollectCountUI(false);
 
         _GameplayUISetup();
+        SdkManager.Instance.SendFAStartLevel("mode_3");
     }
 
     public void _GameplayKeyCollectSetup()
     {
-        SdkManager.Instance.SendFAStartLevel("mode_4");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -68,11 +67,11 @@ public class GameplayUI : MonoBehaviour
         _ActiveKeyCollectCountUI(true);
 
         _GameplayUISetup();
+        SdkManager.Instance.SendFAStartLevel("mode_4");
     }
 
     public void _GameplayFindFriendSetup()
     {
-        SdkManager.Instance.SendFAStartLevel("mode_2");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -80,11 +79,11 @@ public class GameplayUI : MonoBehaviour
         _ActiveKeyCollectCountUI(false);
 
         _GameplayUISetup();
+        SdkManager.Instance.SendFAStartLevel("mode_2");
     }
 
     public void _GameplayLastStandSetup()
     {
-        SdkManager.Instance.SendFAStartLevel("mode_5");
         _ActiveTimeCountUI(true);
         _ActivePlayerCountUI(true);
         _ActiveAlphabetCollectCountUI(false);
@@ -92,6 +91,7 @@ public class GameplayUI : MonoBehaviour
         _ActiveKeyCollectCountUI(false);
 
         _GameplayUISetup();
+        SdkManager.Instance.SendFAStartLevel("mode_5");
     }
 
     public void _GameplayUISetup()

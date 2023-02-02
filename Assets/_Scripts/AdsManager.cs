@@ -26,6 +26,7 @@ public class AdsManager : MonoBehaviour
         
         MaxSdkCallbacks.OnSdkInitializedEvent += _ => {
             // AppLovin SDK is initialized, start loading ads
+            MaxSdk.ShowMediationDebugger();
             InitializeBannerAds();
             InitializeInterstitialAds();
             InitializeRewardedAds();
